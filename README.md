@@ -6,7 +6,7 @@ In fact, [Rodrigo Proença](https://github.com/rproenca) did most of the code. K
 
 ## Current features
 - Improves syntax highlight for pull requests. Enabled languages:
-  - Markup, C-like languages, Go, Handlebars, JSON, Markdown, Objective-C, Python, React JSX, Ruby, Sass, Swift and YAML. I decided to add the most common languages, but it can be easily improved if necessary.
+  - Markup, C-like languages, CoffeeScript, Go, Handlebars, JSON, Markdown, Makefile, Objective-C, PHP, Python, React JSX, Ruby, Sass, Swift and YAML. I decided to add the most common languages, but it can be easily improved if necessary.
 
 ## License
 MIT © [andremw](github.com/andremw)
