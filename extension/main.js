@@ -30,18 +30,8 @@
         const parent = container.parentElement;
         const dataPath = parent.getAttribute('data-path');
 
-        if (dataPath.endsWith('.jsp')) {
-            container.className += ' language-java';
-        } else if (dataPath.endsWith('.java')) {
-            container.className += ' language-java';
-        } else if (dataPath.endsWith('.xml')) {
-            container.className += ' language-markup';
-        } else if (dataPath.endsWith('.js')) {
-            container.className += ' language-javascript';
-        } else if (dataPath.endsWith('.css')) {
-            container.className += ' language-css';
-        } else if (dataPath.endsWith('.html')) {
-            container.className += ' language-markup';
-        }
+        // faster way of getting the file extension
+        const fileExtension = `.${dataPath.slice((dataPath.lastIndexOf(".") - 1 >>> 0) + 2)}`;
+        container.className += ` ${refinedBitbucket.languages[fileExtension] || ''}`;
     }
 })();

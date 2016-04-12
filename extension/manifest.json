@@ -16,6 +16,7 @@
       "js": [
         "vendor/prism.js",
         "source-handler.js",
+        "languages.js",
         "main.js"
       ]
     }
