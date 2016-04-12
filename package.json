@@ -1,6 +1,6 @@
 {
   "name": "refined-bitbucket",
-  "version": "1.1.0",
+  "version": "0.0.1",
   "description": "We all know Bitbucket lacks some features that we find lovely in GitHub and in our minds. That's why, based on Sindre Sorhus' [Refined Github](https://github.com/sindresorhus/refined-github) extension I created this project. It's a chrome extension that improves the Bitbucket interface.",
   "main": "index.js",
   "dependencies": {},
