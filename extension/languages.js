@@ -30,6 +30,8 @@ document.refinedBitbucket.languages = {
     ".rb": "language-ruby",
     ".sass": "language-sass",
     ".scss": "language-scss",
+    ".sbt": "language-scala",
+    ".scala": "language-scala",
     ".swift": "language-swift",
     ".yaml": "language-yaml"
 };
