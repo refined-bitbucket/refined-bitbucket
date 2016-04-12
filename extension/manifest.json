@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Refined Bitbucket",
   "description": "Improves Bitbucket user interface",
-  "version": "1.0.0",
+  "version": "0.0.0",
 
   "permissions": [
     "https://bitbucket.org/*"
