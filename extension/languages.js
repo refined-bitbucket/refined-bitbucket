@@ -3,6 +3,8 @@
 document.refinedBitbucket = document.refinedBitbucket || {};
 
 document.refinedBitbucket.languages = {
+    ".bash": "language-bash",
+    ".sh": "language-bash",
     ".jsp": "language-java",
     ".java": "language-java",
     ".xml": "language-markup",
