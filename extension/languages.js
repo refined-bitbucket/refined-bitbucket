@@ -3,6 +3,8 @@
 document.refinedBitbucket = document.refinedBitbucket || {};
 
 document.refinedBitbucket.languages = {
+    ".groovy": "language-groovy",
+    ".gradle": "language-groovy",
     ".bash": "language-bash",
     ".sh": "language-bash",
     ".jsp": "language-java",
