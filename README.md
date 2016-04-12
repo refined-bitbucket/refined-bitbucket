@@ -8,5 +8,12 @@ In fact, [Rodrigo Proença](https://github.com/rproenca) did most of the code. K
 - Improves syntax highlight for pull requests. Enabled languages:
   - Markup, C-like languages, Go, Handlebars, JSON, Markdown, Objective-C, Python, React JSX, Ruby, Sass, Swift and YAML. I decided to add the most common languages, but it can be easily improved if necessary.
 
+## Install
+I haven't published the extension in the Web Store yet (icon needed and other things), but it's already possible to use it.
+You just need to do the steps listed [here](https://developer.chrome.com/extensions/getstarted#unpacked).
+
+## Contribute
+Clone the repo, run *npm install* and start tweaking. :)
+
 ## License
 MIT © [andremw](github.com/andremw)
