@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Refined Bitbucket",
+  "description": "Improves Bitbucket user interface",
+  "version": "0.0.0",
+
+  "permissions": [
+    "https://bitbucket.org/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://bitbucket.org/*"
+      ],
+      "js": [
+        "vendor/prism.js",
+        "source-handler.js",
+        "main.js"
+      ]
+    }
+  ],
+
+  "author": "andremw",
+  "homepage_url": "https://github.com/andremw/refined-bitbucket"
+
+}

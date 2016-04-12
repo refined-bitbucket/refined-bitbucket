@@ -1,0 +1,38 @@
+{
+  "name": "refined-bitbucket",
+  "version": "0.0.1",
+  "description": "We all know Bitbucket lacks some features that we find lovely in GitHub and in our minds. That's why, based on Sindre Sorhus' [Refined Github](https://github.com/sindresorhus/refined-github) extension I created this project. It's a chrome extension that improves the Bitbucket interface.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "xo": "^0.14.0"
+  },
+  "scripts": {
+    "test": "xo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andremw/refined-bitbucket.git"
+  },
+  "keywords": [
+    "bitbucket",
+    "syntax_highlight",
+    "highlight"
+  ],
+  "author": "andremw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andremw/refined-bitbucket/issues"
+  },
+  "homepage": "https://github.com/andremw/refined-bitbucket#readme",
+  "xo": {
+    "envs": [
+      "browser"
+    ],
+    "esnext": true,
+    "space": 4,
+    "globals": [
+      "Prism"
+    ]
+  }
+}
