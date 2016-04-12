@@ -1,4 +1,5 @@
 'use strict';
+
 document.refinedBitbucket = document.refinedBitbucket || {};
 
 document.refinedBitbucket.languages = {
