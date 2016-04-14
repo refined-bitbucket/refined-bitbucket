@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 
-define(['../var/window', 'jquery'], function(window, jquery) {
+define(['../var/window', '../var/document', 'jquery'], function(window, document, jquery) {
     'use strict';
 
     const INTERVAL = 50; // Interval in milliseconds.
