@@ -1,10 +1,6 @@
-'use strict';
+/* jshint esversion: 6 */
 
-document.refinedBitbucket = document.refinedBitbucket || {};
-
-document.refinedBitbucket.languages = {
-    ".groovy": "language-groovy",
-    ".gradle": "language-groovy",
+define({
     ".bash": "language-bash",
     ".sh": "language-bash",
     ".jsp": "language-java",
@@ -39,4 +35,4 @@ document.refinedBitbucket.languages = {
     ".scala": "language-scala",
     ".swift": "language-swift",
     ".yaml": "language-yaml"
-};
+});

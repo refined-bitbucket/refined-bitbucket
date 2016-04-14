@@ -7,20 +7,26 @@
   "permissions": [
     "https://bitbucket.org/*"
   ],
-  "content_scripts": [
-    {
-      "run_at": "document_end",
-      "matches": [
-        "https://bitbucket.org/*"
-      ],
-      "js": [
-        "vendor/prism.js",
-        "source-handler.js",
-        "languages.js",
-        "main.js"
-      ]
-    }
+  "web_accessible_resources": [
+    "lib/prism.js",
+    "lib/require-cs.js",
+    "lib/require.js",
+    "var/document.js",
+    "var/languages.js",
+    "app/highlighter.js"
   ],
+  "content_scripts": [{
+    "run_at": "document_end",
+    "matches": [
+      "https://bitbucket.org/*"
+    ],
+    "js": [
+      "lib/require.js",
+      "lib/require-cs.js",
+      "lib/prism.js",
+      "app/main.js"
+    ]
+  }],
 
   "author": "andremw",
   "homepage_url": "https://github.com/andremw/refined-bitbucket"
