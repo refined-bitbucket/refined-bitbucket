@@ -14,9 +14,12 @@
     "lib/prism.js",
     "lib/require-cs.js",
     "lib/require.js",
+    "var/window.js",
     "var/document.js",
+    "jquery.js",
     "var/languages.js",
-    "app/highlighter.js"
+    "app/highlighter.js",
+    "app/doubleClickWordSelection.js"
   ],
   "content_scripts": [{
     "run_at": "document_end",
