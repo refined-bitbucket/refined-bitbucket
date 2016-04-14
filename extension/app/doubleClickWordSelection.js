@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 
-define(['../var/window', '../var/document', 'jquery'], function(window, document, jquery) {
+define(['../var/window', '../var/document', 'jquery', '../lib/jquery.highlight'], function(window, document, jquery) {
     'use strict';
 
     const INTERVAL = 50; // Interval in milliseconds.
@@ -17,34 +17,24 @@ define(['../var/window', '../var/document', 'jquery'], function(window, document
         return txt;
     }
 
-    function deselectText() {
-        if (window.getSelection) {
-            window.getSelection().removeAllRanges();
-        } else if (document.getSelection) {
-            txt = document.getSelection().removeAllRanges();
-        } else if (document.selection) {
-            txt = document.selection.empty;
-        }
-    }
-
     function insertStyles() {
         const head = document.getElementsByTagName('head')[0];
         let style = document.createElement('style');
         style.type = 'text/css';
-        style.innerHTML = '.highlight {background:#FFFF00;}';
+        style.innerHTML = '.highlight {background:#FFFF88;}';
         head.appendChild(style);
     }
 
     function highlightOnDblClick() {
         jquery('.diff-content-container').dblclick(function() {
-            $('.highlight').removeClass('highlight');
-            var t = getSelectedText();
-            var regex = new RegExp(t, "gi");
-            var container = $(this).closest('.diff-content-container')[0];
-            container.innerHTML = container.innerHTML.replace(regex, function(matched) {
-                return "<span class=\"highlight \">" + matched + "</span>";
+            var code = $($(this).closest('.diff-content-container')[0]).find('pre'),
+                text = getSelectedText().toString();
+
+            code.unhighlight();
+            code.highlight(text, {
+                caseSensitive: true,
+                wordsOnly: true
             });
-            deselectText();
         });
     }
 
@@ -55,6 +45,7 @@ define(['../var/window', '../var/document', 'jquery'], function(window, document
 
             // If main container is rendered, stop the interval and continue.
             clearInterval(intervalId);
+            
             insertStyles();
             highlightOnDblClick();
         }, INTERVAL);

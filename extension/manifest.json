@@ -11,12 +11,13 @@
     "https://bitbucket.org/*"
   ],
   "web_accessible_resources": [
+    "jquery.js",
     "lib/prism.js",
     "lib/require-cs.js",
     "lib/require.js",
+    "lib/jquery.highlight.js",
     "var/window.js",
     "var/document.js",
-    "jquery.js",
     "var/languages.js",
     "app/highlighter.js",
     "app/doubleClickWordSelection.js"
