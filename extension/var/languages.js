@@ -1,6 +1,8 @@
 /* jshint esversion: 6 */
 
 define({
+    ".groovy": "language-groovy",
+    ".gradle": "language-groovy",
     ".bash": "language-bash",
     ".sh": "language-bash",
     ".jsp": "language-java",
