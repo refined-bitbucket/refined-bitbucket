@@ -23,7 +23,7 @@ define(['../var/document', 'jquery'], function(document, jquery) {
                 setMergeState();
 
                 if (hasMinApprovals()) {
-                    var ok = confirm("Merge pull request?");
+                    let ok = confirm("Merge pull request?");
                     if (ok) {
                         let mergeButton = document.getElementById('fulfill-pullrequest');
                         mergeButton.click();
