@@ -63,7 +63,9 @@ define(['../var/document', '../var/languages'], function(document, languages) {
      */
     function highlightWhenReady() {
         const intervalId = setInterval(() => {
-            const container = document.getElementById('pullrequest-diff');
+            var container = document.getElementById('pullrequest-diff');
+            if (!container)
+                container = document.getElementById('commit');
             if (!container) return;
 
             // If main container is rendered, stop the interval and continue.
