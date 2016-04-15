@@ -20,7 +20,8 @@
     "var/document.js",
     "var/languages.js",
     "app/highlighter.js",
-    "app/doubleClickWordSelection.js"
+    "app/doubleClickWordSelection.js",
+    "app/pullRequestActionsControl.js"
   ],
   "content_scripts": [{
     "run_at": "document_end",
