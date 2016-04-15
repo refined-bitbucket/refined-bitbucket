@@ -3,17 +3,24 @@
   "name": "Refined Bitbucket",
   "description": "Improves Bitbucket user interface",
   "version": "2.0.0",
-
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
   "permissions": [
     "https://bitbucket.org/*"
   ],
   "web_accessible_resources": [
+    "jquery.js",
     "lib/prism.js",
     "lib/require-cs.js",
     "lib/require.js",
+    "lib/jquery.highlight.js",
+    "var/window.js",
     "var/document.js",
     "var/languages.js",
-    "app/highlighter.js"
+    "app/highlighter.js",
+    "app/doubleClickWordSelection.js"
   ],
   "content_scripts": [{
     "run_at": "document_end",
