@@ -3,11 +3,11 @@
 define(['../var/document', 'jquery'], function(document, jquery) {
     'use strict';
 
-    const MIN_APPROVALS_REQ = 2;
+    let minApprovals;
 
     function hasMinApprovals() {
         let approvals = parseInt(document.getElementsByClassName('approvals')[0].innerHTML),
-            hasMinApprovals = approvals && approvals >= MIN_APPROVALS_REQ;
+            hasMinApprovals = approvals && approvals >= minApprovals;
 
         return hasMinApprovals;
     }
@@ -42,8 +42,15 @@ define(['../var/document', 'jquery'], function(document, jquery) {
 
     return {
         run: function() {
-            setMergeState();
-            setupHandlers();
+            let pullrequestActionsExist = document.querySelector('#pullrequest-actions');
+
+            if (pullrequestActionsExist) {
+                window.StorageHelper.storage.get((err, items) => {
+                    minApprovals = items.minApprovals;
+                    setMergeState();
+                    setupHandlers();
+                });
+            }
         }
     };
 });

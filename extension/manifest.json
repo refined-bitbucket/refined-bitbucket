@@ -7,8 +7,19 @@
     "48": "icon48.png",
     "128": "icon128.png"
   },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "storageHelper.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
   "permissions": [
-    "https://bitbucket.org/*"
+    "https://bitbucket.org/*",
+    "storage"
   ],
   "web_accessible_resources": [
     "jquery.js",
@@ -29,6 +40,7 @@
       "https://bitbucket.org/*"
     ],
     "js": [
+      "storageHelper.js",
       "lib/require.js",
       "lib/require-cs.js",
       "lib/prism.js",
