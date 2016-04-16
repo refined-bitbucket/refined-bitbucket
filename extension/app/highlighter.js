@@ -76,9 +76,17 @@ define(['../var/document', '../var/languages'], function(document, languages) {
         }, INTERVAL);
     }
 
+    function bindRehighlightHandler() {
+        let menuDiff = document.querySelector('#pr-menu-diff');
+        menuDiff.addEventListener('click', () => {
+            highlightWhenReady();
+        });
+    }
+
     return {
         run: function() {
             highlightWhenReady();
+            bindRehighlightHandler();
         }
     };
 });
