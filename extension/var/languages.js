@@ -36,5 +36,6 @@ define({
     ".sbt": "language-scala",
     ".scala": "language-scala",
     ".swift": "language-swift",
-    ".yaml": "language-yaml"
+    ".yaml": "language-yaml",
+    ".yml": "language-yaml"
 });
