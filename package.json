@@ -32,7 +32,9 @@
     "esnext": true,
     "space": 4,
     "globals": [
-      "Prism"
+      "Prism",
+      "chrome",
+      "define"
     ]
   }
 }
