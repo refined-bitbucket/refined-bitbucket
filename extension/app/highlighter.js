@@ -9,12 +9,26 @@ define(['../var/document', '../var/languages'], (document, languages) => {
         init() {
             insertStyles();
             waitForRender('.diff-container').then(() => {
-                prepareLanguageClasses();
-                addCodeTagToElements('.source');
-                Prism.highlightAll();
+                highlightCode();
             });
         }
     };
+
+    /**
+     * Adds the necessary styles to the <head>.
+     * It shouldn't be needed, since we have the prism.css, but for some reason
+     * the styles are not being injected into the page.
+     */
+    function insertStyles() {
+        const head = document.getElementsByTagName('head')[0];
+        const style = document.createElement('style');
+        style.type = 'text/css';
+        // Prism css
+        style.innerHTML = '.token.comment,.token.prolog,.token.doctype,.token.cdata{color: slategray}.token.punctuation{color: #999}.namespace{opacity: .7}.token.property,.token.tag,.token.boolean,.token.number,.token.constant,.token.symbol,.token.deleted{color: #905}.token.selector,.token.attr-name,.token.string,.token.char,.token.builtin,.token.inserted{color: #690}.token.operator,.token.entity,.token.url,.language-css .token.string,.style .token.string{color: #a67f59;background: hsla(0, 0%, 100%, .5)}.token.atrule,.token.attr-value,.token.keyword{color: #07a}.token.function{color: #DD4A68}.token.regex,.token.important,.token.variable{color: #e90}.token.important,.token.bold{font-weight: bold}.token.italic{font-style: italic}.token.entity{cursor: help}';
+        // Custom css to fix some layout problems because of the insertion of <code> element
+        style.innerHTML += 'pre>code{border-radius:initial;display:initial;line-height:initial;margin-left:initial;overflow-y:initial;padding:initial}code,tt{background:initial;border:initial}.refract-container .deletion pre.source {background-color: #fff1f2 !important;} .refract-container .addition pre.source { background-color: #e8ffe8;}';
+        head.appendChild(style);
+    }
 
     /**
      * Waits some intervals until a specific element is displayed.
@@ -35,20 +49,24 @@ define(['../var/document', '../var/languages'], (document, languages) => {
         });
     }
 
+    function highlightCode() {
+        bindRehighlightHandler();
+        prepareLanguageClasses();
+        addCodeTagToElements('.source');
+        Prism.highlightAll();
+    }
+
     /**
-     * Adds the necessary styles to the <head>.
-     * It shouldn't be needed, since we have the prism.css, but for some reason
-     * the styles are not being injected into the page.
+     * Set a listener to the "Overview" tab in the pull request screen so that
+     * when switching back to the overview tab, the code will get highlighted again.
      */
-    function insertStyles() {
-        const head = document.getElementsByTagName('head')[0];
-        const style = document.createElement('style');
-        style.type = 'text/css';
-        // Prism css
-        style.innerHTML = '.token.comment,.token.prolog,.token.doctype,.token.cdata{color: slategray}.token.punctuation{color: #999}.namespace{opacity: .7}.token.property,.token.tag,.token.boolean,.token.number,.token.constant,.token.symbol,.token.deleted{color: #905}.token.selector,.token.attr-name,.token.string,.token.char,.token.builtin,.token.inserted{color: #690}.token.operator,.token.entity,.token.url,.language-css .token.string,.style .token.string{color: #a67f59;background: hsla(0, 0%, 100%, .5)}.token.atrule,.token.attr-value,.token.keyword{color: #07a}.token.function{color: #DD4A68}.token.regex,.token.important,.token.variable{color: #e90}.token.important,.token.bold{font-weight: bold}.token.italic{font-style: italic}.token.entity{cursor: help}';
-        // Custom css to fix some layout problems because of the insertion of <code> element
-        style.innerHTML += 'pre>code{border-radius:initial;display:initial;line-height:initial;margin-left:initial;overflow-y:initial;padding:initial}code,tt{background:initial;border:initial}.refract-container .deletion pre.source {background-color: #fff1f2 !important;} .refract-container .addition pre.source { background-color: #e8ffe8;}';
-        head.appendChild(style);
+    function bindRehighlightHandler() {
+        const menuDiff = document.getElementById('pr-menu-diff');
+        menuDiff.addEventListener('click', () => {
+            waitForRender('.diff-container').then(() => {
+                highlightCode();
+            });
+        });
     }
 
     /**

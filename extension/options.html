@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Refined Bitbucket Options</title>
+    <link href="options.css" rel="stylesheet">
+    <script src="storageHelper.js"></script>
+    <script src="options.js"></script>
+</head>
+
+<body>
+    <h2>Enabled features</h2>
+    <input type="checkbox" name="enabledFeatures" id="highlighter" value="highlighter" />
+    <label for="highlighter">Source code syntax highlight</label>
+    <br />
+    <input type="checkbox" name="enabledFeatures" id="doubleClickWordSelection" value="doubleClickWordSelection" />
+    <label for="doubleClickWordSelection">Automatically highlights occurrences of the selected word</label>
+    <br />
+    <input type="checkbox" name="enabledFeatures" id="pullRequestActionsControl" value="pullRequestActionsControl" />
+    <label for="pullRequestActionsControl">Pull request requires a minimum number of approvers</label>
+    <br />
+    <br />
+
+    <div id="minApprovalsSection" style="display:none">
+        <strong>Requires&nbsp;</strong>
+        <select id="minApprovals">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        <strong>&nbsp;approvers</strong>
+        <br />
+        <small>At a minimum, pull requests must be approved by the number of users above before it can be merged</small>
+    </div>
+</body>
+
+</html>
