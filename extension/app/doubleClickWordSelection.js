@@ -40,12 +40,12 @@ define(['../var/window', '../var/document', 'jquery', '../lib/jquery.highlight']
 
     function selectWhenReady() {
         const intervalId = setInterval(() => {
-            const container = document.getElementById('pullrequest-diff');
+            const container = document.querySelector('.diff-container');
             if (!container) return;
 
             // If main container is rendered, stop the interval and continue.
             clearInterval(intervalId);
-            
+
             insertStyles();
             highlightOnDblClick();
         }, INTERVAL);
