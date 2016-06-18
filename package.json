@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "xo && browserify test/index.js | tap-closer | smokestack -b chrome | faucet"
+    "test": "xo && browserify test/*.js | tape-run"
   },
   "repository": {
     "type": "git",
@@ -24,15 +24,16 @@
   "homepage": "https://github.com/andremw/refined-bitbucket#readme",
   "devDependencies": {
     "browserify": "^13.0.1",
-    "faucet": "0.0.1",
-    "smokestack": "^3.4.1",
-    "tap-closer": "^1.0.0",
     "tape": "^4.5.1",
+    "tape-run": "^2.1.4",
     "xo": "^0.16.0"
   },
   "xo": {
     "semicolon": true,
     "esnext": true,
-    "space": 4
+    "space": 4,
+    "globals": [
+      "document"
+    ]
   }
 }
