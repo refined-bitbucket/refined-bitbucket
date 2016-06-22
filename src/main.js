@@ -9,9 +9,7 @@
         init() {
             this.INTERVAL = 50; // Interval in milliseconds.
             this.insertStyles();
-            Promise.all([this.classifyDiffContainers(), this.transformPreElements()]).then(() => {
-                Prism.highlightAll();
-            });
+            this.highlightAll();
         },
 
         insertStyles() {
@@ -31,6 +29,25 @@
             style = null;
         },
 
+        highlightAll() {
+            Promise.all([this.classifyDiffContainers(), this.transformPreElements()]).then(() => {
+                Prism.highlightAll();
+            });
+        },
+
+        classifyDiffContainers() {
+            return this.waitForRender('.diff-container').then(() => {
+                const containers = Array.from(document.querySelectorAll('.diff-container'));
+
+                containers.forEach(container => {
+                    const classifiedParent = sourceHandler.classify(container.parentNode);
+                    container.setAttribute('class', classifiedParent.getAttribute('class'));
+                });
+
+                return Promise.resolve();
+            });
+        },
+
         /**
          * Waits some intervals until a specific element is displayed.
          * @return {Promise} Returns a promise that is fulfilled when it finds a specific element.
@@ -47,19 +64,6 @@
                     clearInterval(intervalId);
                     resolve();
                 }, this.INTERVAL);
-            });
-        },
-
-        classifyDiffContainers() {
-            return this.waitForRender('.diff-container').then(() => {
-                const containers = Array.from(document.querySelectorAll('.diff-container'));
-
-                containers.forEach(container => {
-                    const classifiedParent = sourceHandler.classify(container.parentNode);
-                    container.setAttribute('class', classifiedParent.getAttribute('class'));
-                });
-
-                return Promise.resolve();
             });
         },
 
