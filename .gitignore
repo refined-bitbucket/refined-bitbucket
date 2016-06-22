@@ -34,3 +34,5 @@ node_modules
 
 # Folder with files to be distributed
 dist
+
+extension/extension.js
