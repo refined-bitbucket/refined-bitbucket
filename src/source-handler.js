@@ -35,7 +35,7 @@ module.exports.classify = function classify(element) {
         throw new Error('couldn\'t find neither data-filename nor data-path in the element');
     }
     let newClass = newElement.getAttribute('class') || '';
-    newClass += languagesExtensions[fileExtension];
+    newClass += ` ${languagesExtensions[fileExtension]}`;
     newElement.setAttribute('class', newClass);
     return newElement;
 };
