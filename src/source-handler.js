@@ -19,13 +19,12 @@ module.exports.transformPreElement = function transformPreElement(preElement) {
 };
 
 /**
- * Clones the element received and adds a class to it according to its data-filename
- * or data-path attribute. For example, calling it passing an element with a
- * data-filename (or data-path) like "/path/to/file/filename.java" would
- * return a new element with the class "language-java".
+ * Retrieves a class according to the element data-filename or data-path attribute.
+ * For example, calling it passing an element with a data-filename (or data-path)
+ * like "/path/to/file/filename.java" would return "language-java".
  *
  * @param  {Element} element An HTML element. Pass anything different and bear the consequences :)
- * @return {Element} The same element passed but with a new class.
+ * @return {String} The class extracted from the element's file path.
  */
 module.exports.getClassBasedOnExtension = function getClassBasedOnExtension(element) {
     const filePath = getFilepathFromElement(element);
