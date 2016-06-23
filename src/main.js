@@ -1,11 +1,21 @@
 /* global Prism */
 
 const sourceHandler = require('../src/source-handler');
+const pubsub = require('../src/pubsub');
 
 const refinedBitbucket = (function refinedBitbucket() {
     'use strict';
 
     const INTERVAL = 50; // Interval in milliseconds.
+
+    pubsub.subscribe('highlight-all', highlightAll);
+
+    return {
+        init() {
+            insertStyles();
+            highlightAll();
+        }
+    };
 
     function insertStyles() {
         let head = document.getElementsByTagName('head')[0];
@@ -74,13 +84,6 @@ const refinedBitbucket = (function refinedBitbucket() {
             return Promise.resolve();
         });
     }
-
-    return {
-        init() {
-            insertStyles();
-            highlightAll();
-        }
-    };
 })();
 
 refinedBitbucket.init();
