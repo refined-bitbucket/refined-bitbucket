@@ -1,15 +1,31 @@
 const pubsub = require('../src/pubsub');
+const waitForRender = require('../src/wait-for-render');
 
 const events = {
     init() {
         this.overviewTab = document.getElementById('pr-menu-diff');
-        this.bindEvents();
+
+        this.mutationObserver = new MutationObserver(mutations => {
+            mutations.forEach(() => {
+                pubsub.publish('highlight-all');
+            });
+        });
+
+        waitForRender('.ellipsisalmagmga').then(() => {
+            this.codeContainers = Array.from(document.getElementsByClassName('refract-content-container'));
+            this.bindEvents();
+        });
     },
     bindEvents() {
-        this.overviewTab.addEventListener('click', this.handleOverviewClick);
+        this.overviewTab.addEventListener('click', this.triggerHighlight);
+        this.codeContainers.forEach(container => {
+            this.mutationObserver.observe(container, {childList: true});
+        });
     },
-    handleOverviewClick() {
-        pubsub.publish('highlight-all');
+    triggerHighlight() {
+        setTimeout(() => {
+            pubsub.publish('highlight-all');
+        }, 300);
     }
 };
 

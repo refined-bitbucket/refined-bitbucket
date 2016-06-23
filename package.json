@@ -34,7 +34,8 @@
     "esnext": true,
     "space": 4,
     "globals": [
-      "document"
+      "document",
+      "MutationObserver"
     ]
   }
 }
