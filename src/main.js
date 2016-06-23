@@ -45,8 +45,8 @@ const refinedBitbucket = (function refinedBitbucket() {
 
             containers.forEach(container => {
                 const parentNode = container.parentNode;
-                const classifiedParent = sourceHandler.classify(parentNode);
-                parentNode.setAttribute('class', classifiedParent.getAttribute('class'));
+                const languageClass = sourceHandler.getClassBasedOnExtension(parentNode);
+                parentNode.setAttribute('class', `${parentNode.getAttribute('class')} ${languageClass}`);
             });
 
             return Promise.resolve();

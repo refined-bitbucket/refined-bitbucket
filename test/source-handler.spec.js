@@ -17,7 +17,7 @@ test('Changes <pre> element to <code> and wraps it in a <pre> element', t => {
 test('Adds a language-xxxx class to the element that has a data-filename attr', t => {
     const element = document.createElement('div');
     element.setAttribute('data-filename', 'z/path/to/file/the-file.java');
-    const elementWithClass = sourceHandler.classify(element);
-    t.ok(elementWithClass.getAttribute('class').indexOf('language-java') > -1, 'proper language-xxxx class added to the element');
+    const languageClass = sourceHandler.getClassBasedOnExtension(element);
+    t.equal(languageClass, 'language-java', 'proper language-xxxx class added to the element');
     t.end();
 });

@@ -27,17 +27,13 @@ module.exports.transformPreElement = function transformPreElement(preElement) {
  * @param  {Element} element An HTML element. Pass anything different and bear the consequences :)
  * @return {Element} The same element passed but with a new class.
  */
-module.exports.classify = function classify(element) {
-    const newElement = element.cloneNode();
-    const filePath = getFilepathFromElement(newElement);
+module.exports.getClassBasedOnExtension = function getClassBasedOnExtension(element) {
+    const filePath = getFilepathFromElement(element);
     const fileExtension = getExtension(filePath);
     if (!fileExtension) {
         throw new Error('couldn\'t find neither data-filename nor data-path in the element');
     }
-    let newClass = newElement.getAttribute('class') || '';
-    newClass += ` ${languagesExtensions[fileExtension]}`;
-    newElement.setAttribute('class', newClass);
-    return newElement;
+    return languagesExtensions[fileExtension];
 };
 
 function getFilepathFromElement(element) {
