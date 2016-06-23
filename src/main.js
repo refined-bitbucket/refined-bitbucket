@@ -1,12 +1,11 @@
 /* global Prism */
 
 const sourceHandler = require('../src/source-handler');
+const waitForRender = require('../src/wait-for-render');
 const pubsub = require('../src/pubsub');
 
 const refinedBitbucket = (function refinedBitbucket() {
     'use strict';
-
-    const INTERVAL = 50; // Interval in milliseconds.
 
     pubsub.subscribe('highlight-all', highlightAll);
 
@@ -45,36 +44,18 @@ const refinedBitbucket = (function refinedBitbucket() {
             const containers = Array.from(document.getElementsByClassName('diff-container'));
 
             containers.forEach(container => {
-                const classifiedParent = sourceHandler.classify(container.parentNode);
-                container.setAttribute('class', classifiedParent.getAttribute('class'));
+                const parentNode = container.parentNode;
+                const classifiedParent = sourceHandler.classify(parentNode);
+                parentNode.setAttribute('class', classifiedParent.getAttribute('class'));
             });
 
             return Promise.resolve();
         });
     }
 
-    /**
-     * Waits some intervals until a specific element is displayed.
-     * @return {Promise} Returns a promise that is fulfilled when it finds a specific element.
-     */
-    function waitForRender(selector) {
-        return new Promise(resolve => {
-            const intervalId = setInterval(() => {
-                const element = document.querySelector(selector);
-                if (!element) {
-                    return;
-                }
-
-                // If element is rendered, stop the interval and continue.
-                clearInterval(intervalId);
-                resolve();
-            }, INTERVAL);
-        });
-    }
-
     function transformPreElements() {
         return waitForRender('.source:not([class*=language])').then(() => {
-            const sourceLines = Array.from(document.getElementsByClassName('source'));
+            const sourceLines = Array.from(document.querySelectorAll('.source:not([class*=language])'));
 
             sourceLines.forEach(line => {
                 const transformedLine = sourceHandler.transformPreElement(line);
