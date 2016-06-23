@@ -42,7 +42,7 @@ const refinedBitbucket = (function refinedBitbucket() {
 
     function classifyDiffContainers() {
         return waitForRender('.diff-container').then(() => {
-            const containers = Array.from(document.querySelectorAll('.diff-container'));
+            const containers = Array.from(document.getElementsByClassName('diff-container'));
 
             containers.forEach(container => {
                 const classifiedParent = sourceHandler.classify(container.parentNode);
@@ -74,7 +74,7 @@ const refinedBitbucket = (function refinedBitbucket() {
 
     function transformPreElements() {
         return waitForRender('.source:not([class*=language])').then(() => {
-            const sourceLines = Array.from(document.querySelectorAll('.source'));
+            const sourceLines = Array.from(document.getElementsByClassName('source'));
 
             sourceLines.forEach(line => {
                 const transformedLine = sourceHandler.transformPreElement(line);
