@@ -1,14 +1,21 @@
 const INTERVAL = 50; // Interval in milliseconds.
+const TIMEOUT = 500;
 
 /**
  * Waits some intervals until a specific element is displayed.
  * @return {Promise} Returns a promise that is fulfilled when it finds a specific element.
  */
 module.exports = function waitForRender(selector) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
+        let totalWaitTime = 0;
         const intervalId = setInterval(() => {
+            if (totalWaitTime === TIMEOUT) {
+                reject(new Error(`waitForRender: Couldn't find the element ${selector}`));
+            }
+
             const element = document.querySelector(selector);
             if (!element) {
+                totalWaitTime += INTERVAL;
                 return;
             }
 
