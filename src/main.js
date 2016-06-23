@@ -58,8 +58,8 @@ const refinedBitbucket = (function refinedBitbucket() {
             const sourceLines = Array.from(document.querySelectorAll('.source:not([class*=language])'));
 
             sourceLines.forEach(line => {
-                const transformedLine = sourceHandler.transformPreElement(line);
-                line.innerHTML = transformedLine.innerHTML;
+                const codeElement = sourceHandler.getCodeElementFromPre(line);
+                line.innerHTML = codeElement.outerHTML;
             });
 
             return Promise.resolve();

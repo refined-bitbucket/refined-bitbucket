@@ -5,11 +5,10 @@ const sourceHandler = require('../src/source-handler');
 test('Changes <pre> element to <code> and wraps it in a <pre> element', t => {
     const pre = document.createElement('pre');
     pre.innerHTML = 'var hello = "world"';
-    const result = sourceHandler.transformPreElement(pre);
+    const result = sourceHandler.getCodeElementFromPre(pre);
 
-    t.equal(result.nodeName, 'PRE', '<pre> element created');
-    t.equal(result.firstElementChild.nodeName, 'CODE', '<code> element created inside <pre>');
-    t.equal(result.firstElementChild.innerHTML, 'var hello = "world"', '<code> content is correct');
+    t.equal(result.nodeName, 'CODE', '<code> element created');
+    t.equal(result.innerHTML, 'var hello = "world"', '<code> content is correct');
 
     t.end();
 });

@@ -2,20 +2,18 @@ const languagesExtensions = require('./language-ext');
 const getExtension = require('./get-extension');
 
 /**
- * Creates a <code> element with the content of the element received and wraps this
- * created element in a <pre> element.
+ * Creates a <code> element with the content of the preElement passed as parameter.
+ *
  * @param  {Element} preElement An HTML <pre> element. Whatever else you pass.. Is not my fault.
- * @return {Element} A <pre> element that has a <code> element inside.
+ * @return {Element} A <code> element.
  */
-module.exports.transformPreElement = function transformPreElement(preElement) {
+module.exports.getCodeElementFromPre = function getCodeElementFromPre(preElement) {
     if (!preElement) {
         throw new Error('<pre> element parameter was not passed.');
     }
-    const pre = document.createElement('pre');
     const code = document.createElement('code');
     code.innerHTML = preElement.innerHTML;
-    pre.appendChild(code);
-    return pre;
+    return code;
 };
 
 /**
