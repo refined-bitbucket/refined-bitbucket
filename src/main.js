@@ -36,17 +36,20 @@ const refinedBitbucket = (function refinedBitbucket() {
     function highlightAll() {
         Promise.all([classifyDiffContainers(), transformPreElements()]).then(() => {
             Prism.highlightAll();
+            pubsub.publish('new-code-highlighted');
         });
     }
 
     function classifyDiffContainers() {
-        return waitForRender('.diff-container').then(() => {
-            const containers = Array.from(document.getElementsByClassName('diff-container'));
+        return waitForRender('.bb-udiff:not([class*=language])').then(() => {
+            const containers = Array.from(document.querySelectorAll('.bb-udiff:not([class*=language])'));
 
             containers.forEach(container => {
-                const parentNode = container.parentNode;
-                const languageClass = sourceHandler.getClassBasedOnExtension(parentNode);
-                parentNode.setAttribute('class', `${parentNode.getAttribute('class')} ${languageClass}`);
+                const containerClass = container.getAttribute('class');
+                const languageClass = sourceHandler.getClassBasedOnExtension(container) || '';
+                if (containerClass.indexOf(languageClass) === -1) {
+                    container.setAttribute('class', `${containerClass} ${languageClass}`);
+                }
             });
 
             return Promise.resolve();

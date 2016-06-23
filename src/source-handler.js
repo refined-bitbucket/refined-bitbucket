@@ -30,7 +30,7 @@ module.exports.getClassBasedOnExtension = function getClassBasedOnExtension(elem
     if (!fileExtension) {
         throw new Error('couldn\'t find neither data-filename nor data-path in the element');
     }
-    return languagesExtensions[fileExtension];
+    return languagesExtensions[fileExtension] || '';
 };
 
 function getFilepathFromElement(element) {
