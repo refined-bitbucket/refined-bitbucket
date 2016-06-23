@@ -11,7 +11,7 @@ const events = {
             });
         });
 
-        waitForRender('.ellipsisalmagmga').then(() => {
+        waitForRender('.ellipsis').then(() => {
             this.codeContainers = Array.from(document.getElementsByClassName('refract-content-container'));
             this.bindEvents();
         });
