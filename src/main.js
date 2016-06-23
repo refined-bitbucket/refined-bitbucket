@@ -73,7 +73,7 @@ const refinedBitbucket = (function refinedBitbucket() {
     }
 
     function transformPreElements() {
-        return waitForRender('.source').then(() => {
+        return waitForRender('.source:not([class*=language])').then(() => {
             const sourceLines = Array.from(document.querySelectorAll('.source'));
 
             sourceLines.forEach(line => {
