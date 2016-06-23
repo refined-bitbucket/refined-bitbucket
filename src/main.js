@@ -8,6 +8,7 @@ const refinedBitbucket = (function refinedBitbucket() {
     'use strict';
 
     pubsub.subscribe('highlight-all', highlightAll);
+    pubsub.subscribe('highlight', highlightSome);
 
     return {
         init() {
@@ -34,9 +35,13 @@ const refinedBitbucket = (function refinedBitbucket() {
     }
 
     function highlightAll() {
-        Promise.all([classifyDiffContainers(), transformPreElements()]).then(() => {
-            Prism.highlightAll();
-            pubsub.publish('new-code-highlighted');
+        Promise.all([classifyDiffContainers(), transformPreElements()])
+        .then(() => Prism.highlightAll());
+    }
+
+    function highlightSome() {
+        transformPreElements().then(sourceLines => {
+            sourceLines.forEach(line => Prism.highlightElement(line));
         });
     }
 
@@ -65,7 +70,7 @@ const refinedBitbucket = (function refinedBitbucket() {
                 line.innerHTML = codeElement.outerHTML;
             });
 
-            return Promise.resolve();
+            return Promise.resolve(sourceLines);
         });
     }
 })();

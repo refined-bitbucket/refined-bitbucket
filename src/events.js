@@ -7,7 +7,7 @@ const events = {
 
         this.mutationObserver = new MutationObserver(mutations => {
             mutations.forEach(() => {
-                pubsub.publish('highlight-all');
+                pubsub.publish('highlight');
             });
         });
 
