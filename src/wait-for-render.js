@@ -7,6 +7,12 @@ const TIMEOUT = 500;
  */
 module.exports = function waitForRender(selector) {
     return new Promise((resolve, reject) => {
+        const element = document.querySelector(selector);
+
+        if (element) {
+            resolve();
+        }
+
         let totalWaitTime = 0;
         const intervalId = setInterval(() => {
             if (totalWaitTime === TIMEOUT) {
