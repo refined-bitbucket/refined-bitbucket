@@ -23,9 +23,7 @@ const events = {
         });
     },
     triggerHighlight() {
-        setTimeout(() => {
-            pubsub.publish('highlight-all');
-        }, 300);
+        pubsub.publish('highlight-all');
     }
 };
 
