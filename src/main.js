@@ -41,7 +41,7 @@ const refinedBitbucket = (function refinedBitbucket() {
     }
 
     function classifyDiffContainers() {
-        return waitForRender('.bb-udiff:not([class*=language])').then(() => {
+        return waitForRender('.bb-udiff').then(() => {
             const containers = Array.from(document.querySelectorAll('.bb-udiff:not([class*=language])'));
 
             containers.forEach(container => {
@@ -57,7 +57,7 @@ const refinedBitbucket = (function refinedBitbucket() {
     }
 
     function transformPreElements() {
-        return waitForRender('.source:not([class*=language])').then(() => {
+        return waitForRender('.source').then(() => {
             const sourceLines = Array.from(document.querySelectorAll('.source:not([class*=language])'));
 
             sourceLines.forEach(line => {
