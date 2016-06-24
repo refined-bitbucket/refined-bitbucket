@@ -1,5 +1,5 @@
 const INTERVAL = 50; // Interval in milliseconds.
-const TIMEOUT = 500;
+const TIMEOUT = 2500;
 
 /**
  * Waits some intervals until a specific element is displayed.
