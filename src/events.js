@@ -17,7 +17,10 @@ const events = {
         });
     },
     bindEvents() {
-        this.overviewTab.addEventListener('click', this.triggerHighlight);
+        // in the commit screen the overview tab will not exist
+        if (this.overviewTab) {
+            this.overviewTab.addEventListener('click', this.triggerHighlight);
+        }
         this.codeContainers.forEach(container => {
             this.mutationObserver.observe(container, {childList: true});
         });
