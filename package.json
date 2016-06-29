@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "xo src/*.js && browserify test/*.js | tape-run",
+    "test": "xo src/*.js && browserify test/*.spec.js | tape-run",
     "build": "browserify src/main.js src/events.js -o extension/extension.js"
   },
   "repository": {
