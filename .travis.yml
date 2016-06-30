@@ -1,7 +1,5 @@
 language: node_js
 node_js:
-  - "stable"
-  - "5.0"
   - "4.2"
 addons:
   apt:
