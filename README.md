@@ -1,1 +1,1 @@
-[![build status](https://travis-ci.org/andremw/refined-bitbucket.svg?branch=test-it)](https://travis-ci.org/andremw/refined-bitbucket)
+[![build status](https://travis-ci.org/andremw/refined-bitbucket.svg?branch=test-it)](https://travis-ci.org/andremw/refined-bitbucket) | [![downloads](https://img.shields.io/chrome-web-store/d/afppminkfnfngihdocacbgeajbbdklkf.svg)](https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon)
