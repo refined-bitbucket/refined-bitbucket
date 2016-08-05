@@ -6,7 +6,7 @@ In fact, [Rodrigo Proença](https://github.com/rproenca) did most of the code. K
 
 ## Current features
 - Improves syntax highlight for pull requests. Enabled languages:
-  - Markup, C-like languages, Go, Groovy, Bash, Handlebars, JSON, Markdown, Python, React JSX, Ruby, PHP, Scala, Less, Sass, Swift and YAML. I decided to add the most common languages, but it can be easily improved if necessary.
+  - Markup, C-like languages, Go, Groovy, Bash, Handlebars, JSON, Markdown, Python, React JSX, Ruby, PHP, Scala, Less, Sass, Swift, YAML, Dart, Elixir, Erlang, F#, INI, Lua, ObjectiveC, Perl, Rust, Typescript. Missed a language? Go ahead and open a pull request with the language added to the languages.js file (remember to check if it's supported by Prism.js).
 
 - Double click on a word to highlight all occurrences.
 
