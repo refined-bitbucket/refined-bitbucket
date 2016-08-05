@@ -1,13 +1,13 @@
 /* jshint esversion: 6 */
 
-define(['../var/document', 'jquery'], function(document, jquery) {
+define(['../var/document', 'jquery'], (document, $) => {
     'use strict';
 
     let minApprovals;
 
     function hasMinApprovals() {
-        let approvals = parseInt(document.getElementsByClassName('approvals')[0].innerHTML),
-            hasMinApprovals = approvals && approvals >= minApprovals;
+        const approvals = parseInt(document.getElementsByClassName('approvals')[0].innerHTML, 10);
+        const hasMinApprovals = approvals && approvals >= minApprovals;
 
         return hasMinApprovals;
     }
@@ -17,15 +17,14 @@ define(['../var/document', 'jquery'], function(document, jquery) {
         // So wait 500ms for elements rendering and bind the event handler again.
         // TODO: It's working now but I think we can change this fixed time waiting
         // for something smarter.
-        $("#approve-button").on("click", function() {
-
-            setTimeout(function() {
+        $('#approve-button').on('click', () => {
+            setTimeout(() => {
                 setMergeState();
 
                 if (hasMinApprovals()) {
-                    let ok = confirm("Merge pull request?");
+                    const ok = confirm('Merge pull request?');
                     if (ok) {
-                        let mergeButton = document.getElementById('fulfill-pullrequest');
+                        const mergeButton = document.getElementById('fulfill-pullrequest');
                         mergeButton.click();
                     }
                 }
@@ -36,13 +35,13 @@ define(['../var/document', 'jquery'], function(document, jquery) {
     }
 
     function setMergeState() {
-        let mergeButton = document.getElementById('fulfill-pullrequest');
+        const mergeButton = document.getElementById('fulfill-pullrequest');
         mergeButton.disabled = !hasMinApprovals();
     }
 
     return {
-        run: function() {
-            let pullrequestActionsExist = document.querySelector('#pullrequest-actions');
+        run() {
+            const pullrequestActionsExist = document.querySelector('#pullrequest-actions');
 
             if (pullrequestActionsExist) {
                 window.StorageHelper.storage.get((err, items) => {
