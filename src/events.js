@@ -1,33 +1,38 @@
 const pubsub = require('../src/pubsub');
 const waitForRender = require('../src/wait-for-render');
 
-const events = {
-    init() {
-        this.overviewTab = document.getElementById('pr-menu-diff');
-
-        this.mutationObserver = new MutationObserver(mutations => {
-            mutations.forEach(() => {
-                pubsub.publish('highlight');
-            });
+module.exports = (function events() {
+    const overviewTab = document.getElementById('pr-menu-diff');
+    const mutationObserver = new MutationObserver(mutations => {
+        mutations.forEach(() => {
+            pubsub.publish('highlight');
         });
+    });
 
+    let codeContainers = null;
+
+    return {
+        init
+    };
+
+    function init() {
         waitForRender('.ellipsis').then(() => {
-            this.codeContainers = Array.from(document.getElementsByClassName('refract-content-container'));
-            this.bindEvents();
+            codeContainers = Array.from(document.getElementsByClassName('refract-content-container'));
+            bindEvents();
         });
-    },
-    bindEvents() {
+    }
+
+    function bindEvents() {
         // in the commit screen the overview tab will not exist
-        if (this.overviewTab) {
-            this.overviewTab.addEventListener('click', this.triggerHighlight);
+        if (overviewTab) {
+            overviewTab.addEventListener('click', triggerHighlight);
         }
-        this.codeContainers.forEach(container => {
-            this.mutationObserver.observe(container, {childList: true});
+        codeContainers.forEach(container => {
+            mutationObserver.observe(container, {childList: true});
         });
-    },
-    triggerHighlight() {
+    }
+
+    function triggerHighlight() {
         pubsub.publish('highlight-all');
     }
-};
-
-events.init();
+})();
