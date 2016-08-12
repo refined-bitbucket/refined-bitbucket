@@ -4,8 +4,33 @@
     <meta charset="UTF-8">
     <title>Refined Bitbucket Options</title>
     <link rel="stylesheet" href="options.css">
+
+    <style>
+        #approvals {
+            width: 50px;
+        }
+    </style>
 </head>
 <body>
-    <span class="teste">opatrão</span>
+    <label>
+        <input type="checkbox" id="syntax-highlight">
+        Syntax highlighting
+    </label>
+    <br><br>
+    <label>
+        <input type="checkbox" id="highlight-ocurrences">
+        Highlight occurrences of selected words
+    </label>
+    <br><br>
+    <label>
+        Pull requests requires <input type="number" id="approvals"> approvals before merging.
+    </label>
+    <br><br>
+
+    <div id="status"></div>
+    <br>
+    <button id="save">Save</button>
+
+    <script src="options.js"></script>
 </body>
 </html>
