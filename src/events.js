@@ -2,13 +2,6 @@ const pubsub = require('../src/pubsub');
 const waitForRender = require('../src/wait-for-render');
 
 module.exports = (function events() {
-    const overviewTab = document.getElementById('pr-menu-diff');
-    const mutationObserver = new MutationObserver(mutations => {
-        mutations.forEach(() => {
-            pubsub.publish('highlight');
-        });
-    });
-
     let codeContainers = null;
 
     return {
@@ -23,16 +16,31 @@ module.exports = (function events() {
     }
 
     function bindEvents() {
-        // in the commit screen the overview tab will not exist
-        if (overviewTab) {
-            overviewTab.addEventListener('click', triggerHighlight);
-        }
-        codeContainers.forEach(container => {
-            mutationObserver.observe(container, {childList: true});
-        });
-    }
-
-    function triggerHighlight() {
-        pubsub.publish('highlight-all');
+        bindOverviewClick();
+        observeCodeContainers(codeContainers);
     }
 })();
+
+function bindOverviewClick() {
+    const overviewTab = document.getElementById('pr-menu-diff');
+    // in the commit screen the overview tab will not exist
+    if (overviewTab) {
+        overviewTab.addEventListener('click', triggerHighlight);
+    }
+}
+
+function triggerHighlight() {
+    pubsub.publish('highlight-all');
+}
+
+function observeCodeContainers(containers) {
+    const codeContainerObserver = new MutationObserver(mutations => {
+        mutations.forEach(() => {
+            pubsub.publish('highlight');
+        });
+    });
+
+    containers.forEach(container => {
+        codeContainerObserver.observe(container, {childList: true});
+    });
+}
