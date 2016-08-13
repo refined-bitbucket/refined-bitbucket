@@ -4,11 +4,11 @@ const storageHelper = require('../storage-helper');
 
 module.exports = (function () {
     return {
-        init(options) {
+        init() {
             const mergeButton = document.getElementById('fulfill-pullrequest');
             mergeButton.addEventListener('click', handleApproval);
             shouldMergeBeDisabled().then(disable => {
-                mergeButton.disabled = options.mergeButtonStartsDisabled && disable;
+                mergeButton.disabled = disable;
             });
         }
     };

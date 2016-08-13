@@ -11,8 +11,6 @@ storageHelper.getConfig().then(config => {
         syntaxHighlight.init();
     }
     if (config.minimumNumberOfApprovals > 0) {
-        approvals.init({
-            mergeButtonStartsDisabled: true
-        });
+        approvals.init();
     }
 });
