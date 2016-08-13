@@ -4,6 +4,12 @@
   "name": "Refined Bitbucket",
   "description": "Improves Bitbucket's user interface",
   "version": "2.1.7",
+  "author": "andremw",
+  "homepage_url": "https://github.com/andremw/refined-bitbucket",
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
 
   "options_ui": {
     "page": "options.html",
@@ -26,8 +32,5 @@
       ],
       "matches": ["https://bitbucket.org/*"]
     }
-  ],
-
-  "author": "andremw",
-  "homepage_url": "https://github.com/andremw/refined-bitbucket"
+  ]
 }
