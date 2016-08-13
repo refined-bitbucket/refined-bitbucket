@@ -1,6 +1,6 @@
 'use strict';
 const test = require('tape');
-const getExtension = require('../src/get-extension');
+const getExtension = require('../src/syntax-highlight/get-extension');
 
 test('get extension', t => {
     t.equal('.java', getExtension('/path/to/whatever/file.java'));

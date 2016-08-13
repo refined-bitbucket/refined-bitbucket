@@ -2,9 +2,10 @@
 
 'use strict';
 
-const sourceHandler = require('../src/source-handler');
-const waitForRender = require('../src/wait-for-render');
-const pubsub = require('../src/pubsub');
+const waitForRender = require('../wait-for-render');
+const pubsub = require('../pubsub');
+
+const sourceHandler = require('./source-handler');
 
 module.exports = (function syntaxHighlight() {
     pubsub.subscribe('highlight-all', highlightAll);

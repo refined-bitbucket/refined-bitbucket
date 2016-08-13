@@ -1,5 +1,5 @@
-const pubsub = require('../src/pubsub');
-const waitForRender = require('../src/wait-for-render');
+const pubsub = require('./pubsub');
+const waitForRender = require('./wait-for-render');
 
 module.exports = (function events() {
     let codeContainers = null;

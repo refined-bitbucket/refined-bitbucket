@@ -1,6 +1,6 @@
 'use strict';
 const test = require('tape');
-const sourceHandler = require('../src/source-handler');
+const sourceHandler = require('../src/syntax-highlight/source-handler');
 
 test('Changes <pre> element to <code> and wraps it in a <pre> element', t => {
     const pre = document.createElement('pre');

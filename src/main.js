@@ -1,6 +1,6 @@
 const storageHelper = require('./storage-helper');
 
-const syntaxHighlight = require('./syntax-highlight');
+const syntaxHighlight = require('./syntax-highlight/syntax-highlight');
 const events = require('./events');
 const approvals = require('./approvals/approvals');
 const occurrencesHighlighter = require('./occurrences-highlighter/occurrences-highlighter');
