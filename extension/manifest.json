@@ -18,7 +18,12 @@
 
   "content_scripts": [
     {
-      "js": ["prism.js", "extension.js"],
+      "js": [
+        "prism.js",
+        "vendor/jquery-3.1.0.min.js",
+        "vendor/jquery.highlight.js",
+        "extension.js"
+      ],
       "matches": ["https://bitbucket.org/*"]
     }
   ],

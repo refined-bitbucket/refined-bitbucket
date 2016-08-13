@@ -3,6 +3,7 @@ const storageHelper = require('./storage-helper');
 const syntaxHighlight = require('./syntax-highlight');
 const events = require('./events');
 const approvals = require('./approvals/approvals');
+const occurrencesHighlighter = require('./occurrences-highlighter/occurrences-highlighter');
 
 storageHelper.getConfig().then(config => {
     events.init();
@@ -12,5 +13,9 @@ storageHelper.getConfig().then(config => {
     }
     if (config.minimumNumberOfApprovals > 0) {
         approvals.init();
+    }
+
+    if (config.highlightOcurrences) {
+        occurrencesHighlighter.init();
     }
 });
