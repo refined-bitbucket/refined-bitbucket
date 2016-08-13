@@ -3,7 +3,7 @@
 
   "name": "Refined Bitbucket",
   "description": "Improves Bitbucket's user interface",
-  "version": "2.1.6",
+  "version": "2.1.7",
 
   "options_ui": {
     "page": "options.html",
