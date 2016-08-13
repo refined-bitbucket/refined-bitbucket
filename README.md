@@ -9,7 +9,7 @@ extension I had the idea of improving BitBucket's user interface.
 - Improves syntax highlight for pull requests. Enabled languages:
   - Markup, C-like languages, Go, Groovy, Bash, Handlebars, JSON, Markdown, Python, React JSX, Ruby, PHP, Scala, Less, Sass, Swift and YAML. I decided to add the most common languages, but it can be easily improved if necessary.
 - Double click on a word to highlight all occurrences.
-- Block pull request merging without a minimum number of approvals.
+- Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).
 
 ## Install
 https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon
