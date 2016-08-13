@@ -1,3 +1,4 @@
+/* global window */
 window.occurrencesHighlighter = (function () {
     function highlight() {
         const selection = window.getSelection();
