@@ -18,7 +18,9 @@ function handleApproval() {
     // timeout because it takes some time for the approvals counter to update
     setTimeout(() => {
         const mergeButton = document.getElementById('fulfill-pullrequest');
-        mergeButton.disabled = shouldMergeBeDisabled();
+        shouldMergeBeDisabled().then(disable => {
+            mergeButton.disabled = disable;
+        });
     }, 200);
 }
 
