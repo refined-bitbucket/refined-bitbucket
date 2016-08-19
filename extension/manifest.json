@@ -30,7 +30,7 @@
         "vendor/jquery.highlight.js",
         "extension.js"
       ],
-      "matches": ["https://bitbucket.org/*", "https://bitbucket.*"]
+      "matches": ["https://bitbucket.org/*"]
     }
   ]
 }
