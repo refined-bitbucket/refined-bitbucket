@@ -7,12 +7,20 @@ extension I had the idea of improving BitBucket's user interface.
 
 ## Current features
 - Improves syntax highlight for pull requests. Enabled languages:
-  - Markup, C-like languages, Go, Groovy, Bash, Handlebars, JSON, Markdown, Python, React JSX, Ruby, PHP, Scala, Less, Sass, Swift and YAML. I decided to add the most common languages, but it can be easily improved if necessary.
+  - Markup, C-like languages, Go, Groovy, Bash, Handlebars, JSON, Dart, Elixir, Erlang, Markdown, Python, React JSX, 
+  Ruby, PHP, Scala, Less, Sass, Swift, YAML etc. Check what other languages are 
+  enabled [here](https://github.com/andremw/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any 
+  language? [Let me know](https://github.com/andremw/refined-bitbucket/issues) or submit a pull request!
 - Double click on a word to highlight all occurrences.
 - Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).
 
 ## Install
 https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon
+
+## Contributing
+Contributions are very appreciated! You'll just need to run _npm run build_ to create the extension.js file and test 
+the code you write and load the unpackaged extension in your Chrome. It would also be nice to take some time to read Google's 
+[documentation on extensions](https://developer.chrome.com/extensions).
 
 ## License
 MIT © [andremw](github.com/andremw)
