@@ -32,14 +32,14 @@ function bindOverviewClick() {
 }
 
 function bindSideDiffButtons() {
-    let sideBySideButtons = $('button[href*="side-by-side"]').toArray();
+    const sideBySideButtons = $('button[href*="side-by-side"]').toArray();
     sideBySideButtons.forEach(button => button.addEventListener('click', initalizeSideDiffHighlighter));
 }
 
 function initalizeSideDiffHighlighter(mouseEventArgs) {
-    let button = mouseEventArgs.currentTarget;
+    const button = mouseEventArgs.currentTarget;
     if (button.attributes.href && button.attributes.href.nodeValue) {
-        let unifiedDiffContainer = button.closest('.bb-udiff');
+        const unifiedDiffContainer = button.closest('.bb-udiff');
         if (unifiedDiffContainer) {
             pubsub.publish('highlight-side-diff', {container: unifiedDiffContainer, diffNode: button.attributes.href.nodeValue});
         }
