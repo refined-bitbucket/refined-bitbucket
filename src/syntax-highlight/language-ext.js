@@ -2,6 +2,8 @@ module.exports = {
     '.groovy': 'language-groovy',
     '.gradle': 'language-groovy',
     '.bash': 'language-bash',
+    '.config': 'language-markup',
+    '.csproj': 'language-markup',
     '.sh': 'language-bash',
     '.jsp': 'language-java',
     '.java': 'language-java',
@@ -46,8 +48,12 @@ module.exports = {
     '.scss': 'language-scss',
     '.sbt': 'language-scala',
     '.scala': 'language-scala',
+    '.sfproj': 'language-markup',
+    '.sql': 'language-sql',
     '.swift': 'language-swift',
     '.ts': 'language-typescript',
+    '.wxs': 'language-markup',
+    '.xaml': 'language-markup',
     '.yaml': 'language-yaml',
     '.yml': 'language-yaml'
 };

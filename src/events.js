@@ -17,6 +17,8 @@ module.exports = (function events() {
 
     function bindEvents() {
         bindOverviewClick();
+        bindSideDiffButtons();
+
         observeCodeContainers(codeContainers);
     }
 })();
@@ -26,6 +28,21 @@ function bindOverviewClick() {
     // in the commit screen the overview tab will not exist
     if (overviewTab) {
         overviewTab.addEventListener('click', triggerHighlight);
+    }
+}
+
+function bindSideDiffButtons() {
+    var sideBySideButtons = $('button[href*="side-by-side"]').toArray();
+    sideBySideButtons.forEach((button) => button.addEventListener('click', initalizeSideDiffHighlighter));
+}
+
+function initalizeSideDiffHighlighter(mouseEventArgs) {
+    var button = mouseEventArgs.currentTarget;
+    if (button.attributes.href && button.attributes.href.nodeValue) {
+        var unifiedDiffContainer = button.closest('.bb-udiff');
+        if (unifiedDiffContainer) {
+            pubsub.publish('highlight-side-diff', { container: unifiedDiffContainer, diffNode: button.attributes.href.nodeValue });
+        }
     }
 }
 
