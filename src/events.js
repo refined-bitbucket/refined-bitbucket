@@ -32,16 +32,16 @@ function bindOverviewClick() {
 }
 
 function bindSideDiffButtons() {
-    var sideBySideButtons = $('button[href*="side-by-side"]').toArray();
-    sideBySideButtons.forEach((button) => button.addEventListener('click', initalizeSideDiffHighlighter));
+    let sideBySideButtons = $('button[href*="side-by-side"]').toArray();
+    sideBySideButtons.forEach(button => button.addEventListener('click', initalizeSideDiffHighlighter));
 }
 
 function initalizeSideDiffHighlighter(mouseEventArgs) {
-    var button = mouseEventArgs.currentTarget;
+    let button = mouseEventArgs.currentTarget;
     if (button.attributes.href && button.attributes.href.nodeValue) {
-        var unifiedDiffContainer = button.closest('.bb-udiff');
+        let unifiedDiffContainer = button.closest('.bb-udiff');
         if (unifiedDiffContainer) {
-            pubsub.publish('highlight-side-diff', { container: unifiedDiffContainer, diffNode: button.attributes.href.nodeValue });
+            pubsub.publish('highlight-side-diff', {container: unifiedDiffContainer, diffNode: button.attributes.href.nodeValue});
         }
     }
 }
