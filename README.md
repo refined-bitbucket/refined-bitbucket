@@ -4,6 +4,8 @@
 We all know Bitbucket lacks some features that we find lovely in GitHub and in our minds.
 And based on Sindre Sorhus' [Refined Github](https://github.com/sindresorhus/refined-github)
 extension I had the idea of improving BitBucket's user interface.
+In fact, [Rodrigo Proença](https://github.com/rproenca) did most of the initial code and I just created the extension
+and made a few improvements. Kudos!
 
 ## Current features
 - Improves syntax highlight for pull requests. Enabled languages:

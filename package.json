@@ -3,7 +3,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "xo src/*.js && browserify test/*.spec.js | tape-run",
+    "test": "xo src/*.js src/**/*.js && browserify test/*.spec.js | tape-run",
     "build": "browserify src/*.js src/**/*.js -o extension/extension.js"
   },
   "repository": {
