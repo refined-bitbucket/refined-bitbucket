@@ -32,7 +32,7 @@ function bindOverviewClick() {
 }
 
 function bindSideDiffButtons() {
-    const sideBySideButtons = $('button[href*="side-by-side"]').toArray();
+    const sideBySideButtons = Array.from(document.querySelectorAll('button[href*="side-by-side"]'));
     sideBySideButtons.forEach(button => button.addEventListener('click', initalizeSideDiffHighlighter));
 }
 

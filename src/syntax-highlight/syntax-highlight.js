@@ -46,7 +46,7 @@ module.exports = (function syntaxHighlight() {
 
     function listenForSideDiffScroll(args) {
         waitForRender("div.aperture-pane-scroller").then(() => {
-            var scrollers = Array.from(document.querySelectorAll("div.aperture-pane-scroller"));
+            const scrollers = Array.from(document.querySelectorAll("div.aperture-pane-scroller"));
 
             if (debouncedSideDiffHandler) {
                 scrollers.forEach(scroller => {
@@ -64,13 +64,13 @@ module.exports = (function syntaxHighlight() {
 
     function highlightSideDiff(args) {
         waitForRender(args.diffNode).then(() => {
-            var container = document.querySelector(args.diffNode);
+            const container = document.querySelector(args.diffNode);
 
-            var languageClass = sourceHandler.getClassBasedOnExtension(args.container) || '';
+            const languageClass = sourceHandler.getClassBasedOnExtension(args.container) || '';
             container.classList.add(languageClass);
 
-            waitForRender(args.diffNode + ' pre').then(() => {
-                var sourceLines = Array.from(document.querySelectorAll(args.diffNode + ' pre:not([class*=language])'));
+            waitForRender(`${args.diffNode}  pre`).then(() => {
+                const sourceLines = Array.from(document.querySelectorAll(`${args.diffNode} pre:not([class*=language])`));
 
                 sourceLines.forEach(line => {
                     const codeElement = sourceHandler.getCodeElementFromPre(line);
