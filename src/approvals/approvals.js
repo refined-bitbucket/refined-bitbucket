@@ -6,7 +6,9 @@ module.exports = (function () {
     return {
         init() {
             const mergeButton = document.getElementById('fulfill-pullrequest');
-            if (!mergeButton) return;
+            if (!mergeButton) {
+                return;
+            }
 
             bindApprovalClick();
             shouldMergeBeDisabled().then(disable => {

@@ -7,6 +7,8 @@ const pubsub = require('../pubsub');
 const debounce = require('../debounce');
 const sourceHandler = require('./source-handler');
 
+let debouncedSideDiffHandler = null;
+
 module.exports = (function syntaxHighlight() {
     pubsub.subscribe('highlight-all', highlightAll);
     pubsub.subscribe('highlight', highlightSome);
@@ -42,22 +44,20 @@ module.exports = (function syntaxHighlight() {
         .then(() => Prism.highlightAll());
     }
 
-    var debouncedSideDiffHandler;
-
     function listenForSideDiffScroll(args) {
-        waitForRender("div.aperture-pane-scroller").then(() => {
-            const scrollers = Array.from(document.querySelectorAll("div.aperture-pane-scroller"));
+        waitForRender('div.aperture-pane-scroller').then(() => {
+            const scrollers = Array.from(document.querySelectorAll('div.aperture-pane-scroller'));
 
             if (debouncedSideDiffHandler) {
                 scrollers.forEach(scroller => {
-                    scroller.removeEventListener("scroll", debouncedSideDiffHandler);
+                    scroller.removeEventListener('scroll', debouncedSideDiffHandler);
                 });
             }
 
             debouncedSideDiffHandler = debounce(() => highlightSideDiff(args), 250);
 
             scrollers.forEach(scroller => {
-                scroller.addEventListener("scroll", debouncedSideDiffHandler);
+                scroller.addEventListener('scroll', debouncedSideDiffHandler);
             });
         });
     }
@@ -75,7 +75,7 @@ module.exports = (function syntaxHighlight() {
                 sourceLines.forEach(line => {
                     const codeElement = sourceHandler.getCodeElementFromPre(line);
                     line.innerHTML = codeElement.outerHTML;
-                    line.classList.add("source");
+                    line.classList.add('source');
                     Prism.highlightElement(line);
                 });
             });
