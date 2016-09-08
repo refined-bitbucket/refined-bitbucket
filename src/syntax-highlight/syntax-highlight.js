@@ -4,12 +4,16 @@
 
 const waitForRender = require('../wait-for-render');
 const pubsub = require('../pubsub');
-
+const debounce = require('../debounce');
 const sourceHandler = require('./source-handler');
+
+let debouncedSideDiffHandler = null;
 
 module.exports = (function syntaxHighlight() {
     pubsub.subscribe('highlight-all', highlightAll);
     pubsub.subscribe('highlight', highlightSome);
+    pubsub.subscribe('highlight-side-diff', highlightSideDiff);
+    pubsub.subscribe('highlight-side-diff', listenForSideDiffScroll);
 
     return {
         init() {
@@ -38,6 +42,44 @@ module.exports = (function syntaxHighlight() {
     function highlightAll() {
         Promise.all([classifyDiffContainers(), transformPreElements()])
         .then(() => Prism.highlightAll());
+    }
+
+    function listenForSideDiffScroll(args) {
+        waitForRender('div.aperture-pane-scroller').then(() => {
+            const scrollers = Array.from(document.querySelectorAll('div.aperture-pane-scroller'));
+
+            if (debouncedSideDiffHandler) {
+                scrollers.forEach(scroller => {
+                    scroller.removeEventListener('scroll', debouncedSideDiffHandler);
+                });
+            }
+
+            debouncedSideDiffHandler = debounce(() => highlightSideDiff(args), 250);
+
+            scrollers.forEach(scroller => {
+                scroller.addEventListener('scroll', debouncedSideDiffHandler);
+            });
+        });
+    }
+
+    function highlightSideDiff(args) {
+        waitForRender(args.diffNode).then(() => {
+            const container = document.querySelector(args.diffNode);
+
+            const languageClass = sourceHandler.getClassBasedOnExtension(args.container) || '';
+            container.classList.add(languageClass);
+
+            waitForRender(`${args.diffNode}  pre`).then(() => {
+                const sourceLines = Array.from(document.querySelectorAll(`${args.diffNode} pre:not([class*=language])`));
+
+                sourceLines.forEach(line => {
+                    const codeElement = sourceHandler.getCodeElementFromPre(line);
+                    line.innerHTML = codeElement.outerHTML;
+                    line.classList.add('source');
+                    Prism.highlightElement(line);
+                });
+            });
+        });
     }
 
     function highlightSome() {
