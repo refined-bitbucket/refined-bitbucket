@@ -18,7 +18,36 @@ and made a few improvements. Kudos!
 ## Installing
 Refined Bitbucket is [available on the Google Chrome Web Store][chrome-install].
 
-## Compiling & Contributing
+## Usage
+
+Refined BitBucket now supplies a key binding feature, which allows for quicker
+navigation through pull requests.
+
+### Default Key Mapping
+
+The following are the default key mappings
+
+#### Tab Selection
+![bitbucket pull request tabs][tab-image]
+
+Key | Action
+--- | ---
+<kbd>1</kbd> | Selects the **Overview** tab
+<kbd>2</kbd> | Selects the **Commits** tab
+<kbd>3</kbd> | Selects the **Activity** tab
+
+#### Page Navigation and Scrolling
+
+*Upper case letters mean that you need to press shift and the letter*
+
+Key | Action
+--- | ---
+<kbd>N</kbd> | Scrolls to the **N**ext comment on the page.
+<kbd>P</kbd> | Scrolls to the **P**previous comment on the page.
+<kbd>g</kbd> <kbd>g</kbd> | Scrolls to the top of the page
+<kbd>G</kbd> | Scrolls to the bottom of the page
+
+### Compiling & Contributing
 Contributions are very appreciated!
 
 If you don't have it already, you will need [Browserify][browserify]. It is available on npm:
@@ -44,3 +73,4 @@ MIT © [andremw](github.com/andremw)
 
 [chrome-install]: https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon
 [browserify]: http://browserify.org/
+[tab-image]: https://cloud.githubusercontent.com/assets/755669/18594922/1c74c184-7bf7-11e6-887d-859fb6206c65.png
