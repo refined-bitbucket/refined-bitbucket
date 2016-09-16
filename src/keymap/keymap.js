@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 const waitForRender = require('../wait-for-render');
 
 /**
@@ -65,11 +66,17 @@ var PrKeyMap = (function($) {
     /**
      * Initializes array of comments elements to cycle through using
      * {@link #scrollToNextComment} or {@link #scrollToPreviousComment}.
+     *
+     * Waits for `selector` to be available before initializing comments.
+     *
+     * @param {String} selector waits for this selecor to become available
+     * before initializing comments. If empty, uses the default `.bb-patch`
+     * selector.
      */
-    self.initComments = function() {
-        if (self.comments.length === 0) {
+    self.initComments = function(selector = '.bb-patch') {
+        waitForRender(selector).then(() => {
             self.comments = document.querySelectorAll(self.commentSelector);
-        }
+        });
     };
 
     /**
@@ -80,8 +87,6 @@ var PrKeyMap = (function($) {
      *
      */
     self.scrollToNextComment = function() {
-        self.initComments();
-
         if (self.comments) {
             $(self.comments[self.currentComment]).removeClass('focused');
             self.currentComment++;
@@ -99,8 +104,6 @@ var PrKeyMap = (function($) {
      * bottom-most (last) comment on the page.
      */
     self.scrollToPreviousComment = function() {
-        self.initComments();
-
         if (self.comments) {
             self.currentComment--;
             if (self.currentComment < 0) self.currentComment = self.comments.length - 1;
@@ -130,7 +133,7 @@ var PrKeyMap = (function($) {
         keyboard.bind(keymap.tab_overview, (event) => {
             event.preventDefault();
             self.switchTo('overview');
-            waitForRender('.bb-patch').then(() => {
+            self.initComments();
         });
 
         keyboard.bind(keymap.tab_commits, (event) => {
@@ -141,19 +144,17 @@ var PrKeyMap = (function($) {
         keyboard.bind(keymap.tab_activity, (event) => {
             event.preventDefault();
             self.switchTo('activity');
+            self.initComments('header .summary');
         });
 
-        waitForRender('.bb-patch').then(() => {
-            //only bind next and previous comments when the diff patches have finished loading
-            keyboard.bind(keymap.scroll_next_comment, (event) => {
-                event.preventDefault();
-                self.scrollToNextComment();
-            });
+        keyboard.bind(keymap.scroll_next_comment, (event) => {
+            event.preventDefault();
+            self.scrollToNextComment();
+        });
 
-            keyboard.bind(keymap.scroll_previous_comment, (event) => {
-                event.preventDefault();
-                self.scrollToPreviousComment();
-            });
+        keyboard.bind(keymap.scroll_previous_comment, (event) => {
+            event.preventDefault();
+            self.scrollToPreviousComment();
         });
 
         keyboard.bind(keymap.scroll_page_top, (event) => {
