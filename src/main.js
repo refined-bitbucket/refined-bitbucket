@@ -20,7 +20,5 @@ storageHelper.getConfig().then(config => {
         occurrencesHighlighter.init();
     }
 
-    jQuery(() => {
-        keymap.init(Mousetrap);
-    });
+    keymap.init(Mousetrap);
 });
