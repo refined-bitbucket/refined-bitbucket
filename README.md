@@ -10,19 +10,37 @@ and made a few improvements. Kudos!
 ## Current features
 - Improves syntax highlight for pull requests. Enabled languages:
   - Markup, C-like languages, Go, Groovy, Bash, Handlebars, JSON, Dart, Elixir, Erlang, Markdown, Python, React JSX, 
-  Ruby, PHP, Scala, Less, Sass, Swift, YAML etc. Check what other languages are 
-  enabled [here](https://github.com/andremw/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any 
+  Ruby, PHP, Scala, Less, Sass, Swift, YAML, etc. [See the full list](https://github.com/andremw/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any 
   language? [Let me know](https://github.com/andremw/refined-bitbucket/issues) or submit a pull request!
 - Double click on a word to highlight all occurrences.
 - Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).
 
-## Install
-https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon
+## Installing
+Refined Bitbucket is [available on the Google Chrome Web Store][chrome-install].
 
-## Contributing
-Contributions are very appreciated! You'll just need to run _npm run build_ to create the extension.js file and test 
-the code you write and load the unpackaged extension in your Chrome. It would also be nice to take some time to read Google's 
+## Compiling & Contributing
+Contributions are very appreciated!
+
+If you don't have it already, you will need [Browserify][browserify]. It is available on npm:
+
+```
+npm install -g browserify
+```
+
+Then you'll just need to run:
+
+```
+npm run build
+```
+
+This will create the `extension.js` file and test
+the code you write and load the unpackaged extension in your Chrome. If you're
+new to Chrome extension development, take some time to read Google's
 [documentation on extensions](https://developer.chrome.com/extensions).
+
 
 ## License
 MIT © [andremw](github.com/andremw)
+
+[chrome-install]: https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon
+[browserify]: http://browserify.org/
