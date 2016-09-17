@@ -13,15 +13,15 @@ const PrKeyMap = (function ($) {
     /**
      * The default keymap for key binds a.k.a. shortcut keys.
      */
-    const default_keymap = {
-        tab_overview: '1',
-        tab_commits: '2',
-        tab_activity: '3',
+    const DEFAULT_KEYMAP = {
+        tabOverview: '1',
+        tabComments: '2',
+        tabActivity: '3',
 
-        scroll_next_comment: 'N',
-        scroll_previous_comment: 'P',
-        scroll_page_top: 'g g',
-        scroll_page_bottom: 'G'
+        scrollNextComment: 'N',
+        scrollPreviousComment: 'P',
+        scrollPageTop: 'g g',
+        scrollPageBottom: 'G'
     };
 
     const keymap = {};
@@ -126,7 +126,7 @@ const PrKeyMap = (function ($) {
      * @param {Object} user_keymap the user-defined keymap to override default keybindings.
      */
     self.init = function (keyboard, userKeymap) {
-        Object.assign(keymap, default_keymap);
+        Object.assign(keymap, DEFAULT_KEYMAP);
         if (userKeymap) {
             // if provided, copy a user-preferred keymap to the main keymap.
             Object.assign(keymap, userKeymap);
@@ -143,38 +143,38 @@ const PrKeyMap = (function ($) {
             self.initComments('header .summary');
         });
 
-        keyboard.bind(keymap.tab_overview, event => {
+        keyboard.bind(keymap.tabOverview, event => {
             event.preventDefault();
             self.switchTo('overview');
         });
 
-        keyboard.bind(keymap.tab_commits, event => {
+        keyboard.bind(keymap.tabComments, event => {
             event.preventDefault();
             self.switchTo('commits');
         });
 
-        keyboard.bind(keymap.tab_activity, event => {
+        keyboard.bind(keymap.tabActivity, event => {
             event.preventDefault();
             self.switchTo('activity');
         });
 
-        keyboard.bind(keymap.scroll_next_comment, event => {
+        keyboard.bind(keymap.scrollNextComment, event => {
             event.preventDefault();
             self.scrollToNextComment();
         });
 
-        keyboard.bind(keymap.scroll_previous_comment, event => {
+        keyboard.bind(keymap.scrollPreviousComment, event => {
             event.preventDefault();
             self.scrollToPreviousComment();
         });
 
-        keyboard.bind(keymap.scroll_page_top, event => {
+        keyboard.bind(keymap.scrollPageTop, event => {
             // gg to scroll to top
             event.preventDefault();
             window.scrollTo(0, 0);
         });
 
-        keyboard.bind(keymap.scroll_page_bottom, event => {
+        keyboard.bind(keymap.scrollPageBottom, event => {
             // scroll to bottom
             event.preventDefault();
             window.scrollTo(0, document.body.scrollHeight);
