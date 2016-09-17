@@ -130,10 +130,17 @@ var PrKeyMap = (function($) {
         keyboard.reset();
         self.initComments();
 
+        $(ids.overview).click(() => {
+            self.initComments();
+        });
+
+        $(ids.activity).click(() => {
+            self.initComments('header .summary');
+        });
+
         keyboard.bind(keymap.tab_overview, (event) => {
             event.preventDefault();
             self.switchTo('overview');
-            self.initComments();
         });
 
         keyboard.bind(keymap.tab_commits, (event) => {
@@ -144,7 +151,6 @@ var PrKeyMap = (function($) {
         keyboard.bind(keymap.tab_activity, (event) => {
             event.preventDefault();
             self.switchTo('activity');
-            self.initComments('header .summary');
         });
 
         keyboard.bind(keymap.scroll_next_comment, (event) => {
