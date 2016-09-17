@@ -50,10 +50,10 @@ Key | Action
 ### Compiling & Contributing
 Contributions are very appreciated!
 
-If you don't have it already, you will need [Browserify][browserify]. It is available on npm:
+There are a few dependencies required to compile the plugin. To install them, run:
 
 ```
-npm install -g browserify
+npm install
 ```
 
 Then you'll just need to run:

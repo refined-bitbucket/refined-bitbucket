@@ -69,7 +69,7 @@ var PrKeyMap = (function($) {
      *
      * Waits for `selector` to be available before initializing comments.
      *
-     * @param {String} selector waits for this selecor to become available
+     * @param {String} selector waits for this selector to become available
      * before initializing comments. If empty, uses the default `.bb-patch`
      * selector.
      */
@@ -80,7 +80,7 @@ var PrKeyMap = (function($) {
     };
 
     /**
-     * Scrolls the browser window to the previous comment on the PR diff.
+     * Scrolls the browser window to the next comment on the PR diff.
      *
      * If scrolling to the next comment from the last comment, this will loop back
      * to the top-most (first) comment on the page.
@@ -128,7 +128,7 @@ var PrKeyMap = (function($) {
         }
 
         keyboard.reset();
-        self.comments = document.querySelectorAll(self.commentSelector);
+        self.initComments();
 
         keyboard.bind(keymap.tab_overview, (event) => {
             event.preventDefault();
