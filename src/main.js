@@ -1,3 +1,5 @@
+/* global Mousetrap */
+
 const storageHelper = require('./storage-helper');
 
 const syntaxHighlight = require('./syntax-highlight/syntax-highlight');

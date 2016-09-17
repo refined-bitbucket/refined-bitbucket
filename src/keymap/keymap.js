@@ -1,11 +1,13 @@
-/*jshint esversion: 6 */
+/* jshint esversion: 6 */
+/* global jQuery, window */
+
 const waitForRender = require('../wait-for-render');
 
 /**
  * Adds useful keymappings to pull requests on bitbucket.org
  * @module keymap
  */
-var PrKeyMap = (function($) {
+const PrKeyMap = (function ($) {
     'use strict';
 
     /**
@@ -22,7 +24,7 @@ var PrKeyMap = (function($) {
         scroll_page_bottom: 'G'
     };
 
-    var keymap = {};
+    const keymap = {};
 
     const ids = {
         overview: '#pr-menu-diff',
@@ -30,7 +32,7 @@ var PrKeyMap = (function($) {
         activity: '#pr-menu-activity'
     };
 
-    var self = {};
+    const self = {};
 
     self.commentSelector = '.iterable-item a.author';
     self.iterableItemSelector = '.iterable-item';
@@ -41,7 +43,7 @@ var PrKeyMap = (function($) {
     /**
      * Switches to a tab, if there is a selector available for that tab.
      */
-    self.switchTo = function(tabName) {
+    self.switchTo = function (tabName) {
         if (tabName in ids) {
             const element = document.querySelector(ids[tabName]);
             element.click();
@@ -57,7 +59,7 @@ var PrKeyMap = (function($) {
      * so that we don't break the existing functionality of the 'j' and 'k' keys.
      *
      */
-    self.focusComment = function(comment) {
+    self.focusComment = function (comment) {
         $(self.iterableItemSelector).removeClass('focused');
         $(comment).addClass('focused');
         comment.scrollIntoView();
@@ -73,7 +75,7 @@ var PrKeyMap = (function($) {
      * before initializing comments. If empty, uses the default `.bb-patch`
      * selector.
      */
-    self.initComments = function(selector = '.bb-patch') {
+    self.initComments = function (selector = '.bb-patch') {
         waitForRender(selector).then(() => {
             self.comments = document.querySelectorAll(self.commentSelector);
         });
@@ -86,13 +88,15 @@ var PrKeyMap = (function($) {
      * to the top-most (first) comment on the page.
      *
      */
-    self.scrollToNextComment = function() {
+    self.scrollToNextComment = function () {
         if (self.comments) {
             $(self.comments[self.currentComment]).removeClass('focused');
             self.currentComment++;
-            if (self.currentComment >= self.comments.length) self.currentComment = 0;
+            if (self.currentComment >= self.comments.length) {
+                self.currentComment = 0;
+            }
 
-            var comment = self.comments[self.currentComment].parentElement.parentElement;
+            const comment = self.comments[self.currentComment].parentElement.parentElement;
             self.focusComment(comment);
         }
     };
@@ -103,12 +107,14 @@ var PrKeyMap = (function($) {
      * If scrolling to previous comment from the top commit, this will loop back to the
      * bottom-most (last) comment on the page.
      */
-    self.scrollToPreviousComment = function() {
+    self.scrollToPreviousComment = function () {
         if (self.comments) {
             self.currentComment--;
-            if (self.currentComment < 0) self.currentComment = self.comments.length - 1;
+            if (self.currentComment < 0) {
+                self.currentComment = self.comments.length - 1;
+            }
 
-            var comment = self.comments[self.currentComment].parentElement.parentElement;
+            const comment = self.comments[self.currentComment].parentElement.parentElement;
             self.focusComment(comment);
         }
     };
@@ -119,11 +125,10 @@ var PrKeyMap = (function($) {
      * @param {Object} keyboard the keyboard library to use to bind keys (usually Mousetrap).
      * @param {Object} user_keymap the user-defined keymap to override default keybindings.
      */
-    self.init = function(keyboard, userKeymap) {
-
+    self.init = function (keyboard, userKeymap) {
         Object.assign(keymap, default_keymap);
         if (userKeymap) {
-            //if provided, copy a user-preferred keymap to the main keymap.
+            // if provided, copy a user-preferred keymap to the main keymap.
             Object.assign(keymap, userKeymap);
         }
 
@@ -138,45 +143,45 @@ var PrKeyMap = (function($) {
             self.initComments('header .summary');
         });
 
-        keyboard.bind(keymap.tab_overview, (event) => {
+        keyboard.bind(keymap.tab_overview, event => {
             event.preventDefault();
             self.switchTo('overview');
         });
 
-        keyboard.bind(keymap.tab_commits, (event) => {
+        keyboard.bind(keymap.tab_commits, event => {
             event.preventDefault();
             self.switchTo('commits');
         });
 
-        keyboard.bind(keymap.tab_activity, (event) => {
+        keyboard.bind(keymap.tab_activity, event => {
             event.preventDefault();
             self.switchTo('activity');
         });
 
-        keyboard.bind(keymap.scroll_next_comment, (event) => {
+        keyboard.bind(keymap.scroll_next_comment, event => {
             event.preventDefault();
             self.scrollToNextComment();
         });
 
-        keyboard.bind(keymap.scroll_previous_comment, (event) => {
+        keyboard.bind(keymap.scroll_previous_comment, event => {
             event.preventDefault();
             self.scrollToPreviousComment();
         });
 
-        keyboard.bind(keymap.scroll_page_top, (event) => {
-            //gg to scroll to top
+        keyboard.bind(keymap.scroll_page_top, event => {
+            // gg to scroll to top
             event.preventDefault();
             window.scrollTo(0, 0);
         });
 
-        keyboard.bind(keymap.scroll_page_bottom, (event) => {
-            //scroll to bottom
+        keyboard.bind(keymap.scroll_page_bottom, event => {
+            // scroll to bottom
+            event.preventDefault();
             window.scrollTo(0, document.body.scrollHeight);
         });
     };
 
     return self;
-
 })(jQuery);
 
 module.exports = (() => {
