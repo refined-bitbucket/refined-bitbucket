@@ -67,6 +67,15 @@ the code you write and load the unpackaged extension in your Chrome. If you're
 new to Chrome extension development, take some time to read Google's
 [documentation on extensions](https://developer.chrome.com/extensions).
 
+#### Integration
+
+There is a test suite included. Before sending a pull request please make
+sure all tests are passing by running:
+
+```
+npm test
+```
+
 
 ## License
 MIT © [andremw](github.com/andremw)
