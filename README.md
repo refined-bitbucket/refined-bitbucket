@@ -43,7 +43,7 @@ Key | Action
 Key | Action
 --- | ---
 <kbd>N</kbd> | Scrolls to the **N**ext comment on the page.
-<kbd>P</kbd> | Scrolls to the **P**previous comment on the page.
+<kbd>P</kbd> | Scrolls to the **P**revious comment on the page.
 <kbd>g</kbd> <kbd>g</kbd> | Scrolls to the top of the page
 <kbd>G</kbd> | Scrolls to the bottom of the page
 
