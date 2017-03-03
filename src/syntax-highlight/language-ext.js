@@ -12,6 +12,7 @@ module.exports = {
     '.js': 'language-javascript',
     '.css': 'language-css',
     '.cs': 'language-csharp',
+    '.cshtml': 'language-markup',
     '.h': 'language-c',
     '.c': 'language-c',
     '.cpp': 'language-cpp',
