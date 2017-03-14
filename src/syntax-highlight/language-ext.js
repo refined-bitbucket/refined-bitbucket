@@ -10,6 +10,7 @@ module.exports = {
     '.xml': 'language-markup',
     '.html': 'language-markup',
     '.js': 'language-javascript',
+    '.jsx': 'language-javascript',
     '.css': 'language-css',
     '.cs': 'language-csharp',
     '.cshtml': 'language-markup',
