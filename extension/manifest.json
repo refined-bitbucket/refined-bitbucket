@@ -15,6 +15,11 @@
     "page": "options.html",
     "chrome_style": true
   },
+  "applications": {
+    "gecko": {
+      "id": "refined-bitbucket@andremw.org"
+    }
+  },
 
   "permissions": [
     "activeTab",
