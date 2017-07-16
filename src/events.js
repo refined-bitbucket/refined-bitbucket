@@ -1,5 +1,6 @@
 const pubsub = require('./pubsub');
 const waitForRender = require('./wait-for-render');
+const {getFilepathFromElement} = require('./syntax-highlight/source-handler');
 
 module.exports = (function events() {
     let codeContainers = null;
@@ -18,6 +19,7 @@ module.exports = (function events() {
     function bindEvents() {
         bindOverviewClick();
         bindSideDiffButtons();
+        bindTryAgainButtons();
 
         observeCodeContainers(codeContainers);
     }
@@ -36,6 +38,31 @@ function bindSideDiffButtons() {
     sideBySideButtons.forEach(button => button.addEventListener('click', initalizeSideDiffHighlighter));
 }
 
+function bindTryAgainButtons() {
+    const bind = buttons => buttons.forEach(button => button.addEventListener('click', initializeTryAgainHighlighter));
+
+    const tryAgainButtonSelector = 'a.try-again';
+    waitForRender('.bb-patch').then(el => {
+        const tryAgainButtons = Array.from(el.querySelectorAll(tryAgainButtonSelector));
+        bind(tryAgainButtons);
+
+        new MutationObserver(ms => {
+            for (let index = 0; index < ms.length; index++) {
+                const mutation = ms[index];
+                for (let j = 0; j < mutation.addedNodes.length; j++) {
+                    const addedNode = mutation.addedNodes[j];
+                    const addedTryAgainButtons = Array.from(addedNode.querySelectorAll(tryAgainButtonSelector));
+                    bind(addedTryAgainButtons);
+                }
+            }
+        }).observe(el, {childList: true});
+    });
+}
+
+function triggerHighlight() {
+    pubsub.publish('highlight-all');
+}
+
 function initalizeSideDiffHighlighter(mouseEventArgs) {
     const button = mouseEventArgs.currentTarget;
     if (button.attributes.href && button.attributes.href.nodeValue) {
@@ -46,14 +73,20 @@ function initalizeSideDiffHighlighter(mouseEventArgs) {
     }
 }
 
-function triggerHighlight() {
-    pubsub.publish('highlight-all');
+function initializeTryAgainHighlighter(mouseEventArgs) {
+    const button = mouseEventArgs.currentTarget;
+    const tryAgainMessageContainer = button.closest('section');
+    const dataIdentifier = getFilepathFromElement(tryAgainMessageContainer);
+    waitForRender(`section[data-identifier*="${dataIdentifier}"] .refract-content-container`).then(codeContainer => {
+        observeCodeContainers([codeContainer]);
+        pubsub.publish('highlight-try-again', {container: codeContainer.closest('section')});
+    });
 }
 
 function observeCodeContainers(containers) {
     const codeContainerObserver = new MutationObserver(mutations => {
-        mutations.forEach(() => {
-            pubsub.publish('highlight');
+        mutations.forEach(mutation => {
+            pubsub.publish('highlight', {container: mutation.target});
         });
     });
 

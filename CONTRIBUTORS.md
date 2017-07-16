@@ -7,3 +7,4 @@ Please try to keep the list in order.
 - [Andre](http://github.com/andremw)
 - [Gregory McQuillan](http://github.com/hk0i)
 - [Rodrigo Proença](http://github.com/rproenca)
+- [Ronald Rey](http://github.com/reyronald)
