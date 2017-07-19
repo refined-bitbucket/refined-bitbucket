@@ -14,6 +14,7 @@ module.exports = (function syntaxHighlight() {
     pubsub.subscribe('highlight', highlightSome);
     pubsub.subscribe('highlight-side-diff', highlightSideDiff);
     pubsub.subscribe('highlight-side-diff', listenForSideDiffScroll);
+    pubsub.subscribe('highlight-try-again', highlightTryAgain);
 
     return {
         init() {
@@ -40,7 +41,7 @@ module.exports = (function syntaxHighlight() {
     }
 
     function highlightAll() {
-        Promise.all([classifyDiffContainers(), transformPreElements()])
+        Promise.all([classifyDiffContainers(), transformPreElements(document)])
         .then(() => Prism.highlightAll());
     }
 
@@ -82,10 +83,16 @@ module.exports = (function syntaxHighlight() {
         });
     }
 
-    function highlightSome() {
-        transformPreElements().then(sourceLines => {
+    function highlightSome({container}) {
+        transformPreElements(container).then(sourceLines => {
             sourceLines.forEach(line => Prism.highlightElement(line));
         });
+    }
+
+    function highlightTryAgain({container}) {
+        const languageClass = sourceHandler.getClassBasedOnExtension(container);
+        container.classList.add(languageClass);
+        highlightSome({container});
     }
 
     function classifyDiffContainers() {
@@ -104,13 +111,15 @@ module.exports = (function syntaxHighlight() {
         });
     }
 
-    function transformPreElements() {
+    function transformPreElements(container) {
         return waitForRender('.source').then(() => {
-            const sourceLines = Array.from(document.querySelectorAll('.source:not([class*=language])'));
+            const sourceLines = Array.from(container.querySelectorAll('.source:not([class*=language])'));
 
             sourceLines.forEach(line => {
-                const codeElement = sourceHandler.getCodeElementFromPre(line);
-                line.innerHTML = codeElement.outerHTML;
+                if (!line.childElementCount) {
+                    const codeElement = sourceHandler.getCodeElementFromPre(line);
+                    line.innerHTML = codeElement.outerHTML;
+                }
             });
 
             return Promise.resolve(sourceLines);

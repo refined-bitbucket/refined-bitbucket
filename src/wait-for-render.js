@@ -1,5 +1,5 @@
 const INTERVAL = 50; // Interval in milliseconds.
-const TIMEOUT = 2500;
+const TIMEOUT = 5000;
 
 /**
  * Waits some intervals until a specific element is displayed.
@@ -10,7 +10,7 @@ module.exports = function waitForRender(selector) {
         const element = document.querySelector(selector);
 
         if (element) {
-            resolve();
+            resolve(element);
         }
 
         let totalWaitTime = 0;
@@ -27,7 +27,7 @@ module.exports = function waitForRender(selector) {
 
             // If element is rendered, stop the interval and continue.
             clearInterval(intervalId);
-            resolve();
+            resolve(element);
         }, INTERVAL);
     });
 };

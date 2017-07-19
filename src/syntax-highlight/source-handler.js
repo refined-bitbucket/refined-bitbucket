@@ -33,6 +33,18 @@ module.exports.getClassBasedOnExtension = function getClassBasedOnExtension(elem
     return languagesExtensions[fileExtension.toLowerCase()] || '';
 };
 
+/**
+ * Retrieves the filename of an element according to its `data-identifier`, * `data-filename` or `data-path` attributes.
+ *
+ * @param  {Element} element An HTML element. Pass anything different and bear the consequences :)
+ * @return {String} The filename
+ */
 function getFilepathFromElement(element) {
-    return element.getAttribute('data-filename') || element.getAttribute('data-path') || '';
+    const filepath = element.getAttribute('data-identifier') ||
+        element.getAttribute('data-filename') ||
+        element.getAttribute('data-path') ||
+        '';
+    return filepath.trim();
 }
+
+module.exports.getFilepathFromElement = getFilepathFromElement;

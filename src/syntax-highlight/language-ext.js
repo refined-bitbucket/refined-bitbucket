@@ -10,6 +10,7 @@ module.exports = {
     '.xml': 'language-markup',
     '.html': 'language-markup',
     '.js': 'language-javascript',
+    '.styl': 'language-stylus',
     '.css': 'language-css',
     '.cs': 'language-csharp',
     '.cshtml': 'language-markup',
@@ -51,10 +52,12 @@ module.exports = {
     '.scala': 'language-scala',
     '.sfproj': 'language-markup',
     '.sql': 'language-sql',
+    '.svcmap': 'language-markup',
     '.swift': 'language-swift',
     '.ts': 'language-typescript',
     '.wxs': 'language-markup',
     '.xaml': 'language-markup',
+    '.xsd': 'language-markup',
     '.yaml': 'language-yaml',
     '.yml': 'language-yaml'
 };
