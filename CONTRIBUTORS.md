@@ -8,3 +8,4 @@ Please try to keep the list in order.
 - [Gregory McQuillan](http://github.com/hk0i)
 - [Rodrigo Proença](http://github.com/rproenca)
 - [Ronald Rey](http://github.com/reyronald)
+- [Jesse Scott](http://github.com/JesseScott)
