@@ -7,6 +7,7 @@ module.exports = {
     '.sh': 'language-bash',
     '.jsp': 'language-java',
     '.java': 'language-java',
+    '.kt': 'language-kotlin',
     '.xml': 'language-markup',
     '.html': 'language-markup',
     '.js': 'language-javascript',
