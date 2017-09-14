@@ -18,6 +18,7 @@ module.exports = {
     '.h': 'language-c',
     '.c': 'language-c',
     '.cpp': 'language-cpp',
+    '.cc': 'language-cpp',
     '.coffee': 'language-coffeescript',
     '.dart': 'language-dart',
     '.ex': 'language-elixir',
