@@ -44,6 +44,7 @@ module.exports = {
     '.phps': 'language-php',
     '.rs': 'language-rust',
     '.rlib': 'language-rust',
+    '.vue': 'language-jsx',
     '.jsx': 'language-jsx',
     '.rb': 'language-ruby',
     '.sass': 'language-sass',
