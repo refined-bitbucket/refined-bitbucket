@@ -1,5 +1,9 @@
 # _Next version_
 
+### Bug Fixes
+
+* **Highlighter**: Now the selection is maintained when highlighting word occurrences, [PR 50](https://github.com/refined-bitbucket/refined-bitbucket/pull/50).
+
 ### Language support:
 
 * Added C++ language support for files with extension `.cc`
