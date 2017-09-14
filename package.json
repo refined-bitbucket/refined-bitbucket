@@ -1,6 +1,7 @@
 {
   "name": "refined-bitbucket",
-  "description": "",
+  "description": "Chrome extension that improves BitBucket's user interface",
+  "version": "2.5.1",
   "main": "index.js",
   "scripts": {
     "test": "xo src/*.js src/**/*.js && browserify test/*.spec.js | tape-run",
@@ -8,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andremw/refined-bitbucket.git"
+    "url": "git+https://github.com/refined-bitbucket/refined-bitbucket.git"
   },
   "keywords": [
     "bitbucket",
@@ -17,11 +18,19 @@
     "prism"
   ],
   "author": "andremw",
+  "contributors": [
+    {
+      "name": "Ronald Rey",
+      "email": "reyronald@gmail.com",
+      "url": "http://github.com/reyronald"
+    }
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/andremw/refined-bitbucket/issues"
+    "url": "https://github.com/refined-bitbucket/refined-bitbucket/issues",
+    "email": "reyronald@gmail.com"
   },
-  "homepage": "https://github.com/andremw/refined-bitbucket#readme",
+  "homepage": "https://github.com/refined-bitbucket/refined-bitbucket#readme",
   "devDependencies": {
     "browserify": "^13.0.1",
     "tape": "^4.5.1",

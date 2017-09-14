@@ -1,7 +1,7 @@
 [![build status](https://travis-ci.org/andremw/refined-bitbucket.svg?branch=test-it)](https://travis-ci.org/andremw/refined-bitbucket) <sup>-</sup> [![downloads](https://img.shields.io/chrome-web-store/d/afppminkfnfngihdocacbgeajbbdklkf.svg)](https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon)
 
 # refined-bitbucket
-We all know Bitbucket lacks some features that we have in GitHub, GitLab etc.
+We all know BitBucket lacks some features that we have in GitHub, GitLab etc.
 Based on Sindre Sorhus' [Refined Github](https://github.com/sindresorhus/refined-github)
 extension I had the idea of improving BitBucket's user interface.
 In fact, [Rodrigo Proença](https://github.com/rproenca) did most of the initial code and I just created the extension
@@ -13,17 +13,13 @@ and made a few improvements. Kudos!
   Ruby, PHP, Scala, Less, Sass, Swift, YAML, etc. [See the full list](https://github.com/andremw/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any 
   language? [Let me know](https://github.com/andremw/refined-bitbucket/issues) or submit a pull request!
 - Double click on a word to highlight all occurrences.
-- Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).
+- Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals)..
+- Key binding feature, which allows for quicker navigation through pull requests.
 
 ## Installing
 Refined Bitbucket is [available on the Google Chrome Web Store][chrome-install].
 
-## Usage
-
-Refined BitBucket now supplies a key binding feature, which allows for quicker
-navigation through pull requests.
-
-### Default Key Mapping
+## Default Key Mapping
 
 The following are the default key mappings
 
@@ -42,23 +38,24 @@ Key | Action
 
 Key | Action
 --- | ---
-<kbd>N</kbd> | Scrolls to the **N**ext comment on the page.
-<kbd>P</kbd> | Scrolls to the **P**revious comment on the page.
+<kbd>N</kbd> (Shift+n) | Scrolls to the **N**ext comment on the page.
+<kbd>P</kbd> (Shift+p) | Scrolls to the **P**revious comment on the page.
 <kbd>g</kbd> <kbd>g</kbd> | Scrolls to the top of the page
-<kbd>G</kbd> | Scrolls to the bottom of the page
+<kbd>G</kbd> (Shift+g) | Scrolls to the bottom of the page
 
 ### Compiling & Contributing
+
 Contributions are very appreciated!
 
 There are a few dependencies required to compile the plugin. To install them, run:
 
-```
+```bash
 npm install
 ```
 
 Then you'll just need to run:
 
-```
+```bash
 npm run build
 ```
 
@@ -72,13 +69,12 @@ new to Chrome extension development, take some time to read Google's
 There is a test suite included. Before sending a pull request please make
 sure all tests are passing by running:
 
-```
+```bash
 npm test
 ```
 
-
 ## License
-MIT © [andremw](github.com/andremw)
+MIT © [refined-bitbucket](https://github.com/refined-bitbucket)
 
 [chrome-install]: https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon
 [browserify]: http://browserify.org/
