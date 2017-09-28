@@ -1,6 +1,5 @@
 {
   "manifest_version": 2,
-
   "name": "Refined Bitbucket",
   "description": "Improves Bitbucket's user interface",
   "version": "2.6.0",
@@ -10,7 +9,6 @@
     "48": "icon48.png",
     "128": "icon128.png"
   },
-
   "options_ui": {
     "page": "options.html",
     "chrome_style": true
@@ -20,13 +18,11 @@
       "id": "refined-bitbucket@andremw.org"
     }
   },
-
   "permissions": [
     "activeTab",
     "https://bitbucket.org/*",
     "storage"
   ],
-
   "content_scripts": [
     {
       "js": [
@@ -36,7 +32,9 @@
         "vendor/mousetrap.min.js",
         "extension.js"
       ],
-      "matches": ["https://bitbucket.org/*"]
+      "matches": [
+        "https://bitbucket.org/*"
+      ]
     }
   ]
 }
