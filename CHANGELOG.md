@@ -1,4 +1,4 @@
-# _Next version_
+# 2.6.0 (2017-06-27)
 
 ### Bug Fixes
 

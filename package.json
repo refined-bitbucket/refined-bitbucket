@@ -1,7 +1,7 @@
 {
   "name": "refined-bitbucket",
   "description": "Chrome extension that improves BitBucket's user interface",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "main": "index.js",
   "scripts": {
     "test": "xo src/*.js src/**/*.js && browserify test/*.spec.js | tape-run",
