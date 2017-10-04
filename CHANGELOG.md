@@ -1,10 +1,16 @@
+# Next Version
+
+### Bug fixes
+
+* **Ocurrences-Highlighter**: Words are not deselected when selected through double-clicking inside comments and tasks, closes [issue #52](https://github.com/refined-bitbucket/refined-bitbucket/issues/52), [pull request 53](https://github.com/refined-bitbucket/refined-bitbucket/pull/53).
+
 # 2.6.1 (2017-06-27)
 
 ### Bug Fixes
 
-* **Highlighter**: Now the selection is maintained when highlighting word occurrences, [PR 50](https://github.com/refined-bitbucket/refined-bitbucket/pull/50).
+* **Ocurrences-Highlighter**: Now the selection is maintained when highlighting word occurrences, closes [issue #38](https://github.com/refined-bitbucket/refined-bitbucket/issues/38), [pull request 50](https://github.com/refined-bitbucket/refined-bitbucket/pull/50).
 
-### Language support:
+### Language support
 
 * Added C++ language support for files with extension `.cc`
 * Added JSX language support for VueJS files with extension `.vue`
