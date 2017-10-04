@@ -10,8 +10,8 @@ and made a few improvements. Kudos!
 ## Current features
 - Improves syntax highlight for pull requests. Enabled languages:
   - Markup, C-like languages, Go, Groovy, Bash, Handlebars, JSON, Dart, Elixir, Erlang, Markdown, Python, React JSX, 
-  Ruby, PHP, Scala, Less, Sass, Swift, YAML, etc. [See the full list](https://github.com/andremw/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any 
-  language? [Let me know](https://github.com/andremw/refined-bitbucket/issues) or submit a pull request!
+  Ruby, PHP, Scala, Less, Sass, Swift, YAML, etc. [See the full list](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any 
+  language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
 - Double click on a word to highlight all occurrences.
 - Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals)..
 - Key binding feature, which allows for quicker navigation through pull requests.
@@ -43,7 +43,7 @@ Key | Action
 <kbd>g</kbd> <kbd>g</kbd> | Scrolls to the top of the page
 <kbd>G</kbd> (Shift+g) | Scrolls to the bottom of the page
 
-### Compiling & Contributing
+## Compiling & Contributing
 
 Contributions are very appreciated!
 
