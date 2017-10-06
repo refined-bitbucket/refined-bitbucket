@@ -1,10 +1,16 @@
+# Next version
+
+### Features
+
+* **Bitbucket Server**: Support for Bitbucket server. Now possible to configure a self-hosted Bitbucket server URL, closes [issue #39](https://github.com/refined-bitbucket/refined-bitbucket/issues/39), [pull request 54](https://github.com/refined-bitbucket/refined-bitbucket/pull/54).
+
 # 2.6.1 (2017-06-27)
 
 ### Bug Fixes
 
-* **Highlighter**: Now the selection is maintained when highlighting word occurrences, [PR 50](https://github.com/refined-bitbucket/refined-bitbucket/pull/50).
+* **Ocurrences-Highlighter**: Now the selection is maintained when highlighting word occurrences, closes [issue #38](https://github.com/refined-bitbucket/refined-bitbucket/issues/38), [pull request 50](https://github.com/refined-bitbucket/refined-bitbucket/pull/50).
 
-### Language support:
+### Language support
 
 * Added C++ language support for files with extension `.cc`
 * Added JSX language support for VueJS files with extension `.vue`
