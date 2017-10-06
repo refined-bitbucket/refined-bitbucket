@@ -4,7 +4,7 @@
   "description": "Improves Bitbucket's user interface",
   "version": "2.6.1",
   "author": "andremw",
-  "homepage_url": "https://github.com/andremw/refined-bitbucket",
+  "homepage_url": "https://github.com/refined-bitbucket/refined-bitbucket",
   "icons": {
     "48": "icon48.png",
     "128": "icon128.png"
@@ -23,6 +23,10 @@
     "https://bitbucket.org/*",
     "storage"
   ],
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
   "content_scripts": [
     {
       "js": [
@@ -32,9 +36,17 @@
         "vendor/mousetrap.min.js",
         "extension.js"
       ],
+      "css": [],
       "matches": [
         "https://bitbucket.org/*"
       ]
     }
-  ]
+  ],
+  "background": {
+    "scripts": [
+        "vendor/webext-dynamic-content-scripts.js",
+        "background.js"
+    ],
+    "persistent": false
+  }
 }
