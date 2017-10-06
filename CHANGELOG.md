@@ -2,9 +2,9 @@
 
 ### Bug Fixes
 
-* **Highlighter**: Now the selection is maintained when highlighting word occurrences, [PR 50](https://github.com/refined-bitbucket/refined-bitbucket/pull/50).
+* **Ocurrences-Highlighter**: Now the selection is maintained when highlighting word occurrences, closes [issue #38](https://github.com/refined-bitbucket/refined-bitbucket/issues/38), [pull request 50](https://github.com/refined-bitbucket/refined-bitbucket/pull/50).
 
-### Language support:
+### Language support
 
 * Added C++ language support for files with extension `.cc`
 * Added JSX language support for VueJS files with extension `.vue`
