@@ -1,3 +1,9 @@
+# Next version
+
+### Features
+
+* **Bitbucket Server**: Support for Bitbucket server. Now possible to configure a self-hosted Bitbucket server URL, closes [issue #39](https://github.com/refined-bitbucket/refined-bitbucket/issues/39), [pull request 54](https://github.com/refined-bitbucket/refined-bitbucket/pull/54).
+
 # 2.6.1 (2017-06-27)
 
 ### Bug Fixes

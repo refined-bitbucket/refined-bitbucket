@@ -35,6 +35,9 @@
     "email": "reyronald@gmail.com"
   },
   "homepage": "https://github.com/refined-bitbucket/refined-bitbucket#readme",
+  "dependencies": {
+    "webext-dynamic-content-scripts": "^2.0.1"
+  },
   "devDependencies": {
     "adm-zip": "^0.4.7",
     "browserify": "^13.0.1",
@@ -51,6 +54,5 @@
       "document",
       "MutationObserver"
     ]
-  },
-  "dependencies": {}
+  }
 }
