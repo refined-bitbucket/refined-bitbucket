@@ -30,7 +30,11 @@ function insertStyles() {
 function highlightOnDoubleClick() {
     $('.diff-content-container').dblclick(function () {
         const $this = $(this);
-        const code = $($this.closest('.diff-content-container')[0]).find('pre');
+
+        // <pre> for lines of code
+        // <p> for comments
+        // <span> for tasks
+        const code = $($this.closest('.diff-content-container')[0]).find('pre, p, span');
         const selection = getSelectedText();
         const text = selection.toString().trim();
         const span = wrapInSpan(selection.anchorNode, SELECTION_TEMPORARY_ID);
