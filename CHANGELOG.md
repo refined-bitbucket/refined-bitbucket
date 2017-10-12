@@ -1,10 +1,10 @@
-# Next Version
+# 2.6.2 (2017-10-12)
 
 ### Bug fixes
 
 * **Ocurrences-Highlighter**: Words are not deselected when selected through double-clicking inside comments and tasks, closes [issue #52](https://github.com/refined-bitbucket/refined-bitbucket/issues/52), [pull request 53](https://github.com/refined-bitbucket/refined-bitbucket/pull/53).
 
-# 2.6.1 (2017-06-27)
+# 2.6.1 (2017-09-27)
 
 ### Bug Fixes
 
