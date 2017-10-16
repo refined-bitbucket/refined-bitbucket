@@ -1,4 +1,4 @@
-/* global $, window */
+/* global $, window, Text */
 
 'use strict';
 
@@ -32,9 +32,9 @@ function highlightOnDoubleClick() {
         const $this = $(this);
 
         // <pre> for lines of code
-        // <p> for comments
+        // <div class="comment-content"> for comments
         // <span class="description"> for tasks
-        const code = $($this.closest('.diff-content-container')[0]).find('pre, p, span.description');
+        const code = $($this.closest('.diff-content-container')[0]).find('pre, div.comment-content, span.description');
         const selection = getSelectedText();
         const selectionIsInTextArea = selection.anchorNode.getElementsByTagName && selection.anchorNode.getElementsByTagName('textarea').length;
         const text = selection.toString();
@@ -44,7 +44,8 @@ function highlightOnDoubleClick() {
         if (selectionIsInTextArea) {
             highlightOcurrences(code, text);
         } else {
-            const span = wrapInSpan(selection.anchorNode, SELECTION_TEMPORARY_ID);
+            const selectedNode = getSelectionAsNode(selection);
+            const span = wrapInSpan(selectedNode, SELECTION_TEMPORARY_ID);
             highlightOcurrences(code, text);
             const children = unwrapChildren(span);
             const highlightedNode = getHighlightedNode(children);
@@ -82,6 +83,20 @@ function highlightOcurrences(code, text) {
         wordsBoundaryStart: '(',
         wordsBoundaryEnd: ')'
     });
+}
+
+/**
+ * Gets the selection as a HTML element node.
+ * @param {Selection} selection
+ * @returns {HTMLElement}
+ */
+function getSelectionAsNode(selection) {
+    if (selection.anchorNode instanceof Text) {
+        const word = selection.anchorNode.splitText(selection.anchorOffset);
+        word.splitText(selection.focusOffset);
+        return word;
+    }
+    return selection.anchorNode;
 }
 
 /**
