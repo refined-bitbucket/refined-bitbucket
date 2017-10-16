@@ -1,4 +1,4 @@
-/* global $, window */
+/* global $, window, Text */
 
 'use strict';
 
@@ -87,7 +87,7 @@ function highlightOcurrences(code, text) {
 
 /**
  * Gets the selection as a HTML element node.
- * @param {Selection} selection 
+ * @param {Selection} selection
  * @returns {HTMLElement}
  */
 function getSelectionAsNode(selection) {
