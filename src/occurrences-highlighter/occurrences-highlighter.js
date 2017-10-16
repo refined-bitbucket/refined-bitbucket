@@ -33,22 +33,24 @@ function highlightOnDoubleClick() {
 
         // <pre> for lines of code
         // <p> for comments
-        // <span> for tasks
-        const code = $($this.closest('.diff-content-container')[0]).find('pre, p, span');
+        // <span class="description"> for tasks
+        const code = $($this.closest('.diff-content-container')[0]).find('pre, p, span.description');
         const selection = getSelectedText();
-        const text = selection.toString().trim();
-        const span = wrapInSpan(selection.anchorNode, SELECTION_TEMPORARY_ID);
+        const selectionIsInTextArea = selection.anchorNode.getElementsByTagName && selection.anchorNode.getElementsByTagName('textarea').length;
+        const text = selection.toString();
 
-        code.unhighlight();
-        code.highlight(text, {
-            caseSensitive: true,
-            wordsOnly: true
-        });
-
-        const children = unwrapChildren(span);
-        const highlighted = [...children].find(node => node.classList.contains('highlight'));
-        if (highlighted) {
-            selectElementContents(highlighted);
+        // When the user selects a word inside a textarea, the selected text is not actually present in the DOM.
+        // In that case the selection is not highlighted and our reselection logic will actually deselect the text.
+        if (selectionIsInTextArea) {
+            highlightOcurrences(code, text);
+        } else {
+            const span = wrapInSpan(selection.anchorNode, SELECTION_TEMPORARY_ID);
+            highlightOcurrences(code, text);
+            const children = unwrapChildren(span);
+            const highlightedNode = getHighlightedNode(children);
+            if (highlightedNode) {
+                selectElementContents(highlightedNode);
+            }
         }
     });
 }
@@ -64,6 +66,22 @@ function getSelectedText() {
         return document.selection.createRange().text;
     }
     return '';
+}
+
+/**
+ * Removes all previous highlights and then highlights the string `text`
+ * (trimmed and untrimmed) in the `code` array of nodes
+ * @param {HTMLElement[]} code
+ * @param {string} text
+ */
+function highlightOcurrences(code, text) {
+    code.unhighlight();
+    code.highlight([text, text.trim()], {
+        caseSensitive: true,
+        wordsOnly: true,
+        wordsBoundaryStart: '(',
+        wordsBoundaryEnd: ')'
+    });
 }
 
 /**
@@ -89,6 +107,25 @@ function unwrapChildren(el) {
         return $(el.firstElementChild).unwrap();
     }
     return [];
+}
+
+/**
+ * Gets the first element that either has the 'highlight' class itself
+ * or contains a children that has it
+ * @param {HTMLElement[]} children
+ * @return {HTMLElement}
+ */
+function getHighlightedNode(children) {
+    for (let index = 0; index < children.length; index++) {
+        const node = children[index];
+        if (node.classList.contains('highlight')) {
+            return node;
+        }
+        const nodesWithHighlightClass = node.getElementsByClassName('highlight');
+        if (nodesWithHighlightClass.length) {
+            return nodesWithHighlightClass[0];
+        }
+    }
 }
 
 /**
