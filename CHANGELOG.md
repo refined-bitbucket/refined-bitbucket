@@ -1,8 +1,15 @@
+# Next Version
+
+### Bug fixes
+
+* **Ocurrences-Highlighter**: Now the selection is maintained when highlighting word occurrences when creating comments and tasks, closes [issue #52](https://github.com/refined-bitbucket/refined-bitbucket/issues/52), [pull request 53](https://github.com/refined-bitbucket/refined-bitbucket/pull/53).
+
+
 # 2.6.2 (2017-10-12)
 
 ### Bug fixes
 
-* **Ocurrences-Highlighter**: Words are not deselected when selected through double-clicking inside comments and tasks, closes [issue #52](https://github.com/refined-bitbucket/refined-bitbucket/issues/52), [pull request 53](https://github.com/refined-bitbucket/refined-bitbucket/pull/53).
+* **Ocurrences-Highlighter**: Now the selection is maintained when highlighting word occurrences inside comments and tasks, closes [issue #52](https://github.com/refined-bitbucket/refined-bitbucket/issues/52), [pull request 53](https://github.com/refined-bitbucket/refined-bitbucket/pull/53).
 
 # 2.6.1 (2017-09-27)
 
