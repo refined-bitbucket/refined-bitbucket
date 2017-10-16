@@ -2,9 +2,9 @@
   "manifest_version": 2,
   "name": "Refined Bitbucket",
   "description": "Improves Bitbucket's user interface",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "author": "andremw",
-  "homepage_url": "https://github.com/andremw/refined-bitbucket",
+  "homepage_url": "https://github.com/refined-bitbucket/refined-bitbucket",
   "icons": {
     "48": "icon48.png",
     "128": "icon128.png"
