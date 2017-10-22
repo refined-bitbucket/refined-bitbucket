@@ -13,7 +13,7 @@ and made a few improvements. Kudos!
   Ruby, PHP, Scala, Less, Sass, Swift, YAML, etc. [See the full list](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any 
   language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
 - Double click on a word to highlight all occurrences.
-- Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals)..
+- ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
 - Key binding feature, which allows for quicker navigation through pull requests.
 
 ## Installing
