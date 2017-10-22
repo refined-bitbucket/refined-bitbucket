@@ -39,6 +39,11 @@ function highlightOnDoubleClick() {
         const selectionIsInTextArea = selection.anchorNode.getElementsByTagName && selection.anchorNode.getElementsByTagName('textarea').length;
         const text = selection.toString();
 
+        // if selected text is all whitespace, don't highlight anything
+        if (!/\S/.test(text)) {
+            return;
+        }
+
         // When the user selects a word inside a textarea, the selected text is not actually present in the DOM.
         // In that case the selection is not highlighted and our reselection logic will actually deselect the text.
         if (selectionIsInTextArea) {
