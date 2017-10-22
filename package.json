@@ -52,5 +52,7 @@
       "MutationObserver"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "selector-observer": "^1.1.0"
+  }
 }
