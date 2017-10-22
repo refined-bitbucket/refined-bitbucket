@@ -2,7 +2,7 @@
 
 ### Features
 
-* **Collapse-Diff**: Added button to collapse diffs in the Pull Request view. [Pull request 59](https://github.com/refined-bitbucket/refined-bitbucket/pull/58).
+* **Collapse-Diff**: Added button to collapse diffs in the Pull Request view. [Pull request 60](https://github.com/refined-bitbucket/refined-bitbucket/pull/60).
 
 # 2.6.4 (2017-10-16)
 
