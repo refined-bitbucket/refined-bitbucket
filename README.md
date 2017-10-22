@@ -13,8 +13,9 @@ and made a few improvements. Kudos!
   Ruby, PHP, Scala, Less, Sass, Swift, YAML, etc. [See the full list](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any 
   language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
 - Double click on a word to highlight all occurrences.
-- Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals)..
+- Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).
 - Key binding feature, which allows for quicker navigation through pull requests.
+- Button to collapse diffs in Pull Request view.
 
 ## Installing
 Refined Bitbucket is [available on the Google Chrome Web Store][chrome-install].
