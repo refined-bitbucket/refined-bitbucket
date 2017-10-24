@@ -31,7 +31,7 @@
         "vendor/jquery.highlight.js",
         "vendor/mousetrap.min.js",
         "vendor/selector-observer.js",
-        "extension.js"
+        "main.js"
       ],
       "matches": [
         "https://bitbucket.org/*"
