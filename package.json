@@ -39,11 +39,11 @@
   "homepage": "https://github.com/refined-bitbucket/refined-bitbucket#readme",
   "devDependencies": {
     "adm-zip": "^0.4.7",
-    "browserify": "^13.0.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
+    "browserify": "^13.0.1",
     "cross-env": "^5.1.0",
     "path": "^0.12.7",
     "semver": "^5.4.1",
@@ -64,7 +64,15 @@
     "globals": [
       "document",
       "MutationObserver"
-    ]
+    ],
+    "rules": {
+      "no-unused-vars": [
+        2,
+        {
+          "varsIgnorePattern": "^h$"
+        }
+      ]
+    }
   },
   "babel": {
     "plugins": [
