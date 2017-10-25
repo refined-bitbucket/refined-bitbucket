@@ -65,7 +65,15 @@
     "globals": [
       "document",
       "MutationObserver"
-      ]
+      ],
+      "rules": {
+        "no-unused-vars": [
+          2,
+          {
+            "varsIgnorePattern": "^h$"
+          }
+        ]
+      }
   },
   "babel": {
     "plugins": [
