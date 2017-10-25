@@ -49,7 +49,7 @@ function insertCollapseDiffButton(diffContainer) {
 
     button.addEventListener('click', function () {
         // Hide/show the diff
-        const diffContentContainer = diffContainer.querySelector('div.diff-content-container.refract-container');
+        const diffContentContainer = diffContainer.querySelector('div.diff-content-container');
         diffContentContainer.classList.toggle('__refined_bitbucket_hide');
 
         // Hide/show diff message, if present (when there are conflicts, for example)
