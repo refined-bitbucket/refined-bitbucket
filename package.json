@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "xo src/*.js src/**/*.js && browserify test/*.spec.js | tape-run",
-    "build": "browserify src/*.js src/**/*.js -o extension/extension.js",
+    "build": "webpack",
+    "build:min": "cross-env NODE_ENV=production webpack",
+    "watch": "webpack --watch",
     "publish": "node scripts/publish",
     "major": "npm version --no-git-tag-version major",
     "minor": "npm version --no-git-tag-version minor",
@@ -38,10 +40,22 @@
   "devDependencies": {
     "adm-zip": "^0.4.7",
     "browserify": "^13.0.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "cross-env": "^5.1.0",
+    "path": "^0.12.7",
     "semver": "^5.4.1",
     "tape": "^4.5.1",
     "tape-run": "^2.1.4",
+    "uglifyjs-webpack-plugin": "^1.0.0",
+    "webpack": "^3.8.1",
     "xo": "^0.16.0"
+  },
+  "dependencies": {
+    "dom-chef": "^3.0.0",
+    "selector-observer": "^1.1.0"
   },
   "xo": {
     "semicolon": true,
@@ -52,7 +66,22 @@
       "MutationObserver"
     ]
   },
-  "dependencies": {
-    "selector-observer": "^1.1.0"
+  "babel": {
+    "plugins": [
+      [
+        "transform-react-jsx",
+        {
+          "pragma": "h",
+          "useBuiltIns": true
+        }
+      ]
+    ],
+    "env": {
+      "testing": {
+        "plugins": [
+          "transform-es2015-modules-commonjs"
+        ]
+      }
+    }
   }
 }

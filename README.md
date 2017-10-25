@@ -57,13 +57,13 @@ npm install
 Then you'll just need to run:
 
 ```bash
-npm run build
+npm run watch
 ```
 
-This will create the `extension.js` file and test
-the code you write and load the unpackaged extension in your Chrome. If you're
-new to Chrome extension development, take some time to read Google's
-[documentation on extensions](https://developer.chrome.com/extensions).
+This will watch any changes in the `src` folder and compile them to the `extension` folder.
+To test in Chrome, activate the Developer mode in `chrome://extensions`, click "Load unpacked extension..." and select that folder.
+
+If you're new to Chrome extension development, take some time to read Google's [documentation on extensions](https://developer.chrome.com/extensions).
 
 #### Integration
 

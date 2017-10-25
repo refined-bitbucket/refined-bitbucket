@@ -35,8 +35,6 @@ node_modules
 # Folder with files to be distributed
 dist
 
-extension/extension.js
-
 # Created by https://www.gitignore.io/api/osx
 
 ### OSX ###
@@ -70,3 +68,6 @@ Temporary Items
 extension.zip
 
 *.orig
+*.js.map
+extension/main.js
+extension/options.js

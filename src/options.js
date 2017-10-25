@@ -13,7 +13,7 @@
 
         chrome.storage.sync.set({
             highlightSyntax,
-            highlightOcurrences,
+            highlightOcurrences
         }, () => {
             statusElement.textContent = 'Options saved.';
             setTimeout(() => {
@@ -25,7 +25,7 @@
     function restoreOptions() {
         chrome.storage.sync.get({
             highlightSyntax: true,
-            highlightOcurrences: true,
+            highlightOcurrences: true
         }, options => {
             highlightSyntaxElement.checked = options.highlightSyntax;
             highlightOcurrencesElement.checked = options.highlightOcurrences;
