@@ -4,6 +4,7 @@
   "version": "2.6.4",
   "main": "index.js",
   "scripts": {
+    "ava": "cross-env BABEL_ENV=testing ava test/ocurrence-highlighter.spec.js",
     "xo:fix": "xo --fix src/*.js src/**/*.js",
     "test": "xo src/*.js src/**/*.js && browserify test/*.spec.js | tape-run",
     "build": "webpack",
@@ -40,12 +41,14 @@
   "homepage": "https://github.com/refined-bitbucket/refined-bitbucket#readme",
   "devDependencies": {
     "adm-zip": "^0.4.7",
+    "ava": "^0.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "browserify": "^13.0.1",
     "cross-env": "^5.1.0",
+    "jsdom": "^11.3.0",
     "path": "^0.12.7",
     "semver": "^5.4.1",
     "tape": "^4.5.1",
@@ -56,6 +59,8 @@
   },
   "dependencies": {
     "dom-chef": "^3.0.0",
+    "jquery": "^3.2.1",
+    "jquery-highlight": "^3.4.0",
     "selector-observer": "^1.1.0"
   },
   "xo": {
@@ -74,6 +79,12 @@
         }
       ]
     }
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
   },
   "babel": {
     "plugins": [
