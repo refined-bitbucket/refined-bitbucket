@@ -9,6 +9,10 @@
 * **Merge-approvals**: Merge approvals feature removed. No longer necessary since it is [now implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html), closes [issue 51](https://github.com/refined-bitbucket/refined-bitbucket/issues/51) and [issue 32](https://github.com/refined-bitbucket/refined-bitbucket/issues/32), [pull request 61](https://github.com/refined-bitbucket/refined-bitbucket/pull/61).
 * **Occurrence-Highlighter**: Now when double-clicking whitespace/indentation in diffs, no highlighting occurs, closes [issue 59](https://github.com/refined-bitbucket/refined-bitbucket/issues/59), [pull request 62](https://github.com/refined-bitbucket/refined-bitbucket/pull/62)
 
+### Bug fixes
+
+* **Ocurrence-Highlighter**: Double-clicking an already highlighted word doesn't remove it, closes [issue 64](https://github.com/refined-bitbucket/refined-bitbucket/issues/64), [pull request 68](https://github.com/refined-bitbucket/refined-bitbucket/pull/68).
+
 # 2.6.4 (2017-10-16)
 
 ### Bug fixes

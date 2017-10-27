@@ -43,6 +43,10 @@ function highlightOnDoubleClick() {
         if (!/\S/.test(text)) {
             return;
         }
+        // if selected text is already highlighted, don't highlight anything
+        if (selection.anchorNode.parentElement.classList.contains('highlight')) {
+            return;
+        }
 
         // When the user selects a word inside a textarea, the selected text is not actually present in the DOM.
         // In that case the selection is not highlighted and our reselection logic will actually deselect the text.
