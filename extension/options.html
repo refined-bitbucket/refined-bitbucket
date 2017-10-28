@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Refined Bitbucket Options</title>
     <link rel="stylesheet" href="options.css">
 </head>
+
 <body>
     <label>
-        <input type="checkbox" id="syntax-highlight">
-        Syntax highlighting
+        <input type="checkbox" id="syntax-highlight"> Syntax highlighting
     </label>
-    <br><br>
+    <br>
+    <br>
     <label>
-        <input type="checkbox" id="highlight-ocurrences">
-        Highlight occurrences of selected words
+        <input type="checkbox" id="highlight-ocurrences"> Highlight occurrences of selected words
     </label>
-    <br><br>
+    <br>
+    <br>
+
+    <div>
+        <div>
+            <label>
+                Pull Request ignore paths
+            </label>
+        </div>
+        <textarea id="ignore-paths" rows="15" cols="90"></textarea>
+    </div>
 
     <div id="status"></div>
     <br>
@@ -23,4 +34,5 @@
 
     <script src="options.js"></script>
 </body>
+
 </html>

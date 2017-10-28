@@ -56,6 +56,8 @@
   },
   "dependencies": {
     "dom-chef": "^3.0.0",
+    "element-ready": "^2.2.0",
+    "ignore": "^3.3.6",
     "selector-observer": "^1.1.0"
   },
   "xo": {

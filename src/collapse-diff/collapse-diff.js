@@ -4,18 +4,13 @@ import {h} from 'dom-chef';
 import 'selector-observer';
 import waitForPullRequestContents from '../wait-for-pullrequest';
 
-export function init() {
+export function init(pullRequestContentsNode) {
     insertStyles();
 
-    waitForPullRequestContents().then(pullRequestContentsNode => {
-        // have to observe the DOM because some diffs
-        // can be loaded by user demand at any moment
-        pullRequestContentsNode.observeSelector('div.diff-container', function () {
-            insertCollapseDiffButton(this);
-        });
-    })
-    .catch(() => {
-        // current page is not a pull request, ignore
+    // have to observe the DOM because some diffs
+    // can be loaded by user demand at any moment
+    pullRequestContentsNode.observeSelector('div.diff-container', function () {
+        insertCollapseDiffButton(this);
     });
 }
 

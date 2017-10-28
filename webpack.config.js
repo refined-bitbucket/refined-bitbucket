@@ -11,7 +11,7 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            process: '0'
+            process: {}
         }),
         new webpack.optimize.ModuleConcatenationPlugin()
     ],
