@@ -1,15 +1,14 @@
 /* global Mousetrap */
 
-const storageHelper = require('./storage-helper');
+import waitForPullRequestContents from './wait-for-pullrequest';
+import collapseDiff from './collapse-diff/collapse-diff';
+import autocollapse from './autocollapse/autocollapse';
 
+const storageHelper = require('./storage-helper');
 const syntaxHighlight = require('./syntax-highlight/syntax-highlight');
 const events = require('./events');
 const occurrencesHighlighter = require('./occurrences-highlighter/occurrences-highlighter');
 const keymap = require('./keymap/keymap');
-
-import waitForPullRequestContents from './wait-for-pullrequest';
-import collapseDiff from './collapse-diff/collapse-diff';
-import autocollapse from './autocollapse/autocollapse';
 
 storageHelper.getConfig().then(config => {
     events.init();
@@ -25,7 +24,7 @@ storageHelper.getConfig().then(config => {
     keymap.init(Mousetrap);
 
     waitForPullRequestContents().then(pullrequestNode => {
-        collapseDiff.init(this);
+        collapseDiff.init();
         autocollapse.init(config.autocollapsePaths);
 
         // have to observe the DOM because some sections

@@ -1,15 +1,13 @@
 'use strict';
 
 import {h} from 'dom-chef';
-import 'selector-observer';
-import waitForPullRequestContents from '../wait-for-pullrequest';
 
 export default {
     init,
     insertCollapseDiffButton
 };
 
-export function init(diffContainer) {
+function init() {
     insertStyles();
 }
 
@@ -24,7 +22,7 @@ function insertStyles() {
     head.appendChild(style);
 }
 
-export function insertCollapseDiffButton(section) {
+function insertCollapseDiffButton(section) {
     const button = (
         <div class="aui-buttons">
             <button type="button" class="aui-button aui-button-light __refined_bitbucket_collapse_diff_button" aria-label="Toggle diff text">
@@ -41,10 +39,10 @@ export function insertCollapseDiffButton(section) {
     const diffActions = section.querySelector('.diff-actions.secondary');
     const diffLoaded = !section.querySelector('div.too-big-message');
     if (diffLoaded) {
-        diffActions.querySelector('div:nth-last-child(3)').insertAdjacentElement('afterend', button);;
+        diffActions.querySelector('div:nth-last-child(3)').insertAdjacentElement('afterend', button);
     } else {
         diffActions.insertAdjacentElement('beforeend', button);
-    } 
+    }
 
     button.addEventListener('click', function () {
         // Hide/show the diff

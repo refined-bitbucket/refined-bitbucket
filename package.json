@@ -4,8 +4,8 @@
   "version": "2.6.4",
   "main": "index.js",
   "scripts": {
-    "xo:fix": "xo --fix src/*.js src/**/*.js",
-    "test": "xo src/*.js src/**/*.js && browserify test/*.spec.js | tape-run",
+    "xo": "xo --fix src/*.js src/**/*.js",
+    "test": "xo --fix src/*.js src/**/*.js && browserify test/*.spec.js | tape-run",
     "build": "webpack",
     "build:min": "cross-env NODE_ENV=production webpack",
     "watch": "webpack --watch",
