@@ -4,6 +4,8 @@ import waitForPullRequestContents from './wait-for-pullrequest';
 import collapseDiff from './collapse-diff/collapse-diff';
 import autocollapse from './autocollapse/autocollapse';
 
+import 'selector-observer';
+
 const storageHelper = require('./storage-helper');
 const syntaxHighlight = require('./syntax-highlight/syntax-highlight');
 const events = require('./events');
