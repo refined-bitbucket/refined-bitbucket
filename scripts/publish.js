@@ -4,8 +4,8 @@ const AdmZip = require('adm-zip');
 
 // Write package.json's versino to the extension/manifest.json
 const manifestLocation = 'extension/manifest.json';
-const manifest = JSON.parse(fs.readFileSync(manifestLocation, { encoding: 'utf8' }));
-const packageJson = JSON.parse(fs.readFileSync('package.json', { encoding: 'utf8' }));
+const manifest = JSON.parse(fs.readFileSync(manifestLocation, {encoding: 'utf8'}));
+const packageJson = JSON.parse(fs.readFileSync('package.json', {encoding: 'utf8'}));
 const validVersion = semver.valid(packageJson.version);
 
 manifest.version = validVersion;

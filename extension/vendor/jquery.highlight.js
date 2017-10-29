@@ -70,7 +70,7 @@
                     highlight.className = className || 'highlight';
                     // Note that we use the captured value to find the real index
                     // of the match. This is because we do not want to include the matching word boundaries
-                    var capturePos = node.data.indexOf( match[1] , match.index );
+                    var capturePos = node.data.indexOf(match[1], match.index);
 
                     // Split the node and replace the matching wordnode
                     // with the highlighted node
@@ -81,9 +81,9 @@
                     highlight.appendChild(wordClone);
                     wordNode.parentNode.replaceChild(highlight, wordNode);
                     if (typeof callback == 'function') {
-                        callback(highlight)   
+                        callback(highlight);
                     }
-                    return 1; //skip added node in parent
+                    return 1; // skip added node in parent
                 }
             } else if ((node.nodeType === 1 && node.childNodes) && // only element nodes that have children
                     !/(script|style)/i.test(node.tagName) && // ignore script and style nodes
@@ -98,8 +98,8 @@
 
     jQuery.fn.unhighlight = function (options) {
         var settings = {
-          className: 'highlight',
-          element: 'span'
+            className: 'highlight',
+            element: 'span'
         };
 
         jQuery.extend(settings, options);
@@ -113,28 +113,28 @@
 
     jQuery.fn.highlight = function (words, options, callback) {
         var settings = {
-          className: 'highlight',
-          element: 'span',
-          caseSensitive: false,
-          wordsOnly: false,
-          wordsBoundary: '\\b'
+            className: 'highlight',
+            element: 'span',
+            caseSensitive: false,
+            wordsOnly: false,
+            wordsBoundary: '\\b'
         };
 
         jQuery.extend(settings, options);
 
         if (typeof words === 'string') {
-          words = [words];
+            words = [words];
         }
-        words = jQuery.grep(words, function(word, i){
-          return word != '';
+        words = jQuery.grep(words, function (word, i) {
+            return word != '';
         });
-        words = jQuery.map(words, function(word, i) {
-          return word.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+        words = jQuery.map(words, function (word, i) {
+            return word.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
         });
 
         if (words.length === 0) {
-          return this;
-        };
+            return this;
+        }
 
         var flag = settings.caseSensitive ? '' : 'i';
         // The capture parenthesis will make sure we can match
