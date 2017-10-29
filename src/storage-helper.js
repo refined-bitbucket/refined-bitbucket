@@ -9,12 +9,12 @@ module.exports = (function storageHelper() {
                 chrome.storage.sync.get({
                     highlightSyntax: true,
                     highlightOcurrences: true,
-                    ignorePaths: ['package-lock.json']
+                    autocollapsePaths: ['package-lock.json']
                 }, options => {
                     resolve({
                         highlightSyntax: options.highlightSyntax,
                         highlightOcurrences: options.highlightOcurrences,
-                        ignorePaths: options.ignorePaths
+                        autocollapsePaths: options.autocollapsePaths
                     });
                 });
             });
