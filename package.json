@@ -4,8 +4,8 @@
   "version": "2.6.4",
   "main": "index.js",
   "scripts": {
-    "xo:fix": "xo --fix src/*.js src/**/*.js",
-    "test": "xo src/*.js src/**/*.js && browserify test/*.spec.js | tape-run",
+    "xo": "xo --fix src/*.js src/**/*.js",
+    "test": "xo --fix src/*.js src/**/*.js && browserify test/*.spec.js | tape-run",
     "build": "webpack",
     "build:min": "cross-env NODE_ENV=production webpack",
     "watch": "webpack --watch",
@@ -56,6 +56,8 @@
   },
   "dependencies": {
     "dom-chef": "^3.0.0",
+    "element-ready": "^2.2.0",
+    "ignore": "^3.3.6",
     "selector-observer": "^1.1.0"
   },
   "xo": {

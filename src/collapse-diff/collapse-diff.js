@@ -1,22 +1,14 @@
 'use strict';
 
 import {h} from 'dom-chef';
-import 'selector-observer';
-import waitForPullRequestContents from '../wait-for-pullrequest';
 
-export function init() {
+export default {
+    init,
+    insertCollapseDiffButton
+};
+
+function init() {
     insertStyles();
-
-    waitForPullRequestContents().then(pullRequestContentsNode => {
-        // have to observe the DOM because some diffs
-        // can be loaded by user demand at any moment
-        pullRequestContentsNode.observeSelector('div.diff-container', function () {
-            insertCollapseDiffButton(this);
-        });
-    })
-    .catch(() => {
-        // current page is not a pull request, ignore
-    });
 }
 
 function insertStyles() {
@@ -30,10 +22,10 @@ function insertStyles() {
     head.appendChild(style);
 }
 
-function insertCollapseDiffButton(diffContainer) {
+function insertCollapseDiffButton(section) {
     const button = (
         <div class="aui-buttons">
-            <button type="button" class="aui-button aui-button-light __refined_bitbucket_collapse_diff_button" aria-label="Toggle diff text" data-initial-state="true">
+            <button type="button" class="aui-button aui-button-light __refined_bitbucket_collapse_diff_button" aria-label="Toggle diff text">
                 <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 10 16" width="10">
                     <path fill-rule="evenodd" d="M10 10l-1.5 1.5L5 7.75 1.5 11.5 0 10l5-5z"></path>
                 </svg>
@@ -44,16 +36,23 @@ function insertCollapseDiffButton(diffContainer) {
         </div>
     );
 
-    const diffAction = diffContainer.querySelector('[id^="side-by-side"].diff-actions.secondary');
-    diffAction.querySelector('div:nth-last-child(3)').insertAdjacentElement('afterend', button);
+    const diffActions = section.querySelector('.diff-actions.secondary');
+    const diffLoaded = !section.querySelector('div.too-big-message');
+    if (diffLoaded) {
+        diffActions.querySelector('div:nth-last-child(3)').insertAdjacentElement('afterend', button);
+    } else {
+        diffActions.insertAdjacentElement('beforeend', button);
+    }
 
     button.addEventListener('click', function () {
         // Hide/show the diff
-        const diffContentContainer = diffContainer.querySelector('div.diff-content-container');
-        diffContentContainer.classList.toggle('__refined_bitbucket_hide');
-
+        const diffContentContainer = section.querySelector('div.diff-content-container');
+        if (diffContentContainer) {
+            diffContentContainer.classList.toggle('__refined_bitbucket_hide');
+        }
+        
         // Hide/show diff message, if present (when there are conflicts, for example)
-        const diffMessageContainer = diffContainer.querySelector('div.diff-message-container.diff-message-container-skipped');
+        const diffMessageContainer = section.querySelector('div.diff-message-container');
         if (diffMessageContainer) {
             diffMessageContainer.classList.toggle('__refined_bitbucket_hide');
         }
