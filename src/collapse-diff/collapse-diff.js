@@ -46,11 +46,13 @@ function insertCollapseDiffButton(section) {
 
     button.addEventListener('click', function () {
         // Hide/show the diff
-        const diffContentContainer = section.querySelector('div.diff-content-container') || section.querySelector('div.diff-message-container');
-        diffContentContainer.classList.toggle('__refined_bitbucket_hide');
-
+        const diffContentContainer = section.querySelector('div.diff-content-container');
+        if (diffContentContainer) {
+            diffContentContainer.classList.toggle('__refined_bitbucket_hide');
+        }
+        
         // Hide/show diff message, if present (when there are conflicts, for example)
-        const diffMessageContainer = section.querySelector('div.diff-message-container.diff-message-container-skipped');
+        const diffMessageContainer = section.querySelector('div.diff-message-container');
         if (diffMessageContainer) {
             diffMessageContainer.classList.toggle('__refined_bitbucket_hide');
         }
