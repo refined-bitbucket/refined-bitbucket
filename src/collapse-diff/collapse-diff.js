@@ -50,7 +50,7 @@ function insertCollapseDiffButton(section) {
         if (diffContentContainer) {
             diffContentContainer.classList.toggle('__refined_bitbucket_hide');
         }
-        
+
         // Hide/show diff message, if present (when there are conflicts, for example)
         const diffMessageContainer = section.querySelector('div.diff-message-container');
         if (diffMessageContainer) {

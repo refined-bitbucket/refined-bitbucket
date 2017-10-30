@@ -1,10 +1,9 @@
 'use strict';
-const test = require('tape');
+const test = require('ava');
 const getExtension = require('../src/syntax-highlight/get-extension');
 
 test('get extension', t => {
-    t.equal('.java', getExtension('/path/to/whatever/file.java'));
-    t.equal('.go', getExtension('/path/to/whatever/file.go'));
-    t.equal('.html', getExtension('/path/to/whatever/file.html'));
-    t.end();
+    t.is('.java', getExtension('/path/to/whatever/file.java'));
+    t.is('.go', getExtension('/path/to/whatever/file.go'));
+    t.is('.html', getExtension('/path/to/whatever/file.html'));
 });

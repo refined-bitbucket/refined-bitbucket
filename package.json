@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "xo": "xo --fix src/*.js src/**/*.js",
-    "test": "xo --fix src/*.js src/**/*.js && browserify test/*.spec.js | tape-run",
+    "ava": "cross-env BABEL_ENV=testing ava",
     "build": "webpack",
     "build:min": "cross-env NODE_ENV=production webpack",
+    "test": "npm run xo && npm run ava && npm run build:min",
     "watch": "webpack --watch",
     "publish": "node scripts/publish",
     "major": "npm version --no-git-tag-version major",
@@ -40,22 +41,25 @@
   "homepage": "https://github.com/refined-bitbucket/refined-bitbucket#readme",
   "devDependencies": {
     "adm-zip": "^0.4.7",
+    "ava": "^0.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "browserify": "^13.0.1",
     "cross-env": "^5.1.0",
+    "jsdom": "^11.3.0",
     "path": "^0.12.7",
+    "request": "^2.83.0",
     "semver": "^5.4.1",
-    "tape": "^4.5.1",
-    "tape-run": "^2.1.4",
     "uglifyjs-webpack-plugin": "^1.0.0",
     "webpack": "^3.8.1",
     "xo": "^0.16.0"
   },
   "dependencies": {
     "dom-chef": "^3.0.0",
+    "jquery": "^3.2.1",
+    "jquery-highlight": "^3.4.0",
     "element-ready": "^2.2.0",
     "ignore": "^3.3.6",
     "selector-observer": "^1.1.0"
@@ -77,6 +81,18 @@
       ]
     }
   },
+  "ava": {
+    "files": [
+      "test/*.spec.js"
+    ],
+    "source": [
+      "src/**/*.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
   "babel": {
     "plugins": [
       [
@@ -85,12 +101,19 @@
           "pragma": "h",
           "useBuiltIns": true
         }
+      ],
+      [
+        "transform-object-rest-spread",
+        {
+          "useBuiltIns": true
+        }
       ]
     ],
     "env": {
       "testing": {
         "plugins": [
-          "transform-es2015-modules-commonjs"
+          "transform-es2015-modules-commonjs",
+          "transform-object-rest-spread"
         ]
       }
     }

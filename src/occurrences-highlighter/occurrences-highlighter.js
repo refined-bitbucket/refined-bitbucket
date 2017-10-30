@@ -4,20 +4,20 @@
 
 const waitForRender = require('../wait-for-render.js');
 
-const SELECTION_TEMPORARY_ID = '__refined_bitbucket_selection_temporary_id';
+export {
+    init,
+    highlightOccurrences
+};
 
-module.exports = (function () {
-    return {
-        init
-    };
+function init() {
+    insertStyles();
 
-    function init() {
-        waitForRender('.diff-container').then(() => {
-            insertStyles();
-            highlightOnDoubleClick();
+    waitForRender('.diff-container').then(() => {
+        $('.diff-content-container').dblclick(function () {
+            highlightOccurrences(this);
         });
-    }
-})();
+    });
+}
 
 function insertStyles() {
     const head = document.getElementsByTagName('head')[0];
@@ -27,38 +27,39 @@ function insertStyles() {
     head.appendChild(style);
 }
 
-function highlightOnDoubleClick() {
-    $('.diff-content-container').dblclick(function () {
-        const $this = $(this);
+function highlightOccurrences(container) {
+    // <pre> for lines of code
+    // <div class="comment-content"> for comments
+    // <span class="description"> for tasks
+    const code = $(container.querySelectorAll('pre, div.comment-content, span.description'));
+    const selection = getSelectedText();
+    const selectionIsInTextArea = selection.anchorNode.getElementsByTagName && selection.anchorNode.getElementsByTagName('textarea').length;
+    const text = selection.toString();
 
-        // <pre> for lines of code
-        // <div class="comment-content"> for comments
-        // <span class="description"> for tasks
-        const code = $($this.closest('.diff-content-container')[0]).find('pre, div.comment-content, span.description');
-        const selection = getSelectedText();
-        const selectionIsInTextArea = selection.anchorNode.getElementsByTagName && selection.anchorNode.getElementsByTagName('textarea').length;
-        const text = selection.toString();
+    // if selected text is all whitespace, don't highlight anything
+    if (!/\S/.test(text)) {
+        code.unhighlight();
+        return;
+    }
+    // if selected text is already highlighted, don't highlight anything
+    if (selection.anchorNode.parentElement.classList.contains('highlight')) {
+        return;
+    }
 
-        // if selected text is all whitespace, don't highlight anything
-        if (!/\S/.test(text)) {
-            return;
+    // When the user selects a word inside a textarea, the selected text is not actually present in the DOM.
+    // In that case the selection is not highlighted and our reselection logic will actually deselect the text.
+    if (selectionIsInTextArea) {
+        highlightOcurrences(code, text);
+    } else {
+        const selectedNode = getSelectionAsNode(selection);
+        const span = wrapInSpan(selectedNode, '__refined_bitbucket_selection_temporary_id');
+        highlightOcurrences(code, text);
+        const children = unwrapChildren(span);
+        const highlightedNode = getHighlightedNode(children);
+        if (highlightedNode) {
+            selectElementContents(highlightedNode);
         }
-
-        // When the user selects a word inside a textarea, the selected text is not actually present in the DOM.
-        // In that case the selection is not highlighted and our reselection logic will actually deselect the text.
-        if (selectionIsInTextArea) {
-            highlightOcurrences(code, text);
-        } else {
-            const selectedNode = getSelectionAsNode(selection);
-            const span = wrapInSpan(selectedNode, SELECTION_TEMPORARY_ID);
-            highlightOcurrences(code, text);
-            const children = unwrapChildren(span);
-            const highlightedNode = getHighlightedNode(children);
-            if (highlightedNode) {
-                selectElementContents(highlightedNode);
-            }
-        }
-    });
+    }
 }
 
 function getSelectedText() {
