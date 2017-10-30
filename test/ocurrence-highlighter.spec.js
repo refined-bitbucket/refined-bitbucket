@@ -17,6 +17,9 @@ document.createRange = () => ({
 const _selectionCommon = {
     removeAllRanges: () => {},
     addRange: () => {},
+    toString: function() {
+        return this.anchorNode.textContent.substr(this.anchorOffset, this.focusOffset - this.anchorOffset);
+    },
 };
 
 test('highlighting one occurrence' , t => {
@@ -39,9 +42,6 @@ test('highlighting one occurrence' , t => {
         anchorNode: container.querySelector('pre').firstChild,
         anchorOffset: 1,
         focusOffset: 6,
-        toString: function() {
-            return this.anchorNode.textContent.substr(this.anchorOffset, this.focusOffset - this.anchorOffset);
-        },
     });
 
     highlightOccurrences(container);
@@ -69,9 +69,6 @@ test('highlighting two occurrences' , t => {
         anchorNode: container.querySelector('pre').firstChild,
         anchorOffset: 1,
         focusOffset: 6,
-        toString: function() {
-            return this.anchorNode.textContent.substr(this.anchorOffset, this.focusOffset - this.anchorOffset);
-        },
     });
 
     highlightOccurrences(container);
@@ -101,9 +98,6 @@ test('highlighting two occurrences in differente nodes' , t => {
         anchorNode: container.querySelector('pre').firstChild,
         anchorOffset: 1,
         focusOffset: 6,
-        toString: function() {
-            return this.anchorNode.textContent.substr(this.anchorOffset, this.focusOffset - this.anchorOffset);
-        },
     });
 
     highlightOccurrences(container);
@@ -171,9 +165,6 @@ test('selecting whitespace should not do anything' , t => {
         anchorNode: container.querySelector('pre').firstChild,
         anchorOffset: 2,
         focusOffset: 3,
-        toString: function() {
-            return this.anchorNode.textContent.substr(this.anchorOffset, this.focusOffset - this.anchorOffset);
-        },
     });
 
     highlightOccurrences(container);
@@ -202,9 +193,6 @@ test('selecting already highlighted word should not remove it' , t => {
         anchorNode: container.querySelector('span').firstChild,
         anchorOffset: 0,
         focusOffset: 5,
-        toString: function() {
-            return this.anchorNode.textContent.substr(this.anchorOffset, this.focusOffset - this.anchorOffset);
-        },
     });
 
     highlightOccurrences(container);
