@@ -4,8 +4,6 @@
 
 const waitForRender = require('../wait-for-render.js');
 
-const SELECTION_TEMPORARY_ID = '__refined_bitbucket_selection_temporary_id';
-
 export {
     init,
     highlightOccurrences
@@ -54,7 +52,7 @@ function highlightOccurrences(container) {
         highlightOcurrences(code, text);
     } else {
         const selectedNode = getSelectionAsNode(selection);
-        const span = wrapInSpan(selectedNode, SELECTION_TEMPORARY_ID);
+        const span = wrapInSpan(selectedNode, '__refined_bitbucket_selection_temporary_id');
         highlightOcurrences(code, text);
         const children = unwrapChildren(span);
         const highlightedNode = getHighlightedNode(children);
