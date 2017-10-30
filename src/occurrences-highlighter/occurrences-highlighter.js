@@ -6,19 +6,20 @@ const waitForRender = require('../wait-for-render.js');
 
 const SELECTION_TEMPORARY_ID = '__refined_bitbucket_selection_temporary_id';
 
-module.exports = (function () {
-    return {
-        init,
-        onHighlight
-    };
+export {
+    init,
+    highlightOccurrences
+};
 
-    function init() {
-        waitForRender('.diff-container').then(() => {
-            insertStyles();
-            highlightOnDoubleClick();
+function init() {
+    insertStyles();
+
+    waitForRender('.diff-container').then(() => {
+        $('.diff-content-container').dblclick(function () {
+            highlightOccurrences(this);
         });
-    }
-})();
+    });
+}
 
 function insertStyles() {
     const head = document.getElementsByTagName('head')[0];
@@ -28,54 +29,30 @@ function insertStyles() {
     head.appendChild(style);
 }
 
-function highlightOnDoubleClick() {
-    $('.diff-content-container').dblclick(function () {
-        onHighlight(this);
-    });
-}
-
-function onHighlight(container) {
-    const $container = $(container);
-    
+function highlightOccurrences(container) {
     // <pre> for lines of code
     // <div class="comment-content"> for comments
     // <span class="description"> for tasks
-    const code = $($container.closest('.diff-content-container')[0]).find('pre, div.comment-content, span.description');
+    const code = $(container.querySelectorAll('pre, div.comment-content, span.description'));
     const selection = getSelectedText();
     const selectionIsInTextArea = selection.anchorNode.getElementsByTagName && selection.anchorNode.getElementsByTagName('textarea').length;
     const text = selection.toString();
 
     // if selected text is all whitespace, don't highlight anything
     if (!/\S/.test(text)) {
+        code.unhighlight();
         return;
     }
-
-    // const parent = selection.anchorNode.parentElement;
-    // const selectedNode = getSelectionAsNode(selection);
-    // code.unhighlight();
-    // $(selectedNode).highlight(text, {
-    //     className: SELECTION_TEMPORARY_ID,
-    //     caseSensitive: true,
-    //     wordsOnly: true,
-    //     wordsBoundaryEnd: '()'
-    // });
-    // highlightOcurrences(code, text);
-    // const highlightedNode = parent.querySelector(`.${SELECTION_TEMPORARY_ID} > .highlight`);
-    // parent.normalize();
-    // $(parent).unhighlight({ className: SELECTION_TEMPORARY_ID });
-    // if (highlightedNode) {
-    //     selectElementContents(highlightedNode);
-    // }
-    
-    // return;
+    // if selected text is already highlighted, don't highlight anything
+    if (selection.anchorNode.parentElement.classList.contains('highlight')) {
+        return;
+    }
 
     // When the user selects a word inside a textarea, the selected text is not actually present in the DOM.
     // In that case the selection is not highlighted and our reselection logic will actually deselect the text.
     if (selectionIsInTextArea) {
-        code.unhighlight();
         highlightOcurrences(code, text);
     } else {
-        code.unhighlight();
         const selectedNode = getSelectionAsNode(selection);
         const span = wrapInSpan(selectedNode, SELECTION_TEMPORARY_ID);
         highlightOcurrences(code, text);
@@ -107,6 +84,7 @@ function getSelectedText() {
  * @param {string} text
  */
 function highlightOcurrences(code, text) {
+    code.unhighlight();
     code.highlight([text, text.trim()], {
         caseSensitive: true,
         wordsOnly: true,

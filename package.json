@@ -4,9 +4,9 @@
   "version": "2.6.4",
   "main": "index.js",
   "scripts": {
-    "ava": "cross-env BABEL_ENV=testing ava test/ocurrence-highlighter.spec.js",
-    "xo:fix": "xo --fix src/*.js src/**/*.js",
-    "test": "xo src/*.js src/**/*.js && browserify test/*.spec.js | tape-run",
+    "xo": "xo --fix src/*.js src/**/*.js",
+    "ava": "cross-env BABEL_ENV=testing ava",
+    "test": "npm run xo && npm run ava && npm run build:min",
     "build": "webpack",
     "build:min": "cross-env NODE_ENV=production webpack",
     "watch": "webpack --watch",
@@ -45,14 +45,12 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "browserify": "^13.0.1",
     "cross-env": "^5.1.0",
     "jsdom": "^11.3.0",
     "path": "^0.12.7",
     "semver": "^5.4.1",
-    "tape": "^4.5.1",
-    "tape-run": "^2.1.4",
     "uglifyjs-webpack-plugin": "^1.0.0",
     "webpack": "^3.8.1",
     "xo": "^0.16.0"
@@ -81,6 +79,12 @@
     }
   },
   "ava": {
+    "files": [
+      "test/*.spec.js"
+    ],
+    "source": [
+      "src/**/*.js"
+    ],
     "require": [
       "babel-register"
     ],
@@ -94,12 +98,19 @@
           "pragma": "h",
           "useBuiltIns": true
         }
+      ],
+      [
+        "transform-object-rest-spread",
+        {
+          "useBuiltIns": true
+        }
       ]
     ],
     "env": {
       "testing": {
         "plugins": [
-          "transform-es2015-modules-commonjs"
+          "transform-es2015-modules-commonjs",
+          "transform-object-rest-spread"
         ]
       }
     }

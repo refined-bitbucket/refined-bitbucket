@@ -1,22 +1,20 @@
 'use strict';
-const test = require('tape');
+import {h} from 'dom-chef';
+const test = require('ava');
 const sourceHandler = require('../src/syntax-highlight/source-handler');
 
+import './setup-jsdom';
+
 test('Changes <pre> element to <code> and wraps it in a <pre> element', t => {
-    const pre = document.createElement('pre');
-    pre.innerHTML = 'var hello = "world"';
+    const pre = <pre>var hello = "world"</pre>;
     const result = sourceHandler.getCodeElementFromPre(pre);
 
-    t.equal(result.nodeName, 'CODE', '<code> element created');
-    t.equal(result.innerHTML, 'var hello = "world"', '<code> content is correct');
-
-    t.end();
+    t.is(result.nodeName, 'CODE', '<code> element created');
+    t.is(result.innerHTML, 'var hello = "world"', '<code> content is correct');
 });
 
 test('Adds a language-xxxx class to the element that has a data-filename attr', t => {
-    const element = document.createElement('div');
-    element.setAttribute('data-filename', 'z/path/to/file/the-file.java');
+    const element = <div data-filename="z/path/to/file/the-file.java"></div>;
     const languageClass = sourceHandler.getClassBasedOnExtension(element);
-    t.equal(languageClass, 'language-java', 'proper language-xxxx class added to the element');
-    t.end();
+    t.is(languageClass, 'language-java', 'proper language-xxxx class added to the element');
 });
