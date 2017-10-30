@@ -12,7 +12,7 @@
 
 ### Bug fixes
 
-* **Ocurrence-Highlighter**: Double-clicking an already highlighted word doesn't remove it, closes [issue 64](https://github.com/refined-bitbucket/refined-bitbucket/issues/64), [pull request 69](https://github.com/refined-bitbucket/refined-bitbucket/pull/69).
+* **Occurrence-Highlighter**: Double-clicking an already highlighted word doesn't remove it, closes [issue 64](https://github.com/refined-bitbucket/refined-bitbucket/issues/64), [pull request 69](https://github.com/refined-bitbucket/refined-bitbucket/pull/69).
 
 # 2.6.4 (2017-10-16)
 
