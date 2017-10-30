@@ -3,6 +3,7 @@
 ### Features
 
 * **Collapse-Diff**: Added button to collapse diffs in the Pull Request view. [Pull request 60](https://github.com/refined-bitbucket/refined-bitbucket/pull/60) and [pull request 67](https://github.com/refined-bitbucket/refined-bitbucket/pull/67).
+* **Autocollapse**: Add file patterns in the Options page that you would like the extension to collapse automatically when the Pull Request. [Pull request 68](https://github.com/refined-bitbucket/refined-bitbucket/pull/68).
 
 ### Improvements
 
@@ -11,7 +12,7 @@
 
 ### Bug fixes
 
-* **Ocurrence-Highlighter**: Double-clicking an already highlighted word doesn't remove it, closes [issue 64](https://github.com/refined-bitbucket/refined-bitbucket/issues/64), [pull request 68](https://github.com/refined-bitbucket/refined-bitbucket/pull/68).
+* **Ocurrence-Highlighter**: Double-clicking an already highlighted word doesn't remove it, closes [issue 64](https://github.com/refined-bitbucket/refined-bitbucket/issues/64), [pull request 69](https://github.com/refined-bitbucket/refined-bitbucket/pull/69).
 
 # 2.6.4 (2017-10-16)
 

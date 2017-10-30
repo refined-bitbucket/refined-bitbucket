@@ -1,5 +1,3 @@
-// https://github.com/avajs/ava/blob/master/docs/recipes/browser-testing.md
-
 'use strict';
 
 import test from 'ava';
@@ -221,3 +219,4 @@ test('selecting already highlighted word should not remove it' , t => {
 // jsx-chai, assertions for chai: expect(<div />).to.deep.equal(<div />);
 // tape-jsx-equals, assertions for tape: t.jsxEquals(<div />, <div />);
 // jasmine-expect-jsx, assertions for jasmine: expect(<div />).toEqualJSX(<div />);
+// https://github.com/avajs/ava/blob/master/docs/recipes/browser-testing.md

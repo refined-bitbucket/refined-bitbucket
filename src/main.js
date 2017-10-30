@@ -1,12 +1,16 @@
 /* global Mousetrap */
 
-const storageHelper = require('./storage-helper');
+import waitForPullRequestContents from './wait-for-pullrequest';
+import collapseDiff from './collapse-diff/collapse-diff';
+import autocollapse from './autocollapse/autocollapse';
 
+import 'selector-observer';
+
+const storageHelper = require('./storage-helper');
 const syntaxHighlight = require('./syntax-highlight/syntax-highlight');
 const events = require('./events');
 const occurrencesHighlighter = require('./occurrences-highlighter/occurrences-highlighter');
 const keymap = require('./keymap/keymap');
-const collapseDiff = require('./collapse-diff/collapse-diff');
 
 storageHelper.getConfig().then(config => {
     events.init();
@@ -21,5 +25,18 @@ storageHelper.getConfig().then(config => {
 
     keymap.init(Mousetrap);
 
-    collapseDiff.init();
+    waitForPullRequestContents().then(pullrequestNode => {
+        collapseDiff.init();
+        autocollapse.init(config.autocollapsePaths);
+
+        // have to observe the DOM because some sections
+        // load asynchronously by user demand
+        pullrequestNode.observeSelector('section.bb-udiff', function () {
+            collapseDiff.insertCollapseDiffButton(this);
+            autocollapse.collapseIfNeeded(this);
+        });
+    })
+    .catch(() => {
+        // current page is not a pull request, ignore
+    });
 });

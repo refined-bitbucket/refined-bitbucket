@@ -6,9 +6,9 @@
   "scripts": {
     "xo": "xo --fix src/*.js src/**/*.js",
     "ava": "cross-env BABEL_ENV=testing ava",
-    "test": "npm run xo && npm run ava && npm run build:min",
     "build": "webpack",
     "build:min": "cross-env NODE_ENV=production webpack",
+    "test": "npm run xo && npm run ava && npm run build:min",
     "watch": "webpack --watch",
     "publish": "node scripts/publish",
     "major": "npm version --no-git-tag-version major",
@@ -50,6 +50,7 @@
     "cross-env": "^5.1.0",
     "jsdom": "^11.3.0",
     "path": "^0.12.7",
+    "request": "^2.83.0",
     "semver": "^5.4.1",
     "uglifyjs-webpack-plugin": "^1.0.0",
     "webpack": "^3.8.1",
@@ -59,6 +60,8 @@
     "dom-chef": "^3.0.0",
     "jquery": "^3.2.1",
     "jquery-highlight": "^3.4.0",
+    "element-ready": "^2.2.0",
+    "ignore": "^3.3.6",
     "selector-observer": "^1.1.0"
   },
   "xo": {
