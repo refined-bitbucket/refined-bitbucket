@@ -4,6 +4,10 @@ import elementReady from 'element-ready';
 import ignore from 'ignore';
 import {h} from 'dom-chef';
 
+/**
+ * @param {HTMLDivElement} node
+ * @param {string[]} ignorePaths
+ */
 export function init(node, ignorePaths) {
     const ig = ignore().add(ignorePaths);
 
@@ -14,7 +18,8 @@ export function init(node, ignorePaths) {
         // Remove the link to the file from the files summary
         const filename = getFilename(li);
         const span = <span style={{margin: 5}}>{filename}</span>;
-        li.querySelector('a').replaceWith(span);
+        const a = li.querySelector('a');
+        li.replaceChild(span, a);
 
         // Remove the diff
         const dataIdentifier = li.getAttribute('data-file-identifier');
