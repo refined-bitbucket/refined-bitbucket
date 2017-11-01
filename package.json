@@ -54,7 +54,8 @@
     "semver": "^5.4.1",
     "uglifyjs-webpack-plugin": "^1.0.0",
     "webpack": "^3.8.1",
-    "xo": "^0.16.0"
+    "xo": "^0.16.0",
+    "yoctodelay": "^1.1.0"
   },
   "dependencies": {
     "dom-chef": "^3.0.0",
@@ -94,6 +95,9 @@
     "babel": "inherit"
   },
   "babel": {
+    "presets": [
+      "@ava/stage-4"
+    ],
     "plugins": [
       [
         "transform-react-jsx",
@@ -112,8 +116,7 @@
     "env": {
       "testing": {
         "plugins": [
-          "transform-es2015-modules-commonjs",
-          "transform-object-rest-spread"
+          "transform-es2015-modules-commonjs"
         ]
       }
     }
