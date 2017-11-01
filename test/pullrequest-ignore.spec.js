@@ -50,7 +50,7 @@ function parseHeader(header) {
     return {filesRemoved, filesChanged};
 };
 
-test('', async t => {
+test('should remove the right diffs and update the header', async t => {
     const filenames = [ '/some path/first_file.js', '/some path/second_file.js', '/some path/third_file.js' ];
     const ignorePaths = [ 'second_file.js'];
 
