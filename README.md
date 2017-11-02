@@ -16,6 +16,9 @@ and made a few improvements. Kudos!
 - ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
 - Key binding feature, which allows for quicker navigation through pull requests.
 - Button to collapse diffs in Pull Request view.
+- Autocollapse. Add file patterns in the Options page that you would like the extension to collapse automatically when the Pull Request.
+- Pullrequest Ignore. Add diff filename patterns in the Options page that you would like the extension to completely remove automatically when the Pull Request loads.
+- Button to load all failed diffs in Pull Request view.
 
 ## Installing
 Refined Bitbucket is [available on the Google Chrome Web Store][chrome-install].

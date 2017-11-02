@@ -5,6 +5,7 @@
 * **Collapse-Diff**: Added button to collapse diffs in the Pull Request view. [Pull request 60](https://github.com/refined-bitbucket/refined-bitbucket/pull/60) and [pull request 67](https://github.com/refined-bitbucket/refined-bitbucket/pull/67).
 * **Autocollapse**: Add file patterns in the Options page that you would like the extension to collapse automatically when the Pull Request. [Pull request 68](https://github.com/refined-bitbucket/refined-bitbucket/pull/68).
 * **Pullrequest-ignore**: Add diff filename patterns in the Options page that you would like the extension to completely remove automatically when the Pull Request loads. [Pull request 70](https://github.com/refined-bitbucket/refined-bitbucket/pull/70).
+* **Load-all-diffs**: Add button to load all failed diffs in Pull Request view. [Pull request 71](https://github.com/refined-bitbucket/refined-bitbucket/pull/71).
 
 ### Improvements
 
