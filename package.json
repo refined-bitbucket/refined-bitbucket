@@ -92,7 +92,8 @@
     "require": [
       "babel-register"
     ],
-    "babel": "inherit"
+    "babel": "inherit",
+    "timeout": "5s"
   },
   "babel": {
     "presets": [

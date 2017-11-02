@@ -6,7 +6,7 @@ import {h} from 'dom-chef';
 export async function init(node) {
     // Wait for all sections to be loaded into the view
     const filesChanged = node.querySelectorAll('#commit-files-summary > li');
-    
+
     const promises = [...filesChanged].map(li => {
         const dataIdentifier = li.getAttribute('data-file-identifier');
         return elementReady(`section[data-identifier="${dataIdentifier}"]`, {target: node});
@@ -34,7 +34,7 @@ export async function init(node) {
     button.addEventListener('click', async () => {
         button.disabled = true;
         button.textContent = 'Please wait';
-
+        
         const finished = [...node.querySelectorAll('a.try-again')].map(tryAgain => {
             tryAgain.click();
             const dataIdentifier = tryAgain.closest('section').getAttribute('data-identifier');
@@ -44,5 +44,6 @@ export async function init(node) {
         await Promise.all(finished);
 
         button.textContent = 'All diffs loaded successfully';
+        button.setAttribute('data-complete', true);
     });
 }
