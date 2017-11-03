@@ -4,6 +4,7 @@ import waitForPullRequestContents from './wait-for-pullrequest';
 import collapseDiff from './collapse-diff/collapse-diff';
 import autocollapse from './autocollapse/autocollapse';
 import pullrequestIgnore from './pullrequest-ignore';
+import loadAllDiffs from './load-all-diffs';
 
 import 'selector-observer';
 
@@ -30,6 +31,7 @@ storageHelper.getConfig().then(config => {
         collapseDiff.init();
         autocollapse.init(config.autocollapsePaths);
         pullrequestIgnore.init(pullrequestNode, config.ignorePaths);
+        loadAllDiffs.init(pullrequestNode);
 
         // have to observe the DOM because some sections
         // load asynchronously by user demand
