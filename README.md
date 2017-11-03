@@ -102,6 +102,10 @@ Key | Action
 <kbd>g</kbd> <kbd>g</kbd> | Scrolls to the top of the page
 <kbd>G</kbd> (Shift+g) | Scrolls to the bottom of the page
 
+## Can I use this on Bitbucket Server?
+
+Sadly, no :(. Although Bitbucket Server and Bitbucket Cloud share a similar name, both are actually two completely different products. [Read this comment for a more detailed explanation](https://github.com/refined-bitbucket/refined-bitbucket/issues/39#issuecomment-338455398).
+
 ## Compiling & Contributing
 
 Contributions are very appreciated! Even if you can't contribute with a pull request, if you stumble upon any weird behavior or bugs, let us know with an issue!
