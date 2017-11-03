@@ -71,3 +71,4 @@ extension.zip
 *.js.map
 extension/main.js
 extension/options.js
+.env

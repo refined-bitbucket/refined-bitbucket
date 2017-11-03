@@ -1,4 +1,10 @@
-# Next version
+# 3.0.0 (2017-11-03)
+
+After a long time of active development being dormant on this project, we are coming back with what I consider some great new features and improvements. Because of this, we are bumping to a new major release, v3.0.0! Check out the updated README to see some screenshots and gifs
+
+The development environment for the extension was greatly improved as well, with changes that will make adding and testing new features a lot easier. We are hoping that future releases can come by quicker from now on.
+
+If you stumble upon any weird behavior or bugs, please report an issue, I'll be be more than happy to tackle them as soon as I can. If you can have any quick question, you can hit me up on Twitter [@reyronald](http://www.twitter.com/reyronald).
 
 ### Features
 
@@ -11,6 +17,7 @@
 
 * **Merge-approvals**: Merge approvals feature removed. No longer necessary since it is [now implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html), closes [issue 51](https://github.com/refined-bitbucket/refined-bitbucket/issues/51) and [issue 32](https://github.com/refined-bitbucket/refined-bitbucket/issues/32), [pull request 61](https://github.com/refined-bitbucket/refined-bitbucket/pull/61).
 * **Occurrence-Highlighter**: Now when double-clicking whitespace/indentation in diffs, no highlighting occurs, closes [issue 59](https://github.com/refined-bitbucket/refined-bitbucket/issues/59), [pull request 62](https://github.com/refined-bitbucket/refined-bitbucket/pull/62)
+* **Development**: _browserify_ build and and _tape_ test suite were replaced with _webpack_ & _babel_ and _ava_. Since now we are using _babel_ transpilation, the latest features of ES that it supports can be used. Also a _watch_ mode is available! [Pull request 65](https://github.com/refined-bitbucket/refined-bitbucket/pull/65).
 
 ### Bug fixes
 
