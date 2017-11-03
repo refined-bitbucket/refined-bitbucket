@@ -32,7 +32,7 @@ function getPullrequestNode(filename) {
                 <div id="compare">
                     <section id="changeset-diff">
                         <div class="bb-patch bb-patch-unified">
-                            {/* Failed diffs not initially loaded */}
+                            {/* Diffs not initially loaded */}
                         </div>
                     </section>
                 </div>
@@ -40,34 +40,61 @@ function getPullrequestNode(filename) {
         </div>
     );
 
-    // Add the failed diff after some delay
-    delay(20).then(() => {
+    const diffsContainer = node.querySelector('div.bb-patch');
+
+    const addFailedDiff = () => {
         const failedDiff = (
             <section class="bb-udiff" data-identifier={escapedFilename}>
                 <strong class="try-again">Oops! You've got a lot of code in this diff and it couldn't load with the page.</strong>
                 <a class="load-diff try-again">Click here to give it another chance.</a>
             </section>
         );
-        const diffsContainer = node.querySelector('div.bb-patch');
         diffsContainer.appendChild(failedDiff);
+
         failedDiff.querySelector('a.try-again').addEventListener('click', function() {
             // After some other delay, replace the failed diff with a successfull diff
             delay(20).then(() => {
-                const loadedDiff = (
-                    <section class="bb-udiff" data-identifier={escapedFilename}>
-                        <div class="diff-container"></div>
-                    </section>
-                );
-
-                diffsContainer.replaceChild(loadedDiff, failedDiff);
+                failedDiff.remove();
+                addSuccessfullDiff();
             });
         });
+    };
+
+    const addSuccessfullDiff = () => {
+        const successfullDiff = (
+            <section class="bb-udiff" data-identifier={escapedFilename}>
+                <div class="diff-container"></div>
+            </section>
+        );
+
+        diffsContainer.appendChild(successfullDiff);
+    };
+
+    // Add the failed diff after some delay
+    delay(20).then(() => {
+        if (filename) {
+            addFailedDiff();
+        } else {
+            addSuccessfullDiff();
+        }
     });
 
     return node;
 }
 
-test('should load all failed diffs when button pressed', async t => {
+test.serial('button should be disabled if no failed diffs are present', async t => {
+    const node = getPullrequestNode(null);
+
+    loadAllDiffs.init(node);
+
+    // Wait for the button to be added after all failed diffs are loaded in the page
+    const button = await elementReadyWithTimeout('button[id="__refined_bitbucket_load_all_diffs"]', {target: node});
+
+    t.is(button.disabled, true);
+    t.is(button.textContent, 'All diffs loaded successfully');
+});
+
+test.serial('should load all failed diffs when button pressed', async t => {
     // Don't remove the spaces from this filename
     const filename = '/path/dummy file name.js';
     const node = getPullrequestNode(filename);

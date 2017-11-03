@@ -34,7 +34,7 @@ export async function init(node) {
     button.addEventListener('click', async () => {
         button.disabled = true;
         button.textContent = 'Please wait';
-        
+
         const finished = [...node.querySelectorAll('a.try-again')].map(tryAgain => {
             tryAgain.click();
             const dataIdentifier = tryAgain.closest('section').getAttribute('data-identifier');
