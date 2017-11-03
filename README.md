@@ -1,17 +1,10 @@
 [![build status](https://travis-ci.org/refined-bitbucket/refined-bitbucket.svg?branch=test-it)](https://travis-ci.org/refined-bitbucket/refined-bitbucket) <sup>-</sup> [![downloads](https://img.shields.io/chrome-web-store/d/afppminkfnfngihdocacbgeajbbdklkf.svg)](https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon)
 
 # refined-bitbucket
-We all know BitBucket lacks some features that we have in GitHub, GitLab etc.
-Based on Sindre Sorhus' [Refined Github](https://github.com/sindresorhus/refined-github)
-extension I had the idea of improving BitBucket's user interface.
-In fact, [Rodrigo Proença](https://github.com/rproenca) did most of the initial code and I just created the extension
-and made a few improvements. Kudos!
+We all know BitBucket lacks some features that we have in other platforms like GitHub, GitLab and others. Originally inspired on Sindre Sorhus' [Refined Github](https://github.com/sindresorhus/refined-github) extension, _refined-bitbucket_ is born as a collaborative project by a few developers to improve upon those holes, and even add some additional functionality that will enhance the overall user experience.
 
 ## Current features
-- Improves syntax highlight for pull requests. Enabled languages:
-  - Markup, C-like languages, Go, Groovy, Bash, Handlebars, JSON, Dart, Elixir, Erlang, Markdown, Python, React JSX, 
-  Ruby, PHP, Scala, Less, Sass, Swift, YAML, etc. [See the full list](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any 
-  language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
+- Improves syntax highlight for pull requests. [See the full list of enabled languages](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
 - Double click on a word to highlight all occurrences.
 - ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
 - Key binding feature, which allows for quicker navigation through pull requests.
@@ -20,8 +13,70 @@ and made a few improvements. Kudos!
 - Pullrequest Ignore. Add diff filename patterns in the Options page that you would like the extension to completely remove automatically when the Pull Request loads.
 - Button to load all failed diffs in Pull Request view.
 
+## Some images
+
+<table>
+	<tr>
+		<th width="50%">
+			Syntax highlighting
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://user-images.githubusercontent.com/7514993/32377709-e708312a-c07e-11e7-87a0-05840deb0c48.PNG" alt="syntax-hl1">
+			<img src="https://user-images.githubusercontent.com/7514993/32377721-ef7c6b0a-c07e-11e7-9f3c-b13b2bdce8ab.PNG" alt="syntax-hl2">
+		</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<th width="50%">
+			The Options page.<br>
+			Showcasing <em>autocollapse</em> and <em>pullrequest-ignore</em> features configuration.
+		</th>
+		<th width="50%">
+			<em>pullrequest-ignore</em> and <em>load-all-diffs</em>
+		</th>
+	</tr>
+	<tr>
+		<td rowspan="2">
+			<img src="https://user-images.githubusercontent.com/7514993/32203196-166bd1ca-bdb8-11e7-82ca-5836780992e3.png" alt="options">
+		</td>
+		<td>
+			<strong>pullrequest-ignore</strong><br>
+			<img src="https://user-images.githubusercontent.com/7514993/32203543-36e1b012-bdba-11e7-8a26-4accd0e775b6.png" alt="pullrequest-ignore">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<strong>load-all-diffs</strong><br>
+			<img src="https://user-images.githubusercontent.com/7514993/32376684-da306e0c-c07b-11e7-81e6-bb9c42d21d2e.gif" alt="load-all-diffs">
+		</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<th width="50%">
+			Collapse diff
+		</th>
+		<th width="50%">
+			Occurrences highlighter
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://user-images.githubusercontent.com/7514993/31857910-3938deb6-b6b8-11e7-8bac-f55242010a62.gif" alt="options">
+		</td>
+		<td>
+			<img src="https://user-images.githubusercontent.com/7514993/30448047-a815dd4a-995b-11e7-98e5-48664c2bd587.gif" alt="pullrequest-ignore">
+		</td>
+	</tr>
+</table>
+
 ## Installing
-Refined Bitbucket is [available on the Google Chrome Web Store][chrome-install].
+_refined-bitbucket_ is [available on the Google Chrome Web Store][chrome-install].
 
 ## Default Key Mapping
 
@@ -49,22 +104,16 @@ Key | Action
 
 ## Compiling & Contributing
 
-Contributions are very appreciated!
+Contributions are very appreciated! Even if you can't contribute with a pull request, if you stumble upon any weird behavior or bugs, let us know with an issue!
 
-There are a few dependencies required to compile the plugin. To install them, run:
+If you want to run a development version of the extension, clone the repo and run the following commands:
 
 ```bash
 npm install
-```
-
-Then you'll just need to run:
-
-```bash
 npm run watch
 ```
 
-This will watch any changes in the `src` folder and compile them to the `extension` folder.
-To test in Chrome, activate the Developer mode in `chrome://extensions`, click "Load unpacked extension..." and select that folder.
+This will watch any changes in the `src` folder and compile them to the `extension` folder. To test in Chrome, activate the Developer mode in `chrome://extensions`, click "Load unpacked extension..." and browse to that folder.
 
 If you're new to Chrome extension development, take some time to read Google's [documentation on extensions](https://developer.chrome.com/extensions).
 
