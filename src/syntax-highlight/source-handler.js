@@ -1,5 +1,13 @@
-const languagesExtensions = require('./language-ext');
-const getExtension = require('./get-extension');
+'use strict';
+
+import languagesExtensions from './language-ext';
+
+export {
+    getCodeElementFromPre,
+    getClassBasedOnExtension,
+    getFilepathFromElement,
+    getExtension
+};
 
 /**
  * Creates a <code> element with the content of the preElement passed as parameter.
@@ -7,14 +15,14 @@ const getExtension = require('./get-extension');
  * @param  {Element} preElement An HTML <pre> element. Whatever else you pass.. Is not my fault.
  * @return {Element} A <code> element.
  */
-module.exports.getCodeElementFromPre = function getCodeElementFromPre(preElement) {
-    if (!preElement) {
-        throw new Error('<pre> element parameter was not passed.');
+function getCodeElementFromPre(preElement) {
+    if (!preElement.childElementCount) {
+        const codeElement = document.createElement('code');
+        codeElement.innerHTML = preElement.innerHTML;
+        preElement.innerHTML = codeElement.outerHTML;
     }
-    const code = document.createElement('code');
-    code.innerHTML = preElement.innerHTML;
-    return code;
-};
+    return preElement;
+}
 
 /**
  * Retrieves a class according to the element data-filename or data-path attribute.
@@ -24,14 +32,11 @@ module.exports.getCodeElementFromPre = function getCodeElementFromPre(preElement
  * @param  {Element} element An HTML element. Pass anything different and bear the consequences :)
  * @return {String} The class extracted from the element's file path.
  */
-module.exports.getClassBasedOnExtension = function getClassBasedOnExtension(element) {
+function getClassBasedOnExtension(element) {
     const filePath = getFilepathFromElement(element);
     const fileExtension = getExtension(filePath);
-    if (!fileExtension) {
-        throw new Error('couldn\'t find neither data-filename nor data-path in the element');
-    }
     return languagesExtensions[fileExtension.toLowerCase()] || '';
-};
+}
 
 /**
  * Retrieves the filename of an element according to its `data-identifier`, * `data-filename` or `data-path` attributes.
@@ -47,4 +52,10 @@ function getFilepathFromElement(element) {
     return filepath.trim();
 }
 
-module.exports.getFilepathFromElement = getFilepathFromElement;
+/**
+ * @param {String} filepath
+ * @return {String}
+ */
+function getExtension(filepath) {
+    return `.${filepath.slice((filepath.lastIndexOf('.') - 1 >>> 0) + 2)}`;
+}

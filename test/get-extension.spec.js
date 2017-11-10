@@ -1,6 +1,6 @@
 'use strict';
 const test = require('ava');
-const getExtension = require('../src/syntax-highlight/get-extension');
+const {getExtension} = require('../src/syntax-highlight/source-handler');
 
 test('get extension', t => {
     t.is('.java', getExtension('/path/to/whatever/file.java'));

@@ -1,3 +1,3 @@
-import {init} from './pullrequest-ignore';
+import {init, isIgnored} from './pullrequest-ignore';
 
-export default {init};
+export default {init, isIgnored};
