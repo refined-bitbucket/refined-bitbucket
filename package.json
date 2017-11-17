@@ -57,6 +57,8 @@
     "request": "^2.83.0",
     "semver": "^5.4.1",
     "uglifyjs-webpack-plugin": "^1.0.0",
+    "url": "^0.11.0",
+    "url-search-params": "^0.10.0",
     "webpack": "^3.8.1",
     "xo": "^0.16.0",
     "yoctodelay": "^1.1.0"
@@ -73,9 +75,9 @@
     "semicolon": true,
     "esnext": true,
     "space": 4,
-    "globals": [
-      "document",
-      "MutationObserver"
+    "envs": [
+      "browser",
+      "jquery"
     ],
     "rules": {
       "no-unused-vars": [
