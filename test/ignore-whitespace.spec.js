@@ -1,6 +1,6 @@
 import {h} from 'dom-chef';
 import test from 'ava';
-import {URL} from 'url';
+const URL = require('url').URL;
 import URLSearchParams from 'url-search-params';
 
 import './setup-jsdom';
