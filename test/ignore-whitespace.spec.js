@@ -1,7 +1,6 @@
 import {h} from 'dom-chef';
 import test from 'ava';
-import {URL} from 'url';
-import URLSearchParams from 'url-search-params';
+import {URL, URLSearchParams} from 'url';
 
 import './setup-jsdom';
 
