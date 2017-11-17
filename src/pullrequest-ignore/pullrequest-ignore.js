@@ -3,13 +3,16 @@
 import elementReady from 'element-ready';
 import ignore from 'ignore';
 import {h} from 'dom-chef';
+import {getFilepathFromElement} from '../syntax-highlight/source-handler';
+
+let ig = null;
 
 /**
  * @param {HTMLDivElement} node
  * @param {string[]} ignorePaths
  */
 export function init(node, ignorePaths) {
-    const ig = ignore().add(ignorePaths);
+    ig = ignore().add(ignorePaths);
 
     const filesChanged = node.querySelectorAll('#commit-files-summary > li');
     const filesToRemove = [...filesChanged].filter(li => ig.ignores(getFilename(li)));
@@ -37,4 +40,12 @@ export function init(node, ignorePaths) {
  */
 function getFilename(li) {
     return li.querySelector('a').textContent.trim();
+}
+
+/**
+ * @param {HTMLSectionElement} section
+ */
+export function isIgnored(section) {
+    const filename = getFilepathFromElement(section);
+    return ig.ignores(filename);
 }

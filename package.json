@@ -52,6 +52,7 @@
     "cross-env": "^5.1.0",
     "dotenv": "^4.0.0",
     "jsdom": "^11.3.0",
+    "mutationobserver-shim": "^0.3.2",
     "path": "^0.12.7",
     "request": "^2.83.0",
     "semver": "^5.4.1",

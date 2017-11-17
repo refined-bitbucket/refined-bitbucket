@@ -9,8 +9,9 @@ test('Changes <pre> element to <code> and wraps it in a <pre> element', t => {
     const pre = <pre>var hello = "world"</pre>;
     const result = sourceHandler.getCodeElementFromPre(pre);
 
-    t.is(result.nodeName, 'CODE', '<code> element created');
-    t.is(result.innerHTML, 'var hello = "world"', '<code> content is correct');
+    const expected = <pre><code>var hello = "world"</code></pre>;
+
+    t.is(result.outerHTML, expected.outerHTML);
 });
 
 test('Adds a language-xxxx class to the element that has a data-filename attr', t => {
