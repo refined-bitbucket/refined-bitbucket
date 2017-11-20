@@ -4,6 +4,10 @@
 
 * **Syntax-highlighting**: Re-implementation of the syntax-highlighting feature now using MutationObservers so that every diff loaded dynamically into the page is also highlighted, closes [issue 76](https://github.com/refined-bitbucket/refined-bitbucket/issues/76), [pull request 77](https://github.com/refined-bitbucket/refined-bitbucket/pull/77).
 
+### Language support
+
+* Added Julia language support for files with extension `.jl`, closes [issue #79](https://github.com/refined-bitbucket/refined-bitbucket/issues/79), [pull request #80](https://github.com/refined-bitbucket/refined-bitbucket/pull/80).
+
 # 3.0.0 (2017-11-03)
 
 After a long time of active development being dormant on this project, we are coming back with what I consider some great new features and improvements. Because of this, we are bumping to a new major release, v3.0.0! Check out the updated README to see some screenshots and gifs
