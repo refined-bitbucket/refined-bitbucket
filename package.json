@@ -1,7 +1,7 @@
 {
   "name": "refined-bitbucket",
   "description": "Chrome extension that improves BitBucket's user interface",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "main": "index.js",
   "scripts": {
     "xo": "xo --fix src/*.js src/**/*.js",
@@ -11,7 +11,7 @@
     "test": "npm run xo && npm run ava && npm run build:min",
     "watch": "webpack --watch",
     "package": "node scripts/package",
-    "deploy": "npm run build:min && npm run package && node scripts/deploy",
+    "deploy": "npm run test && npm run package && node scripts/deploy",
     "major": "npm version --no-git-tag-version major",
     "minor": "npm version --no-git-tag-version minor",
     "patch": "npm version --no-git-tag-version patch"

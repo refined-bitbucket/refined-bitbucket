@@ -1,4 +1,4 @@
-# Next Version
+# 3.1.0 (2017-11-20)
 
 ### Features
 
