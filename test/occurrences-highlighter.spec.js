@@ -33,7 +33,7 @@ test('highlighting one occurrence' , t => {
     const expected = 
         <div class="diff-container">
             <div class="diff-content-container">
-                <pre> <span class="highlight">Hello</span> </pre>
+                <pre> <span class="__refined_bitbucket_highlight">Hello</span> </pre>
             </div>
         </div>;
 
@@ -60,7 +60,7 @@ test('highlighting two occurrences' , t => {
     const expected = 
         <div class="diff-container">
             <div class="diff-content-container">
-                <pre> <span class="highlight">Hello</span> and <span class="highlight">Hello</span> again </pre>
+                <pre> <span class="__refined_bitbucket_highlight">Hello</span> and <span class="__refined_bitbucket_highlight">Hello</span> again </pre>
             </div>
         </div>;
 
@@ -88,8 +88,8 @@ test('highlighting two occurrences in differente nodes' , t => {
     const expected = 
         <div class="diff-container">
             <div class="diff-content-container">
-                <pre> <span class="highlight">Hello</span> </pre>
-                <pre> <span class="highlight">Hello</span> </pre>
+                <pre> <span class="__refined_bitbucket_highlight">Hello</span> </pre>
+                <pre> <span class="__refined_bitbucket_highlight">Hello</span> </pre>
             </div>
         </div>;
 
@@ -121,7 +121,7 @@ test('when selected word is inside a comment editing box (textarea)' , t => {
     const expected = 
         <div class="diff-container">
             <div class="diff-content-container">
-                <pre> <span class="highlight">Hello</span> </pre>
+                <pre> <span class="__refined_bitbucket_highlight">Hello</span> </pre>
 
                 <div class="markItUpContainer">
                     <textarea></textarea>
@@ -176,7 +176,7 @@ test('selecting already highlighted word should not remove it' , t => {
     const container = 
         <div class="diff-container">
             <div class="diff-content-container">
-                <pre> <span class="highlight">Hello</span> and <span class="highlight">Hello</span> again </pre>
+                <pre> <span class="__refined_bitbucket_highlight">Hello</span> and <span class="__refined_bitbucket_highlight">Hello</span> again </pre>
                 
             </div>
         </div>;
@@ -184,7 +184,7 @@ test('selecting already highlighted word should not remove it' , t => {
     const expected = 
         <div class="diff-container">
             <div class="diff-content-container">
-                <pre> <span class="highlight">Hello</span> and <span class="highlight">Hello</span> again </pre>
+                <pre> <span class="__refined_bitbucket_highlight">Hello</span> and <span class="__refined_bitbucket_highlight">Hello</span> again </pre>
             </div>
         </div>;
 

@@ -23,7 +23,7 @@ function insertStyles() {
     const head = document.getElementsByTagName('head')[0];
     const style = document.createElement('style');
     style.type = 'text/css';
-    style.innerHTML = '.highlight {background:#FFFF88;}';
+    style.innerHTML = '.__refined_bitbucket_highlight {background:#FFFF88;}';
     head.appendChild(style);
 }
 
@@ -42,7 +42,7 @@ function highlightOccurrences(container) {
         return;
     }
     // if selected text is already highlighted, don't highlight anything
-    if (selection.anchorNode.parentElement.classList.contains('highlight')) {
+    if (selection.anchorNode.parentElement.classList.contains('__refined_bitbucket_highlight')) {
         return;
     }
 
@@ -82,8 +82,9 @@ function getSelectedText() {
  * @param {string} text
  */
 function highlightOcurrences(code, text) {
-    code.unhighlight();
+    code.unhighlight({className: '__refined_bitbucket_highlight'});
     code.highlight([text, text.trim()], {
+        className: '__refined_bitbucket_highlight',
         caseSensitive: true,
         wordsOnly: true,
         wordsBoundaryStart: '(',
@@ -131,7 +132,7 @@ function unwrapChildren(el) {
 }
 
 /**
- * Gets the first element that either has the 'highlight' class itself
+ * Gets the first element that either has the '__refined_bitbucket_highlight' class itself
  * or contains a children that has it
  * @param {HTMLElement[]} children
  * @return {HTMLElement}
@@ -139,10 +140,10 @@ function unwrapChildren(el) {
 function getHighlightedNode(children) {
     for (let index = 0; index < children.length; index++) {
         const node = children[index];
-        if (node.classList.contains('highlight')) {
+        if (node.classList.contains('__refined_bitbucket_highlight')) {
             return node;
         }
-        const nodesWithHighlightClass = node.getElementsByClassName('highlight');
+        const nodesWithHighlightClass = node.getElementsByClassName('__refined_bitbucket_highlight');
         if (nodesWithHighlightClass.length) {
             return nodesWithHighlightClass[0];
         }
