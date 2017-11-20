@@ -6,7 +6,11 @@
 
 ### Improvements
 
-* **Syntax-highlighting**: Re-implementation of the syntax-highlighting feature now using MutationObservers so that every diff loaded dynamically into the page is also highlighted, closes [issue 76](https://github.com/refined-bitbucket/refined-bitbucket/issues/76), [pull request 77](https://github.com/refined-bitbucket/refined-bitbucket/pull/77).
+* **Syntax-highlighting**: Re-implementation of the syntax-highlighting feature now using MutationObservers so that every diff loaded dynamically into the page is also highlighted, closes [issue #76](https://github.com/refined-bitbucket/refined-bitbucket/issues/76), [pull request #77](https://github.com/refined-bitbucket/refined-bitbucket/pull/77).
+
+### Bug fixes
+
+* **General**: Files don't have a yellow background highlighting in source code view, closes [issue #75](https://github.com/refined-bitbucket/refined-bitbucket/issues/75), [pull request #83](https://github.com/refined-bitbucket/refined-bitbucket/pull/83).
 
 ### Language support
 
