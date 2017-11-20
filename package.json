@@ -6,9 +6,9 @@
   "scripts": {
     "xo": "xo --fix src/*.js src/**/*.js",
     "ava": "cross-env BABEL_ENV=testing ava",
-    "build": "npm run test && webpack",
-    "build:min": "npm run test && cross-env NODE_ENV=production webpack",
-    "test": "npm run xo && npm run ava",
+    "build": "webpack",
+    "build:min": "cross-env NODE_ENV=production webpack",
+    "test": "npm run xo && npm run ava && npm run build:min",
     "watch": "webpack --watch",
     "package": "node scripts/package",
     "deploy": "npm run build:min && npm run package && node scripts/deploy",
@@ -73,9 +73,9 @@
     "semicolon": true,
     "esnext": true,
     "space": 4,
-    "globals": [
-      "document",
-      "MutationObserver"
+    "envs": [
+      "browser",
+      "jquery"
     ],
     "rules": {
       "no-unused-vars": [

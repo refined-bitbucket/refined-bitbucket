@@ -1,5 +1,9 @@
 # Next Version
 
+### Features
+
+* **Ignore-whitespace**: Open pull request links with "Ignore whitespace" option enabled by default when entering pull requests from the pull request list page, closes [issue #78](https://github.com/refined-bitbucket/refined-bitbucket/issues/78), [pull request #81](https://github.com/refined-bitbucket/refined-bitbucket/pull/81).
+
 ### Improvements
 
 * **Syntax-highlighting**: Re-implementation of the syntax-highlighting feature now using MutationObservers so that every diff loaded dynamically into the page is also highlighted, closes [issue 76](https://github.com/refined-bitbucket/refined-bitbucket/issues/76), [pull request 77](https://github.com/refined-bitbucket/refined-bitbucket/pull/77).

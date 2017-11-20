@@ -8,6 +8,7 @@ import autocollapse from './autocollapse/autocollapse';
 import pullrequestIgnore from './pullrequest-ignore';
 import loadAllDiffs from './load-all-diffs';
 import syntaxHighlight from './syntax-highlight';
+import ignoreWhitespace from './ignore-whitespace';
 
 import 'selector-observer';
 
@@ -21,6 +22,10 @@ storageHelper.getConfig().then(config => {
     }
 
     keymap.init(Mousetrap);
+
+    if (config.ignoreWhitespace) {
+        ignoreWhitespace.init();
+    }
 
     waitForPullRequestContents().then(pullrequestNode => {
         collapseDiff.init();
