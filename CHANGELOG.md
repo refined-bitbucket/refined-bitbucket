@@ -1,3 +1,9 @@
+# Next Version
+
+### Bug fixes
+
+* **Collapse-diff**: When using the Bitbucket Diff Tree extension, the "Toggle diff text" button (collapse diff) is not duplicated anymore each time the "Compact/Uncompact empty folder" button is clicked, closes [issue #84](https://github.com/refined-bitbucket/refined-bitbucket/issues/84), [pull request #85](https://github.com/refined-bitbucket/refined-bitbucket/pull/85).
+
 # 3.1.0 (2017-11-20)
 
 ### Features
