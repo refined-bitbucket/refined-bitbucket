@@ -1,5 +1,9 @@
 # Next Version
 
+### Improvements:
+
+* **General**: Added checkboxes in the Options page to allow the user to opt-in / opt-out of each feature of the extension individually, closes [issue #86](https://github.com/refined-bitbucket/refined-bitbucket/issues/86), [pull request #87](https://github.com/refined-bitbucket/refined-bitbucket/pull/87).
+
 ### Bug fixes
 
 * **Collapse-diff**: When using the Bitbucket Diff Tree extension, the "Toggle diff text" button (collapse diff) is not duplicated anymore each time the "Compact/Uncompact empty folder" button is clicked, closes [issue #84](https://github.com/refined-bitbucket/refined-bitbucket/issues/84), [pull request #85](https://github.com/refined-bitbucket/refined-bitbucket/pull/85).
