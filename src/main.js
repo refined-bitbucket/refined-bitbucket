@@ -21,17 +21,26 @@ storageHelper.getConfig().then(config => {
         occurrencesHighlighter.init();
     }
 
-    keymap.init(Mousetrap);
+    if (config.keymap) {
+        keymap.init(Mousetrap);
+    }
 
     if (config.ignoreWhitespace) {
         ignoreWhitespace.init();
     }
 
     waitForPullRequestContents().then(pullrequestNode => {
-        collapseDiff.init();
+        if (config.collapseDiff) {
+            collapseDiff.init();
+        }
+
         autocollapse.init(config.autocollapsePaths);
+
         pullrequestIgnore.init(pullrequestNode, config.ignorePaths);
-        loadAllDiffs.init(pullrequestNode);
+
+        if (config.loadAllDiffs) {
+            loadAllDiffs.init(pullrequestNode);
+        }
 
         if (config.highlightSyntax) {
             syntaxHighlight.init();
@@ -40,7 +49,9 @@ storageHelper.getConfig().then(config => {
         // have to observe the DOM because some sections
         // load asynchronously by user demand
         pullrequestNode.observeSelector('section.bb-udiff', function () {
-            collapseDiff.insertCollapseDiffButton(this);
+            if (config.collapseDiff) {
+                collapseDiff.insertCollapseDiffButton(this);
+            }
             autocollapse.collapseIfNeeded(this);
 
             if (config.highlightSyntax && !pullrequestIgnore.isIgnored(this)) {

@@ -10,6 +10,9 @@ module.exports = (function storageHelper() {
                     highlightSyntax: true,
                     highlightOcurrences: true,
                     ignoreWhitespace: true,
+                    keymap: true,
+                    collapseDiff: true,
+                    loadAllDiffs: true,
                     autocollapsePaths: ['package-lock.json'],
                     ignorePaths: []
                 }, options => {
@@ -17,6 +20,9 @@ module.exports = (function storageHelper() {
                         highlightSyntax: options.highlightSyntax,
                         highlightOcurrences: options.highlightOcurrences,
                         ignoreWhitespace: options.ignoreWhitespace,
+                        keymap: options.keymap,
+                        collapseDiff: options.collapseDiff,
+                        loadAllDiffs: options.loadAllDiffs,
                         autocollapsePaths: options.autocollapsePaths,
                         ignorePaths: options.ignorePaths
                     });
