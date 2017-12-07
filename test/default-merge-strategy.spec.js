@@ -1,16 +1,14 @@
 import test from 'ava';
 import jsdom from 'jsdom';
-import { h } from 'dom-chef';
+import {h} from 'dom-chef';
 import delay from 'yoctodelay';
 import elementReady from 'element-ready';
-import {URL, URLSearchParams} from 'url';
+import {URL} from 'url';
 
 import defaultMergeStrategy, { SCRIPT_ID, scriptAlreadyExists } from '../src/default-merge-strategy';
 
 import './setup-jsdom';
 
-global.URL = URL;
-global.URLSearchParams = URLSearchParams;
 global.location = new URL('https://www.bitbucket.org');
 
 const cleanDocumentBody = () => {
