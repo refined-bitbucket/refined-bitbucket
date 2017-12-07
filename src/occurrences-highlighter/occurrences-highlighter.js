@@ -1,6 +1,6 @@
-/* global $, window, Text */
-
 'use strict';
+
+import 'jquery-highlight';
 
 const waitForRender = require('../wait-for-render.js');
 

@@ -1,5 +1,9 @@
 # Next Version
 
+### Features:
+
+* **Default-merge-strategy**: Choose either "Merge commit" or "Squash" as the default merge strategy for pull requests in the Options page, closes [issue #90](https://github.com/refined-bitbucket/refined-bitbucket/issues/90), [pull request #91](https://github.com/refined-bitbucket/refined-bitbucket/pull/91).
+
 ### Improvements:
 
 * **General**: Added checkboxes in the Options page to allow the user to opt-in / opt-out of each feature of the extension individually, closes [issue #86](https://github.com/refined-bitbucket/refined-bitbucket/issues/86), [pull request #87](https://github.com/refined-bitbucket/refined-bitbucket/pull/87).

@@ -63,10 +63,11 @@
   },
   "dependencies": {
     "dom-chef": "^3.0.0",
-    "jquery": "^3.2.1",
-    "jquery-highlight": "^3.4.0",
     "element-ready": "^2.2.0",
     "ignore": "^3.3.6",
+    "jquery": "^3.2.1",
+    "jquery-highlight": "^3.4.0",
+    "mousetrap": "^1.6.1",
     "selector-observer": "^1.1.0"
   },
   "xo": {

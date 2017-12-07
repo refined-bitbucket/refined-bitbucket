@@ -27,9 +27,6 @@
     {
       "js": [
         "prism.js",
-        "vendor/jquery-3.1.0.min.js",
-        "vendor/jquery.highlight.js",
-        "vendor/mousetrap.min.js",
         "main.js"
       ],
       "matches": [
