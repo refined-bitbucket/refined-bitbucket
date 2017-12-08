@@ -13,3 +13,5 @@ const getRepoPath = () => {
 };
 
 export const isPullRequestList = () => getRepoPath() === 'pull-requests';
+
+export const isPullRequest = () => getRepoPath().startsWith('pull-requests/');

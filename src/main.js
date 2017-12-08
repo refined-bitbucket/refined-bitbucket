@@ -1,6 +1,7 @@
-/* global Mousetrap */
-
 'use strict';
+
+/* eslint-disable import/imports-first */
+global.jQuery = global.$ = require('jquery');
 
 import waitForPullRequestContents from './wait-for-pullrequest';
 import collapseDiff from './collapse-diff/collapse-diff';
@@ -9,6 +10,7 @@ import pullrequestIgnore from './pullrequest-ignore';
 import loadAllDiffs from './load-all-diffs';
 import syntaxHighlight from './syntax-highlight';
 import ignoreWhitespace from './ignore-whitespace';
+import defaultMergeStrategy from './default-merge-strategy';
 
 import 'selector-observer';
 
@@ -22,12 +24,14 @@ storageHelper.getConfig().then(config => {
     }
 
     if (config.keymap) {
-        keymap.init(Mousetrap);
+        keymap.init();
     }
 
     if (config.ignoreWhitespace) {
         ignoreWhitespace.init();
     }
+
+    defaultMergeStrategy.init(config.defaultMergeStrategy);
 
     waitForPullRequestContents().then(pullrequestNode => {
         if (config.collapseDiff) {

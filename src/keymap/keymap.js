@@ -1,5 +1,4 @@
-/* jshint esversion: 6 */
-/* global jQuery, window */
+const Mousetrap = require('mousetrap');
 
 const waitForRender = require('../wait-for-render');
 
@@ -189,7 +188,7 @@ module.exports = (() => {
         init
     };
 
-    function init(keyboard) {
-        PrKeyMap.init(keyboard);
+    function init() {
+        PrKeyMap.init(Mousetrap);
     }
 })();

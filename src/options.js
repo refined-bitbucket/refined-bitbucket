@@ -9,6 +9,7 @@
     const keymapElement = document.getElementById('keymap');
     const collapseDiffElement = document.getElementById('collapse-diff');
     const loadAllDiffsElement = document.getElementById('load-all-diffs');
+    const defaultMergeStrategyElement = document.getElementById('default-merge-strategy-form')['default-merge-strategy'];
     const autocollapsePathsElement = document.getElementById('autocollapse-paths');
     const ignorePathsElement = document.getElementById('ignore-paths');
     const statusElement = document.getElementById('status');
@@ -20,6 +21,7 @@
         const keymap = keymapElement.checked;
         const collapseDiff = collapseDiffElement.checked;
         const loadAllDiffs = loadAllDiffsElement.checked;
+        const defaultMergeStrategy = defaultMergeStrategyElement.value;
         const autocollapsePaths = autocollapsePathsElement.value.split('\n');
         const ignorePaths = ignorePathsElement.value.split('\n');
 
@@ -30,6 +32,7 @@
             keymap,
             collapseDiff,
             loadAllDiffs,
+            defaultMergeStrategy,
             autocollapsePaths,
             ignorePaths
         }, () => {
@@ -48,6 +51,7 @@
             keymap: true,
             collapseDiff: true,
             loadAllDiffs: true,
+            defaultMergeStrategy: 'merge_commit',
             autocollapsePaths: ['package-lock.json'],
             ignorePaths: []
         }, options => {
@@ -57,6 +61,7 @@
             keymapElement.checked = options.keymap;
             collapseDiffElement.checked = options.collapseDiff;
             loadAllDiffsElement.checked = options.loadAllDiffs;
+            defaultMergeStrategyElement.value = options.defaultMergeStrategy;
             autocollapsePathsElement.value = options.autocollapsePaths.join('\n');
             ignorePathsElement.value = options.ignorePaths.join('\n');
         });

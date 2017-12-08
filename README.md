@@ -33,7 +33,6 @@ We all know BitBucket lacks some features that we have in other platforms like G
 	<tr>
 		<th width="50%">
 			The Options page.<br>
-			Showcasing <em>autocollapse</em> and <em>pullrequest-ignore</em> features configuration.
 		</th>
 		<th width="50%">
 			<em>pullrequest-ignore</em> and <em>load-all-diffs</em>
@@ -41,7 +40,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 	</tr>
 	<tr>
 		<td rowspan="2">
-			<img src="https://user-images.githubusercontent.com/7514993/32203196-166bd1ca-bdb8-11e7-82ca-5836780992e3.png" alt="options">
+			<img src="https://user-images.githubusercontent.com/7514993/33744735-1f66115c-db89-11e7-804c-9739d3619c65.png" alt="options">
 		</td>
 		<td>
 			<strong>pullrequest-ignore</strong><br>

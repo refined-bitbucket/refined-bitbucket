@@ -4,11 +4,9 @@ import test from 'ava';
 import jsdom from 'jsdom';
 import {h} from 'dom-chef';
 
-import { highlightOccurrences } from '../src/occurrences-highlighter/occurrences-highlighter';
-
 import './setup-jsdom';
 
-require('jquery-highlight');
+import { highlightOccurrences } from '../src/occurrences-highlighter/occurrences-highlighter';
 
 // Necessary custom mockings
 document.createRange = () => ({
