@@ -1,34 +1,31 @@
-'use strict';
-
 import test from 'ava';
-import jsdom from 'jsdom';
 import {h} from 'dom-chef';
 
 import './setup-jsdom';
 
-import { highlightOccurrences } from '../src/occurrences-highlighter/occurrences-highlighter';
+import {highlightOccurrences} from '../src/occurrences-highlighter/occurrences-highlighter';
 
 // Necessary custom mockings
 document.createRange = () => ({
-    selectNodeContents: (element) => {},
+    selectNodeContents: () => {}
 });
 const _selectionCommon = {
     removeAllRanges: () => {},
     addRange: () => {},
-    toString: function() {
+    toString() {
         return this.anchorNode.textContent.substr(this.anchorOffset, this.focusOffset - this.anchorOffset);
-    },
+    }
 };
 
-test('highlighting one occurrence' , t => {
-    const container = 
+test('highlighting one occurrence', t => {
+    const container =
         <div class="diff-container">
             <div class="diff-content-container">
                 <pre> Hello </pre>
             </div>
         </div>;
 
-    const expected = 
+    const expected =
         <div class="diff-container">
             <div class="diff-content-container">
                 <pre> <span class="__refined_bitbucket_highlight">Hello</span> </pre>
@@ -39,7 +36,7 @@ test('highlighting one occurrence' , t => {
         ..._selectionCommon,
         anchorNode: container.querySelector('pre').firstChild,
         anchorOffset: 1,
-        focusOffset: 6,
+        focusOffset: 6
     });
 
     highlightOccurrences(container);
@@ -47,15 +44,15 @@ test('highlighting one occurrence' , t => {
     t.is(container.innerHTML, expected.innerHTML);
 });
 
-test('highlighting two occurrences' , t => {
-    const container = 
+test('highlighting two occurrences', t => {
+    const container =
         <div class="diff-container">
             <div class="diff-content-container">
                 <pre> Hello and Hello again </pre>
             </div>
         </div>;
 
-    const expected = 
+    const expected =
         <div class="diff-container">
             <div class="diff-content-container">
                 <pre> <span class="__refined_bitbucket_highlight">Hello</span> and <span class="__refined_bitbucket_highlight">Hello</span> again </pre>
@@ -66,7 +63,7 @@ test('highlighting two occurrences' , t => {
         ..._selectionCommon,
         anchorNode: container.querySelector('pre').firstChild,
         anchorOffset: 1,
-        focusOffset: 6,
+        focusOffset: 6
     });
 
     highlightOccurrences(container);
@@ -74,8 +71,8 @@ test('highlighting two occurrences' , t => {
     t.is(container.innerHTML, expected.innerHTML);
 });
 
-test('highlighting two occurrences in differente nodes' , t => {
-    const container = 
+test('highlighting two occurrences in differente nodes', t => {
+    const container =
         <div class="diff-container">
             <div class="diff-content-container">
                 <pre> Hello </pre>
@@ -83,7 +80,7 @@ test('highlighting two occurrences in differente nodes' , t => {
             </div>
         </div>;
 
-    const expected = 
+    const expected =
         <div class="diff-container">
             <div class="diff-content-container">
                 <pre> <span class="__refined_bitbucket_highlight">Hello</span> </pre>
@@ -95,7 +92,7 @@ test('highlighting two occurrences in differente nodes' , t => {
         ..._selectionCommon,
         anchorNode: container.querySelector('pre').firstChild,
         anchorOffset: 1,
-        focusOffset: 6,
+        focusOffset: 6
     });
 
     highlightOccurrences(container);
@@ -103,8 +100,8 @@ test('highlighting two occurrences in differente nodes' , t => {
     t.is(container.innerHTML, expected.innerHTML);
 });
 
-test('when selected word is inside a comment editing box (textarea)' , t => {
-    const container = 
+test('when selected word is inside a comment editing box (textarea)', t => {
+    const container =
         <div class="diff-container">
             <div class="diff-content-container">
                 <pre> Hello </pre>
@@ -116,7 +113,7 @@ test('when selected word is inside a comment editing box (textarea)' , t => {
             </div>
         </div>;
 
-    const expected = 
+    const expected =
         <div class="diff-container">
             <div class="diff-content-container">
                 <pre> <span class="__refined_bitbucket_highlight">Hello</span> </pre>
@@ -133,7 +130,7 @@ test('when selected word is inside a comment editing box (textarea)' , t => {
         anchorNode: container.querySelector('div.markItUpContainer'),
         anchorOffset: 1,
         focusOffset: 1,
-        toString: () => 'Hello',
+        toString: () => 'Hello'
     });
 
     highlightOccurrences(container);
@@ -141,19 +138,21 @@ test('when selected word is inside a comment editing box (textarea)' , t => {
     t.is(container.innerHTML, expected.innerHTML);
 });
 
-test('selecting whitespace should not do anything' , t => {
-    const container = 
+test('selecting whitespace should not do anything', t => {
+    const container =
         <div class="diff-container">
             <div class="diff-content-container">
-                <pre>         </pre>
+                {/* eslint-disable no-multi-spaces*/}
+                <pre>                                                           </pre>
                 <pre> Hello </pre>
             </div>
         </div>;
 
-    const expected = 
+    const expected =
         <div class="diff-container">
             <div class="diff-content-container">
-                <pre>         </pre>
+                {/* eslint-disable no-multi-spaces*/}
+                <pre>                                                           </pre>
                 <pre> Hello </pre>
             </div>
         </div>;
@@ -162,7 +161,7 @@ test('selecting whitespace should not do anything' , t => {
         ..._selectionCommon,
         anchorNode: container.querySelector('pre').firstChild,
         anchorOffset: 2,
-        focusOffset: 3,
+        focusOffset: 3
     });
 
     highlightOccurrences(container);
@@ -170,16 +169,16 @@ test('selecting whitespace should not do anything' , t => {
     t.is(container.innerHTML, expected.innerHTML);
 });
 
-test('selecting already highlighted word should not remove it' , t => {
-    const container = 
+test('selecting already highlighted word should not remove it', t => {
+    const container =
         <div class="diff-container">
             <div class="diff-content-container">
                 <pre> <span class="__refined_bitbucket_highlight">Hello</span> and <span class="__refined_bitbucket_highlight">Hello</span> again </pre>
-                
+
             </div>
         </div>;
 
-    const expected = 
+    const expected =
         <div class="diff-container">
             <div class="diff-content-container">
                 <pre> <span class="__refined_bitbucket_highlight">Hello</span> and <span class="__refined_bitbucket_highlight">Hello</span> again </pre>
@@ -190,7 +189,7 @@ test('selecting already highlighted word should not remove it' , t => {
         ..._selectionCommon,
         anchorNode: container.querySelector('span').firstChild,
         anchorOffset: 0,
-        focusOffset: 5,
+        focusOffset: 5
     });
 
     highlightOccurrences(container);

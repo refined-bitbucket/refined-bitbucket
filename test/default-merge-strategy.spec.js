@@ -1,11 +1,9 @@
+import {URL} from 'url';
 import test from 'ava';
-import jsdom from 'jsdom';
 import {h} from 'dom-chef';
 import delay from 'yoctodelay';
-import elementReady from 'element-ready';
-import {URL} from 'url';
 
-import defaultMergeStrategy, { SCRIPT_ID, scriptAlreadyExists } from '../src/default-merge-strategy';
+import defaultMergeStrategy, {SCRIPT_ID, scriptAlreadyExists} from '../src/default-merge-strategy';
 
 import './setup-jsdom';
 
@@ -23,21 +21,21 @@ test('should not try to choose default merge strategy on non-pull request pages'
     try {
         await defaultMergeStrategy.initAsync('squash');
         t.fail();
-    } catch (e) {
+    } catch (err) {
         t.pass();
     }
 });
 
 test('should not choose default merge strategy twice', async t => {
     location.href = 'https://www.bitbucket.org/reyronald/repo/pull-requests/1';
-    
+
     const script = <script id={SCRIPT_ID}></script>;
     document.body.appendChild(script);
 
     try {
         await defaultMergeStrategy.initAsync('squash');
         t.fail();
-    } catch (e) {
+    } catch (err) {
         t.pass();
     }
 
@@ -46,14 +44,14 @@ test('should not choose default merge strategy twice', async t => {
 
 test('should not choose default merge strategy if configured strategy is invalid', async t => {
     location.href = 'https://www.bitbucket.org/reyronald/repo/pull-requests/1';
-    
+
     const script = <script id={SCRIPT_ID}></script>;
     document.body.appendChild(script);
 
     try {
         await defaultMergeStrategy.initAsync('invalid default merge strategy');
         t.fail();
-    } catch (e) {
+    } catch (err) {
         t.pass();
     }
 
@@ -87,8 +85,8 @@ test.serial('should choose default merge strategy', async t => {
         } else {
             t.fail();
         }
-    } catch (e) {
-        console.error(e);
+    } catch (err) {
+        console.error(err);
         t.fail();
     }
 

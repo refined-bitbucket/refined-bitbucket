@@ -1,6 +1,6 @@
+import {URL, URLSearchParams} from 'url';
 import {h} from 'dom-chef';
 import test from 'ava';
-import {URL, URLSearchParams} from 'url';
 
 import './setup-jsdom';
 
@@ -45,7 +45,7 @@ test('should not transform pull request link if current page is not pull request
 
     document.body.appendChild(actual);
 
-    location.href = 'https://www.bitbucket.org/user/repo/pull-requests/is-not-pull-request-page-list'
+    location.href = 'https://www.bitbucket.org/user/repo/pull-requests/is-not-pull-request-page-list';
 
     ignoreWhitespace.init();
 

@@ -1,8 +1,7 @@
 'use strict';
 
 import test from 'ava';
-import jsdom from 'jsdom';
-import { h } from 'dom-chef';
+import {h} from 'dom-chef';
 import delay from 'yoctodelay';
 import elementReady from 'element-ready';
 
@@ -42,6 +41,16 @@ function getPullrequestNode(filename) {
 
     const diffsContainer = node.querySelector('div.bb-patch');
 
+    const addSuccessfullDiff = () => {
+        const successfullDiff = (
+            <section class="bb-udiff" data-identifier={escapedFilename}>
+                <div class="diff-container"></div>
+            </section>
+        );
+
+        diffsContainer.appendChild(successfullDiff);
+    };
+
     const addFailedDiff = () => {
         const failedDiff = (
             <section class="bb-udiff" data-identifier={escapedFilename}>
@@ -51,23 +60,13 @@ function getPullrequestNode(filename) {
         );
         diffsContainer.appendChild(failedDiff);
 
-        failedDiff.querySelector('a.try-again').addEventListener('click', function() {
+        failedDiff.querySelector('a.try-again').addEventListener('click', () => {
             // After some other delay, replace the failed diff with a successfull diff
             delay(20).then(() => {
                 failedDiff.remove();
                 addSuccessfullDiff();
             });
         });
-    };
-
-    const addSuccessfullDiff = () => {
-        const successfullDiff = (
-            <section class="bb-udiff" data-identifier={escapedFilename}>
-                <div class="diff-container"></div>
-            </section>
-        );
-
-        diffsContainer.appendChild(successfullDiff);
     };
 
     // Add the failed diff after some delay
@@ -127,8 +126,6 @@ test.serial('should load all failed diffs when button pressed', async t => {
 
 function elementReadyWithTimeout(selector, options, timeout = 1000) {
     const promise = elementReady(selector, options);
-    setTimeout(function() {
-        promise.cancel();
-    }, timeout);
+    setTimeout(promise.cancel, timeout);
     return promise;
 }

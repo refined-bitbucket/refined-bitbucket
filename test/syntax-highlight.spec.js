@@ -6,6 +6,7 @@ import test from 'ava';
 import './setup-jsdom';
 
 require('mutationobserver-shim');
+
 global.MutationObserver = window.MutationObserver;
 
 require('../extension/prism.js');

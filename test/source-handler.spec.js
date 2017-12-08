@@ -1,9 +1,9 @@
-'use strict';
+import test from 'ava';
 import {h} from 'dom-chef';
-const test = require('ava');
-const sourceHandler = require('../src/syntax-highlight/source-handler');
 
 import './setup-jsdom';
+
+import * as sourceHandler from '../src/syntax-highlight/source-handler';
 
 test('Changes <pre> element to <code> and wraps it in a <pre> element', t => {
     const pre = <pre>var hello = "world"</pre>;

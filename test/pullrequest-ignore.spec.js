@@ -1,8 +1,5 @@
-'use strict';
-
 import test from 'ava';
-import jsdom from 'jsdom';
-import { h } from 'dom-chef';
+import {h} from 'dom-chef';
 import delay from 'yoctodelay';
 import ignore from 'ignore';
 
@@ -45,14 +42,14 @@ function getPullrequestNode(filenames) {
  */
 function parseHeader(header) {
     const [, filesVisible, filesChangedString] = /Showing (\d+) of (\d+)/.exec(header);
-    const filesChanged =  parseInt(filesChangedString, 10)
+    const filesChanged = parseInt(filesChangedString, 10);
     const filesRemoved = filesChanged - filesVisible;
     return {filesRemoved, filesChanged};
-};
+}
 
 test('should remove the right diffs and update the header', async t => {
-    const filenames = [ '/some path/first_file.js', '/some path/second_file.js', '/some path/third_file.js' ];
-    const ignorePaths = [ 'second_file.js'];
+    const filenames = ['/some path/first_file.js', '/some path/second_file.js', '/some path/third_file.js'];
+    const ignorePaths = ['second_file.js'];
 
     const node = getPullrequestNode(filenames);
     pullrequest.init(node, ignorePaths);
@@ -62,8 +59,7 @@ test('should remove the right diffs and update the header', async t => {
     await delay(16);
 
     const header = node.querySelector('section.main > h1').textContent;
-    const x = parseHeader(header);
-    const { filesRemoved, filesChanged } = parseHeader(header);
+    const {filesRemoved, filesChanged} = parseHeader(header);
     t.is(filenames.length, filesChanged);
     t.is(ignorePaths.length, filesRemoved);
 
