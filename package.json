@@ -6,6 +6,7 @@
   "scripts": {
     "xo": "xo --fix src/*.js src/**/*.js test/*.js test/**/*.js",
     "ava": "cross-env BABEL_ENV=testing ava",
+    "ava:w": "npm run ava -- --watch",
     "build": "webpack",
     "build:min": "cross-env NODE_ENV=production webpack",
     "test": "npm run xo && npm run ava && npm run build:min",

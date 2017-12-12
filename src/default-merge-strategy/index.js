@@ -31,7 +31,10 @@ function initAsync(defaultMergeStrategy) {
         // defaultMergeStrategy can be either 'merge_commit' or 'squash'
         if (!['merge_commit', 'squash'].includes(defaultMergeStrategy)) {
             const msg = `refined-bitbucket(default-merge-strategy): Unimplemented merge strategy '${defaultMergeStrategy}'. No action taken.`;
-            console.warn(msg);
+            // Only warn when in browser, not when testing
+            if (!process || !process.title) {
+                console.warn(msg);
+            }
             reject(msg);
         }
 

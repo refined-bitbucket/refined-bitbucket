@@ -46,9 +46,10 @@ function insertCollapseDiffButton(section) {
     const diffActions = section.querySelector('.diff-actions.secondary');
     const diffLoaded = !section.querySelector('div.too-big-message');
     if (diffLoaded) {
-        diffActions.querySelector('div:nth-last-child(3)').insertAdjacentElement('afterend', button);
+        // NOTE: jsdom (used for unit-testing) doesn't support either `after`, `append` nor `insertAdjacentElement`
+        diffActions.insertBefore(button, diffActions.querySelector('div:nth-child(4)'));
     } else {
-        diffActions.insertAdjacentElement('beforeend', button);
+        diffActions.appendChild(button);
     }
 
     button.addEventListener('click', function () {
