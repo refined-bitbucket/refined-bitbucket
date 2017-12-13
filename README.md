@@ -12,6 +12,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 - Autocollapse. Add file patterns in the Options page that you would like the extension to collapse automatically when the Pull Request.
 - Pullrequest Ignore. Add diff filename patterns in the Options page that you would like the extension to completely remove automatically when the Pull Request loads.
 - Button to load all failed diffs in Pull Request view.
+- Choose a default merge strategy for your pull requests.
 
 ## Some images
 
