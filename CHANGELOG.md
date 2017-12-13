@@ -1,5 +1,7 @@
 # 3.2.0 (2017-12-13)
 
+The highlight of this release is the feature "Default merge strategy". [As you can see, this has been a popular request by Bitbucket users for almost a year now](https://bitbucket.org/site/master/issues/13895/default-merge-strategy), but now I hope this can serve as a solution for most of the people who voted on that official issue.
+
 ### Features:
 
 * **Default-merge-strategy**: Choose either "Merge commit" or "Squash" as the default merge strategy for pull requests in the Options page, closes [issue #90](https://github.com/refined-bitbucket/refined-bitbucket/issues/90), [pull request #91](https://github.com/refined-bitbucket/refined-bitbucket/pull/91).
