@@ -33,10 +33,10 @@ function insertCollapseDiffButton(section) {
     const button = (
         <div class="aui-buttons">
             <button type="button" class="aui-button aui-button-light __refined_bitbucket_collapse_diff_button" aria-label="Toggle diff text" title="Toggle diff text">
-                <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 10 16" width="10">
+                <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 10 16" width="10" data-arrow-direction="up">
                     <path fill-rule="evenodd" d="M10 10l-1.5 1.5L5 7.75 1.5 11.5 0 10l5-5z"></path>
                 </svg>
-                <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 10 16" width="10" class="__refined_bitbucket_hide">
+                <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 10 16" width="10" class="__refined_bitbucket_hide" data-arrow-direction="down">
                     <path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"></path>
                 </svg>
             </button>
