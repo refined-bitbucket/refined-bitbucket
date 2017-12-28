@@ -1,7 +1,5 @@
 import test from 'ava';
 import {h} from 'dom-chef';
-// import delay from 'yoctodelay';
-// import elementReady from 'element-ready';
 
 import collapseDiff from '../src/collapse-diff/collapse-diff';
 
