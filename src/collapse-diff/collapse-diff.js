@@ -33,10 +33,10 @@ function insertCollapseDiffButton(section) {
     const button = (
         <div class="aui-buttons">
             <button type="button" class="aui-button aui-button-light __refined_bitbucket_collapse_diff_button" aria-label="Toggle diff text" title="Toggle diff text">
-                <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 10 16" width="10">
+                <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 10 16" width="10" data-arrow-direction="up">
                     <path fill-rule="evenodd" d="M10 10l-1.5 1.5L5 7.75 1.5 11.5 0 10l5-5z"></path>
                 </svg>
-                <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 10 16" width="10" class="__refined_bitbucket_hide">
+                <svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 10 16" width="10" class="__refined_bitbucket_hide" data-arrow-direction="down">
                     <path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"></path>
                 </svg>
             </button>
@@ -46,9 +46,10 @@ function insertCollapseDiffButton(section) {
     const diffActions = section.querySelector('.diff-actions.secondary');
     const diffLoaded = !section.querySelector('div.too-big-message');
     if (diffLoaded) {
-        diffActions.querySelector('div:nth-last-child(3)').insertAdjacentElement('afterend', button);
+        // NOTE: jsdom (used for unit-testing) doesn't support either `after`, `append` nor `insertAdjacentElement`
+        diffActions.insertBefore(button, diffActions.querySelector('div:nth-child(4)'));
     } else {
-        diffActions.insertAdjacentElement('beforeend', button);
+        diffActions.appendChild(button);
     }
 
     button.addEventListener('click', function () {

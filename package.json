@@ -6,6 +6,7 @@
   "scripts": {
     "xo": "xo --fix src/*.js src/**/*.js test/*.js test/**/*.js",
     "ava": "cross-env BABEL_ENV=testing ava",
+    "ava:w": "npm run ava -- --watch",
     "build": "webpack",
     "build:min": "cross-env NODE_ENV=production webpack",
     "test": "npm run xo && npm run ava && npm run build:min",
@@ -43,7 +44,7 @@
   "homepage": "https://github.com/refined-bitbucket/refined-bitbucket#readme",
   "devDependencies": {
     "adm-zip": "^0.4.7",
-    "ava": "^0.23.0",
+    "ava": "^0.24.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
