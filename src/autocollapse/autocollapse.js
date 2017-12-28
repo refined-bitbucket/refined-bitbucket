@@ -30,9 +30,6 @@ async function collapseIfNeededAsync(section) {
         return;
     }
 
-    // Use the commented line below instead of the one below it when this issue #10 is resolved
-    // https://github.com/sindresorhus/element-ready/issues/10
-    // await elementReady('.__refined_bitbucket_collapse_diff_button', {target: section});
-    await elementReady(`section[data-identifier="${section.getAttribute('data-identifier')}"] .__refined_bitbucket_collapse_diff_button`);
+    await elementReady('.__refined_bitbucket_collapse_diff_button', {target: section});
     toggleDiff(section);
 }
