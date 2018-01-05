@@ -7,6 +7,7 @@
 ### Improvements:
 
 * **Collapse-diff**: Test suite for the feature, [pull request #94](https://github.com/refined-bitbucket/refined-bitbucket/pull/94).
+* **Syntax-highlighting**: Fix for an issue where the styling necessary for syntax highlighting pull requests was interfering with some of Bitbucket's own styling, which caused inline code in comments to have a white background instead of their original gray background, closes [issue #74](https://github.com/refined-bitbucket/refined-bitbucket/issues/74) and [issue #93](https://github.com/refined-bitbucket/refined-bitbucket/issues/93), [pull request #99](https://github.com/refined-bitbucket/refined-bitbucket/pull/99).
 
 # 3.2.0 (2017-12-13)
 
