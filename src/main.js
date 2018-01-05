@@ -38,7 +38,7 @@ storageHelper.getConfig().then(config => {
             collapseDiff.init();
         }
 
-        autocollapse.init(config.autocollapsePaths);
+        autocollapse.init(config.autocollapsePaths, config.autocollapseDeletedFiles);
 
         pullrequestIgnore.init(pullrequestNode, config.ignorePaths);
 
