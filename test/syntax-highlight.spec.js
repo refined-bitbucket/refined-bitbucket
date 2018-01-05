@@ -33,7 +33,7 @@ test('should syntax-highlight diff', t => {
     );
 
     const expected = (
-        <section class="bb-udiff language-javascript" data-filename="filename.js">
+        <section class="bb-udiff language-jsx" data-filename="filename.js">
             <div class="heading">
                 <div class="diff-actions secondary" id="side-by-side-1">
                     <div class="aui-buttons">
@@ -43,7 +43,7 @@ test('should syntax-highlight diff', t => {
             </div>
 
             <div class="refract-content-container">
-                <pre class=" language-javascript">
+                <pre class=" language-jsx">
                     <span class="token keyword">var</span> msg <span class="token operator">=</span> <span class="token string">'Hello world'</span><span class="token punctuation">;</span>
                 </pre>
             </div>
@@ -68,11 +68,11 @@ test('should syntax-highlight when side-by-side button not present', t => {
     );
 
     const expected = (
-        <section class="bb-udiff language-javascript" data-filename="filename.js">
+        <section class="bb-udiff language-jsx" data-filename="filename.js">
             {/* no side-by-side button */}
 
             <div class="refract-content-container">
-                <pre class=" language-javascript">
+                <pre class=" language-jsx">
                     <span class="token keyword">var</span> msg <span class="token operator">=</span> <span class="token string">'Hello world'</span><span class="token punctuation">;</span>
                 </pre>
             </div>
