@@ -54,6 +54,14 @@ const createNode = () => (
         <div class="diff-content-container refract-container">
             <div class="refract-content-container">
                 <pre>var msg = 'Hello world';</pre>
+
+                <div class="skipped-container">
+                    <div class="line-numbers-skipped skipped-bottom last"></div>
+                    <div class="skipped-bottom last">
+                        {/* Location of the bottom button */}
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -65,17 +73,70 @@ test('should not re-insert collapse diff button if already present', async t => 
     collapseDiff.insertCollapseDiffButton(uudiff);
     collapseDiff.insertCollapseDiffButton(uudiff);
     collapseDiff.insertCollapseDiffButton(uudiff);
+    collapseDiff.insertCollapseDiffButton(uudiff);
 
     const buttons = uudiff.getElementsByClassName('__refined_bitbucket_collapse_diff_button');
-    t.true(buttons.length === 1);
+    // one at the top, one at the bottom of the diff
+    t.true(buttons.length === 2);
 });
 
-test('should insert button in correct position when diff loads successfully', async t => {
+test('should insert TOP button in correct position when diff loads successfully', async t => {
     const uudiff = createNode();
 
     collapseDiff.insertCollapseDiffButton(uudiff);
 
     const button = uudiff.querySelector('div.secondary.diff-actions div:nth-child(4)');
+
+    t.truthy(button.querySelector('.__refined_bitbucket_collapse_diff_button'));
+});
+
+test('should insert BOTTOM button in correct position when diff loads successfully', async t => {
+    const uudiff = createNode();
+
+    collapseDiff.insertCollapseDiffButton(uudiff);
+
+    const button = uudiff.querySelector('.refract-content-container .skipped-container .skipped-bottom.last:last-child');
+
+    t.truthy(button.querySelector('.__refined_bitbucket_collapse_diff_button'));
+});
+
+test('should insert BOTTOM button in correct position when diff has no more lines to show', async t => {
+    const uudiff = (
+        <section class="bb-udiff" data-filename="filename.js">
+            <div class="heading">
+                <div class="diff-actions secondary" id="side-by-side-1">
+                    {/* "Side by side" and "View File" buttons */}
+                    <div class="aui-buttons">
+                    </div>
+
+                    {/* "Comment" button */}
+                    <div class="aui-buttons">
+                    </div>
+
+                    {/* "More" button */}
+                    <div class="aui-buttons">
+                    </div>
+
+                    {/* "Collapse-diff" button should go here */}
+
+                </div>
+            </div>
+
+            <div class="diff-content-container refract-container">
+                <div class="refract-content-container">
+                    <pre>var msg = 'Hello world';</pre>
+
+                    {/* If there are no more lines to show at the bottom of the diff,
+                    there is no `<div class="skipped-container">` */}
+
+                </div>
+            </div>
+        </section>
+    );
+
+    collapseDiff.insertCollapseDiffButton(uudiff);
+
+    const button = uudiff.querySelector('.refract-content-container .skipped-container .skipped-bottom.last:last-child');
 
     t.truthy(button.querySelector('.__refined_bitbucket_collapse_diff_button'));
 });

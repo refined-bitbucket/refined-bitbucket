@@ -29,3 +29,7 @@ window.Element.prototype.closest = window.Element.prototype.closest || function 
     }
     return null;
 };
+
+// `scrollIntoView` not supported by jsdom,
+// shim with a no-op
+window.Element.prototype.scrollIntoView = () => {};

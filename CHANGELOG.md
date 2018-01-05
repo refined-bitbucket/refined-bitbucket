@@ -1,5 +1,9 @@
 # Next Version
 
+### Features:
+
+* **Collapse-diff**: A button to toggle the diff text was added at the bottom of the diff. Additionally, clicking this or the previous button at the top will now scroll the diff into view at the top of the page, closes [issue #88](https://github.com/refined-bitbucket/refined-bitbucket/issues/88), [pull request #95](https://github.com/refined-bitbucket/refined-bitbucket/pull/95).
+
 ### Improvements:
 
 * **Collapse-diff**: Test suite for the feature, [pull request #94](https://github.com/refined-bitbucket/refined-bitbucket/pull/94).

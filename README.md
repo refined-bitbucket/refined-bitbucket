@@ -67,10 +67,11 @@ We all know BitBucket lacks some features that we have in other platforms like G
 	</tr>
 	<tr>
 		<td>
-			<img src="https://user-images.githubusercontent.com/7514993/31857910-3938deb6-b6b8-11e7-8bac-f55242010a62.gif" alt="options">
+			<img src="https://user-images.githubusercontent.com/7514993/31857910-3938deb6-b6b8-11e7-8bac-f55242010a62.gif" alt="collapse-diff">
+			<img src="https://user-images.githubusercontent.com/7514993/34419580-06327498-ebdb-11e7-90cc-41144d4bd671.gif" alt="bottom-collapse">
 		</td>
 		<td>
-			<img src="https://user-images.githubusercontent.com/7514993/30448047-a815dd4a-995b-11e7-98e5-48664c2bd587.gif" alt="pullrequest-ignore">
+			<img src="https://user-images.githubusercontent.com/7514993/30448047-a815dd4a-995b-11e7-98e5-48664c2bd587.gif" alt="occurrences-highlighter">
 		</td>
 	</tr>
 </table>
