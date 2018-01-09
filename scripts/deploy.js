@@ -5,7 +5,7 @@ const path = require('path');
 const chromeDeploy = require('chrome-extension-deploy');
 const firefoxDeploy = require('firefox-extension-deploy');
 
-console.log('Deploying to Chrome Web Store...');
+console.log('Deploying to Chrome Web Store and Add-ons for Firefox...');
 
 const zipPath = path.join(__dirname, '../extension.zip');
 
@@ -18,7 +18,7 @@ chromeDeploy({
 }).then(() => {
     console.log('Chrome deployment complete!');
 }, err => {
-    console.error('Chrome deployment failed:', err);
+    console.error('Chrome deployment failed: ', err);
     process.exitCode = 1;
 });
 
@@ -29,8 +29,8 @@ firefoxDeploy({
     version: require('../extension/manifest.json').version, // eslint-disable-line global-require
     src: fs.createReadStream(zipPath),
 }).then(() => {
-    console.log('Firefox beta deployment complete!');
+    console.log('Firefox deployment complete!');
 }, err => {
-    console.error('Firefox beta failed:', err);
+    console.error('Firefox failed: ', err);
     process.exitCode = 1;
 });
