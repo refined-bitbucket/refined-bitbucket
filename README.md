@@ -77,7 +77,9 @@ We all know BitBucket lacks some features that we have in other platforms like G
 </table>
 
 ## Installing
-_refined-bitbucket_ is [available on the Google Chrome Web Store][chrome-install].
+_refined-bitbucket_ is available on the [Google Chrome Web Store][chrome-install] and [Add-ons for Firefox][firefox-install].
+
+Sometimes the extension is not immediately picked up by the browser after installation. If this happens to you, log out of Bitbucket and then log back in, or clear your cache.
 
 ## Default Key Mapping
 
@@ -135,5 +137,6 @@ npm test
 MIT © [refined-bitbucket](https://github.com/refined-bitbucket)
 
 [chrome-install]: https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon
+[firefox-install]: https://addons.mozilla.org/en-US/firefox/addon/refined-bitbucket-/
 [browserify]: http://browserify.org/
 [tab-image]: https://cloud.githubusercontent.com/assets/755669/18594922/1c74c184-7bf7-11e6-887d-859fb6206c65.png

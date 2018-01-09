@@ -1,4 +1,8 @@
-# Next Version
+# 3.3.0 (2018-01-09)
+
+With the release of [Firefox Quantum](https://www.mozilla.org/en-US/firefox/) there is a renewed interest for this browser in the community, so we have decided to officially publish the extension as an [Add-on for Firefox](https://addons.mozilla.org/en-US/firefox/addon/refined-bitbucket-/)! I'd like to thank [@Ivan0xFF](https://github.com/Ivan0xFF) with [#40](https://github.com/refined-bitbucket/refined-bitbucket/pull/40) and [@awendland](https://github.com/awendland) with [#89](https://github.com/refined-bitbucket/refined-bitbucket/issues/89) for getting the wheel moving in this direction.
+
+If you decide to switch to Firefox and use this extension, let me know of any compatibily issues if they arise!
 
 ### Features:
 
