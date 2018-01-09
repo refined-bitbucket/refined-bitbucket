@@ -4,7 +4,7 @@
 We all know BitBucket lacks some features that we have in other platforms like GitHub, GitLab and others. Originally inspired on Sindre Sorhus' [Refined Github](https://github.com/sindresorhus/refined-github) extension, _refined-bitbucket_ is born as a collaborative project by a few developers to improve upon those holes, and even add some additional functionality that will enhance the overall user experience.
 
 ## Current features
-- Improves syntax highlight for pull requests. [See the full list of enabled languages](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
+- Adds syntax highlighting for pull requests. [See the full list of enabled languages](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
 - Double click on a word to highlight all occurrences.
 - ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
 - Key binding feature, which allows for quicker navigation through pull requests.
