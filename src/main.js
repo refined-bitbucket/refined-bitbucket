@@ -34,20 +34,12 @@ storageHelper.getConfig().then(config => {
     defaultMergeStrategy.init(config.defaultMergeStrategy);
 
     waitForPullRequestContents().then(pullrequestNode => {
-        if (config.collapseDiff) {
-            collapseDiff.init();
-        }
-
         autocollapse.init(config.autocollapsePaths);
 
         pullrequestIgnore.init(pullrequestNode, config.ignorePaths);
 
         if (config.loadAllDiffs) {
             loadAllDiffs.init(pullrequestNode);
-        }
-
-        if (config.highlightSyntax) {
-            syntaxHighlight.init();
         }
 
         // have to observe the DOM because some sections
@@ -59,7 +51,7 @@ storageHelper.getConfig().then(config => {
             autocollapse.collapseIfNeeded(this);
 
             if (config.highlightSyntax && !pullrequestIgnore.isIgnored(this)) {
-                syntaxHighlight.syntaxHighlight(this);
+                syntaxHighlight(this);
             }
         });
     })

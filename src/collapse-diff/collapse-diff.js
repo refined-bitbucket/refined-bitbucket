@@ -2,8 +2,9 @@
 
 import {h} from 'dom-chef';
 
+import './collapse-diff.css';
+
 export default {
-    init,
     insertCollapseDiffButton
 };
 
@@ -25,82 +26,6 @@ export function toggleDiff(section) {
 
     // Toggle the collapse button icon
     [...section.querySelectorAll('.__refined_bitbucket_collapse_diff_button svg')].forEach(svg => svg.classList.toggle('__refined_bitbucket_hide'));
-}
-
-
-const insertStyles = () => {
-    const head = document.getElementsByTagName('head')[0];
-    const style = document.createElement('style');
-    style.type = 'text/css';
-    style.textContent = `
-        .__refined_bitbucket_hide { display: none; }
-        .__refined_bitbucket_bottom_border { border-bottom: 1px solid #ccc !important; }
-
-        .skipped-container .__rb_ellipsis {
-            box-sizing: border-box;
-            background: #f5f5f5;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-shadow: 0 0 0 2px #fff;
-            color: #707070;
-            cursor: pointer;
-            display: block;
-            float: left;
-            font-family: Arial,sans-serif;
-            font-size: 20px;
-            height: 16px;
-            line-height: 6px;
-            margin: 0 0 0 21px;
-            padding: 0;
-            position: absolute;
-            text-align: center;
-            width: 30px;
-            z-index: 1
-        }
-
-        .skipped-container .__rb_ellipsis:hover {
-            background-color: #e9e9e9;
-            border-color: #999
-        }
-
-        .skipped-container .__rb_ellipsis::after,.skipped-container .__rb_ellipsis::before {
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            content: '';
-            height: 9px;
-            left: -4px;
-            position: absolute;
-            width: 36px
-        }
-
-        .skipped-container .__rb_ellipsis::before {
-            border-bottom: none;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-            content: \'\\2026\';
-            padding: 2px 0 0;
-            top: -4px
-        }
-
-        .skipped-bottom .__rb_ellipsis {
-            margin-top: 12px
-        }
-
-        .skipped-container:last-child .__rb_ellipsis::after {
-            display: none
-        }
-
-        .aui-buttons.__rb_ellipsis::before {
-            width: 38px;
-            content:'';
-        }
-    `;
-    head.appendChild(style);
-};
-
-function init() {
-    insertStyles();
 }
 
 const insertTopButton = section => {

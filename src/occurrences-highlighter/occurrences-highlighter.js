@@ -2,6 +2,8 @@
 
 import 'jquery-highlight';
 
+import './occurrences-highlighter.css';
+
 const waitForRender = require('../wait-for-render.js');
 
 export {
@@ -10,21 +12,11 @@ export {
 };
 
 function init() {
-    insertStyles();
-
     waitForRender('.diff-container').then(() => {
         $('.diff-content-container').dblclick(function () {
             highlightOccurrences(this);
         });
     });
-}
-
-function insertStyles() {
-    const head = document.getElementsByTagName('head')[0];
-    const style = document.createElement('style');
-    style.type = 'text/css';
-    style.innerHTML = '.__refined_bitbucket_highlight {background:#FFFF88;}';
-    head.appendChild(style);
 }
 
 function highlightOccurrences(container) {
