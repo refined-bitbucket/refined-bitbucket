@@ -9,7 +9,9 @@ We all know BitBucket lacks some features that we have in other platforms like G
 - ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
 - Key binding feature, which allows for quicker navigation through pull requests.
 - Button to collapse diffs in Pull Request view.
-- Autocollapse. Add filename patterns in the Options page that you would like the extension to collapse automatically when the pull request loads.
+- Autocollapse:
+  - Add filename patterns in the Options page that you would like the extension to collapse automatically when the pull request loads.
+  - Deleted files are automatically collapsed.
 - Pullrequest Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the Pull Request loads.
 - Button to load all failed diffs in Pull Request view.
 - Choose a default merge strategy for your pull requests.

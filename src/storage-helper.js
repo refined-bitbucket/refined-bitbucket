@@ -15,6 +15,7 @@ module.exports = (function storageHelper() {
                     loadAllDiffs: true,
                     defaultMergeStrategy: 'merge_commit',
                     autocollapsePaths: ['package-lock.json'],
+                    autocollapseDeletedFiles: true,
                     ignorePaths: []
                 }, options => {
                     resolve({
@@ -26,6 +27,7 @@ module.exports = (function storageHelper() {
                         loadAllDiffs: options.loadAllDiffs,
                         defaultMergeStrategy: options.defaultMergeStrategy,
                         autocollapsePaths: options.autocollapsePaths,
+                        autocollapseDeletedFiles: options.autocollapseDeletedFiles,
                         ignorePaths: options.ignorePaths
                     });
                 });
