@@ -12,9 +12,9 @@ export default {
 let ig;
 let autocollapseDeletedFiles;
 
-function init(autocollapsePaths, collapseDeletedFiles) {
+function init(autocollapsePaths, autocollapseDeletedFiles) {
     ig = ignore().add(autocollapsePaths);
-    autocollapseDeletedFiles = collapseDeletedFiles;
+    autocollapseDeletedFiles = autocollapseDeletedFiles;
 }
 
 function collapseIfNeeded(section) {
