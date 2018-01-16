@@ -30,7 +30,7 @@ async function collapseIfNeededAsync(section) {
     const isDeleted = section.querySelector('h1.filename span.diff-entry-lozenge.aui-lozenge-error');
 
     const shouldCollapse = ig.ignores(filename) || (autocollapseDeletedFiles && isDeleted);
-    
+
     if (shouldCollapse) {
         await elementReady('.__refined_bitbucket_collapse_diff_button', {target: section});
         toggleDiff(section);

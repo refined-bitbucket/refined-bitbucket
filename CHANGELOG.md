@@ -1,3 +1,9 @@
+# Next Version
+
+### Features:
+
+* **Autocollapse**: Add option to automatically collapse deleted files in a pull request, closes [issue #96](https://github.com/refined-bitbucket/refined-bitbucket/issues/96), [pull request #101](https://github.com/refined-bitbucket/refined-bitbucket/pull/101).
+
 # 3.3.0 (2018-01-09)
 
 With the release of [Firefox Quantum](https://www.mozilla.org/en-US/firefox/) there is a renewed interest for this browser in the community, so we have decided to officially publish the extension as an [Add-on for Firefox](https://addons.mozilla.org/en-US/firefox/addon/refined-bitbucket-/)! I'd like to thank [@Ivan0xFF](https://github.com/Ivan0xFF) with [#40](https://github.com/refined-bitbucket/refined-bitbucket/pull/40) and [@awendland](https://github.com/awendland) with [#89](https://github.com/refined-bitbucket/refined-bitbucket/issues/89) for getting the wheel moving in this direction.
@@ -7,7 +13,6 @@ If you decide to switch to Firefox and use this extension, let me know of any co
 ### Features:
 
 * **Collapse-diff**: A button to toggle the diff text was added at the bottom of the diff. Additionally, clicking this or the previous button at the top will now scroll the diff into view at the top of the page, closes [issue #88](https://github.com/refined-bitbucket/refined-bitbucket/issues/88), [pull request #95](https://github.com/refined-bitbucket/refined-bitbucket/pull/95).
-* **Autocollapse**: Add option to automatically collapse deleted files in a pull request.
 
 ### Improvements:
 
