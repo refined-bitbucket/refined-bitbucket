@@ -1,5 +1,9 @@
 # Next Version
 
+### Features:
+
+* **Autocollapse**: Add option to automatically collapse deleted files in a pull request, closes [issue #96](https://github.com/refined-bitbucket/refined-bitbucket/issues/96), [pull request #101](https://github.com/refined-bitbucket/refined-bitbucket/pull/101).
+
 ### Development:
 
 * Added CSS Loader to the Webpack config, which now makes it possible to directly import `.css` files in JavaScript modules, [pull request #104](https://github.com/refined-bitbucket/refined-bitbucket/pull/104).

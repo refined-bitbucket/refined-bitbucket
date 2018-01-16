@@ -11,6 +11,7 @@
     const loadAllDiffsElement = document.getElementById('load-all-diffs');
     const defaultMergeStrategyElement = document.getElementById('default-merge-strategy-form')['default-merge-strategy'];
     const autocollapsePathsElement = document.getElementById('autocollapse-paths');
+    const autocollapseDeletedFilesElement = document.getElementById('autocollapse-deleted-files');
     const ignorePathsElement = document.getElementById('ignore-paths');
     const statusElement = document.getElementById('status');
 
@@ -23,6 +24,7 @@
         const loadAllDiffs = loadAllDiffsElement.checked;
         const defaultMergeStrategy = defaultMergeStrategyElement.value;
         const autocollapsePaths = autocollapsePathsElement.value.split('\n');
+        const autocollapseDeletedFiles = autocollapseDeletedFilesElement.checked;
         const ignorePaths = ignorePathsElement.value.split('\n');
 
         chrome.storage.sync.set({
@@ -34,6 +36,7 @@
             loadAllDiffs,
             defaultMergeStrategy,
             autocollapsePaths,
+            autocollapseDeletedFiles,
             ignorePaths
         }, () => {
             statusElement.textContent = 'Options saved.';
@@ -53,6 +56,7 @@
             loadAllDiffs: true,
             defaultMergeStrategy: 'merge_commit',
             autocollapsePaths: ['package-lock.json'],
+            autocollapseDeletedFiles: true,
             ignorePaths: []
         }, options => {
             highlightSyntaxElement.checked = options.highlightSyntax;
@@ -63,6 +67,7 @@
             loadAllDiffsElement.checked = options.loadAllDiffs;
             defaultMergeStrategyElement.value = options.defaultMergeStrategy;
             autocollapsePathsElement.value = options.autocollapsePaths.join('\n');
+            autocollapseDeletedFilesElement.checked = options.autocollapseDeletedFiles;
             ignorePathsElement.value = options.ignorePaths.join('\n');
         });
     }

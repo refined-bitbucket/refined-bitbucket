@@ -10,9 +10,11 @@ export default {
 };
 
 let ig;
+let autocollapseDeletedFiles;
 
-function init(autocollapsePaths) {
+function init(autocollapsePaths, collapseDeletedFiles) {
     ig = ignore().add(autocollapsePaths);
+    autocollapseDeletedFiles = collapseDeletedFiles;
 }
 
 function collapseIfNeeded(section) {
@@ -25,11 +27,12 @@ function collapseIfNeeded(section) {
 
 async function collapseIfNeededAsync(section) {
     const filename = section.getAttribute('data-filename').trim();
+    const isDeleted = section.querySelector('h1.filename span.diff-entry-lozenge.aui-lozenge-error');
 
-    if (!ig.ignores(filename)) {
-        return;
+    const shouldCollapse = ig.ignores(filename) || (autocollapseDeletedFiles && isDeleted);
+
+    if (shouldCollapse) {
+        await elementReady('.__refined_bitbucket_collapse_diff_button', {target: section});
+        toggleDiff(section);
     }
-
-    await elementReady('.__refined_bitbucket_collapse_diff_button', {target: section});
-    toggleDiff(section);
 }

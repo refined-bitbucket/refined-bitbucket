@@ -34,7 +34,7 @@ storageHelper.getConfig().then(config => {
     defaultMergeStrategy.init(config.defaultMergeStrategy);
 
     waitForPullRequestContents().then(pullrequestNode => {
-        autocollapse.init(config.autocollapsePaths);
+        autocollapse.init(config.autocollapsePaths, config.autocollapseDeletedFiles);
 
         pullrequestIgnore.init(pullrequestNode, config.ignorePaths);
 
