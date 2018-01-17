@@ -1,5 +1,10 @@
-.__refined_bitbucket_hide { display: none; }
-.__refined_bitbucket_bottom_border { border-bottom: 1px solid #ccc !important; }
+.__refined_bitbucket_hide { 
+    display: none; 
+}
+
+.__refined_bitbucket_bottom_border { 
+    border-bottom: 1px solid #ccc !important; 
+}
 
 .skipped-container .__rb_ellipsis {
     box-sizing: border-box;
