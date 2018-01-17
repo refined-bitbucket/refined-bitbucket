@@ -4,7 +4,7 @@
   "version": "3.3.0",
   "main": "index.js",
   "scripts": {
-    "xo": "xo --fix src/*.js src/**/*.js test/*.js test/**/*.js",
+    "xo": "xo --fix *.js src/*.js src/**/*.js test/*.js test/**/*.js",
     "ava": "cross-env BABEL_ENV=testing ava",
     "ava:w": "npm run ava -- --watch",
     "build": "webpack",
@@ -52,6 +52,7 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "chrome-extension-deploy": "^3.0.0",
     "cross-env": "^5.1.0",
+    "css-loader": "^0.28.8",
     "del": "^3.0.0",
     "dotenv": "^4.0.0",
     "firefox-extension-deploy": "^1.1.0",
@@ -59,7 +60,9 @@
     "mutationobserver-shim": "^0.3.2",
     "path": "^0.12.7",
     "request": "^2.83.0",
+    "require-hacker": "^3.0.1",
     "semver": "^5.4.1",
+    "style-loader": "^0.19.1",
     "uglifyjs-webpack-plugin": "^1.0.0",
     "webpack": "^3.8.1",
     "xo": "^0.16.0",
@@ -99,7 +102,8 @@
       "src/**/*.js"
     ],
     "require": [
-      "babel-register"
+      "babel-register",
+      "./ignore-utils"
     ],
     "babel": "inherit",
     "timeout": "5s"

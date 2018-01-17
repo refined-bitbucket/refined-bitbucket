@@ -1,3 +1,1 @@
-import {init, syntaxHighlight} from './syntax-highlight';
-
-export default {init, syntaxHighlight};
+export {default} from './syntax-highlight';

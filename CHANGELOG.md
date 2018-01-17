@@ -4,6 +4,10 @@
 
 * **Autocollapse**: Add option to automatically collapse deleted files in a pull request, closes [issue #96](https://github.com/refined-bitbucket/refined-bitbucket/issues/96), [pull request #101](https://github.com/refined-bitbucket/refined-bitbucket/pull/101).
 
+### Development:
+
+* Added CSS Loader to the Webpack config, which now makes it possible to directly import `.css` files in JavaScript modules, [pull request #104](https://github.com/refined-bitbucket/refined-bitbucket/pull/104).
+
 # 3.3.0 (2018-01-09)
 
 With the release of [Firefox Quantum](https://www.mozilla.org/en-US/firefox/) there is a renewed interest for this browser in the community, so we have decided to officially publish the extension as an [Add-on for Firefox](https://addons.mozilla.org/en-US/firefox/addon/refined-bitbucket-/)! I'd like to thank [@Ivan0xFF](https://github.com/Ivan0xFF) with [#40](https://github.com/refined-bitbucket/refined-bitbucket/pull/40) and [@awendland](https://github.com/awendland) with [#89](https://github.com/refined-bitbucket/refined-bitbucket/issues/89) for getting the wheel moving in this direction.

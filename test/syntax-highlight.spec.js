@@ -11,7 +11,7 @@ global.MutationObserver = window.MutationObserver;
 
 require('../extension/prism.js');
 
-const {syntaxHighlight} = require('../src/syntax-highlight').default;
+const syntaxHighlight = require('../src/syntax-highlight').default;
 
 test('should syntax-highlight diff', t => {
     const uudiff = (
