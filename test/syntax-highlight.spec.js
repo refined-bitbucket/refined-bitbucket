@@ -9,7 +9,7 @@ require('mutationobserver-shim');
 
 global.MutationObserver = window.MutationObserver;
 
-require('../extension/prism.js');
+require('../src/vendor/prism.js');
 
 const syntaxHighlight = require('../src/syntax-highlight').default;
 
