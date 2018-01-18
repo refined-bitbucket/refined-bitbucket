@@ -2,18 +2,30 @@
 const path = require('path');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     devtool: 'source-map',
     entry: {
         main: './src/main',
-        options: './src/options'
+        options: './src/options',
+        background: './src/background'
     },
     plugins: [
         new webpack.DefinePlugin({
             process: {}
         }),
-        new webpack.optimize.ModuleConcatenationPlugin()
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        new CopyWebpackPlugin([
+            {
+                from: '*',
+                context: 'src',
+                ignore: '*.js'
+            },
+            {
+                from: 'src/vendor/prism.js'
+            }
+        ])
     ],
     output: {
         path: path.join(__dirname, 'extension'),

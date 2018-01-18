@@ -3,6 +3,8 @@
 /* eslint-disable import/imports-first */
 global.jQuery = global.$ = require('jquery');
 
+import OptionsSync from 'webext-options-sync';
+
 import waitForPullRequestContents from './wait-for-pullrequest';
 import collapseDiff from './collapse-diff/collapse-diff';
 import autocollapse from './autocollapse/autocollapse';
@@ -14,11 +16,20 @@ import defaultMergeStrategy from './default-merge-strategy';
 
 import 'selector-observer';
 
-const storageHelper = require('./storage-helper');
 const occurrencesHighlighter = require('./occurrences-highlighter/occurrences-highlighter');
 const keymap = require('./keymap/keymap');
 
-storageHelper.getConfig().then(config => {
+new OptionsSync().getAll().then(options => {
+    const config = {
+        ...options,
+        autocollapsePaths: (options.autocollapsePaths || '').split('\n'),
+        ignorePaths: (options.ignorePaths || '').split('\n')
+    };
+
+    init(config);
+});
+
+function init(config) {
     if (config.highlightOcurrences) {
         occurrencesHighlighter.init();
     }
@@ -58,4 +69,4 @@ storageHelper.getConfig().then(config => {
     .catch(() => {
         // current page is not a pull request, ignore
     });
-});
+}
