@@ -69,6 +69,5 @@ extension.zip
 
 *.orig
 *.js.map
-extension/main.js
-extension/options.js
 .env
+extension

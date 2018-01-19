@@ -4,7 +4,7 @@
   "version": "3.3.0",
   "main": "index.js",
   "scripts": {
-    "xo": "xo --fix *.js src/*.js src/**/*.js test/*.js test/**/*.js",
+    "xo": "xo --fix *.js src/*.js src/**/*.js test/*.js test/**/*.js !src/vendor/prism.js",
     "ava": "cross-env BABEL_ENV=testing ava",
     "ava:w": "npm run ava -- --watch",
     "build": "webpack",
@@ -13,7 +13,7 @@
     "watch": "webpack --watch",
     "sync-version": "node scripts/sync-version",
     "package": "node scripts/package",
-    "deploy": "npm run test && npm run sync-version && npm run package && node scripts/deploy",
+    "deploy": "npm test && npm run sync-version && npm run package && node scripts/deploy",
     "major": "npm version --no-git-tag-version major && npm run sync-version",
     "minor": "npm version --no-git-tag-version minor && npm run sync-version",
     "patch": "npm version --no-git-tag-version patch && npm run sync-version"
@@ -51,6 +51,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "chrome-extension-deploy": "^3.0.0",
+    "copy-webpack-plugin": "^4.3.1",
     "cross-env": "^5.1.0",
     "css-loader": "^0.28.8",
     "del": "^3.0.0",
@@ -103,7 +104,7 @@
     ],
     "require": [
       "babel-register",
-      "./ignore-utils"
+      "./scripts/ignore-utils"
     ],
     "babel": "inherit",
     "timeout": "5s"

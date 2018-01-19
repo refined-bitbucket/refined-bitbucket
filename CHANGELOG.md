@@ -7,6 +7,7 @@
 ### Development:
 
 * Added CSS Loader to the Webpack config, which now makes it possible to directly import `.css` files in JavaScript modules, [pull request #104](https://github.com/refined-bitbucket/refined-bitbucket/pull/104).
+* Removed the `extension` folder from source control and moved everything to `src` for better code colocation. Now using webpack to copy all the necessary resources, [pull request #108](https://github.com/refined-bitbucket/refined-bitbucket/pull/108).
 
 # 3.3.0 (2018-01-09)
 

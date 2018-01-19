@@ -1,5 +1,3 @@
-'use strict';
-
 export default function waitForPullRequestContents() {
     return new Promise((resolve, reject) => {
         const pullRequestContentsNode = document.getElementById('pr-tab-content');
