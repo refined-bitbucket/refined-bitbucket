@@ -15,6 +15,23 @@ We all know BitBucket lacks some features that we have in other platforms like G
 - Pullrequest Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the Pull Request loads.
 - Button to load all failed diffs in Pull Request view.
 - Choose a default merge strategy for your pull requests.
+- Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
+
+    ```
+    /PULL_REQUEST_TEMPLATE.md
+    /docs/PULL_REQUEST_TEMPLATE.md
+    /.github/PULL_REQUEST_TEMPLATE.md
+    /.bitbucket/PULL_REQUEST_TEMPLATE.md
+    ```
+
+    Please note that the filename IS case sensitive (must be all caps),
+    and MUST have the .md file extension. No other file extensions will be
+    recognized. The file to be used will be the first to be found in one
+    of these locations (from top to bottom).
+
+    It's also possible to specify a URL for a raw Gist with the contents
+    of the template in the options page, in case you don't want to include
+    the file in your repository, e.g., https://gist.githubusercontent.com/anonymous/8054a3ee32f7cf1a5975e3fd52b3c5f3/raw/f6897720e8b6b93becd246187dac36038291c3a4/PULL_REQUEST_TEMPLATE.md.
 
 ## Some images
 

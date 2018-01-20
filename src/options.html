@@ -44,6 +44,13 @@
         <br>
         <br>
 
+        <label>
+            <input type="checkbox" name="prTemplateEnabled"> Use a <em>PULL_REQUEST_TEMPLATE.md</em> from the repository when creating new pull requests or specify a URL with your own raw template (must be hosted publicly in <a href="http://gist.github.com/">http://gist.github.com/</a>). See the <a href="http://github.com/refined-bitbucket/refined-bitbucket">README</a> of the extension for more details on how this works.
+            <input type="text" name="prTemplateUrl" style="width: 100%;">
+        </label>
+        <br>
+        <br>
+
         <label> Default Merge Strategy </label>
         <div name="default-merge-strategy-form" style="margin: 0.5em 0 0 1em;">
             <input type="radio" name="defaultMergeStrategy" value="merge_commit" checked> Merge commit

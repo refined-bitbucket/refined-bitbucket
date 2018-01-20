@@ -4,16 +4,11 @@ import {h} from 'dom-chef';
 import delay from 'yoctodelay';
 
 import defaultMergeStrategy, {SCRIPT_ID, scriptAlreadyExists} from '../src/default-merge-strategy';
+import {cleanDocumentBody} from './test-utils';
 
 import './setup-jsdom';
 
 global.location = new URL('https://www.bitbucket.org');
-
-const cleanDocumentBody = () => {
-    while (document.body.hasChildNodes()) {
-        document.body.removeChild(document.body.lastChild);
-    }
-};
 
 test('should not try to choose default merge strategy on non-pull request pages', async t => {
     location.href = 'https://www.bitbucket.org/user/repo/is-not-a-pull-request';

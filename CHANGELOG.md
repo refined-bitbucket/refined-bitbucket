@@ -2,6 +2,26 @@
 
 ### Features:
 
+* **Pullrequest Template**: [Available in GitHub since the start of 2016](https://github.com/blog/2111-issue-and-pull-request-templates), and [actively requested by Bitbucket users](https://bitbucket.org/site/master/issues/11571/custom-pull-request-description-template). With this feature, by including a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
+
+    ```
+    /PULL_REQUEST_TEMPLATE.md
+    /docs/PULL_REQUEST_TEMPLATE.md
+    /.github/PULL_REQUEST_TEMPLATE.md
+    /.bitbucket/PULL_REQUEST_TEMPLATE.md
+    ```
+
+    Please note that the filename IS case sensitive (must be all caps),
+    and MUST have the .md file extension. No other file extensions will be
+    recognized. The file to be used will be the first to be found in one
+    of these locations (from top to bottom).
+
+    It's also possible to specify a URL for a raw Gist with the contents
+    of the template in the options page, in case you don't want to include
+    the file in your repository, e.g., https://gist.githubusercontent.com/anonymous/8054a3ee32f7cf1a5975e3fd52b3c5f3/raw/f6897720e8b6b93becd246187dac36038291c3a4/PULL_REQUEST_TEMPLATE.md.
+
+    Closes [issue #105](https://github.com/refined-bitbucket/refined-bitbucket/issues/105), [pull request #106](https://github.com/refined-bitbucket/refined-bitbucket/pull/106).
+
 * **Autocollapse**: Add option to automatically collapse deleted files in a pull request, closes [issue #96](https://github.com/refined-bitbucket/refined-bitbucket/issues/96), [pull request #101](https://github.com/refined-bitbucket/refined-bitbucket/pull/101).
 
 ### Development:

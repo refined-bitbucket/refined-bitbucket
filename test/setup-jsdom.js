@@ -7,6 +7,8 @@ global.window = dom.window;
 global.document = dom.window.document;
 global.Element = dom.window._core.Element;
 global.Text = dom.window._core.Text;
+global.HTMLTextAreaElement = dom.window._core.HTMLTextAreaElement;
+global.HTMLDivElement = dom.window._core.HTMLDivElement;
 global.requestAnimationFrame = fn => setTimeout(fn, 16);
 global.cancelAnimationFrame = id => clearTimeout(id);
 
