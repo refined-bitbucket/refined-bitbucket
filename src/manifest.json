@@ -21,6 +21,7 @@
   "permissions": [
     "activeTab",
     "https://bitbucket.org/*",
+    "https://gist.githubusercontent.com/*",
     "storage"
   ],
   "content_scripts": [

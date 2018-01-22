@@ -13,6 +13,8 @@ import loadAllDiffs from './load-all-diffs';
 import syntaxHighlight from './syntax-highlight';
 import ignoreWhitespace from './ignore-whitespace';
 import defaultMergeStrategy from './default-merge-strategy';
+import insertPullrequestTemplate from './pullrequest-template';
+import {isCreatePullRequestURL} from './page-detect';
 
 import 'selector-observer';
 
@@ -40,6 +42,10 @@ function init(config) {
 
     if (config.ignoreWhitespace) {
         ignoreWhitespace.init();
+    }
+
+    if (config.prTemplateEnabled && isCreatePullRequestURL()) {
+        insertPullrequestTemplate(config.prTemplateUrl);
     }
 
     defaultMergeStrategy.init(config.defaultMergeStrategy);
