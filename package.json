@@ -4,30 +4,35 @@
   "version": "3.3.0",
   "main": "index.js",
   "scripts": {
-    "xo": "xo --fix *.js src/*.js src/**/*.js test/*.js test/**/*.js !src/vendor/prism.js",
+    "precommit": "lint-staged",
+    "prettier":
+      "prettier --single-quote --write \"./**/*.{js,jsx,json,css,md}\"",
+    "xo": "xo --fix *.js {src,test,scripts}/**/*.js !src/vendor/prism.js",
+    "lint": "npm run prettier && npm run xo",
     "ava": "cross-env BABEL_ENV=testing ava",
     "ava:w": "npm run ava -- --watch",
     "build": "webpack",
     "build:min": "cross-env NODE_ENV=production webpack",
-    "test": "npm run xo && npm run ava && npm run build:min",
+    "test": "npm-run-all lint ava build:min",
     "watch": "webpack --watch",
     "sync-version": "node scripts/sync-version",
     "package": "node scripts/package",
-    "deploy": "npm test && npm run sync-version && npm run package && node scripts/deploy",
+    "deploy": "npm-run-all test sync-version package && node scripts/deploy",
     "major": "npm version --no-git-tag-version major && npm run sync-version",
     "minor": "npm version --no-git-tag-version minor && npm run sync-version",
     "patch": "npm version --no-git-tag-version patch && npm run sync-version"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/refined-bitbucket/refined-bitbucket.git"
   },
-  "keywords": [
-    "bitbucket",
-    "highlight",
-    "syntax-highlight",
-    "prism"
-  ],
+  "keywords": ["bitbucket", "highlight", "syntax-highlight", "prism"],
   "author": "andremw",
   "contributors": [
     {
@@ -59,6 +64,7 @@
     "firefox-extension-deploy": "^1.1.0",
     "jsdom": "^11.3.0",
     "mutationobserver-shim": "^0.3.2",
+    "npm-run-all": "^4.1.2",
     "path": "^0.12.7",
     "request": "^2.83.0",
     "require-hacker": "^3.0.1",
@@ -72,11 +78,14 @@
   "dependencies": {
     "dom-chef": "^3.0.0",
     "element-ready": "^2.2.1",
+    "husky": "^0.14.3",
     "ignore": "^3.3.6",
     "jquery": "^3.2.1",
     "jquery-highlight": "^3.4.0",
+    "lint-staged": "^6.0.1",
     "marked": "^0.3.12",
     "mousetrap": "^1.6.1",
+    "prettier": "^1.10.2",
     "selector-observer": "^1.1.0",
     "webext-options-sync": "^0.15.0"
   },
@@ -84,37 +93,27 @@
     "semicolon": true,
     "esnext": true,
     "space": 4,
-    "envs": [
-      "browser",
-      "jquery"
-    ],
+    "envs": ["browser", "jquery"],
     "rules": {
       "no-unused-vars": [
         2,
         {
           "varsIgnorePattern": "^h$"
         }
-      ]
+      ],
+      "babel/object-curly-spacing": 0,
+      "space-before-function-paren": 0
     }
   },
   "ava": {
-    "files": [
-      "test/*.spec.js"
-    ],
-    "source": [
-      "src/**/*.js"
-    ],
-    "require": [
-      "babel-register",
-      "./scripts/ignore-utils"
-    ],
+    "files": ["test/*.spec.js"],
+    "source": ["src/**/*.js"],
+    "require": ["babel-register", "./scripts/ignore-utils"],
     "babel": "inherit",
     "timeout": "5s"
   },
   "babel": {
-    "presets": [
-      "@ava/stage-4"
-    ],
+    "presets": ["@ava/stage-4"],
     "plugins": [
       [
         "transform-react-jsx",
@@ -132,9 +131,7 @@
     ],
     "env": {
       "testing": {
-        "plugins": [
-          "transform-es2015-modules-commonjs"
-        ]
+        "plugins": ["transform-es2015-modules-commonjs"]
       }
     }
   }

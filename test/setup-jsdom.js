@@ -5,10 +5,10 @@ import jsdom from 'jsdom';
 const dom = new jsdom.JSDOM();
 global.window = dom.window;
 global.document = dom.window.document;
-global.Element = dom.window._core.Element;
-global.Text = dom.window._core.Text;
-global.HTMLTextAreaElement = dom.window._core.HTMLTextAreaElement;
-global.HTMLDivElement = dom.window._core.HTMLDivElement;
+global.Element = dom.window.Element;
+global.Text = dom.window.Text;
+global.HTMLTextAreaElement = dom.window.HTMLTextAreaElement;
+global.HTMLDivElement = dom.window.HTMLDivElement;
 global.requestAnimationFrame = fn => setTimeout(fn, 16);
 global.cancelAnimationFrame = id => clearTimeout(id);
 
