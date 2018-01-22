@@ -15,6 +15,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 - Pullrequest Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the Pull Request loads.
 - Button to load all failed diffs in Pull Request view.
 - Choose a default merge strategy for your pull requests.
+- Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
 - Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
 
     ```

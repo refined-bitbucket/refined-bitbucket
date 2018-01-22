@@ -14,7 +14,8 @@ import syntaxHighlight from './syntax-highlight';
 import ignoreWhitespace from './ignore-whitespace';
 import defaultMergeStrategy from './default-merge-strategy';
 import insertPullrequestTemplate from './pullrequest-template';
-import {isCreatePullRequestURL} from './page-detect';
+import closeAnchorBranch from './close-anchor-branch';
+import {isCreatePullRequestURL, isEditPullRequestURL} from './page-detect';
 
 import 'selector-observer';
 
@@ -44,8 +45,14 @@ function init(config) {
         ignoreWhitespace.init();
     }
 
-    if (config.prTemplateEnabled && isCreatePullRequestURL()) {
-        insertPullrequestTemplate(config.prTemplateUrl);
+    if (isCreatePullRequestURL() || isEditPullRequestURL()) {
+        if (config.prTemplateEnabled && isCreatePullRequestURL()) {
+            insertPullrequestTemplate(config.prTemplateUrl);
+        }
+
+        if (config.closeAnchorBranch) {
+            closeAnchorBranch();
+        }
     }
 
     defaultMergeStrategy.init(config.defaultMergeStrategy);

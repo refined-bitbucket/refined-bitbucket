@@ -23,6 +23,7 @@
     Closes [issue #105](https://github.com/refined-bitbucket/refined-bitbucket/issues/105), [pull request #106](https://github.com/refined-bitbucket/refined-bitbucket/pull/106).
 
 * **Autocollapse**: Add option to automatically collapse deleted files in a pull request, closes [issue #96](https://github.com/refined-bitbucket/refined-bitbucket/issues/96), [pull request #101](https://github.com/refined-bitbucket/refined-bitbucket/pull/101).
+* **Close anchor branch**: Check the "Close anchor branch" checkbox by default when creating or editing pull requests, closes [issue #92](https://github.com/refined-bitbucket/refined-bitbucket/issues/92), [pull request #110](https://github.com/refined-bitbucket/refined-bitbucket/pull/110).
 
 ### Development:
 
