@@ -35,6 +35,9 @@
   only run when needed, according to the current URL,
   closes [issue #20](https://github.com/refined-bitbucket/refined-bitbucket/issues/20),
   [pull request #111](https://github.com/refined-bitbucket/refined-bitbucket/pull/111).
+* Prettier set up in development environment: npm scripts, commit hooks, editor integration,
+  closes [issue #109](https://github.com/refined-bitbucket/refined-bitbucket/issues/109),
+  [pull request #114](https://github.com/refined-bitbucket/refined-bitbucket/pull/114).
 
 # 3.3.0 (2018-01-09)
 

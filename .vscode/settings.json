@@ -3,5 +3,7 @@
   "editor.tabSize": 4,
   "files.exclude": {
     "**/*.css": false
-  }
+  },
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": true
 }

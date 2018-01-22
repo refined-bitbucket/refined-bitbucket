@@ -60,7 +60,7 @@ function initAsync(defaultMergeStrategy) {
                 $('#id_merge_strategy').select2('val', 'defaultMergeStrategy');
                 const $commitMsg = $('#id_commit_message');
                 const selectedOption = document.querySelector(
-                    'option[value=\'defaultMergeStrategy\']'
+                    "option[value='defaultMergeStrategy']"
                 );
                 $commitMsg.text(selectedOption.dataset.defaultCommitMsg);
             };

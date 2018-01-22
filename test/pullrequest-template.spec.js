@@ -12,7 +12,7 @@ import { cleanDocumentBody } from './test-utils';
 
 import './setup-jsdom';
 
-test('should get repo\'s pull request template urls', t => {
+test("should get repo's pull request template urls", t => {
     global.location = new URL(
         'https://www.bitbucket.org/user/repo/pull-requests/new'
     );
@@ -59,7 +59,7 @@ test('should get repo\'s pull request template urls', t => {
 });
 
 test.serial(
-    'should not insert pull request templates if didn\'t find them',
+    "should not insert pull request templates if didn't find them",
     async t => {
         const requests = Array.from(Array(4)).map(() => {
             return new Promise(resolve => {
