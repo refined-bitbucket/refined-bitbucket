@@ -15,7 +15,12 @@ import ignoreWhitespace from './ignore-whitespace';
 import defaultMergeStrategy from './default-merge-strategy';
 import insertPullrequestTemplate from './pullrequest-template';
 import closeAnchorBranch from './close-anchor-branch';
-import {isCreatePullRequestURL, isEditPullRequestURL} from './page-detect';
+import {
+    isPullRequest,
+    isCreatePullRequestURL,
+    isEditPullRequestURL,
+    isPullRequestList
+} from './page-detect';
 
 import 'selector-observer';
 
@@ -33,6 +38,24 @@ new OptionsSync().getAll().then(options => {
 });
 
 function init(config) {
+    if (isPullRequest()) {
+        pullrequestRelatedFeatures(config);
+    } else if (isPullRequestList()) {
+        if (config.ignoreWhitespace) {
+            ignoreWhitespace.init();
+        }
+    } else if (isCreatePullRequestURL() || isEditPullRequestURL()) {
+        if (isCreatePullRequestURL() && config.prTemplateEnabled) {
+            insertPullrequestTemplate(config.prTemplateUrl);
+        }
+
+        if (config.closeAnchorBranch) {
+            closeAnchorBranch();
+        }
+    }
+}
+
+function pullrequestRelatedFeatures(config) {
     if (config.highlightOcurrences) {
         occurrencesHighlighter.init();
     }
@@ -41,45 +64,38 @@ function init(config) {
         keymap.init();
     }
 
-    if (config.ignoreWhitespace) {
-        ignoreWhitespace.init();
-    }
-
-    if (isCreatePullRequestURL() || isEditPullRequestURL()) {
-        if (config.prTemplateEnabled && isCreatePullRequestURL()) {
-            insertPullrequestTemplate(config.prTemplateUrl);
-        }
-
-        if (config.closeAnchorBranch) {
-            closeAnchorBranch();
-        }
-    }
-
     defaultMergeStrategy.init(config.defaultMergeStrategy);
 
-    waitForPullRequestContents().then(pullrequestNode => {
-        autocollapse.init(config.autocollapsePaths, config.autocollapseDeletedFiles);
+    waitForPullRequestContents()
+        .then(pullrequestNode => {
+            autocollapse.init(
+                config.autocollapsePaths,
+                config.autocollapseDeletedFiles
+            );
 
-        pullrequestIgnore.init(pullrequestNode, config.ignorePaths);
+            pullrequestIgnore.init(pullrequestNode, config.ignorePaths);
 
-        if (config.loadAllDiffs) {
-            loadAllDiffs.init(pullrequestNode);
-        }
-
-        // have to observe the DOM because some sections
-        // load asynchronously by user demand
-        pullrequestNode.observeSelector('section.bb-udiff', function () {
-            if (config.collapseDiff) {
-                collapseDiff.insertCollapseDiffButton(this);
+            if (config.loadAllDiffs) {
+                loadAllDiffs.init(pullrequestNode);
             }
-            autocollapse.collapseIfNeeded(this);
 
-            if (config.highlightSyntax && !pullrequestIgnore.isIgnored(this)) {
-                syntaxHighlight(this);
-            }
+            // have to observe the DOM because some sections
+            // load asynchronously by user demand
+            pullrequestNode.observeSelector('section.bb-udiff', function () {
+                if (config.collapseDiff) {
+                    collapseDiff.insertCollapseDiffButton(this);
+                }
+                autocollapse.collapseIfNeeded(this);
+
+                if (
+                    config.highlightSyntax &&
+                    !pullrequestIgnore.isIgnored(this)
+                ) {
+                    syntaxHighlight(this);
+                }
+            });
+        })
+        .catch(() => {
+            // current page is not a pull request, ignore
         });
-    })
-    .catch(() => {
-        // current page is not a pull request, ignore
-    });
 }
