@@ -31,10 +31,10 @@
 * Removed the `extension` folder from source control and moved everything to `src` for better code colocation. Now using webpack to copy all the necessary resources, [pull request #108](https://github.com/refined-bitbucket/refined-bitbucket/pull/108).
 * Option storage management is now handled gracefully by the npm package `webext-options-sync`, [pull request #107](https://github.com/refined-bitbucket/refined-bitbucket/pull/107).
 * Previously, the code for every feature was executed on every page
-within http://bitbucket.org/. Now checks have been added so they will
-only run when needed, according to the current URL, 
-closes [issue #20](https://github.com/refined-bitbucket/refined-bitbucket/issues/20), 
-[pull request #111](https://github.com/refined-bitbucket/refined-bitbucket/pull/111).
+  within http://bitbucket.org/. Now checks have been added so they will
+  only run when needed, according to the current URL,
+  closes [issue #20](https://github.com/refined-bitbucket/refined-bitbucket/issues/20),
+  [pull request #111](https://github.com/refined-bitbucket/refined-bitbucket/pull/111).
 
 # 3.3.0 (2018-01-09)
 
@@ -125,7 +125,6 @@ If you stumble upon any weird behavior or bugs, please report an issue, I'll be 
 ### Bug fixes
 
 * **Occurrence-Highlighter**: Now the selection is maintained when highlighting word occurrences when creating comments and tasks, closes [issue #55](https://github.com/refined-bitbucket/refined-bitbucket/issues/55), [pull request 56](https://github.com/refined-bitbucket/refined-bitbucket/pull/56).
-
 
 # 2.6.2 (2017-10-12)
 

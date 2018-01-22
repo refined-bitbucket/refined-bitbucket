@@ -45,7 +45,8 @@ function getClassBasedOnExtension(element) {
  * @return {String} The filename
  */
 function getFilepathFromElement(element) {
-    const filepath = element.getAttribute('data-identifier') ||
+    const filepath =
+        element.getAttribute('data-identifier') ||
         element.getAttribute('data-filename') ||
         element.getAttribute('data-path') ||
         '';
@@ -57,5 +58,5 @@ function getFilepathFromElement(element) {
  * @return {String}
  */
 function getExtension(filepath) {
-    return `.${filepath.slice((filepath.lastIndexOf('.') - 1 >>> 0) + 2)}`;
+    return `.${filepath.slice(((filepath.lastIndexOf('.') - 1) >>> 0) + 2)}`;
 }

@@ -1,4 +1,4 @@
-import {isPullRequestList} from '../page-detect';
+import { isPullRequestList } from '../page-detect';
 
 export default {
     init

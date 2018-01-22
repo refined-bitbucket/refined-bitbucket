@@ -45,7 +45,9 @@ chrome.storage.sync.get(null, deprecatedOptions => {
                     newOptions.ignorePaths = newOptions.ignorePaths.join('\n');
                 }
                 if (Array.isArray(newOptions.autocollapsePaths)) {
-                    newOptions.autocollapsePaths = newOptions.autocollapsePaths.join('\n');
+                    newOptions.autocollapsePaths = newOptions.autocollapsePaths.join(
+                        '\n'
+                    );
                 }
 
                 chrome.storage.sync.clear();

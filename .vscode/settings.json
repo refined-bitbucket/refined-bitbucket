@@ -2,6 +2,6 @@
   "files.eol": "\n",
   "editor.tabSize": 4,
   "files.exclude": {
-    "**/*.css": false,
-  },
+    "**/*.css": false
+  }
 }

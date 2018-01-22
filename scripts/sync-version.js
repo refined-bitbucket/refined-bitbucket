@@ -3,6 +3,7 @@ const semver = require('semver');
 
 // Write package.json's versino to the src/manifest.json
 const packageJson = require('../package');
+
 const validVersion = semver.valid(packageJson.version);
 console.log(validVersion);
 

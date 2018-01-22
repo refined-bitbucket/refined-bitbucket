@@ -16,7 +16,11 @@ module.exports = function waitForRender(selector) {
         let totalWaitTime = 0;
         const intervalId = setInterval(() => {
             if (totalWaitTime === TIMEOUT) {
-                reject(new Error(`waitForRender: Couldn't find the element ${selector}`));
+                reject(
+                    new Error(
+                        `waitForRender: Couldn't find the element ${selector}`
+                    )
+                );
             }
 
             const element = document.querySelector(selector);

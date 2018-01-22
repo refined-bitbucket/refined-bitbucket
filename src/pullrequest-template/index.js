@@ -1,1 +1,1 @@
-export {default} from './pullrequest-template';
+export { default } from './pullrequest-template';

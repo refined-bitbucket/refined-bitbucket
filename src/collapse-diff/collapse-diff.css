@@ -1,9 +1,9 @@
-.__refined_bitbucket_hide { 
-    display: none; 
+.__refined_bitbucket_hide {
+    display: none;
 }
 
-.__refined_bitbucket_bottom_border { 
-    border-bottom: 1px solid #ccc !important; 
+.__refined_bitbucket_bottom_border {
+    border-bottom: 1px solid #ccc !important;
 }
 
 .skipped-container .__rb_ellipsis {
@@ -16,7 +16,7 @@
     cursor: pointer;
     display: block;
     float: left;
-    font-family: Arial,sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 20px;
     height: 16px;
     line-height: 6px;
@@ -25,15 +25,16 @@
     position: absolute;
     text-align: center;
     width: 30px;
-    z-index: 1
+    z-index: 1;
 }
 
 .skipped-container .__rb_ellipsis:hover {
     background-color: #e9e9e9;
-    border-color: #999
+    border-color: #999;
 }
 
-.skipped-container .__rb_ellipsis::after,.skipped-container .__rb_ellipsis::before {
+.skipped-container .__rb_ellipsis::after,
+.skipped-container .__rb_ellipsis::before {
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -41,27 +42,27 @@
     height: 9px;
     left: -4px;
     position: absolute;
-    width: 36px
+    width: 36px;
 }
 
 .skipped-container .__rb_ellipsis::before {
     border-bottom: none;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    content: \'\\2026\';
+    content: '\2026';
     padding: 2px 0 0;
-    top: -4px
+    top: -4px;
 }
 
 .skipped-bottom .__rb_ellipsis {
-    margin-top: 12px
+    margin-top: 12px;
 }
 
 .skipped-container:last-child .__rb_ellipsis::after {
-    display: none
+    display: none;
 }
 
 .aui-buttons.__rb_ellipsis::before {
     width: 38px;
-    content:'';
+    content: '';
 }

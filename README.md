@@ -1,22 +1,24 @@
 [![build status](https://travis-ci.org/refined-bitbucket/refined-bitbucket.svg?branch=test-it)](https://travis-ci.org/refined-bitbucket/refined-bitbucket) <sup>-</sup> [![downloads](https://img.shields.io/chrome-web-store/d/afppminkfnfngihdocacbgeajbbdklkf.svg)](https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon)
 
 # refined-bitbucket
+
 We all know BitBucket lacks some features that we have in other platforms like GitHub, GitLab and others. Originally inspired on Sindre Sorhus' [Refined Github](https://github.com/sindresorhus/refined-github) extension, _refined-bitbucket_ is born as a collaborative project by a few developers to improve upon those holes, and even add some additional functionality that will enhance the overall user experience.
 
 ## Current features
-- Adds syntax highlighting for pull requests. [See the full list of enabled languages](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
-- Double click on a word to highlight all occurrences.
-- ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
-- Key binding feature, which allows for quicker navigation through pull requests.
-- Button to collapse diffs in Pull Request view.
-- Autocollapse:
-  - Add filename patterns in the Options page that you would like the extension to collapse automatically when the pull request loads.
-  - Deleted files are automatically collapsed.
-- Pullrequest Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the Pull Request loads.
-- Button to load all failed diffs in Pull Request view.
-- Choose a default merge strategy for your pull requests.
-- Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
-- Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
+
+* Adds syntax highlighting for pull requests. [See the full list of enabled languages](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
+* Double click on a word to highlight all occurrences.
+* ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
+* Key binding feature, which allows for quicker navigation through pull requests.
+* Button to collapse diffs in Pull Request view.
+* Autocollapse:
+    * Add filename patterns in the Options page that you would like the extension to collapse automatically when the pull request loads.
+    * Deleted files are automatically collapsed.
+* Pullrequest Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the Pull Request loads.
+* Button to load all failed diffs in Pull Request view.
+* Choose a default merge strategy for your pull requests.
+* Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
+* Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
 
     ```
     /PULL_REQUEST_TEMPLATE.md
@@ -97,6 +99,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 </table>
 
 ## Installing
+
 _refined-bitbucket_ is available on the [Google Chrome Web Store][chrome-install] and [Add-ons for Firefox][firefox-install].
 
 Sometimes the extension is not immediately picked up by the browser after installation. If this happens to you, log out of Bitbucket and then log back in, or clear your cache.
@@ -106,24 +109,25 @@ Sometimes the extension is not immediately picked up by the browser after instal
 The following are the default key mappings
 
 #### Tab Selection
+
 ![bitbucket pull request tabs][tab-image]
 
-Key | Action
---- | ---
-<kbd>1</kbd> | Selects the **Overview** tab
-<kbd>2</kbd> | Selects the **Commits** tab
-<kbd>3</kbd> | Selects the **Activity** tab
+| Key          | Action                       |
+| ------------ | ---------------------------- |
+| <kbd>1</kbd> | Selects the **Overview** tab |
+| <kbd>2</kbd> | Selects the **Commits** tab  |
+| <kbd>3</kbd> | Selects the **Activity** tab |
 
 #### Page Navigation and Scrolling
 
-*Upper case letters mean that you need to press shift and the letter*
+_Upper case letters mean that you need to press shift and the letter_
 
-Key | Action
---- | ---
-<kbd>N</kbd> (Shift+n) | Scrolls to the **N**ext comment on the page.
-<kbd>P</kbd> (Shift+p) | Scrolls to the **P**revious comment on the page.
-<kbd>g</kbd> <kbd>g</kbd> | Scrolls to the top of the page
-<kbd>G</kbd> (Shift+g) | Scrolls to the bottom of the page
+| Key                       | Action                                           |
+| ------------------------- | ------------------------------------------------ |
+| <kbd>N</kbd> (Shift+n)    | Scrolls to the **N**ext comment on the page.     |
+| <kbd>P</kbd> (Shift+p)    | Scrolls to the **P**revious comment on the page. |
+| <kbd>g</kbd> <kbd>g</kbd> | Scrolls to the top of the page                   |
+| <kbd>G</kbd> (Shift+g)    | Scrolls to the bottom of the page                |
 
 ## Can I use this on Bitbucket Server?
 
@@ -154,6 +158,7 @@ npm test
 ```
 
 ## License
+
 MIT © [refined-bitbucket](https://github.com/refined-bitbucket)
 
 [chrome-install]: https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon

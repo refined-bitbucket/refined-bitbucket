@@ -81,7 +81,7 @@ function pullrequestRelatedFeatures(config) {
 
             // have to observe the DOM because some sections
             // load asynchronously by user demand
-            pullrequestNode.observeSelector('section.bb-udiff', function () {
+            pullrequestNode.observeSelector('section.bb-udiff', function() {
                 if (config.collapseDiff) {
                     collapseDiff.insertCollapseDiffButton(this);
                 }

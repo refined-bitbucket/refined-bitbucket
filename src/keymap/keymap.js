@@ -6,7 +6,7 @@ const waitForRender = require('../wait-for-render');
  * Adds useful keymappings to pull requests on bitbucket.org
  * @module keymap
  */
-const PrKeyMap = (function ($) {
+const PrKeyMap = (function($) {
     'use strict';
 
     /**
@@ -42,7 +42,7 @@ const PrKeyMap = (function ($) {
     /**
      * Switches to a tab, if there is a selector available for that tab.
      */
-    self.switchTo = function (tabName) {
+    self.switchTo = function(tabName) {
         if (tabName in ids) {
             const element = document.querySelector(ids[tabName]);
             element.click();
@@ -58,7 +58,7 @@ const PrKeyMap = (function ($) {
      * so that we don't break the existing functionality of the 'j' and 'k' keys.
      *
      */
-    self.focusComment = function (comment) {
+    self.focusComment = function(comment) {
         $(self.iterableItemSelector).removeClass('focused');
         $(comment).addClass('focused');
         comment.scrollIntoView();
@@ -74,7 +74,7 @@ const PrKeyMap = (function ($) {
      * before initializing comments. If empty, uses the default `.bb-patch`
      * selector.
      */
-    self.initComments = function (selector = '.bb-patch') {
+    self.initComments = function(selector = '.bb-patch') {
         waitForRender(selector).then(() => {
             self.comments = document.querySelectorAll(self.commentSelector);
         });
@@ -87,7 +87,7 @@ const PrKeyMap = (function ($) {
      * to the top-most (first) comment on the page.
      *
      */
-    self.scrollToNextComment = function () {
+    self.scrollToNextComment = function() {
         if (self.comments) {
             $(self.comments[self.currentComment]).removeClass('focused');
             self.currentComment++;
@@ -95,7 +95,8 @@ const PrKeyMap = (function ($) {
                 self.currentComment = 0;
             }
 
-            const comment = self.comments[self.currentComment].parentElement.parentElement;
+            const comment =
+                self.comments[self.currentComment].parentElement.parentElement;
             self.focusComment(comment);
         }
     };
@@ -106,14 +107,15 @@ const PrKeyMap = (function ($) {
      * If scrolling to previous comment from the top commit, this will loop back to the
      * bottom-most (last) comment on the page.
      */
-    self.scrollToPreviousComment = function () {
+    self.scrollToPreviousComment = function() {
         if (self.comments) {
             self.currentComment--;
             if (self.currentComment < 0) {
                 self.currentComment = self.comments.length - 1;
             }
 
-            const comment = self.comments[self.currentComment].parentElement.parentElement;
+            const comment =
+                self.comments[self.currentComment].parentElement.parentElement;
             self.focusComment(comment);
         }
     };
@@ -124,7 +126,7 @@ const PrKeyMap = (function ($) {
      * @param {Object} keyboard the keyboard library to use to bind keys (usually Mousetrap).
      * @param {Object} user_keymap the user-defined keymap to override default keybindings.
      */
-    self.init = function (keyboard, userKeymap) {
+    self.init = function(keyboard, userKeymap) {
         Object.assign(keymap, DEFAULT_KEYMAP);
         if (userKeymap) {
             // if provided, copy a user-preferred keymap to the main keymap.

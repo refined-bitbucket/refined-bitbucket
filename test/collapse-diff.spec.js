@@ -1,5 +1,5 @@
 import test from 'ava';
-import {h} from 'dom-chef';
+import { h } from 'dom-chef';
 
 import collapseDiff from '../src/collapse-diff/collapse-diff';
 
@@ -15,9 +15,7 @@ const createNode = () => (
                         Side-by-side diff
                     </button>
 
-                    <a class="view-file ">
-                        View file
-                    </a>
+                    <a class="view-file ">View file</a>
                 </div>
 
                 {/* "Comment" button */}
@@ -35,19 +33,24 @@ const createNode = () => (
                 </div>
 
                 {/* "Collapse-diff" button should go here */}
-
             </div>
         </div>
 
         <div class="diff-message-container diff-message-container-skipped">
             <div class="aui-message aui-message-warning warning">
                 <p class="title">
-                <strong>Conflict: File modified in both source and destination</strong>
+                    <strong>
+                        Conflict: File modified in both source and destination
+                    </strong>
                 </p>
-
-                To be able to merge you will need to resolve the conflicts manually.
-                <a target="_blank" href="https://confluence.atlassian.com/x/M4H8KQ">Learn how</a>.
-
+                To be able to merge you will need to resolve the conflicts
+                manually.
+                <a
+                    target="_blank"
+                    href="https://confluence.atlassian.com/x/M4H8KQ"
+                >
+                    Learn how
+                </a>.
             </div>
         </div>
 
@@ -56,12 +59,11 @@ const createNode = () => (
                 <pre>var msg = 'Hello world';</pre>
 
                 <div class="skipped-container">
-                    <div class="line-numbers-skipped skipped-bottom last"></div>
+                    <div class="line-numbers-skipped skipped-bottom last" />
                     <div class="skipped-bottom last">
                         {/* Location of the bottom button */}
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -75,7 +77,9 @@ test('should not re-insert collapse diff button if already present', async t => 
     collapseDiff.insertCollapseDiffButton(uudiff);
     collapseDiff.insertCollapseDiffButton(uudiff);
 
-    const buttons = uudiff.getElementsByClassName('__refined_bitbucket_collapse_diff_button');
+    const buttons = uudiff.getElementsByClassName(
+        '__refined_bitbucket_collapse_diff_button'
+    );
     // one at the top, one at the bottom of the diff
     t.true(buttons.length === 2);
 });
@@ -85,7 +89,9 @@ test('should insert TOP button in correct position when diff loads successfully'
 
     collapseDiff.insertCollapseDiffButton(uudiff);
 
-    const button = uudiff.querySelector('div.secondary.diff-actions div:nth-child(4)');
+    const button = uudiff.querySelector(
+        'div.secondary.diff-actions div:nth-child(4)'
+    );
 
     t.truthy(button.querySelector('.__refined_bitbucket_collapse_diff_button'));
 });
@@ -95,7 +101,9 @@ test('should insert BOTTOM button in correct position when diff loads successful
 
     collapseDiff.insertCollapseDiffButton(uudiff);
 
-    const button = uudiff.querySelector('.refract-content-container .skipped-container .skipped-bottom.last:last-child');
+    const button = uudiff.querySelector(
+        '.refract-content-container .skipped-container .skipped-bottom.last:last-child'
+    );
 
     t.truthy(button.querySelector('.__refined_bitbucket_collapse_diff_button'));
 });
@@ -106,19 +114,15 @@ test('should insert BOTTOM button in correct position when diff has no more line
             <div class="heading">
                 <div class="diff-actions secondary" id="side-by-side-1">
                     {/* "Side by side" and "View File" buttons */}
-                    <div class="aui-buttons">
-                    </div>
+                    <div class="aui-buttons" />
 
                     {/* "Comment" button */}
-                    <div class="aui-buttons">
-                    </div>
+                    <div class="aui-buttons" />
 
                     {/* "More" button */}
-                    <div class="aui-buttons">
-                    </div>
+                    <div class="aui-buttons" />
 
                     {/* "Collapse-diff" button should go here */}
-
                 </div>
             </div>
 
@@ -128,7 +132,6 @@ test('should insert BOTTOM button in correct position when diff has no more line
 
                     {/* If there are no more lines to show at the bottom of the diff,
                     there is no `<div class="skipped-container">` */}
-
                 </div>
             </div>
         </section>
@@ -136,7 +139,9 @@ test('should insert BOTTOM button in correct position when diff has no more line
 
     collapseDiff.insertCollapseDiffButton(uudiff);
 
-    const button = uudiff.querySelector('.refract-content-container .skipped-container .skipped-bottom.last:last-child');
+    const button = uudiff.querySelector(
+        '.refract-content-container .skipped-container .skipped-bottom.last:last-child'
+    );
 
     t.truthy(button.querySelector('.__refined_bitbucket_collapse_diff_button'));
 });
@@ -148,9 +153,15 @@ test('should toggle the diff, toggle messages, toggle the arrow icon and apply b
     // Acting
     collapseDiff.insertCollapseDiffButton(uudiff);
 
-    const button = uudiff.querySelector('.__refined_bitbucket_collapse_diff_button');
-    const diffContentContainer = uudiff.querySelector('div.diff-content-container');
-    const diffMessageContainer = uudiff.querySelector('div.diff-message-container');
+    const button = uudiff.querySelector(
+        '.__refined_bitbucket_collapse_diff_button'
+    );
+    const diffContentContainer = uudiff.querySelector(
+        'div.diff-content-container'
+    );
+    const diffMessageContainer = uudiff.querySelector(
+        'div.diff-message-container'
+    );
     const heading = uudiff.querySelector('div.heading');
     const upArrow = button.querySelector('svg[data-arrow-direction="up"]');
     const downArrow = button.querySelector('svg[data-arrow-direction="down"]');
@@ -158,9 +169,11 @@ test('should toggle the diff, toggle messages, toggle the arrow icon and apply b
     button.click();
 
     // Assering
-    const hasClass = (node, className) => Array.from(node.classList).includes(className);
+    const hasClass = (node, className) =>
+        Array.from(node.classList).includes(className);
     const isHidden = node => hasClass(node, '__refined_bitbucket_hide');
-    const hasBorder = node => hasClass(node, '__refined_bitbucket_bottom_border');
+    const hasBorder = node =>
+        hasClass(node, '__refined_bitbucket_bottom_border');
 
     t.true(isHidden(diffContentContainer));
     t.true(isHidden(diffMessageContainer));
@@ -194,12 +207,20 @@ test('should insert button in correct position if diff failed to load', async t 
 
             <div class="diff-message-container">
                 <div class="aui-message info too-big-message">
-                <p class="title">
-                    <span class="aui-icon icon-info"></span>
-                    <strong class="try-again">Oops! You've got a lot of code in this diff and it couldn't load with the page.</strong>
-                    <a href="#" class="load-diff try-again">Click here to give it another chance.</a>
-                    <strong class="try-again-failed">Now that is a lot of code! There's simply too much in this diff for us to render it all.</strong>
-                </p>
+                    <p class="title">
+                        <span class="aui-icon icon-info" />
+                        <strong class="try-again">
+                            Oops! You've got a lot of code in this diff and it
+                            couldn't load with the page.
+                        </strong>
+                        <a href="#" class="load-diff try-again">
+                            Click here to give it another chance.
+                        </a>
+                        <strong class="try-again-failed">
+                            Now that is a lot of code! There's simply too much
+                            in this diff for us to render it all.
+                        </strong>
+                    </p>
                 </div>
             </div>
         </section>
@@ -207,6 +228,8 @@ test('should insert button in correct position if diff failed to load', async t 
 
     collapseDiff.insertCollapseDiffButton(uudiff);
 
-    const button = uudiff.querySelector('div.secondary.diff-actions .__refined_bitbucket_collapse_diff_button');
+    const button = uudiff.querySelector(
+        'div.secondary.diff-actions .__refined_bitbucket_collapse_diff_button'
+    );
     t.truthy(button);
 });

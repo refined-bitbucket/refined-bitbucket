@@ -1,6 +1,6 @@
 'use strict';
 
-import {h} from 'dom-chef';
+import { h } from 'dom-chef';
 import test from 'ava';
 
 import './setup-jsdom';
@@ -37,14 +37,19 @@ test('should syntax-highlight diff', t => {
             <div class="heading">
                 <div class="diff-actions secondary" id="side-by-side-1">
                     <div class="aui-buttons">
-                        <button href="#side-by-side-1-content">Side-by-side diff</button>
+                        <button href="#side-by-side-1-content">
+                            Side-by-side diff
+                        </button>
                     </div>
                 </div>
             </div>
 
             <div class="refract-content-container">
                 <pre class=" language-jsx">
-                    <span class="token keyword">var</span> msg <span class="token operator">=</span> <span class="token string">'Hello world'</span><span class="token punctuation">;</span>
+                    <span class="token keyword">var</span> msg{' '}
+                    <span class="token operator">=</span>{' '}
+                    <span class="token string">'Hello world'</span>
+                    <span class="token punctuation">;</span>
                 </pre>
             </div>
         </section>
@@ -73,7 +78,10 @@ test('should syntax-highlight when side-by-side button not present', t => {
 
             <div class="refract-content-container">
                 <pre class=" language-jsx">
-                    <span class="token keyword">var</span> msg <span class="token operator">=</span> <span class="token string">'Hello world'</span><span class="token punctuation">;</span>
+                    <span class="token keyword">var</span> msg{' '}
+                    <span class="token operator">=</span>{' '}
+                    <span class="token string">'Hello world'</span>
+                    <span class="token punctuation">;</span>
                 </pre>
             </div>
         </section>
@@ -109,12 +117,20 @@ test('should not syntax-highlight if diff failed to load', t => {
         <section class="bb-udiff" data-filename="filename.js">
             <div class="diff-message-container">
                 <div class="aui-message info too-big-message">
-                <p class="title">
-                    <span class="aui-icon icon-info"></span>
-                    <strong class="try-again">Oops! You've got a lot of code in this diff and it couldn't load with the page.</strong>
-                    <a href="#" class="load-diff try-again">Click here to give it another chance.</a>
-                    <strong class="try-again-failed">Now that is a lot of code! There's simply too much in this diff for us to render it all.</strong>
-                </p>
+                    <p class="title">
+                        <span class="aui-icon icon-info" />
+                        <strong class="try-again">
+                            Oops! You've got a lot of code in this diff and it
+                            couldn't load with the page.
+                        </strong>
+                        <a href="#" class="load-diff try-again">
+                            Click here to give it another chance.
+                        </a>
+                        <strong class="try-again-failed">
+                            Now that is a lot of code! There's simply too much
+                            in this diff for us to render it all.
+                        </strong>
+                    </p>
                 </div>
             </div>
         </section>

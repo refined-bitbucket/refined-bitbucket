@@ -6,14 +6,11 @@ import './occurrences-highlighter.css';
 
 const waitForRender = require('../wait-for-render.js');
 
-export {
-    init,
-    highlightOccurrences
-};
+export { init, highlightOccurrences };
 
 function init() {
     waitForRender('.diff-container').then(() => {
-        $('.diff-content-container').dblclick(function () {
+        $('.diff-content-container').dblclick(function() {
             highlightOccurrences(this);
         });
     });
@@ -23,9 +20,13 @@ function highlightOccurrences(container) {
     // <pre> for lines of code
     // <div class="comment-content"> for comments
     // <span class="description"> for tasks
-    const code = $(container.querySelectorAll('pre, div.comment-content, span.description'));
+    const code = $(
+        container.querySelectorAll('pre, div.comment-content, span.description')
+    );
     const selection = getSelectedText();
-    const selectionIsInTextArea = selection.anchorNode.getElementsByTagName && selection.anchorNode.getElementsByTagName('textarea').length;
+    const selectionIsInTextArea =
+        selection.anchorNode.getElementsByTagName &&
+        selection.anchorNode.getElementsByTagName('textarea').length;
     const text = selection.toString();
 
     // if selected text is all whitespace, don't highlight anything
@@ -34,7 +35,11 @@ function highlightOccurrences(container) {
         return;
     }
     // if selected text is already highlighted, don't highlight anything
-    if (selection.anchorNode.parentElement.classList.contains('__refined_bitbucket_highlight')) {
+    if (
+        selection.anchorNode.parentElement.classList.contains(
+            '__refined_bitbucket_highlight'
+        )
+    ) {
         return;
     }
 
@@ -44,7 +49,10 @@ function highlightOccurrences(container) {
         highlightOcurrences(code, text);
     } else {
         const selectedNode = getSelectionAsNode(selection);
-        const span = wrapInSpan(selectedNode, '__refined_bitbucket_selection_temporary_id');
+        const span = wrapInSpan(
+            selectedNode,
+            '__refined_bitbucket_selection_temporary_id'
+        );
         highlightOcurrences(code, text);
         const children = unwrapChildren(span);
         const highlightedNode = getHighlightedNode(children);
@@ -74,7 +82,7 @@ function getSelectedText() {
  * @param {string} text
  */
 function highlightOcurrences(code, text) {
-    code.unhighlight({className: '__refined_bitbucket_highlight'});
+    code.unhighlight({ className: '__refined_bitbucket_highlight' });
     code.highlight([text, text.trim()], {
         className: '__refined_bitbucket_highlight',
         caseSensitive: true,
@@ -135,7 +143,9 @@ function getHighlightedNode(children) {
         if (node.classList.contains('__refined_bitbucket_highlight')) {
             return node;
         }
-        const nodesWithHighlightClass = node.getElementsByClassName('__refined_bitbucket_highlight');
+        const nodesWithHighlightClass = node.getElementsByClassName(
+            '__refined_bitbucket_highlight'
+        );
         if (nodesWithHighlightClass.length) {
             return nodesWithHighlightClass[0];
         }

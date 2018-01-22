@@ -1,6 +1,6 @@
 import test from 'ava';
 import delay from 'yoctodelay';
-import {h} from 'dom-chef';
+import { h } from 'dom-chef';
 import closeAnchorBranch from '../src/close-anchor-branch';
 
 import './setup-jsdom';

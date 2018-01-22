@@ -3,7 +3,11 @@
 // Drops leading and trailing slash to avoid /\/?/ everywhere
 const getCleanPathname = () => location.pathname.replace(/^[/]|[/]$/g, '');
 
-export const getRepoURL = () => location.pathname.slice(1).split('/', 2).join('/');
+export const getRepoURL = () =>
+    location.pathname
+        .slice(1)
+        .split('/', 2)
+        .join('/');
 
 // Parses a repo's subpage, e.g.
 // '/user/repo/pull-requests/' -> 'pull-requests'
@@ -18,6 +22,8 @@ export const isPullRequestList = () => getRepoPath() === 'pull-requests';
 
 export const isPullRequest = () => /^pull-requests\/\d+/.test(getRepoPath());
 
-export const isCreatePullRequestURL = () => getRepoPath() === 'pull-requests/new';
+export const isCreatePullRequestURL = () =>
+    getRepoPath() === 'pull-requests/new';
 
-export const isEditPullRequestURL = () => getRepoPath().startsWith('pull-requests/update');
+export const isEditPullRequestURL = () =>
+    getRepoPath().startsWith('pull-requests/update');

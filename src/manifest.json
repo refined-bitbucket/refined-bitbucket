@@ -26,19 +26,12 @@
   ],
   "content_scripts": [
     {
-      "js": [
-        "prism.js",
-        "main.js"
-      ],
-      "matches": [
-        "https://bitbucket.org/*"
-      ]
+      "js": ["prism.js", "main.js"],
+      "matches": ["https://bitbucket.org/*"]
     }
   ],
   "background": {
-    "scripts": [
-      "background.js"
-    ],
+    "scripts": ["background.js"],
     "persistent": false
   }
 }

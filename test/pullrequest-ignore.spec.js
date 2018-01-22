@@ -1,5 +1,5 @@
 import test from 'ava';
-import {h} from 'dom-chef';
+import { h } from 'dom-chef';
 import delay from 'yoctodelay';
 import ignore from 'ignore';
 
@@ -18,9 +18,15 @@ function getPullrequestNode(filenames) {
             <div id="pullrequest-diff">
                 {/* Header and file summary */}
                 <section class="main">
-                    <h1>Files changed <span>({filenames.length})</span></h1>
+                    <h1>
+                        Files changed <span>({filenames.length})</span>
+                    </h1>
                     <ul id="commit-files-summary">
-                        {filenames.map(filename => <li data-file-identifier={escape(filename)}><a>{filename}</a></li>)}
+                        {filenames.map(filename => (
+                            <li data-file-identifier={escape(filename)}>
+                                <a>{filename}</a>
+                            </li>
+                        ))}
                     </ul>
                 </section>
 
@@ -28,7 +34,12 @@ function getPullrequestNode(filenames) {
                 <div id="compare">
                     <section id="changeset-diff">
                         <div class="bb-patch bb-patch-unified">
-                            {filenames.map(filename => <section class="bb-udiff" data-identifier={escape(filename)}></section>)}
+                            {filenames.map(filename => (
+                                <section
+                                    class="bb-udiff"
+                                    data-identifier={escape(filename)}
+                                />
+                            ))}
                         </div>
                     </section>
                 </div>
@@ -41,14 +52,20 @@ function getPullrequestNode(filenames) {
  * @param {HTMLHeadingElement} header
  */
 function parseHeader(header) {
-    const [, filesVisible, filesChangedString] = /Showing (\d+) of (\d+)/.exec(header);
+    const [, filesVisible, filesChangedString] = /Showing (\d+) of (\d+)/.exec(
+        header
+    );
     const filesChanged = parseInt(filesChangedString, 10);
     const filesRemoved = filesChanged - filesVisible;
-    return {filesRemoved, filesChanged};
+    return { filesRemoved, filesChanged };
 }
 
 test('should remove the right diffs and update the header', async t => {
-    const filenames = ['/some path/first_file.js', '/some path/second_file.js', '/some path/third_file.js'];
+    const filenames = [
+        '/some path/first_file.js',
+        '/some path/second_file.js',
+        '/some path/third_file.js'
+    ];
     const ignorePaths = ['second_file.js'];
 
     const node = getPullrequestNode(filenames);
@@ -59,16 +76,22 @@ test('should remove the right diffs and update the header', async t => {
     await delay(16);
 
     const header = node.querySelector('section.main > h1').textContent;
-    const {filesRemoved, filesChanged} = parseHeader(header);
+    const { filesRemoved, filesChanged } = parseHeader(header);
     t.is(filenames.length, filesChanged);
     t.is(ignorePaths.length, filesRemoved);
 
     const ig = ignore().add(ignorePaths);
 
     filenames.forEach(filename => {
-        const diff = node.querySelector(`section[data-identifier="${escape(filename)}"]`);
-        const link = node.querySelector(`li[data-file-identifier="${escape(filename)}"] > a`);
-        const span = node.querySelector(`li[data-file-identifier="${escape(filename)}"] > span`);
+        const diff = node.querySelector(
+            `section[data-identifier="${escape(filename)}"]`
+        );
+        const link = node.querySelector(
+            `li[data-file-identifier="${escape(filename)}"] > a`
+        );
+        const span = node.querySelector(
+            `li[data-file-identifier="${escape(filename)}"] > span`
+        );
 
         if (ig.ignores(filename)) {
             t.is(diff, null);

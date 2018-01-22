@@ -1,10 +1,13 @@
-import {URL} from 'url';
+import { URL } from 'url';
 import test from 'ava';
-import {h} from 'dom-chef';
+import { h } from 'dom-chef';
 import delay from 'yoctodelay';
 
-import defaultMergeStrategy, {SCRIPT_ID, scriptAlreadyExists} from '../src/default-merge-strategy';
-import {cleanDocumentBody} from './test-utils';
+import defaultMergeStrategy, {
+    SCRIPT_ID,
+    scriptAlreadyExists
+} from '../src/default-merge-strategy';
+import { cleanDocumentBody } from './test-utils';
 
 import './setup-jsdom';
 
@@ -24,7 +27,7 @@ test('should not try to choose default merge strategy on non-pull request pages'
 test('should not choose default merge strategy twice', async t => {
     location.href = 'https://www.bitbucket.org/reyronald/repo/pull-requests/1';
 
-    const script = <script id={SCRIPT_ID}></script>;
+    const script = <script id={SCRIPT_ID} />;
     document.body.appendChild(script);
 
     try {
@@ -40,7 +43,7 @@ test('should not choose default merge strategy twice', async t => {
 test('should not choose default merge strategy if configured strategy is invalid', async t => {
     location.href = 'https://www.bitbucket.org/reyronald/repo/pull-requests/1';
 
-    const script = <script id={SCRIPT_ID}></script>;
+    const script = <script id={SCRIPT_ID} />;
     document.body.appendChild(script);
 
     try {
@@ -64,9 +67,17 @@ test.serial('should choose default merge strategy', async t => {
     mergeButton.click();
 
     const mergeStrategies = (
-        <select class="select aui-select2 select2-offscreen" id="id_merge_strategy" name="merge_strategy">
-            <option value="merge_commit" data-default-commit-msg="...">Merge commit</option>
-            <option value="squash" data-default-commit-msg="...">Squash</option>
+        <select
+            class="select aui-select2 select2-offscreen"
+            id="id_merge_strategy"
+            name="merge_strategy"
+        >
+            <option value="merge_commit" data-default-commit-msg="...">
+                Merge commit
+            </option>
+            <option value="squash" data-default-commit-msg="...">
+                Squash
+            </option>
         </select>
     );
     await delay(1000);

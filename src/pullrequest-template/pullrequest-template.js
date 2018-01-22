@@ -1,6 +1,6 @@
 import elementReady from 'element-ready';
 import marked from 'marked';
-import {getRepoURL} from '../page-detect';
+import { getRepoURL } from '../page-detect';
 
 export default function fetchAndInsertPullrequestTemplate(externalUrl) {
     const pullrequestTemplateUrls = getPullrequestTemplateUrls();
@@ -8,7 +8,7 @@ export default function fetchAndInsertPullrequestTemplate(externalUrl) {
         pullrequestTemplateUrls.push(externalUrl);
     }
     const requests = pullrequestTemplateUrls.map(url =>
-        fetch(url, {credentials: 'include'})
+        fetch(url, { credentials: 'include' })
     );
     insertPullrequestTemplate(requests);
 }

@@ -1,1 +1,1 @@
-export {default} from './close-anchor-branch';
+export { default } from './close-anchor-branch';
