@@ -19,3 +19,5 @@ export const isPullRequestList = () => getRepoPath() === 'pull-requests';
 export const isPullRequest = () => getRepoPath().startsWith('pull-requests/');
 
 export const isCreatePullRequestURL = () => getRepoPath() === 'pull-requests/new';
+
+export const isEditPullRequestURL = () => getRepoPath().startsWith('pull-requests/update');
