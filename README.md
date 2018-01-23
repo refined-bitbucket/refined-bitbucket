@@ -6,16 +6,16 @@ We all know BitBucket lacks some features that we have in other platforms like G
 
 ## Current features
 
-* Adds syntax highlighting for pull requests. [See the full list of enabled languages](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
+* Adds syntax highlighting for pull requests and commits. [See the full list of enabled languages](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
 * Double click on a word to highlight all occurrences.
 * ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
 * Key binding feature, which allows for quicker navigation through pull requests.
-* Button to collapse diffs in Pull Request view.
+* Button to collapse diffs in Pull Request and Commits view.
 * Autocollapse:
-    * Add filename patterns in the Options page that you would like the extension to collapse automatically when the pull request loads.
+    * Add filename patterns in the Options page that you would like the extension to collapse automatically when the pull request or commit loads.
     * Deleted files are automatically collapsed.
-* Pullrequest Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the Pull Request loads.
-* Button to load all failed diffs in Pull Request view.
+* Diff Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the pull request or commit loads.
+* Button to load all failed diffs in pull request and commit view.
 * Choose a default merge strategy for your pull requests.
 * Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
 * Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
@@ -100,7 +100,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 
 ## Installing
 
-_refined-bitbucket_ is available on the [Google Chrome Web Store][chrome-install] and [Add-ons for Firefox][firefox-install].
+_refined-bitbucket_ is available on the [Google Chrome Web Store][chrome-install] and [Add-ons for Firefox][firefox-install]. hen installed, go check the extension's Options to customize it to your needs.
 
 Sometimes the extension is not immediately picked up by the browser after installation. If this happens to you, log out of Bitbucket and then log back in, or clear your cache.
 
@@ -163,5 +163,4 @@ MIT © [refined-bitbucket](https://github.com/refined-bitbucket)
 
 [chrome-install]: https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon
 [firefox-install]: https://addons.mozilla.org/en-US/firefox/addon/refined-bitbucket-/
-[browserify]: http://browserify.org/
 [tab-image]: https://cloud.githubusercontent.com/assets/755669/18594922/1c74c184-7bf7-11e6-887d-859fb6206c65.png
