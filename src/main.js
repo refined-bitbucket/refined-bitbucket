@@ -8,7 +8,7 @@ import OptionsSync from 'webext-options-sync';
 import waitForPullRequestContents from './wait-for-pullrequest';
 import collapseDiff from './collapse-diff/collapse-diff';
 import autocollapse from './autocollapse/autocollapse';
-import pullrequestIgnore from './pullrequest-ignore';
+import diffIgnore from './diff-ignore';
 import loadAllDiffs from './load-all-diffs';
 import syntaxHighlight from './syntax-highlight';
 import ignoreWhitespace from './ignore-whitespace';
@@ -19,7 +19,8 @@ import {
     isPullRequest,
     isCreatePullRequestURL,
     isEditPullRequestURL,
-    isPullRequestList
+    isPullRequestList,
+    isCommit
 } from './page-detect';
 
 import 'selector-observer';
@@ -39,6 +40,8 @@ new OptionsSync().getAll().then(options => {
 
 function init(config) {
     if (isPullRequest()) {
+        const getPullrequestNodePromise = waitForPullRequestContents();
+        codeReviewFeatures(config, getPullrequestNodePromise);
         pullrequestRelatedFeatures(config);
     } else if (isPullRequestList()) {
         if (config.ignoreWhitespace) {
@@ -52,50 +55,55 @@ function init(config) {
         if (config.closeAnchorBranch) {
             closeAnchorBranch();
         }
+    } else if (isCommit()) {
+        const getCommitsNodePromise = Promise.resolve(
+            document.getElementById('commit')
+        );
+        codeReviewFeatures(config, getCommitsNodePromise);
     }
 }
 
-function pullrequestRelatedFeatures(config) {
+function codeReviewFeatures(config, getNodePromise) {
     if (config.highlightOcurrences) {
         occurrencesHighlighter.init();
     }
 
-    if (config.keymap) {
-        keymap.init();
-    }
+    autocollapse.init(
+        config.autocollapsePaths,
+        config.autocollapseDeletedFiles
+    );
 
-    defaultMergeStrategy.init(config.defaultMergeStrategy);
-
-    waitForPullRequestContents()
-        .then(pullrequestNode => {
-            autocollapse.init(
-                config.autocollapsePaths,
-                config.autocollapseDeletedFiles
-            );
-
-            pullrequestIgnore.init(pullrequestNode, config.ignorePaths);
+    getNodePromise
+        .then(node => {
+            diffIgnore.init(node, config.ignorePaths);
 
             if (config.loadAllDiffs) {
-                loadAllDiffs.init(pullrequestNode);
+                loadAllDiffs.init(node);
             }
 
             // have to observe the DOM because some sections
             // load asynchronously by user demand
-            pullrequestNode.observeSelector('section.bb-udiff', function() {
+            node.observeSelector('section.bb-udiff', function() {
                 if (config.collapseDiff) {
                     collapseDiff.insertCollapseDiffButton(this);
                 }
                 autocollapse.collapseIfNeeded(this);
 
-                if (
-                    config.highlightSyntax &&
-                    !pullrequestIgnore.isIgnored(this)
-                ) {
+                if (config.highlightSyntax && !diffIgnore.isIgnored(this)) {
                     syntaxHighlight(this);
                 }
             });
         })
-        .catch(() => {
-            // current page is not a pull request, ignore
+        .catch(err => {
+            // something went wrong
+            console.error('refined-bitbucket(code-review): ', err);
         });
+}
+
+function pullrequestRelatedFeatures(config) {
+    defaultMergeStrategy.init(config.defaultMergeStrategy);
+
+    if (config.keymap) {
+        keymap.init();
+    }
 }

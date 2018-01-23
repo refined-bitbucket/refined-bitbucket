@@ -24,7 +24,7 @@ export async function init(node) {
         </button>
     );
     const summarySection = node.querySelector(
-        '#pullrequest-diff > section.main'
+        '#pullrequest-diff > section.main, section#commit-summary'
     );
     summarySection.appendChild(button);
 

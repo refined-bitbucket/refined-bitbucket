@@ -3,7 +3,7 @@ import { h } from 'dom-chef';
 import delay from 'yoctodelay';
 import ignore from 'ignore';
 
-import pullrequest from '../src/pullrequest-ignore';
+import diffIgnore from '../src/diff-ignore';
 
 import './setup-jsdom';
 
@@ -49,6 +49,43 @@ function getPullrequestNode(filenames) {
 }
 
 /**
+ * Returns the `HTMLElement` representing the node that contains a commit view
+ * @param {string[]} filenames
+ * @return {HTMLDivElement}
+ */
+function getCommitNode(filenames) {
+    return (
+        <section id="commit" data-module="repo/commits/view">
+            {/* Header and file summary */}
+            <section id="commit-summary">
+                <h1>
+                    Files changed <span>({filenames.length})</span>
+                </h1>
+                <ul id="commit-files-summary">
+                    {filenames.map(filename => (
+                        <li data-file-identifier={escape(filename)}>
+                            <a>{filename}</a>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            {/* Diffs */}
+            <section id="changeset-diff">
+                <div class="bb-patch bb-patch-unified">
+                    {filenames.map(filename => (
+                        <section
+                            class="bb-udiff"
+                            data-identifier={escape(filename)}
+                        />
+                    ))}
+                </div>
+            </section>
+        </section>
+    );
+}
+
+/**
  * @param {HTMLHeadingElement} header
  */
 function parseHeader(header) {
@@ -60,7 +97,7 @@ function parseHeader(header) {
     return { filesRemoved, filesChanged };
 }
 
-test('should remove the right diffs and update the header', async t => {
+async function performAssertions(t, getNode) {
     const filenames = [
         '/some path/first_file.js',
         '/some path/second_file.js',
@@ -68,14 +105,15 @@ test('should remove the right diffs and update the header', async t => {
     ];
     const ignorePaths = ['second_file.js'];
 
-    const node = getPullrequestNode(filenames);
-    pullrequest.init(node, ignorePaths);
+    const node = getNode(filenames);
+    diffIgnore.init(node, ignorePaths);
 
     // Just wait an arbitrary short amount of time to let
     // the promise of the `await elementReady` to resolve
     await delay(16);
 
-    const header = node.querySelector('section.main > h1').textContent;
+    const header = node.querySelector('section.main > h1, #commit-summary > h1')
+        .textContent;
     const { filesRemoved, filesChanged } = parseHeader(header);
     t.is(filenames.length, filesChanged);
     t.is(ignorePaths.length, filesRemoved);
@@ -103,4 +141,12 @@ test('should remove the right diffs and update the header', async t => {
             t.is(link.textContent, filename);
         }
     });
+}
+
+test('should remove the right diffs and update the header in a pull request', async t => {
+    await performAssertions(t, getPullrequestNode);
+});
+
+test('should remove the right diffs and update the header in a commit', async t => {
+    await performAssertions(t, getCommitNode);
 });

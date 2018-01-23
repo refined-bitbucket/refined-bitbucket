@@ -37,7 +37,7 @@ export function init(node, ignorePaths) {
 
     // Update the "Files changed" summary header to reflect the removed diffs count
     const summaryHeader = node.querySelector(
-        '#pullrequest-diff > section.main > h1'
+        '#pullrequest-diff > section.main > h1, #commit-summary > h1'
     );
     summaryHeader.textContent += ` - Showing ${filesChanged.length -
         filesToRemove.length} of ${filesChanged.length}`;

@@ -27,3 +27,5 @@ export const isCreatePullRequestURL = () =>
 
 export const isEditPullRequestURL = () =>
     getRepoPath().startsWith('pull-requests/update');
+
+export const isCommit = () => getRepoPath().startsWith('commits/');
