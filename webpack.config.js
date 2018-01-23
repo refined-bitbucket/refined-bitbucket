@@ -58,6 +58,17 @@ if (process.env.NODE_ENV === 'production') {
                 mangle: true,
                 output: {
                     beautify: false
+                },
+                compress: {
+                    // https://github.com/refined-bitbucket/refined-bitbucket/issues/115
+                    // https://github.com/refined-bitbucket/refined-bitbucket/pull/116
+                    // The default value of this option was producing a bundle
+                    // with broken code due to a constant variable reassignment
+                    // that ended up causing a TypeError at runtime.
+                    // See the issue and the pull request for more details.
+                    // (default: true) -- Improve optimization on variables assigned with and used as constant values.
+                    // eslint-disable-next-line camelcase
+                    reduce_vars: false
                 }
             }
         })

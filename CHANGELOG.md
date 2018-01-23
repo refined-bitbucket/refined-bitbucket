@@ -38,6 +38,9 @@
 * Prettier set up in development environment: npm scripts, commit hooks, editor integration,
   closes [issue #109](https://github.com/refined-bitbucket/refined-bitbucket/issues/109),
   [pull request #114](https://github.com/refined-bitbucket/refined-bitbucket/pull/114).
+* Fixed an bug with the production build process where the `UglifyJSPlugin` was outputting
+  a bundle with broken code, closes [issue #115](https://github.com/refined-bitbucket/refined-bitbucket/issues/115),
+  [pull request #116](https://github.com/refined-bitbucket/refined-bitbucket/pull/116).
 
 # 3.3.0 (2018-01-09)
 
