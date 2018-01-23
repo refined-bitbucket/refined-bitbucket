@@ -62,10 +62,13 @@
     "del": "^3.0.0",
     "dotenv": "^4.0.0",
     "firefox-extension-deploy": "^1.1.0",
+    "husky": "^0.14.3",
     "jsdom": "^11.3.0",
+    "lint-staged": "^6.0.1",
     "mutationobserver-shim": "^0.3.2",
     "npm-run-all": "^4.1.2",
     "path": "^0.12.7",
+    "prettier": "^1.10.2",
     "request": "^2.83.0",
     "require-hacker": "^3.0.1",
     "semver": "^5.4.1",
@@ -78,14 +81,11 @@
   "dependencies": {
     "dom-chef": "^3.0.0",
     "element-ready": "^2.2.1",
-    "husky": "^0.14.3",
     "ignore": "^3.3.6",
     "jquery": "^3.2.1",
     "jquery-highlight": "^3.4.0",
-    "lint-staged": "^6.0.1",
     "marked": "^0.3.12",
     "mousetrap": "^1.6.1",
-    "prettier": "^1.10.2",
     "selector-observer": "^1.1.0",
     "webext-options-sync": "^0.15.0"
   },
@@ -102,7 +102,14 @@
         }
       ],
       "babel/object-curly-spacing": 0,
-      "space-before-function-paren": 0
+      "space-before-function-paren": 0,
+      "quotes": [
+        2,
+        "single",
+        {
+          "avoidEscape": true
+        }
+      ]
     }
   },
   "ava": {

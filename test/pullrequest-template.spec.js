@@ -47,10 +47,10 @@ test("should get repo's pull request template urls", t => {
     document.body.appendChild(branchSelect);
 
     const expected = [
-        `/user/repo/raw/master/PULL_REQUEST_TEMPLATE.md`,
-        `/user/repo/raw/master/docs/PULL_REQUEST_TEMPLATE.md`,
-        `/user/repo/raw/master/.github/PULL_REQUEST_TEMPLATE.md`,
-        `/user/repo/raw/master/.bitbucket/PULL_REQUEST_TEMPLATE.md`
+        '/user/repo/raw/master/PULL_REQUEST_TEMPLATE.md',
+        '/user/repo/raw/master/docs/PULL_REQUEST_TEMPLATE.md',
+        '/user/repo/raw/master/.github/PULL_REQUEST_TEMPLATE.md',
+        '/user/repo/raw/master/.bitbucket/PULL_REQUEST_TEMPLATE.md'
     ];
 
     const actual = getPullrequestTemplateUrls();
