@@ -25,10 +25,10 @@ export function getPullrequestTemplateUrls() {
     })();
 
     const pullrequestTemplateUrls = [
-        `/${repoURL}/raw/${defaultBranch}/PULL_REQUEST_TEMPLATE.md`,
-        `/${repoURL}/raw/${defaultBranch}/docs/PULL_REQUEST_TEMPLATE.md`,
-        `/${repoURL}/raw/${defaultBranch}/.github/PULL_REQUEST_TEMPLATE.md`,
-        `/${repoURL}/raw/${defaultBranch}/.bitbucket/PULL_REQUEST_TEMPLATE.md`
+        `https://bitbucket.org/${repoURL}/raw/${defaultBranch}/PULL_REQUEST_TEMPLATE.md`,
+        `https://bitbucket.org/${repoURL}/raw/${defaultBranch}/docs/PULL_REQUEST_TEMPLATE.md`,
+        `https://bitbucket.org/${repoURL}/raw/${defaultBranch}/.github/PULL_REQUEST_TEMPLATE.md`,
+        `https://bitbucket.org/${repoURL}/raw/${defaultBranch}/.bitbucket/PULL_REQUEST_TEMPLATE.md`
     ];
 
     return pullrequestTemplateUrls;

@@ -3,7 +3,7 @@
   "name": "Refined Bitbucket",
   "description": "Improves Bitbucket's user interface",
   "version": "3.3.0",
-  "author": "andremw",
+  "author": "Ronald Rey",
   "homepage_url": "https://github.com/refined-bitbucket/refined-bitbucket",
   "icons": {
     "48": "icon48.png",
