@@ -1,4 +1,8 @@
-[![build status](https://travis-ci.org/refined-bitbucket/refined-bitbucket.svg?branch=test-it)](https://travis-ci.org/refined-bitbucket/refined-bitbucket) <sup>-</sup> [![downloads](https://img.shields.io/chrome-web-store/d/afppminkfnfngihdocacbgeajbbdklkf.svg)](https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon)
+[![build status](https://travis-ci.org/refined-bitbucket/refined-bitbucket.svg?branch=test-it)](https://travis-ci.org/refined-bitbucket/refined-bitbucket) 
+<sup>-</sup> 
+[![downloads](https://img.shields.io/chrome-web-store/d/afppminkfnfngihdocacbgeajbbdklkf.svg)](https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon)
+<sup>-</sup>
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 # refined-bitbucket
 
