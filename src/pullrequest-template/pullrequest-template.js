@@ -4,12 +4,12 @@ import { getRepoURL } from '../page-detect';
 
 export default function fetchAndInsertPullrequestTemplate(externalUrl) {
     const pullrequestTemplateUrls = getPullrequestTemplateUrls();
-    if (externalUrl) {
-        pullrequestTemplateUrls.push(externalUrl);
-    }
     const requests = pullrequestTemplateUrls.map(url =>
         fetch(url, { credentials: 'include' })
     );
+    if (externalUrl) {
+        requests.push(fetch(externalUrl));
+    }
     insertPullrequestTemplate(requests);
 }
 

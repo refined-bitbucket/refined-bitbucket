@@ -1,3 +1,13 @@
+# Next Version
+
+### Improvement:
+
+* **Pullrequest Template**: Permission to access https://gist.githubusercontent.com/ is no longer necessary, closes [issue #119](https://github.com/refined-bitbucket/refined-bitbucket/issues/119), [pull request #120](https://github.com/refined-bitbucket/refined-bitbucket/pull/120).
+
+### Language support:
+
+* **ColdFusion Markup Language**: Added cfml (\*.cfc/\*.cfm) extension support, [pull request #118](https://github.com/refined-bitbucket/refined-bitbucket/pull/118).
+
 # 3.4.0 (2018-01-23)
 
 ### Features:
