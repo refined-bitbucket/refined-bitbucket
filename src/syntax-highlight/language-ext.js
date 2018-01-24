@@ -13,6 +13,8 @@ module.exports = {
     '.html': 'language-markup',
     '.js': 'language-jsx',
     '.styl': 'language-stylus',
+    '.cfc': 'language-actionscript',
+    '.cfm': 'language-markup',
     '.css': 'language-css',
     '.cs': 'language-csharp',
     '.cshtml': 'language-markup',
