@@ -2,7 +2,7 @@
 
 ### Features:
 
-* Improve the default font-family and size of lines of code in Source view, closes [issue #35](https://github.com/refined-bitbucket/refined-bitbucket/issues/121), [pull request #125](https://github.com/refined-bitbucket/refined-bitbucket/pull/125).
+* Improve the default font-family and size of lines of code in Source view, closes [issue #35](https://github.com/refined-bitbucket/refined-bitbucket/issues/121), [pull request #126](https://github.com/refined-bitbucket/refined-bitbucket/pull/126).
 
 ### Language support:
 
@@ -11,7 +11,7 @@
 ### Development:
 
 * Refactor: Co-located tests alongside their feature implementation, and refactored the import/exports, [pull request #124](https://github.com/refined-bitbucket/refined-bitbucket/pull/124).
-* Refactor: Removed unnecessary `wait-for-render.js`, since now we are using `element-ready` npm package, [pull request #124](https://github.com/refined-bitbucket/refined-bitbucket/pull/124).
+* Refactor: Removed unnecessary `wait-for-render.js`, since now we are using `element-ready` npm package, [pull request #125](https://github.com/refined-bitbucket/refined-bitbucket/pull/125).
 
 # 3.4.1 (2018-01-24)
 
