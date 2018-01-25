@@ -1,16 +1,16 @@
 'use strict';
 
+import elementReady from 'element-ready';
+
 import 'jquery-highlight';
 
 import './occurrences-highlighter.css';
 
-const waitForRender = require('../wait-for-render.js');
+export async function init() {
+    await elementReady('.diff-container');
 
-export function init() {
-    waitForRender('.diff-container').then(() => {
-        $('.diff-content-container').dblclick(function() {
-            highlightOccurrences(this);
-        });
+    $('.diff-content-container').dblclick(function() {
+        highlightOccurrences(this);
     });
 }
 
