@@ -1,3 +1,13 @@
+# Next Version
+
+### Language support:
+
+* **Smarty & Twig**: Added smarty, twig (\*.tpl/\*.twig) extension support, closes [issue #121](https://github.com/refined-bitbucket/refined-bitbucket/issues/121), [pull request #123](https://github.com/refined-bitbucket/refined-bitbucket/pull/123).
+
+### Development:
+
+* Refactor: Co-located tests alongside their feature implementation, and refactored the import/exports, [pull request #124](https://github.com/refined-bitbucket/refined-bitbucket/pull/124).
+
 # 3.4.1 (2018-01-24)
 
 ### Improvement:

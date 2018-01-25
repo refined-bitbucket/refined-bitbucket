@@ -4,13 +4,13 @@ import { h } from 'dom-chef';
 import delay from 'yoctodelay';
 import marked from 'marked';
 
+import '../../test/setup-jsdom';
+import { cleanDocumentBody } from '../../test/test-utils';
+
 import {
     getPullrequestTemplateUrls,
     insertPullrequestTemplate
-} from '../src/pullrequest-template/pullrequest-template';
-import { cleanDocumentBody } from './test-utils';
-
-import './setup-jsdom';
+} from './pullrequest-template';
 
 test("should get repo's pull request template urls", t => {
     global.location = new URL(

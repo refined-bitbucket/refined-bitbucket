@@ -1,9 +1,9 @@
 import test from 'ava';
 import delay from 'yoctodelay';
 import { h } from 'dom-chef';
-import closeAnchorBranch from '../src/close-anchor-branch';
+import closeAnchorBranch from '.';
 
-import './setup-jsdom';
+import '../../test/setup-jsdom';
 
 test('should check the "Close anchor branch" checkbox when creating/editing pr', async t => {
     const checkbox = (

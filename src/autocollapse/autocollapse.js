@@ -2,22 +2,17 @@
 
 import elementReady from 'element-ready';
 import ignore from 'ignore';
-import { toggleDiff } from '../collapse-diff/collapse-diff';
-
-export default {
-    init,
-    collapseIfNeeded
-};
+import { toggleDiff } from '../collapse-diff';
 
 let ig;
 let autocollapseDeletedFiles;
 
-function init(autocollapsePaths, collapseDeletedFiles) {
+export function init(autocollapsePaths, collapseDeletedFiles) {
     ig = ignore().add(autocollapsePaths);
     autocollapseDeletedFiles = collapseDeletedFiles;
 }
 
-function collapseIfNeeded(section) {
+export function collapseIfNeeded(section) {
     if (ig) {
         collapseIfNeededAsync(section);
     } else {

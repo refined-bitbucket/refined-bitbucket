@@ -1,9 +1,9 @@
 import test from 'ava';
 import { h } from 'dom-chef';
 
-import './setup-jsdom';
+import * as sourceHandler from './source-handler';
 
-import * as sourceHandler from '../src/syntax-highlight/source-handler';
+import '../../test/setup-jsdom';
 
 test('Changes <pre> element to <code> and wraps it in a <pre> element', t => {
     const pre = <pre>var hello = "world"</pre>;

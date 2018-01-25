@@ -2,9 +2,9 @@ import { URL, URLSearchParams } from 'url';
 import { h } from 'dom-chef';
 import test from 'ava';
 
-import './setup-jsdom';
+import ignoreWhitespace from '.';
 
-import ignoreWhitespace from '../src/ignore-whitespace';
+import '../../test/setup-jsdom';
 
 global.URL = URL;
 global.URLSearchParams = URLSearchParams;
@@ -35,7 +35,7 @@ test('should transform pull request link to add ignore whitespace query param to
 
     location.href = 'https://www.bitbucket.org/user/repo/pull-requests/';
 
-    ignoreWhitespace.init();
+    ignoreWhitespace();
 
     t.is(actual.outerHTML, expected.outerHTML);
 });
@@ -65,7 +65,7 @@ test('should transform pull request link to toggle ignore whitespace query param
 
     location.href = 'https://www.bitbucket.org/user/repo/pull-requests/';
 
-    ignoreWhitespace.init();
+    ignoreWhitespace();
 
     t.is(actual.outerHTML, expected.outerHTML);
 });
@@ -96,7 +96,7 @@ test('should not transform pull request link if current page is not pull request
     location.href =
         'https://www.bitbucket.org/user/repo/pull-requests/is-not-pull-request-page-list';
 
-    ignoreWhitespace.init();
+    ignoreWhitespace();
 
     t.is(actual.outerHTML, expected.outerHTML);
 });

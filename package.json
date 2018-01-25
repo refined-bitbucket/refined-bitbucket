@@ -113,7 +113,7 @@
     }
   },
   "ava": {
-    "files": ["test/*.spec.js"],
+    "files": ["src/**/*.spec.js"],
     "source": ["src/**/*.js"],
     "require": ["babel-register", "./scripts/ignore-utils"],
     "babel": "inherit",

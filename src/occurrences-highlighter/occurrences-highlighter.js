@@ -6,9 +6,7 @@ import './occurrences-highlighter.css';
 
 const waitForRender = require('../wait-for-render.js');
 
-export { init, highlightOccurrences };
-
-function init() {
+export function init() {
     waitForRender('.diff-container').then(() => {
         $('.diff-content-container').dblclick(function() {
             highlightOccurrences(this);
@@ -16,7 +14,7 @@ function init() {
     });
 }
 
-function highlightOccurrences(container) {
+export function highlightOccurrences(container) {
     // <pre> for lines of code
     // <div class="comment-content"> for comments
     // <span class="description"> for tasks

@@ -1,17 +1,15 @@
-'use strict';
-
 import { h } from 'dom-chef';
 import test from 'ava';
 
-import './setup-jsdom';
+import '../../test/setup-jsdom';
 
 require('mutationobserver-shim');
 
 global.MutationObserver = window.MutationObserver;
 
-require('../src/vendor/prism.js');
+require('../vendor/prism.js');
 
-const syntaxHighlight = require('../src/syntax-highlight').default;
+const syntaxHighlight = require('.').default;
 
 test('should syntax-highlight diff', t => {
     const uudiff = (

@@ -1,9 +1,9 @@
 import test from 'ava';
 import { h } from 'dom-chef';
 
-import './setup-jsdom';
+import '../../test/setup-jsdom';
 
-import { highlightOccurrences } from '../src/occurrences-highlighter/occurrences-highlighter';
+const { highlightOccurrences } = require('./occurrences-highlighter');
 
 // Necessary custom mockings
 document.createRange = () => ({

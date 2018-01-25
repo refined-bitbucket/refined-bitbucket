@@ -1,13 +1,11 @@
-'use strict';
-
 import test from 'ava';
 import { h } from 'dom-chef';
 import delay from 'yoctodelay';
 import elementReady from 'element-ready';
 
-import loadAllDiffs from '../src/load-all-diffs';
+import loadAllDiffs from '.';
 
-import './setup-jsdom';
+import '../../test/setup-jsdom';
 
 /**
  * Returns the `HTMLElement` representing the node that contains a pull request
