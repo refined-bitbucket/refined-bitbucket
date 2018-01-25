@@ -7,6 +7,7 @@
 ### Development:
 
 * Refactor: Co-located tests alongside their feature implementation, and refactored the import/exports, [pull request #124](https://github.com/refined-bitbucket/refined-bitbucket/pull/124).
+* Refactor: Removed unnecessary `wait-for-render.js`, since now we are using `element-ready` npm package, [pull request #124](https://github.com/refined-bitbucket/refined-bitbucket/pull/124).
 
 # 3.4.1 (2018-01-24)
 
