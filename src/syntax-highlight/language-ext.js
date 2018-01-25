@@ -11,6 +11,8 @@ module.exports = {
     '.kt': 'language-kotlin',
     '.xml': 'language-markup',
     '.html': 'language-markup',
+    '.tpl': 'language-smarty',
+    '.twig': 'language-twig',
     '.js': 'language-jsx',
     '.styl': 'language-stylus',
     '.cfc': 'language-actionscript',
