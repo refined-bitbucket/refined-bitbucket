@@ -4,40 +4,6 @@ import { h } from 'dom-chef';
 
 import './collapse-diff.css';
 
-export default {
-    insertCollapseDiffButton
-};
-
-export function toggleDiff(section) {
-    // Hide/show the diff
-    const diffContentContainer = section.querySelector(
-        'div.diff-content-container'
-    );
-    if (diffContentContainer) {
-        diffContentContainer.classList.toggle('__refined_bitbucket_hide');
-    }
-
-    // Hide/show diff message, if present (when there are conflicts, for example)
-    const diffMessageContainer = section.querySelector(
-        'div.diff-message-container'
-    );
-    if (diffMessageContainer) {
-        diffMessageContainer.classList.toggle('__refined_bitbucket_hide');
-    }
-
-    // Add/remove a bottom border to the diff heading
-    section
-        .querySelector('div.heading')
-        .classList.toggle('__refined_bitbucket_bottom_border');
-
-    // Toggle the collapse button icon
-    [
-        ...section.querySelectorAll(
-            '.__refined_bitbucket_collapse_diff_button svg'
-        )
-    ].forEach(svg => svg.classList.toggle('__refined_bitbucket_hide'));
-}
-
 const insertTopButton = section => {
     const button = (
         <div class="aui-buttons">
@@ -168,7 +134,37 @@ const insertBottomButton = section => {
     return bottomButton;
 };
 
-function insertCollapseDiffButton(section) {
+export function toggleDiff(section) {
+    // Hide/show the diff
+    const diffContentContainer = section.querySelector(
+        'div.diff-content-container'
+    );
+    if (diffContentContainer) {
+        diffContentContainer.classList.toggle('__refined_bitbucket_hide');
+    }
+
+    // Hide/show diff message, if present (when there are conflicts, for example)
+    const diffMessageContainer = section.querySelector(
+        'div.diff-message-container'
+    );
+    if (diffMessageContainer) {
+        diffMessageContainer.classList.toggle('__refined_bitbucket_hide');
+    }
+
+    // Add/remove a bottom border to the diff heading
+    section
+        .querySelector('div.heading')
+        .classList.toggle('__refined_bitbucket_bottom_border');
+
+    // Toggle the collapse button icon
+    [
+        ...section.querySelectorAll(
+            '.__refined_bitbucket_collapse_diff_button svg'
+        )
+    ].forEach(svg => svg.classList.toggle('__refined_bitbucket_hide'));
+}
+
+export function insertCollapseDiffButton(section) {
     // don't reinsert the button if already present.
     // doesn't happen with vanilla Bitbucket, but can happen when interacting
     // with other extensions (like Bitbucket Diff Tree)

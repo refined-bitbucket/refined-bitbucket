@@ -1,20 +1,21 @@
-'use strict';
-
 /* eslint-disable import/imports-first */
 global.jQuery = global.$ = require('jquery');
 
 import OptionsSync from 'webext-options-sync';
 
-import waitForPullRequestContents from './wait-for-pullrequest';
-import collapseDiff from './collapse-diff/collapse-diff';
-import autocollapse from './autocollapse/autocollapse';
-import diffIgnore from './diff-ignore';
-import loadAllDiffs from './load-all-diffs';
-import syntaxHighlight from './syntax-highlight';
-import ignoreWhitespace from './ignore-whitespace';
-import defaultMergeStrategy from './default-merge-strategy';
-import insertPullrequestTemplate from './pullrequest-template';
+import autocollapse from './autocollapse';
 import closeAnchorBranch from './close-anchor-branch';
+import collapseDiff from './collapse-diff';
+import defaultMergeStrategy from './default-merge-strategy';
+import diffIgnore from './diff-ignore';
+import ignoreWhitespace from './ignore-whitespace';
+import keymap from './keymap';
+import loadAllDiffs from './load-all-diffs';
+import occurrencesHighlighter from './occurrences-highlighter';
+import insertPullrequestTemplate from './pullrequest-template';
+import syntaxHighlight from './syntax-highlight';
+
+import waitForPullRequestContents from './wait-for-pullrequest';
 import {
     isPullRequest,
     isCreatePullRequestURL,
@@ -24,9 +25,6 @@ import {
 } from './page-detect';
 
 import 'selector-observer';
-
-const occurrencesHighlighter = require('./occurrences-highlighter/occurrences-highlighter');
-const keymap = require('./keymap/keymap');
 
 new OptionsSync().getAll().then(options => {
     const config = {
@@ -45,7 +43,7 @@ function init(config) {
         pullrequestRelatedFeatures(config);
     } else if (isPullRequestList()) {
         if (config.ignoreWhitespace) {
-            ignoreWhitespace.init();
+            ignoreWhitespace();
         }
     } else if (isCreatePullRequestURL() || isEditPullRequestURL()) {
         if (isCreatePullRequestURL() && config.prTemplateEnabled) {

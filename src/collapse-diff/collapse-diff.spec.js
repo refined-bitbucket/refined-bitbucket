@@ -1,9 +1,9 @@
 import test from 'ava';
 import { h } from 'dom-chef';
 
-import collapseDiff from '../src/collapse-diff/collapse-diff';
+import { insertCollapseDiffButton } from './collapse-diff';
 
-import './setup-jsdom';
+import '../../test/setup-jsdom';
 
 const createNode = () => (
     <section class="bb-udiff" data-filename="filename.js">
@@ -72,10 +72,10 @@ const createNode = () => (
 test('should not re-insert collapse diff button if already present', async t => {
     const uudiff = createNode();
 
-    collapseDiff.insertCollapseDiffButton(uudiff);
-    collapseDiff.insertCollapseDiffButton(uudiff);
-    collapseDiff.insertCollapseDiffButton(uudiff);
-    collapseDiff.insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff);
 
     const buttons = uudiff.getElementsByClassName(
         '__refined_bitbucket_collapse_diff_button'
@@ -87,7 +87,7 @@ test('should not re-insert collapse diff button if already present', async t => 
 test('should insert TOP button in correct position when diff loads successfully', async t => {
     const uudiff = createNode();
 
-    collapseDiff.insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff);
 
     const button = uudiff.querySelector(
         'div.secondary.diff-actions div:nth-child(4)'
@@ -99,7 +99,7 @@ test('should insert TOP button in correct position when diff loads successfully'
 test('should insert BOTTOM button in correct position when diff loads successfully', async t => {
     const uudiff = createNode();
 
-    collapseDiff.insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff);
 
     const button = uudiff.querySelector(
         '.refract-content-container .skipped-container .skipped-bottom.last:last-child'
@@ -137,7 +137,7 @@ test('should insert BOTTOM button in correct position when diff has no more line
         </section>
     );
 
-    collapseDiff.insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff);
 
     const button = uudiff.querySelector(
         '.refract-content-container .skipped-container .skipped-bottom.last:last-child'
@@ -151,7 +151,7 @@ test('should toggle the diff, toggle messages, toggle the arrow icon and apply b
     const uudiff = createNode();
 
     // Acting
-    collapseDiff.insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff);
 
     const button = uudiff.querySelector(
         '.__refined_bitbucket_collapse_diff_button'
@@ -226,7 +226,7 @@ test('should insert button in correct position if diff failed to load', async t 
         </section>
     );
 
-    collapseDiff.insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff);
 
     const button = uudiff.querySelector(
         'div.secondary.diff-actions .__refined_bitbucket_collapse_diff_button'

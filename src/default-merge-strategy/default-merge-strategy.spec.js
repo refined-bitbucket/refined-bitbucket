@@ -3,13 +3,10 @@ import test from 'ava';
 import { h } from 'dom-chef';
 import delay from 'yoctodelay';
 
-import defaultMergeStrategy, {
-    SCRIPT_ID,
-    scriptAlreadyExists
-} from '../src/default-merge-strategy';
-import { cleanDocumentBody } from './test-utils';
+import '../../test/setup-jsdom';
+import { cleanDocumentBody } from '../../test/test-utils';
 
-import './setup-jsdom';
+import * as defaultMergeStrategy from './default-merge-strategy';
 
 global.location = new URL('https://www.bitbucket.org');
 
@@ -27,7 +24,7 @@ test('should not try to choose default merge strategy on non-pull request pages'
 test('should not choose default merge strategy twice', async t => {
     location.href = 'https://www.bitbucket.org/reyronald/repo/pull-requests/1';
 
-    const script = <script id={SCRIPT_ID} />;
+    const script = <script id={defaultMergeStrategy.SCRIPT_ID} />;
     document.body.appendChild(script);
 
     try {
@@ -43,7 +40,7 @@ test('should not choose default merge strategy twice', async t => {
 test('should not choose default merge strategy if configured strategy is invalid', async t => {
     location.href = 'https://www.bitbucket.org/reyronald/repo/pull-requests/1';
 
-    const script = <script id={SCRIPT_ID} />;
+    const script = <script id={defaultMergeStrategy.SCRIPT_ID} />;
     document.body.appendChild(script);
 
     try {
@@ -86,7 +83,7 @@ test.serial('should choose default merge strategy', async t => {
     // Assert
     try {
         await promise;
-        if (scriptAlreadyExists()) {
+        if (defaultMergeStrategy.scriptAlreadyExists()) {
             t.pass();
         } else {
             t.fail();

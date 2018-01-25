@@ -6,7 +6,7 @@ const waitForRender = require('../wait-for-render');
  * Adds useful keymappings to pull requests on bitbucket.org
  * @module keymap
  */
-const PrKeyMap = (function($) {
+const PrKeyMap = (function() {
     'use strict';
 
     /**
@@ -183,14 +183,8 @@ const PrKeyMap = (function($) {
     };
 
     return self;
-})(jQuery);
-
-module.exports = (() => {
-    return {
-        init
-    };
-
-    function init() {
-        PrKeyMap.init(Mousetrap);
-    }
 })();
+
+export function init() {
+    PrKeyMap.init(Mousetrap);
+}

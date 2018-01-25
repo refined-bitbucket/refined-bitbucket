@@ -3,9 +3,9 @@ import { h } from 'dom-chef';
 import delay from 'yoctodelay';
 import ignore from 'ignore';
 
-import diffIgnore from '../src/diff-ignore';
+import diffIgnore from '.';
 
-import './setup-jsdom';
+import '../../test/setup-jsdom';
 
 /**
  * Returns the `HTMLElement` representing the node that contains a pull request
