@@ -1,5 +1,9 @@
 # Next Version
 
+### Features:
+
+* Improve the default font-family and size of lines of code in Source view, closes [issue #35](https://github.com/refined-bitbucket/refined-bitbucket/issues/121), [pull request #125](https://github.com/refined-bitbucket/refined-bitbucket/pull/125).
+
 ### Language support:
 
 * **Smarty & Twig**: Added smarty, twig (\*.tpl/\*.twig) extension support, closes [issue #121](https://github.com/refined-bitbucket/refined-bitbucket/issues/121), [pull request #123](https://github.com/refined-bitbucket/refined-bitbucket/pull/123).

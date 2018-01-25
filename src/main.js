@@ -59,6 +59,10 @@ function init(config) {
         );
         codeReviewFeatures(config, getCommitsNodePromise);
     }
+
+    if (config.improveFonts) {
+        require('./improve-fonts.css');
+    }
 }
 
 function codeReviewFeatures(config, getNodePromise) {

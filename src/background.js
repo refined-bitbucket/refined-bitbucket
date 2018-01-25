@@ -25,6 +25,8 @@ chrome.storage.sync.get(null, deprecatedOptions => {
             collapseDiff: true,
             loadAllDiffs: true,
             closeAnchorBranch: true,
+            improveFonts: true,
+            prTemplateEnabled: true,
             defaultMergeStrategy: 'merge_commit',
             autocollapsePaths: ['package-lock.json', 'yarn.lock'],
             autocollapseDeletedFiles: true,
