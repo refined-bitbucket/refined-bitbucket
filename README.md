@@ -104,7 +104,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 
 ## Installing
 
-_refined-bitbucket_ is available on the [Google Chrome Web Store][chrome-install] and [Add-ons for Firefox][firefox-install]. hen installed, go check the extension's Options to customize it to your needs.
+_refined-bitbucket_ is available on the [Google Chrome Web Store][chrome-install] and [Add-ons for Firefox][firefox-install]. When installed, go check the extension's Options to customize it to your needs.
 
 Sometimes the extension is not immediately picked up by the browser after installation. If this happens to you, log out of Bitbucket and then log back in, or clear your cache.
 
