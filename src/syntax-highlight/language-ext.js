@@ -63,6 +63,7 @@ module.exports = {
     '.svcmap': 'language-markup',
     '.swift': 'language-swift',
     '.ts': 'language-typescript',
+    '.tsx': 'language-typescript',
     '.wxs': 'language-markup',
     '.xaml': 'language-markup',
     '.xsd': 'language-markup',
