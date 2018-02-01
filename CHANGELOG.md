@@ -7,6 +7,7 @@
 ### Language support:
 
 * **Smarty & Twig**: Added smarty, twig (\*.tpl/\*.twig) extension support, closes [issue #121](https://github.com/refined-bitbucket/refined-bitbucket/issues/121), [pull request #123](https://github.com/refined-bitbucket/refined-bitbucket/pull/123).
+* **Typescript JSX**: Added TypeScript JSX (\*.tsx) extension support, closes [issue #129](https://github.com/refined-bitbucket/refined-bitbucket/issues/129), [pull request #130](https://github.com/refined-bitbucket/refined-bitbucket/pull/130).
 
 ### Development:
 
