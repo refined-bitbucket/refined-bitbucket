@@ -2,6 +2,7 @@ import { URL } from 'url';
 import test from 'ava';
 import { h } from 'dom-chef';
 import '../../test/setup-jsdom';
+import { addApiTokenMetadata } from '../../test/test-utils';
 
 import 'selector-observer';
 
@@ -12,18 +13,8 @@ global.location = new URL('https://www.bitbucket.org/user/repo');
 
 global.fetch = {};
 
-const addMeta = () => {
-    const meta = (
-        <meta
-            name="apitoken"
-            content={'{"token": "...", "expiration": 1517595777.580439}'}
-        />
-    );
-    document.head.appendChild(meta);
-};
-
 test('getResourcesCount should return ? with error response', async t => {
-    addMeta();
+    addApiTokenMetadata();
     global.fetch = () => {
         return Promise.resolve({
             json: () =>
@@ -35,7 +26,7 @@ test('getResourcesCount should return ? with error response', async t => {
 });
 
 test('getResourcesCount should return correct size with successful response', async t => {
-    addMeta();
+    addApiTokenMetadata();
     const size = 10;
     global.fetch = () => {
         return Promise.resolve({
@@ -84,7 +75,7 @@ test('addSidebarCounters should exit early', async t => {
 
 test('addSidebarCounters should work properly', async t => {
     // Arrange
-    addMeta();
+    addApiTokenMetadata();
     const nav = (
         <div id="adg3-navigation">
             <div>
