@@ -117,7 +117,7 @@
     "source": ["src/**/*.js"],
     "require": ["babel-register", "./scripts/ignore-utils"],
     "babel": "inherit",
-    "timeout": "5s"
+    "timeout": "10s"
   },
   "babel": {
     "presets": ["@ava/stage-4"],

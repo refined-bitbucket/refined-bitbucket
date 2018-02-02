@@ -3,6 +3,7 @@
 // Drops leading and trailing slash to avoid /\/?/ everywhere
 const getCleanPathname = () => location.pathname.replace(/^[/]|[/]$/g, '');
 
+// '/user/repo/.../...' -> 'user/repo'
 export const getRepoURL = () =>
     location.pathname
         .slice(1)

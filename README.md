@@ -19,6 +19,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
     * Add filename patterns in the Options page that you would like the extension to collapse automatically when the pull request or commit loads.
     * Deleted files are automatically collapsed.
 * Diff Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the pull request or commit loads.
+* Counters for open or active branches and pull requests in the sidebar navigation menu.
 * Button to load all failed diffs in pull request and commit view.
 * Choose a default merge strategy for your pull requests.
 * Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
@@ -62,7 +63,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 			The Options page.<br>
 		</th>
 		<th width="50%">
-			<em>pullrequest-ignore</em> and <em>load-all-diffs</em>
+			<em>Diff ignore</em> and <em>Load all diffs</em>
 		</th>
 	</tr>
 	<tr>
@@ -70,13 +71,13 @@ We all know BitBucket lacks some features that we have in other platforms like G
 			<img src="https://user-images.githubusercontent.com/7514993/33744735-1f66115c-db89-11e7-804c-9739d3619c65.png" alt="options">
 		</td>
 		<td>
-			<strong>pullrequest-ignore</strong><br>
+			<strong>Diff ignore</strong><br>
 			<img src="https://user-images.githubusercontent.com/7514993/32203543-36e1b012-bdba-11e7-8a26-4accd0e775b6.png" alt="pullrequest-ignore">
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<strong>load-all-diffs</strong><br>
+			<strong>Load all diffs</strong><br>
 			<img src="https://user-images.githubusercontent.com/7514993/32376684-da306e0c-c07b-11e7-81e6-bb9c42d21d2e.gif" alt="load-all-diffs">
 		</td>
 	</tr>
@@ -98,6 +99,24 @@ We all know BitBucket lacks some features that we have in other platforms like G
 		</td>
 		<td>
 			<img src="https://user-images.githubusercontent.com/7514993/30448047-a815dd4a-995b-11e7-98e5-48664c2bd587.gif" alt="occurrences-highlighter">
+		</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<th colspan="2">
+			Sidebar counters
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://user-images.githubusercontent.com/7514993/35759127-0f886b44-084e-11e8-9e3a-58e9ce3da71a.png" alt="expanded"/> <br />
+			Expanded
+		</td>
+		<td>
+			<img src="https://user-images.githubusercontent.com/7514993/35742830-1c604af8-0812-11e8-936b-f6083599fb45.png" alt="collapsed" /> <br />
+			Collapsed
 		</td>
 	</tr>
 </table>

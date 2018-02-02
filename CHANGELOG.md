@@ -1,8 +1,16 @@
+# Next Version
+
+### Features:
+
+* **Sidebar Counters**: Adds counters of the open or active "Branches" and "Pull requests"
+  links in the sidebar navigation menu, closes [issue #133](https://github.com/refined-bitbucket/refined-bitbucket/issues/133),
+  [pull request #134](https://github.com/refined-bitbucket/refined-bitbucket/pull/134).
+
 # 3.5.0 (2018-02-01)
 
 ### Features:
 
-* Improve the default font-family and size of lines of code in Source view, closes [issue #35](https://github.com/refined-bitbucket/refined-bitbucket/issues/121), [pull request #126](https://github.com/refined-bitbucket/refined-bitbucket/pull/126).
+* Improve the default font-family and size of lines of code in Source view, closes [issue #35](https://github.com/refined-bitbucket/refined-bitbucket/issues/35), [pull request #126](https://github.com/refined-bitbucket/refined-bitbucket/pull/126).
 
 ### Language support:
 
