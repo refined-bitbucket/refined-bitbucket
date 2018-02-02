@@ -1,5 +1,6 @@
 import elementReady from 'element-ready';
 import { h } from 'dom-chef';
+import logger from '../logger';
 import { isPullRequest } from '../page-detect';
 
 export const SCRIPT_ID = 'refined_bitbucket_default_merge_script';
@@ -29,10 +30,7 @@ export function initAsync(defaultMergeStrategy) {
         // defaultMergeStrategy can be either 'merge_commit' or 'squash'
         if (!['merge_commit', 'squash'].includes(defaultMergeStrategy)) {
             const msg = `refined-bitbucket(default-merge-strategy): Unimplemented merge strategy '${defaultMergeStrategy}'. No action taken.`;
-            // Only warn when in browser, not when testing
-            if (!process) {
-                console.warn(msg);
-            }
+            logger.warn(msg);
             reject(msg);
         }
 

@@ -14,6 +14,7 @@ import loadAllDiffs from './load-all-diffs';
 import occurrencesHighlighter from './occurrences-highlighter';
 import insertPullrequestTemplate from './pullrequest-template';
 import syntaxHighlight from './syntax-highlight';
+import addSidebarCounters from './sidebar-counters';
 
 import waitForPullRequestContents from './wait-for-pullrequest';
 import {
@@ -62,6 +63,10 @@ function init(config) {
 
     if (config.improveFonts) {
         require('./improve-fonts.css');
+    }
+
+    if (config.addSidebarCounters) {
+        addSidebarCounters();
     }
 }
 

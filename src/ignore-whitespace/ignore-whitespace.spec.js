@@ -1,14 +1,9 @@
-import { URL, URLSearchParams } from 'url';
 import { h } from 'dom-chef';
 import test from 'ava';
 
 import ignoreWhitespace from '.';
 
 import '../../test/setup-jsdom';
-
-global.URL = URL;
-global.URLSearchParams = URLSearchParams;
-global.location = new URL('https://www.bitbucket.org');
 
 test('should transform pull request link to add ignore whitespace query param to 1', t => {
     const actual = (
