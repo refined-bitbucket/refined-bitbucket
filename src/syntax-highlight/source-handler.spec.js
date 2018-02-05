@@ -3,6 +3,7 @@ import { h } from 'dom-chef';
 
 import * as sourceHandler from './source-handler';
 
+import '../vendor/prism.js';
 import '../../test/setup-jsdom';
 
 test('Changes <pre> element to <code> and wraps it in a <pre> element', t => {
