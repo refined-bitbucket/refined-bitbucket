@@ -49,25 +49,8 @@ const buildSourceBranchNode = branchName => {
     );
 };
 
-export const linkifyTargetBranchNode = node => {
-    const targetBranchSpan = node.querySelector('span.name');
-    const targetBranchName = targetBranchSpan.textContent;
-    targetBranchSpan.removeChild(targetBranchSpan.lastChild);
-    const a = (
-        <a
-            style={{ color: '#707070' }}
-            title={targetBranchName}
-            href={`https://bitbucket.org/${repoUrl}/branch/${targetBranchName}`}
-        >
-            {targetBranchName}
-        </a>
-    );
-    targetBranchSpan.appendChild(a);
-};
-
-export const addSourceBranchNode = async prNode => {
-    const row = prNode.closest('tr');
-    const prId = row.dataset.pullRequestId;
+export default async function addSourceBranch(prNode) {
+    const prId = prNode.dataset.pullRequestId;
     const sourceBranchName = await getPrSourceBranch(prId);
 
     if (!sourceBranchName) {
@@ -78,14 +61,5 @@ export const addSourceBranchNode = async prNode => {
     const arrow = prNode.querySelector(
         'span.aui-iconfont-devtools-arrow-right'
     );
-    prNode.insertBefore(sourceBranchNode, arrow);
-};
-
-export default function addSourceBranchToPrList() {
-    const prTable = document.querySelector('.pull-requests-table');
-
-    prTable.observeSelector('.title-and-target-branch', function() {
-        linkifyTargetBranchNode(this);
-        addSourceBranchNode(this);
-    });
+    arrow.parentElement.insertBefore(sourceBranchNode, arrow);
 }

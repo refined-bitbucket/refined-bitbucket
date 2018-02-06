@@ -10,12 +10,13 @@ import defaultMergeStrategy from './default-merge-strategy';
 import diffIgnore from './diff-ignore';
 import ignoreWhitespace from './ignore-whitespace';
 import keymap from './keymap';
+import linkifyTargetBranch from './linkify-target-branch';
 import loadAllDiffs from './load-all-diffs';
 import occurrencesHighlighter from './occurrences-highlighter';
 import insertPullrequestTemplate from './pullrequest-template';
-import syntaxHighlight from './syntax-highlight';
 import addSidebarCounters from './sidebar-counters';
-import addSourceBranchToPrList from './source-branch';
+import addSourceBranch from './source-branch';
+import syntaxHighlight from './syntax-highlight';
 
 import waitForPullRequestContents from './wait-for-pullrequest';
 import {
@@ -44,13 +45,7 @@ function init(config) {
         codeReviewFeatures(config, getPullrequestNodePromise);
         pullrequestRelatedFeatures(config);
     } else if (isPullRequestList()) {
-        if (config.ignoreWhitespace) {
-            ignoreWhitespace();
-        }
-
-        if (config.addSourceBranchToPrList) {
-            addSourceBranchToPrList();
-        }
+        pullrequestListRelatedFeatures(config);
     } else if (isCreatePullRequestURL() || isEditPullRequestURL()) {
         if (isCreatePullRequestURL() && config.prTemplateEnabled) {
             insertPullrequestTemplate(config.prTemplateUrl);
@@ -73,6 +68,26 @@ function init(config) {
     if (config.addSidebarCounters) {
         addSidebarCounters();
     }
+}
+
+function pullrequestListRelatedFeatures(config) {
+    // Exit early if none of the pr list related features are enabled
+    if (!config.ignoreWhitespace && !config.addSourceBranchToPrList) {
+        return;
+    }
+
+    const prTable = document.querySelector('.pull-requests-table');
+
+    prTable.observeSelector('tr.pull-request-row', function() {
+        if (config.ignoreWhitespace) {
+            ignoreWhitespace(this);
+        }
+
+        if (config.addSourceBranchToPrList) {
+            linkifyTargetBranch(this);
+            addSourceBranch(this);
+        }
+    });
 }
 
 function codeReviewFeatures(config, getNodePromise) {
