@@ -3,16 +3,27 @@
 ### Features:
 
 * **Sidebar Counters**: Adds counters of the open or active "Branches" and "Pull requests"
-  links in the sidebar navigation menu, closes [issue #133](https://github.com/refined-bitbucket/refined-bitbucket/issues/133),
+  links in the sidebar navigation menu,
+  closes [issue #133](https://github.com/refined-bitbucket/refined-bitbucket/issues/133),
   [pull request #134](https://github.com/refined-bitbucket/refined-bitbucket/pull/134).
-* **Source Branch**: Adds the source branch name next to the pull request title in the pull request list view and linkifies it along with the target branch, closes [issue #135](https://github.com/refined-bitbucket/refined-bitbucket/issues/135),
+* **Source Branch**: Adds the source branch name next to the pull request title in the
+  pull request list view and linkifies it along with the target branch,
+  closes [issue #135](https://github.com/refined-bitbucket/refined-bitbucket/issues/135),
   [pull request #136](https://github.com/refined-bitbucket/refined-bitbucket/pull/136).
+
+### Bug fixes:
+
+* **Ignore Whitespace**: Only the PRs that were initially loaded with the page were touched,
+  while any PR added dynamically to the DOM were not affected,
+  closes [issue #138](https://github.com/refined-bitbucket/refined-bitbucket/issues/138),
+  [pull request #139](https://github.com/refined-bitbucket/refined-bitbucket/pull/139).
 
 # 3.5.0 (2018-02-01)
 
 ### Features:
 
-* Improve the default font-family and size of lines of code in Source view, closes [issue #35](https://github.com/refined-bitbucket/refined-bitbucket/issues/35), [pull request #126](https://github.com/refined-bitbucket/refined-bitbucket/pull/126).
+* Improve the default font-family and size of lines of code in Source view,
+  closes [issue #35](https://github.com/refined-bitbucket/refined-bitbucket/issues/35), [pull request #126](https://github.com/refined-bitbucket/refined-bitbucket/pull/126).
 
 ### Language support:
 

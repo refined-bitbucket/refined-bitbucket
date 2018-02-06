@@ -1,15 +1,8 @@
-import { isPullRequestList } from '../page-detect';
-
-export default function init() {
-    if (isPullRequestList()) {
-        const links = document.querySelectorAll('a.pull-request-title');
-
-        links.forEach(link => {
-            const url = new URL(link.href);
-            const searchParams = new URLSearchParams(url.search);
-            searchParams.set('w', 1);
-            url.search = searchParams.toString();
-            link.href = url.href;
-        });
-    }
+export default function init(prRow) {
+    const link = prRow.querySelector('a.pull-request-title');
+    const url = new URL(link.href);
+    const searchParams = new URLSearchParams(url.search);
+    searchParams.set('w', 1);
+    url.search = searchParams.toString();
+    link.href = url.href;
 }
