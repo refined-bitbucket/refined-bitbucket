@@ -17,6 +17,10 @@
   while any PR added dynamically to the DOM were not affected,
   closes [issue #138](https://github.com/refined-bitbucket/refined-bitbucket/issues/138),
   [pull request #139](https://github.com/refined-bitbucket/refined-bitbucket/pull/139).
+* **Collapse Diff**: When there are previous versions comments in the diff,
+  the collapse/toggle diff top button was misplaced,
+  closes [issue #122](https://github.com/refined-bitbucket/refined-bitbucket/issues/122),
+  [pull request #140](https://github.com/refined-bitbucket/refined-bitbucket/pull/140).
 
 # 3.5.0 (2018-02-01)
 
