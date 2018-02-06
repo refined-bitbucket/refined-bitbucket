@@ -15,6 +15,7 @@ import occurrencesHighlighter from './occurrences-highlighter';
 import insertPullrequestTemplate from './pullrequest-template';
 import syntaxHighlight from './syntax-highlight';
 import addSidebarCounters from './sidebar-counters';
+import addSourceBranchToPrList from './source-branch';
 
 import waitForPullRequestContents from './wait-for-pullrequest';
 import {
@@ -45,6 +46,10 @@ function init(config) {
     } else if (isPullRequestList()) {
         if (config.ignoreWhitespace) {
             ignoreWhitespace();
+        }
+
+        if (config.addSourceBranchToPrList) {
+            addSourceBranchToPrList();
         }
     } else if (isCreatePullRequestURL() || isEditPullRequestURL()) {
         if (isCreatePullRequestURL() && config.prTemplateEnabled) {

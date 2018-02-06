@@ -5,6 +5,8 @@
 * **Sidebar Counters**: Adds counters of the open or active "Branches" and "Pull requests"
   links in the sidebar navigation menu, closes [issue #133](https://github.com/refined-bitbucket/refined-bitbucket/issues/133),
   [pull request #134](https://github.com/refined-bitbucket/refined-bitbucket/pull/134).
+* **Source Branch**: Adds the source branch name next to the pull request title in the pull request list view and linkifies it along with the target branch, closes [issue #135](https://github.com/refined-bitbucket/refined-bitbucket/issues/135),
+  [pull request #136](https://github.com/refined-bitbucket/refined-bitbucket/pull/136).
 
 # 3.5.0 (2018-02-01)
 

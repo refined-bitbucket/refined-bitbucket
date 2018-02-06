@@ -23,6 +23,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 * Button to load all failed diffs in pull request and commit view.
 * Choose a default merge strategy for your pull requests.
 * Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
+* Adds the source branch name next to the pull request title in the pull request list view and linkifies it along with the target branch.
 * Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
 
     ```
@@ -45,7 +46,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 
 <table>
 	<tr>
-		<th width="50%">
+		<th>
 			Syntax highlighting
 		</th>
 	</tr>
@@ -53,6 +54,20 @@ We all know BitBucket lacks some features that we have in other platforms like G
 		<td>
 			<img src="https://user-images.githubusercontent.com/7514993/32377709-e708312a-c07e-11e7-87a0-05840deb0c48.PNG" alt="syntax-hl1">
 			<img src="https://user-images.githubusercontent.com/7514993/32377721-ef7c6b0a-c07e-11e7-9f3c-b13b2bdce8ab.PNG" alt="syntax-hl2">
+		</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<th>
+			Pull request list <br />
+			<small>(notice the source branch name next to the PR title)</small>
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://user-images.githubusercontent.com/7514993/35834039-2df31738-0aaa-11e8-87b0-e4ae5be45903.png" alt="source-branch">
 		</td>
 	</tr>
 </table>
