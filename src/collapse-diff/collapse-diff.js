@@ -48,9 +48,11 @@ const insertTopButton = section => {
     const diffLoaded = !section.querySelector('div.too-big-message');
     if (diffLoaded) {
         // NOTE: jsdom (used for unit-testing) doesn't support either `after`, `append` nor `insertAdjacentElement`
+        // Insert it after the "More" button
         diffActions.insertBefore(
             button,
-            diffActions.querySelector('div:nth-child(4)')
+            diffActions.querySelector('.aui-dropdown2-trigger-more')
+                .parentElement.nextElementSibling
         );
     } else {
         diffActions.appendChild(button);
