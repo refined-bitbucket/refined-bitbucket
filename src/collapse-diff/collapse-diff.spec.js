@@ -27,7 +27,7 @@ const createNode = () => (
 
                 {/* "More" button */}
                 <div class="aui-buttons">
-                    <button>
+                    <button class="aui-dropdown2-trigger-more">
                         <span>More</span>
                     </button>
                 </div>
@@ -90,10 +90,10 @@ test('should insert TOP button in correct position when diff loads successfully'
     insertCollapseDiffButton(uudiff);
 
     const button = uudiff.querySelector(
-        'div.secondary.diff-actions div:nth-child(4)'
+        'div.secondary.diff-actions div:nth-child(4) .__refined_bitbucket_collapse_diff_button'
     );
 
-    t.truthy(button.querySelector('.__refined_bitbucket_collapse_diff_button'));
+    t.truthy(button);
 });
 
 test('should insert BOTTOM button in correct position when diff loads successfully', async t => {
@@ -102,10 +102,10 @@ test('should insert BOTTOM button in correct position when diff loads successful
     insertCollapseDiffButton(uudiff);
 
     const button = uudiff.querySelector(
-        '.refract-content-container .skipped-container .skipped-bottom.last:last-child'
+        '.refract-content-container .skipped-container .skipped-bottom.last:last-child .__refined_bitbucket_collapse_diff_button'
     );
 
-    t.truthy(button.querySelector('.__refined_bitbucket_collapse_diff_button'));
+    t.truthy(button);
 });
 
 test('should insert BOTTOM button in correct position when diff has no more lines to show', async t => {
@@ -120,7 +120,11 @@ test('should insert BOTTOM button in correct position when diff has no more line
                     <div class="aui-buttons" />
 
                     {/* "More" button */}
-                    <div class="aui-buttons" />
+                    <div class="aui-buttons">
+                        <button class="aui-dropdown2-trigger-more">
+                            <span>More</span>
+                        </button>
+                    </div>
 
                     {/* "Collapse-diff" button should go here */}
                 </div>
@@ -140,10 +144,10 @@ test('should insert BOTTOM button in correct position when diff has no more line
     insertCollapseDiffButton(uudiff);
 
     const button = uudiff.querySelector(
-        '.refract-content-container .skipped-container .skipped-bottom.last:last-child'
+        '.refract-content-container .skipped-container .skipped-bottom.last:last-child .__refined_bitbucket_collapse_diff_button'
     );
 
-    t.truthy(button.querySelector('.__refined_bitbucket_collapse_diff_button'));
+    t.truthy(button);
 });
 
 test('should toggle the diff, toggle messages, toggle the arrow icon and apply bottom border to heading', t => {
@@ -231,5 +235,58 @@ test('should insert button in correct position if diff failed to load', async t 
     const button = uudiff.querySelector(
         'div.secondary.diff-actions .__refined_bitbucket_collapse_diff_button'
     );
+    t.truthy(button);
+});
+
+test('should insert button in correct position if diff has prev version comments', t => {
+    const uudiff = (
+        <section class="bb-udiff" data-filename="filename.js">
+            <div class="heading">
+                <div class="diff-actions secondary" id="side-by-side-1">
+                    {/* Previous versions comments */}
+                    <button
+                        class="eclipsedcount aui-button aui-button-light aui-button-subtle"
+                        data-module="components/tooltip"
+                        original-title="1 comment on previous versions of this file"
+                    >
+                        <span class="aui-badge">1</span>
+                    </button>
+
+                    {/* "Side by side" and "View File" buttons */}
+                    <div class="aui-buttons">
+                        <button href="#side-by-side-1-content">
+                            Side-by-side diff
+                        </button>
+                        <a class="view-file aui-button aui-button-light">
+                            View file
+                        </a>
+                    </div>
+
+                    {/* "Comment" button */}
+                    <div class="aui-buttons">
+                        <button class="add-diff-comment add-file-comment aui-button aui-button-light">
+                            Comment
+                        </button>
+                    </div>
+
+                    {/* "More" button */}
+                    <div class="aui-buttons">
+                        <button class="aui-dropdown2-trigger-more">
+                            <span>More</span>
+                        </button>
+                    </div>
+
+                    {/* "Collapse-diff" button should go here */}
+                </div>
+            </div>
+        </section>
+    );
+
+    insertCollapseDiffButton(uudiff);
+
+    const button = uudiff.querySelector(
+        'div.secondary.diff-actions div:nth-child(5) > button.__refined_bitbucket_collapse_diff_button'
+    );
+
     t.truthy(button);
 });
