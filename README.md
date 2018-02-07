@@ -4,7 +4,7 @@
 <sup>-</sup>
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-# refined-bitbucket
+# Refined Bitbucket
 
 We all know BitBucket lacks some features that we have in other platforms like GitHub, GitLab and others. Originally inspired on Sindre Sorhus' [Refined Github](https://github.com/sindresorhus/refined-github) extension, _refined-bitbucket_ is born as a collaborative project by a few developers to improve upon those holes, and even add some additional functionality that will enhance the overall user experience.
 
@@ -23,7 +23,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 * Button to load all failed diffs in pull request and commit view.
 * Choose a default merge strategy for your pull requests.
 * Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
-* Adds the source branch name next to the pull request title in the pull request list view and linkifies it along with the target branch.
+* Add source branch, linkify branch names, and add creation date to each pull request row in pull request list.
 * Don't carry pluses and minuses to clipboard when copying diff's contents.
 * Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
 
@@ -63,12 +63,12 @@ We all know BitBucket lacks some features that we have in other platforms like G
 	<tr>
 		<th>
 			Pull request list <br />
-			<small>(notice the source branch name next to the PR title)</small>
+			<small>(notice the source branch name and creation date)</small>
 		</th>
 	</tr>
 	<tr>
 		<td>
-			<img src="https://user-images.githubusercontent.com/7514993/35834039-2df31738-0aaa-11e8-87b0-e4ae5be45903.png" alt="source-branch">
+			<img src="https://user-images.githubusercontent.com/7514993/35921778-0511d8d8-0bf2-11e8-933a-6d333e75335e.png" alt="source-branch">
 		</td>
 	</tr>
 </table>
