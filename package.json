@@ -1,12 +1,11 @@
 {
   "name": "refined-bitbucket",
   "description": "Chrome extension that improves BitBucket's user interface",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
-    "prettier":
-      "prettier --single-quote --write \"./**/*.{js,jsx,json,css,md}\"",
+    "prettier": "prettier --single-quote --write \"./**/*.{js,jsx,json,css,md}\"",
     "xo": "xo --fix *.js {src,test,scripts}/**/*.js !src/vendor/prism.js",
     "lint": "npm run prettier && npm run xo",
     "ava": "cross-env BABEL_ENV=testing ava",
@@ -32,7 +31,12 @@
     "type": "git",
     "url": "git+https://github.com/refined-bitbucket/refined-bitbucket.git"
   },
-  "keywords": ["bitbucket", "highlight", "syntax-highlight", "prism"],
+  "keywords": [
+    "bitbucket",
+    "highlight",
+    "syntax-highlight",
+    "prism"
+  ],
   "author": "andremw",
   "contributors": [
     {
@@ -93,7 +97,10 @@
     "semicolon": true,
     "esnext": true,
     "space": 4,
-    "envs": ["browser", "jquery"],
+    "envs": [
+      "browser",
+      "jquery"
+    ],
     "rules": {
       "no-unused-vars": [
         2,
@@ -113,14 +120,23 @@
     }
   },
   "ava": {
-    "files": ["src/**/*.spec.js"],
-    "source": ["src/**/*.js"],
-    "require": ["babel-register", "./scripts/ignore-utils"],
+    "files": [
+      "src/**/*.spec.js"
+    ],
+    "source": [
+      "src/**/*.js"
+    ],
+    "require": [
+      "babel-register",
+      "./scripts/ignore-utils"
+    ],
     "babel": "inherit",
     "timeout": "10s"
   },
   "babel": {
-    "presets": ["@ava/stage-4"],
+    "presets": [
+      "@ava/stage-4"
+    ],
     "plugins": [
       [
         "transform-react-jsx",
@@ -138,7 +154,9 @@
     ],
     "env": {
       "testing": {
-        "plugins": ["transform-es2015-modules-commonjs"]
+        "plugins": [
+          "transform-es2015-modules-commonjs"
+        ]
       }
     }
   }
