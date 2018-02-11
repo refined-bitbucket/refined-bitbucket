@@ -1,4 +1,7 @@
-# Next Version
+# 3.6.0 (2018-02-11)
+
+Huge thanks to [@atdrago](http://github.com/atdrago) and [@dpekkle](http://github.com/dpekkle) for helping out with testing and identifying several issues
+in this release!
 
 ### Features:
 
@@ -31,10 +34,10 @@
 
 * **Header File extension**: Added Header File extension (\*.hpp), commonly used
   for tempalte implementations, or directly as C++ header extension, [pull request #132](https://github.com/refined-bitbucket/refined-bitbucket/pull/132).
-* Updated PrismJS to v1.11.0 to add new language definitions
-  that were not supported in the previous version, like TSX, closes [issue #130](https://github.com/refined-bitbucket/refined-bitbucket/issues/130), [pull request #137](https://github.com/refined-bitbucket/refined-bitbucket/pull/137).
 * **Perl**: Add support for the Perl module extension (\*.pm),
   [pull request #145](https://github.com/refined-bitbucket/refined-bitbucket/pull/145).
+* Updated PrismJS to v1.11.0 to add new language definitions
+  that were not supported in the previous version, like TSX, closes [issue #130](https://github.com/refined-bitbucket/refined-bitbucket/issues/130), [pull request #137](https://github.com/refined-bitbucket/refined-bitbucket/pull/137).
 
 # 3.5.0 (2018-02-01)
 

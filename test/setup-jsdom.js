@@ -13,6 +13,7 @@ global.Text = dom.window.Text;
 global.HTMLDivElement = dom.window.HTMLDivElement;
 global.HTMLTextAreaElement = dom.window.HTMLTextAreaElement;
 global.HTMLSpanElement = dom.window.HTMLSpanElement;
+global.HTMLCollection = dom.window.HTMLCollection;
 
 global.requestAnimationFrame = fn => setTimeout(fn, 16);
 global.cancelAnimationFrame = id => clearTimeout(id);
