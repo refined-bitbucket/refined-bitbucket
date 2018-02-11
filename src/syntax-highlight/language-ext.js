@@ -43,6 +43,8 @@ module.exports = {
     '.m': 'language-objectivec',
     '.md': 'language-markdown',
     '.pl': 'language-perl',
+    '.pm': 'language-perl',
+    '.t': 'language-perl',
     '.py': 'language-python',
     '.php': 'language-php',
     '.phtml': 'language-php',
