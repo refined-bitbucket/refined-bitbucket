@@ -11,10 +11,6 @@
   closes [issue #135](https://github.com/refined-bitbucket/refined-bitbucket/issues/135),
   [pull request #136](https://github.com/refined-bitbucket/refined-bitbucket/pull/136).
 
-### Language support:
-
-* **Perl**: Add support for the Perl module extension (\*.pm).
-
 ### Bug fixes:
 
 * **Ignore Whitespace**: Only the PRs that were initially loaded with the page were touched,
@@ -25,6 +21,15 @@
   the collapse/toggle diff top button was misplaced,
   closes [issue #122](https://github.com/refined-bitbucket/refined-bitbucket/issues/122),
   [pull request #140](https://github.com/refined-bitbucket/refined-bitbucket/pull/140).
+
+### Language support:
+
+* **Header File extension**: Added Header File extension (\*.hpp), commonly used
+  for tempalte implementations, or directly as C++ header extension, [pull request #132](https://github.com/refined-bitbucket/refined-bitbucket/pull/132).
+* Updated PrismJS to v1.11.0 to add new language definitions
+  that were not supported in the previous version, like TSX, closes [issue #130](https://github.com/refined-bitbucket/refined-bitbucket/issues/130), [pull request #137](https://github.com/refined-bitbucket/refined-bitbucket/pull/137).
+* **Perl**: Add support for the Perl module extension (\*.pm),
+  [pull request #145](https://github.com/refined-bitbucket/refined-bitbucket/pull/145).
 
 # 3.5.0 (2018-02-01)
 

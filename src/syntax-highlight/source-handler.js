@@ -1,13 +1,8 @@
+/* globals Prism */
+
 'use strict';
 
 import languagesExtensions from './language-ext';
-
-export {
-    getCodeElementFromPre,
-    getClassBasedOnExtension,
-    getFilepathFromElement,
-    getExtension
-};
 
 /**
  * Creates a <code> element with the content of the preElement passed as parameter.
@@ -15,7 +10,7 @@ export {
  * @param  {Element} preElement An HTML <pre> element. Whatever else you pass.. Is not my fault.
  * @return {Element} A <code> element.
  */
-function getCodeElementFromPre(preElement) {
+export function getCodeElementFromPre(preElement) {
     if (!preElement.childElementCount) {
         const codeElement = document.createElement('code');
         codeElement.innerHTML = preElement.innerHTML;
@@ -32,10 +27,20 @@ function getCodeElementFromPre(preElement) {
  * @param  {Element} element An HTML element. Pass anything different and bear the consequences :)
  * @return {String} The class extracted from the element's file path.
  */
-function getClassBasedOnExtension(element) {
+export function getClassBasedOnExtension(element) {
     const filePath = getFilepathFromElement(element);
-    const fileExtension = getExtension(filePath);
-    return languagesExtensions[fileExtension.toLowerCase()] || '';
+    const fileExtension = getExtension(filePath).toLowerCase();
+
+    if (fileExtension in languagesExtensions) {
+        return languagesExtensions[fileExtension];
+    }
+
+    const fileExtensionWithoutDot = fileExtension.slice(1);
+    if (fileExtensionWithoutDot in Prism.languages) {
+        return `language-${fileExtensionWithoutDot}`;
+    }
+
+    return '';
 }
 
 /**
@@ -44,7 +49,7 @@ function getClassBasedOnExtension(element) {
  * @param  {Element} element An HTML element. Pass anything different and bear the consequences :)
  * @return {String} The filename
  */
-function getFilepathFromElement(element) {
+export function getFilepathFromElement(element) {
     const filepath =
         element.getAttribute('data-identifier') ||
         element.getAttribute('data-filename') ||
@@ -57,6 +62,6 @@ function getFilepathFromElement(element) {
  * @param {String} filepath
  * @return {String}
  */
-function getExtension(filepath) {
+export function getExtension(filepath) {
     return `.${filepath.slice(((filepath.lastIndexOf('.') - 1) >>> 0) + 2)}`;
 }
