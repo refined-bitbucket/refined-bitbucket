@@ -21,6 +21,11 @@
   the collapse/toggle diff top button was misplaced,
   closes [issue #122](https://github.com/refined-bitbucket/refined-bitbucket/issues/122),
   [pull request #140](https://github.com/refined-bitbucket/refined-bitbucket/pull/140).
+* **Syntax Highlighting**: Syntax highlighting was not working for anyone who installed the
+  extension for the first time on version 3.4.0 or 3.5.0, due to the refactoring made
+  to the Options mechanism in [pull request #107](https://github.com/refined-bitbucket/refined-bitbucket/pull/107),
+  closes [issue #143](https://github.com/refined-bitbucket/refined-bitbucket/issues/143),
+  [pull request #146](https://github.com/refined-bitbucket/refined-bitbucket/pull/146).
 
 ### Language support:
 
