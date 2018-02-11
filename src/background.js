@@ -18,7 +18,7 @@ chrome.runtime.onInstalled.addListener(details => {
 chrome.storage.sync.get(null, deprecatedOptions => {
     new OptionsSync().define({
         defaults: {
-            highlightSyntax: true,
+            syntaxHighlight: true,
             highlightOcurrences: true,
             ignoreWhitespace: true,
             keymap: true,
