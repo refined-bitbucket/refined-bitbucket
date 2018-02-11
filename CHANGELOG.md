@@ -11,6 +11,10 @@
   closes [issue #135](https://github.com/refined-bitbucket/refined-bitbucket/issues/135),
   [pull request #136](https://github.com/refined-bitbucket/refined-bitbucket/pull/136).
 
+### Language support:
+
+* **Perl**: Expanded Perl support to include Perl module and test file extensions (\*.t/\*.pm).
+
 ### Bug fixes:
 
 * **Ignore Whitespace**: Only the PRs that were initially loaded with the page were touched,
