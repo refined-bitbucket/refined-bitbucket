@@ -10,7 +10,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 
 ## Current features
 
-* Adds syntax highlighting for pull requests and commits. [See the full list of enabled languages](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
+* Adds syntax highlighting for pull requests and commits. See the full list of enabled languages [here][prismjs-languages], and then [here][language-ext]. [Test them here](http://prismjs.com/test.html). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
 * Double click on a word to highlight all occurrences.
 * ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
 * Key binding feature, which allows for quicker navigation through pull requests.
@@ -202,3 +202,5 @@ MIT © [refined-bitbucket](https://github.com/refined-bitbucket)
 [chrome-install]: https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf?utm_source=chrome-ntp-icon
 [firefox-install]: https://addons.mozilla.org/en-US/firefox/addon/refined-bitbucket-/
 [tab-image]: https://cloud.githubusercontent.com/assets/755669/18594922/1c74c184-7bf7-11e6-887d-859fb6206c65.png
+[prismjs-languages]: http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript+abap+actionscript+ada+apacheconf+apl+applescript+c+asciidoc+asm6502+aspnet+autohotkey+autoit+bash+basic+batch+bison+brainfuck+bro+cpp+csharp+arduino+coffeescript+ruby+csp+css-extras+d+dart+diff+django+docker+eiffel+elixir+elm+erlang+fsharp+flow+fortran+gherkin+git+glsl+go+graphql+groovy+haml+handlebars+haskell+haxe+http+hpkp+hsts+ichigojam+icon+inform7+ini+io+j+java+jolie+json+julia+keyman+kotlin+latex+less+livescript+lolcode+lua+makefile+markdown+matlab+mel+mizar+monkey+n4js+nasm+nginx+nim+nix+nsis+objectivec+ocaml+opencl+oz+parigp+parser+pascal+perl+php+php-extras+powershell+processing+prolog+properties+protobuf+pug+puppet+pure+python+q+qore+r+jsx+typescript+renpy+reason+rest+rip+roboconf+crystal+rust+sas+sass+scss+scala+scheme+smalltalk+smarty+sql+stylus+swift+tcl+textile+twig+tsx+vbnet+verilog+vhdl+vim+wiki+xeora+xojo+yaml#category-languages
+[language-ext]: https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/src/syntax-highlight/language-ext.js

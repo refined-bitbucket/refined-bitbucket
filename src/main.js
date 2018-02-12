@@ -116,7 +116,7 @@ function codeReviewFeatures(config, getNodePromise) {
                 }
                 autocollapse.collapseIfNeeded(this);
 
-                if (config.highlightSyntax && !diffIgnore.isIgnored(this)) {
+                if (config.syntaxHighlight && !diffIgnore.isIgnored(this)) {
                     syntaxHighlight(this);
                 }
             });
