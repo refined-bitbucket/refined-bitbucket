@@ -3,6 +3,7 @@
 ### Language support:
 
 * **Perl**: Expanded Perl support to include Perl test files and template toolkit (\*.t, \*.tt).
+  [pull request #148](https://github.com/refined-bitbucket/refined-bitbucket/pull/148).
 
 # 3.6.0 (2018-02-11)
 
