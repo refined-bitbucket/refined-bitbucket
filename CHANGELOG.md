@@ -1,3 +1,10 @@
+# Next Release
+
+### Language support:
+
+* **Perl**: Expanded Perl support to include Perl test files and template toolkit (\*.t, \*.tt).
+  [pull request #148](https://github.com/refined-bitbucket/refined-bitbucket/pull/148).
+
 # 3.6.0 (2018-02-11)
 
 Huge thanks to [@atdrago](http://github.com/atdrago) and [@dpekkle](http://github.com/dpekkle) for helping out with testing and identifying several issues
