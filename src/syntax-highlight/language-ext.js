@@ -52,6 +52,8 @@ module.exports = {
     '.styl': 'language-stylus',
     '.svcmap': 'language-markup',
     '.tpl': 'language-smarty',
+    '.t': 'language-perl',
+    '.tt': 'language-markup'
     '.ts': 'language-typescript',
     '.tsx': 'language-tsx',
     '.vue': 'language-jsx',
