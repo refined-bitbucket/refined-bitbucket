@@ -35,6 +35,7 @@ module.exports = {
     '.kt': 'language-kotlin',
     '.m': 'language-objectivec',
     '.md': 'language-markdown',
+    '.php': 'language-php',
     '.php3': 'language-php',
     '.php4': 'language-php',
     '.php5': 'language-php',
