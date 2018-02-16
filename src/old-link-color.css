@@ -1,0 +1,4 @@
+.pull-request-title,
+.repository-list--name > a {
+    color: #0052cc !important;
+}
