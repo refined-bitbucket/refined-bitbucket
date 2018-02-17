@@ -1,16 +1,14 @@
 # Next Release
 
-### Language support:
-
-* **Perl**: Expanded Perl support to include Perl test files and template toolkit (\*.t, \*.tt).
-  [pull request #148](https://github.com/refined-bitbucket/refined-bitbucket/pull/148).
-  
-# 3.7.0 (2018-02-16)
-
 ### Improvements:
 
 * Bring old link color (blue) back to pull request and repository titles,
 [pull request #153](https://github.com/refined-bitbucket/refined-bitbucket/pull/153).
+
+### Language support:
+
+* **Perl**: Expanded Perl support to include Perl test files and template toolkit (\*.t, \*.tt).
+  [pull request #148](https://github.com/refined-bitbucket/refined-bitbucket/pull/148).
 
 # 3.6.0 (2018-02-11)
 
