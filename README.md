@@ -136,6 +136,20 @@ We all know BitBucket lacks some features that we have in other platforms like G
 	</tr>
 </table>
 
+<table>
+    <tr>
+        <th>
+            Old (blue) link color
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <img src="https://user-images.githubusercontent.com/6213695/36309322-76d26544-1324-11e8-8959-4d94be38d802.png"/>
+            <img src="https://user-images.githubusercontent.com/6213695/36309321-76b5a922-1324-11e8-85bd-c476b9818b00.png"/>
+        </td>
+    </tr>
+</table>
+
 ## Installing
 
 _refined-bitbucket_ is available on the [Google Chrome Web Store][chrome-install] and [Add-ons for Firefox][firefox-install]. When installed, go check the extension's Options to customize it to your needs.
