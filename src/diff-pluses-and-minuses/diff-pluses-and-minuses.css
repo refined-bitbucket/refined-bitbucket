@@ -1,0 +1,9 @@
+.addition > .source:before {
+    content: '+';
+    color: #a67f59;
+}
+
+.deletion > .source:before {
+    content: '-';
+    color: #a67f59;
+}

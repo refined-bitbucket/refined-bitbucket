@@ -49,3 +49,7 @@ window.Element.prototype.closest =
 // `scrollIntoView` not supported by jsdom,
 // shim with a no-op
 window.Element.prototype.scrollIntoView = () => {};
+
+require('mutationobserver-shim');
+
+global.MutationObserver = window.MutationObserver;
