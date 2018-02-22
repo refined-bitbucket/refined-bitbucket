@@ -8,6 +8,14 @@
   closes [issue #149](https://github.com/refined-bitbucket/refined-bitbucket/issues/149),
   [pull request #156](https://github.com/refined-bitbucket/refined-bitbucket/pull/156).
 
+### Bug fixes:
+
+* The "Close anchor branch" checkbox was being checked even
+  in the PR editing screen. It's been fixed now so that it only works
+  in the creation screen, like how it should've been all along,
+  closes [issue #155](https://github.com/refined-bitbucket/refined-bitbucket/issues/155),
+  [pull request #157](https://github.com/refined-bitbucket/refined-bitbucket/pull/157).
+
 ### Language support:
 
 * **Perl**: Expanded Perl support to include Perl test files and template toolkit (\*.t, \*.tt).
