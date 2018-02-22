@@ -23,7 +23,6 @@ import waitForPullRequestContents from './wait-for-pullrequest';
 import {
     isPullRequest,
     isCreatePullRequestURL,
-    isEditPullRequestURL,
     isPullRequestList,
     isCommit
 } from './page-detect';
@@ -47,8 +46,8 @@ function init(config) {
         pullrequestRelatedFeatures(config);
     } else if (isPullRequestList()) {
         pullrequestListRelatedFeatures(config);
-    } else if (isCreatePullRequestURL() || isEditPullRequestURL()) {
-        if (isCreatePullRequestURL() && config.prTemplateEnabled) {
+    } else if (isCreatePullRequestURL()) {
+        if (config.prTemplateEnabled) {
             insertPullrequestTemplate(config.prTemplateUrl);
         }
 
