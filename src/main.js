@@ -8,6 +8,7 @@ import closeAnchorBranch from './close-anchor-branch';
 import collapseDiff from './collapse-diff';
 import defaultMergeStrategy from './default-merge-strategy';
 import diffIgnore from './diff-ignore';
+import removeDiffsPlusesAndMinuses from './diff-pluses-and-minuses';
 import ignoreWhitespace from './ignore-whitespace';
 import keymap from './keymap';
 import linkifyTargetBranch from './linkify-target-branch';
@@ -115,12 +116,20 @@ function codeReviewFeatures(config, getNodePromise) {
             // have to observe the DOM because some sections
             // load asynchronously by user demand
             node.observeSelector('section.bb-udiff', function() {
+                if (diffIgnore.isIgnored(this)) {
+                    return;
+                }
+
                 if (config.collapseDiff) {
                     collapseDiff.insertCollapseDiffButton(this);
                 }
                 autocollapse.collapseIfNeeded(this);
 
-                if (config.syntaxHighlight && !diffIgnore.isIgnored(this)) {
+                if (config.diffPlusesAndMinuses) {
+                    removeDiffsPlusesAndMinuses(this);
+                }
+
+                if (config.syntaxHighlight) {
                     syntaxHighlight(this);
                 }
             });

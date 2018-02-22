@@ -24,6 +24,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 * Choose a default merge strategy for your pull requests.
 * Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
 * Adds the source branch name next to the pull request title in the pull request list view and linkifies it along with the target branch.
+* Don't carry pluses and minuses to clipboard when copying diff's contents.
 * Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
 
     ```

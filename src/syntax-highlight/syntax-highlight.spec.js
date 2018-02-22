@@ -3,10 +3,6 @@ import test from 'ava';
 
 import '../../test/setup-jsdom';
 
-require('mutationobserver-shim');
-
-global.MutationObserver = window.MutationObserver;
-
 require('../vendor/prism.js');
 
 const syntaxHighlight = require('.').default;

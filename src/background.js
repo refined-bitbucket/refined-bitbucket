@@ -29,6 +29,7 @@ chrome.storage.sync.get(null, deprecatedOptions => {
             oldLinkColor: true,
             addSidebarCounters: true,
             addSourceBranchToPrList: true,
+            diffPlusesAndMinuses: true,
             prTemplateEnabled: true,
             defaultMergeStrategy: 'merge_commit',
             autocollapsePaths: ['package-lock.json', 'yarn.lock'],
