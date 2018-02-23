@@ -5,21 +5,6 @@
 import languagesExtensions from './language-ext';
 
 /**
- * Creates a <code> element with the content of the preElement passed as parameter.
- *
- * @param  {Element} preElement An HTML <pre> element. Whatever else you pass.. Is not my fault.
- * @return {Element} A <code> element.
- */
-export function getCodeElementFromPre(preElement) {
-    if (!preElement.childElementCount) {
-        const codeElement = document.createElement('code');
-        codeElement.innerHTML = preElement.innerHTML;
-        preElement.innerHTML = codeElement.outerHTML;
-    }
-    return preElement;
-}
-
-/**
  * Retrieves a class according to the element data-filename or data-path attribute.
  * For example, calling it passing an element with a data-filename (or data-path)
  * like "/path/to/file/filename.java" would return "language-java".

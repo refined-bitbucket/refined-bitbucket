@@ -5,10 +5,7 @@
 import { h } from 'dom-chef';
 import elementReady from 'element-ready';
 import debounce from '../debounce';
-import {
-    getClassBasedOnExtension,
-    getCodeElementFromPre
-} from './source-handler';
+import { getClassBasedOnExtension } from './source-handler';
 
 import './prism.css';
 import './fix.css';
@@ -21,7 +18,7 @@ const codeContainerObserver = new MutationObserver(mutations => {
 
 let debouncedSideDiffHandler = null;
 
-export default function syntaxHighlight(diff) {
+export default function syntaxHighlight(diff, afterWordDiff) {
     // File was only renamed, there's no diff
     if (diff.querySelector('.content-container')) {
         return;
@@ -41,7 +38,10 @@ export default function syntaxHighlight(diff) {
         diff.classList.add(languageClass);
     }
 
-    syntaxHighlightSourceCodeLines(diff);
+    const $diff = $(diff);
+    syntaxHighlightSourceCodeLines($diff);
+
+    afterWordDiff(() => syntaxHighlightSourceCodeLines($diff));
 
     const codeContainer = diff.querySelector('.refract-content-container');
     codeContainerObserver.observe(codeContainer, { childList: true });
@@ -66,13 +66,12 @@ export default function syntaxHighlight(diff) {
     }
 }
 
-function syntaxHighlightSourceCodeLines(diff) {
+function syntaxHighlightSourceCodeLines($diff) {
     const sourceLines = Array.from(
-        diff.querySelectorAll('pre:not([class*=language])')
+        $diff.find('pre:not([class*=language]), pre:has(ins), pre:has(del)')
     );
 
     sourceLines.forEach(preElement => {
-        preElement = getCodeElementFromPre(preElement);
         Prism.highlightElement(preElement);
     });
 }
@@ -83,7 +82,8 @@ async function highlightSideDiffAsync({ languageClass, diffNodeSelector }) {
 
     await elementReady(`${diffNodeSelector} pre`, { target: sideBySide });
 
-    syntaxHighlightSourceCodeLines(sideBySide);
+    const $sideBySide = $(sideBySide);
+    syntaxHighlightSourceCodeLines($sideBySide);
 }
 
 async function listenForSideDiffScrollAsync(args) {

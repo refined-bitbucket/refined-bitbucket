@@ -1,7 +1,10 @@
 import test from 'ava';
 import { h } from 'dom-chef';
 
-import { execute, observeForWordDiffs } from './diff-pluses-and-minuses';
+import observeForWordDiffs from '../observe-for-word-diffs';
+import removeDiffsPlusesAndMinuses, {
+    execute
+} from './diff-pluses-and-minuses';
 
 import '../../test/setup-jsdom';
 
@@ -188,13 +191,6 @@ test('should remove pluses and minuses when diff has been rerendered to include 
         </section>
     );
 
-    const observingPromise = observeForWordDiffs(uudiff);
-
-    const diffContentContainer = uudiff.querySelector(
-        'div.diff-container > div.diff-content-container.refract-container'
-    );
-    diffContentContainer.classList.add('word-diff');
-
     const expected = (
         <section class="bb-udiff" data-filename="filename.js">
             <div class="diff-container">
@@ -209,7 +205,15 @@ test('should remove pluses and minuses when diff has been rerendered to include 
         </section>
     );
 
-    await observingPromise;
+    //
+
+    const afterWordDiff = observeForWordDiffs(uudiff);
+    removeDiffsPlusesAndMinuses(uudiff, afterWordDiff);
+
+    const diffContentContainer = uudiff.querySelector(
+        'div.diff-container > div.diff-content-container.refract-container'
+    );
+    diffContentContainer.classList.add('word-diff');
 
     t.is(uudiff.outerHTML, expected.outerHTML);
 });
@@ -240,7 +244,7 @@ test('should do nothing and not throw or error when diff fails to load', async t
 
     const expected = uudiff.cloneNode(true);
 
-    await observeForWordDiffs(uudiff);
+    execute(uudiff);
 
     t.is(uudiff.outerHTML, expected.outerHTML);
 });

@@ -8,6 +8,12 @@
   closes [issue #149](https://github.com/refined-bitbucket/refined-bitbucket/issues/149),
   [pull request #156](https://github.com/refined-bitbucket/refined-bitbucket/pull/156).
 
+### Improvement:
+
+* Word diffs no longer remove or break syntax highlighting.
+  closes [issue #63](https://github.com/refined-bitbucket/refined-bitbucket/issues/63),
+  [pull request #158](https://github.com/refined-bitbucket/refined-bitbucket/pull/158).
+
 ### Bug fixes:
 
 * The "Close anchor branch" checkbox was being checked even

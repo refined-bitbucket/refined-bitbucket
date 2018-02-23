@@ -26,53 +26,7 @@ export const execute = diff => {
         });
 };
 
-/**
- * Keep watching in case the diff is altered to include
- * word diffs, which rerenders the diffs with <ins> and <del> tags
- * and ends up removing any previous manipulation we did with it :(
- *
- * @param {HTMLElement} diff
- */
-export const observeForWordDiffs = diff => {
-    return new Promise(resolve => {
-        const diffContentContainer = diff.querySelector(
-            'div.diff-container > div.diff-content-container.refract-container'
-        );
-
-        // Return earlier if couldn't find the element,
-        // which happens when the diff failed to load
-        if (!diffContentContainer) {
-            resolve();
-            return;
-        }
-
-        const observer = new MutationObserver(function(mutations) {
-            const isWordDiff = mutations.every(m =>
-                m.target.classList.contains('word-diff')
-            );
-
-            if (isWordDiff) {
-                this.disconnect();
-                execute(diff);
-                resolve();
-            }
-        });
-
-        observer.observe(diffContentContainer, {
-            attributes: true,
-            attributeFilter: ['class']
-        });
-
-        // Disconnect the observer after an arbitrary 20 seconds,
-        // to release browser resources.
-        setTimeout(() => {
-            observer.disconnect();
-            resolve();
-        }, 20000);
-    });
-};
-
-export default function removeDiffsPlusesAndMinuses(diff) {
+export default function removeDiffsPlusesAndMinuses(diff, afterWordDiff) {
     if (!stylesImported) {
         stylesImported = true;
         require('./diff-pluses-and-minuses.css');
@@ -80,5 +34,5 @@ export default function removeDiffsPlusesAndMinuses(diff) {
 
     execute(diff);
 
-    observeForWordDiffs(diff);
+    afterWordDiff(() => execute(diff));
 }
