@@ -37,6 +37,10 @@ in this release!
   pull request list view and linkifies it along with the target branch,
   closes [issue #135](https://github.com/refined-bitbucket/refined-bitbucket/issues/135),
   [pull request #136](https://github.com/refined-bitbucket/refined-bitbucket/pull/136).
+* **Augment PR Entry**: Include the creation date of the pull request in the pull request
+  list view,
+  closes [issue #141](https://github.com/refined-bitbucket/refined-bitbucket/issues/141),
+  [pull request #142](https://github.com/refined-bitbucket/refined-bitbucket/pull/142).
 
 ### Bug fixes:
 

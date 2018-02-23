@@ -3,6 +3,7 @@ global.jQuery = global.$ = require('jquery');
 
 import OptionsSync from 'webext-options-sync';
 
+import augmentPrEntry from './augment-pr-entry';
 import autocollapse from './autocollapse';
 import closeAnchorBranch from './close-anchor-branch';
 import collapseDiff from './collapse-diff';
@@ -16,7 +17,6 @@ import loadAllDiffs from './load-all-diffs';
 import occurrencesHighlighter from './occurrences-highlighter';
 import insertPullrequestTemplate from './pullrequest-template';
 import addSidebarCounters from './sidebar-counters';
-import addSourceBranch from './source-branch';
 import syntaxHighlight from './syntax-highlight';
 
 import waitForPullRequestContents from './wait-for-pullrequest';
@@ -87,9 +87,9 @@ function pullrequestListRelatedFeatures(config) {
             ignoreWhitespace(this);
         }
 
-        if (config.addSourceBranchToPrList) {
+        if (config.augmentPrEntry) {
             linkifyTargetBranch(this);
-            addSourceBranch(this);
+            augmentPrEntry(this);
         }
     });
 }

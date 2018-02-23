@@ -91,6 +91,7 @@
     "marked": "^0.3.12",
     "mousetrap": "^1.6.1",
     "selector-observer": "^1.1.0",
+    "time-ago": "^0.2.1",
     "webext-options-sync": "^0.15.0"
   },
   "xo": {
