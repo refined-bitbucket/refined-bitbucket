@@ -1,3 +1,3 @@
-import { init, isIgnored } from './diff-ignore';
+import { init, execute, isIgnored } from './diff-ignore';
 
-export default { init, isIgnored };
+export default { init, execute, isIgnored };

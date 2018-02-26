@@ -1,3 +1,11 @@
+# Next Version
+
+### Improvements:
+
+* Code review features now available in branch compare view,
+  closes [issue #128](https://github.com/refined-bitbucket/refined-bitbucket/issues/128),
+  [pull request #159](https://github.com/refined-bitbucket/refined-bitbucket/pull/159).
+
 # 3.7.0 (2018-02-26)
 
 I'm very happy with this release since a bug that existed since the initial release of the extension has been

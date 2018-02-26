@@ -1,3 +1,1 @@
-import { init } from './occurrences-highlighter';
-
-export default { init };
+export { default } from './occurrences-highlighter';

@@ -1,15 +1,13 @@
 'use strict';
 
-import elementReady from 'element-ready';
-
 import 'jquery-highlight';
 
 import './occurrences-highlighter.css';
 
-export async function init() {
-    await elementReady('.diff-container');
+export default function occurrencesHighlighter(diff) {
+    const diffContentContainer = diff.querySelector('.diff-content-container');
 
-    $('.diff-content-container').dblclick(function() {
+    $(diffContentContainer).dblclick(function() {
         highlightOccurrences(this);
     });
 }

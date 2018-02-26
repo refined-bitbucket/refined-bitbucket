@@ -5,6 +5,9 @@ import { h } from 'dom-chef';
 
 export async function init(node) {
     // Wait for all sections to be loaded into the view
+    await elementReady('#commit-files-summary > li', {
+        target: node
+    });
     const filesChanged = node.querySelectorAll('#commit-files-summary > li');
 
     const promises = [...filesChanged].map(li => {
@@ -24,7 +27,7 @@ export async function init(node) {
         </button>
     );
     const summarySection = node.querySelector(
-        '#pullrequest-diff > section.main, section#commit-summary'
+        '#pullrequest-diff > section.main, section#commit-summary, ul#commit-files-summary'
     );
     summarySection.appendChild(button);
 

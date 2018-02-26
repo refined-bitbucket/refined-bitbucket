@@ -19,14 +19,14 @@ import insertPullrequestTemplate from './pullrequest-template';
 import addSidebarCounters from './sidebar-counters';
 import syntaxHighlight from './syntax-highlight';
 
-import waitForPullRequestContents from './wait-for-pullrequest';
 import observeForWordDiffs from './observe-for-word-diffs';
 
 import {
     isPullRequest,
     isCreatePullRequestURL,
     isPullRequestList,
-    isCommit
+    isCommit,
+    isBranch
 } from './page-detect';
 
 import 'selector-observer';
@@ -42,9 +42,10 @@ new OptionsSync().getAll().then(options => {
 });
 
 function init(config) {
-    if (isPullRequest()) {
-        const getPullrequestNodePromise = waitForPullRequestContents();
-        codeReviewFeatures(config, getPullrequestNodePromise);
+    if (isBranch()) {
+        codeReviewFeatures(config);
+    } else if (isPullRequest()) {
+        codeReviewFeatures(config);
         pullrequestRelatedFeatures(config);
     } else if (isPullRequestList()) {
         pullrequestListRelatedFeatures(config);
@@ -57,10 +58,7 @@ function init(config) {
             closeAnchorBranch();
         }
     } else if (isCommit()) {
-        const getCommitsNodePromise = Promise.resolve(
-            document.getElementById('commit')
-        );
-        codeReviewFeatures(config, getCommitsNodePromise);
+        codeReviewFeatures(config);
     }
 
     if (config.improveFonts) {
@@ -92,53 +90,74 @@ function pullrequestListRelatedFeatures(config) {
     });
 }
 
-function codeReviewFeatures(config, getNodePromise) {
-    if (config.highlightOcurrences) {
-        occurrencesHighlighter.init();
-    }
-
+function codeReviewFeatures(config) {
     autocollapse.init(
         config.autocollapsePaths,
         config.autocollapseDeletedFiles
     );
 
-    getNodePromise
-        .then(node => {
-            diffIgnore.init(node, config.ignorePaths);
+    diffIgnore.init(config.ignorePaths);
 
-            if (config.loadAllDiffs) {
-                loadAllDiffs.init(node);
+    const manipulateSummary = summaryNode => {
+        if (config.ignorePaths.length) {
+            diffIgnore.execute(summaryNode);
+        }
+
+        if (config.loadAllDiffs) {
+            loadAllDiffs.init(summaryNode);
+        }
+    };
+
+    const manipulateDiff = diff => {
+        if (diffIgnore.isIgnored(diff)) {
+            return;
+        }
+
+        if (config.highlightOcurrences) {
+            occurrencesHighlighter(diff);
+        }
+
+        if (config.collapseDiff) {
+            collapseDiff.insertCollapseDiffButton(diff);
+        }
+
+        autocollapse.collapseIfNeeded(diff);
+
+        if (config.diffPlusesAndMinuses || config.syntaxHighlight) {
+            const afterWordDiff = observeForWordDiffs(diff);
+
+            if (config.diffPlusesAndMinuses) {
+                removeDiffsPlusesAndMinuses(diff, afterWordDiff);
             }
 
-            // have to observe the DOM because some sections
-            // load asynchronously by user demand
-            node.observeSelector('section.bb-udiff', function() {
-                if (diffIgnore.isIgnored(this)) {
-                    return;
+            if (config.syntaxHighlight) {
+                syntaxHighlight(diff, afterWordDiff);
+            }
+        }
+    };
+
+    const summarySelectors = '#compare-diff-content, #pr-tab-content, #commit';
+    const diffSelector = 'section.bb-udiff';
+
+    // have to observe the DOM because some sections
+    // load asynchronously by user interactions
+    document.body.observeSelector(
+        [summarySelectors, diffSelector].join(', '),
+        function() {
+            try {
+                if (this.matches(summarySelectors)) {
+                    return manipulateSummary(this);
                 }
 
-                if (config.collapseDiff) {
-                    collapseDiff.insertCollapseDiffButton(this);
+                if (this.matches(diffSelector)) {
+                    return manipulateDiff(this);
                 }
-                autocollapse.collapseIfNeeded(this);
-
-                if (config.diffPlusesAndMinuses || config.syntaxHighlight) {
-                    const afterWordDiff = observeForWordDiffs(this);
-
-                    if (config.diffPlusesAndMinuses) {
-                        removeDiffsPlusesAndMinuses(this, afterWordDiff);
-                    }
-
-                    if (config.syntaxHighlight) {
-                        syntaxHighlight(this, afterWordDiff);
-                    }
-                }
-            });
-        })
-        .catch(err => {
-            // something went wrong
-            console.error('refined-bitbucket(code-review): ', err);
-        });
+            } catch (err) {
+                // something went wrong
+                console.error('refined-bitbucket(code-review): ', err);
+            }
+        }
+    );
 }
 
 function pullrequestRelatedFeatures(config) {
