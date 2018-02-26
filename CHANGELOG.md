@@ -1,4 +1,19 @@
-# Next Release
+# 3.7.0 (2018-02-26)
+
+I'm very happy with this release since a bug that existed since the initial release of the extension has been
+closed, [issue #63](https://github.com/refined-bitbucket/refined-bitbucket/issues/63). Previously, all lines that
+contained word diffs in file diffs were not syntax highlighted! I didn't anticipate how much of a difference fixing this
+issue would make, but now that I have been using it for a few days, I can say that it tremendously improves the syntax
+highlighting experience. Hope you find it as useful as I have!
+
+Remember to rate the extension in the [Chrome Webstore](https://chrome.google.com/webstore/detail/refined-bitbucket/afppminkfnfngihdocacbgeajbbdklkf)
+or [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/refined-bitbucket-/) if you haven't already, it
+helps give the extension visibility in the market place and help other users find it!
+
+Oh, and something else, I've wanted to add a proper logo to the extension for a while but I'm not a designer myself. I
+had a friend of mine sketch some ideas and posted them here
+[#15](https://github.com/refined-bitbucket/refined-bitbucket/issues/15),
+if you have some time, would love for you to drop by and leave some feedback!
 
 ### Features:
 
@@ -28,8 +43,8 @@
 
 # 3.6.0 (2018-02-11)
 
-Huge thanks to [@atdrago](http://github.com/atdrago) and [@dpekkle](http://github.com/dpekkle) for helping out with testing and identifying several issues
-in this release!
+Huge thanks to [@atdrago](http://github.com/atdrago) and [@dpekkle](http://github.com/dpekkle) for helping out with
+testing and identifying several issues in this release!
 
 ### Features:
 
