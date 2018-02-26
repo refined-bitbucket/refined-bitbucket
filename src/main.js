@@ -20,6 +20,8 @@ import addSidebarCounters from './sidebar-counters';
 import syntaxHighlight from './syntax-highlight';
 
 import waitForPullRequestContents from './wait-for-pullrequest';
+import observeForWordDiffs from './observe-for-word-diffs';
+
 import {
     isPullRequest,
     isCreatePullRequestURL,
@@ -124,12 +126,16 @@ function codeReviewFeatures(config, getNodePromise) {
                 }
                 autocollapse.collapseIfNeeded(this);
 
-                if (config.diffPlusesAndMinuses) {
-                    removeDiffsPlusesAndMinuses(this);
-                }
+                if (config.diffPlusesAndMinuses || config.syntaxHighlight) {
+                    const afterWordDiff = observeForWordDiffs(this);
 
-                if (config.syntaxHighlight) {
-                    syntaxHighlight(this);
+                    if (config.diffPlusesAndMinuses) {
+                        removeDiffsPlusesAndMinuses(this, afterWordDiff);
+                    }
+
+                    if (config.syntaxHighlight) {
+                        syntaxHighlight(this, afterWordDiff);
+                    }
                 }
             });
         })

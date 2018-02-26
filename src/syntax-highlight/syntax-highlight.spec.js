@@ -7,6 +7,8 @@ require('../vendor/prism.js');
 
 const syntaxHighlight = require('.').default;
 
+const noop = () => {};
+
 test('should syntax-highlight diff', t => {
     const uudiff = (
         <section class="bb-udiff" data-filename="filename.js">
@@ -49,7 +51,7 @@ test('should syntax-highlight diff', t => {
         </section>
     );
 
-    syntaxHighlight(uudiff);
+    syntaxHighlight(uudiff, noop);
 
     t.is(uudiff.outerHTML, expected.outerHTML);
 });
@@ -81,7 +83,7 @@ test('should syntax-highlight when side-by-side button not present', t => {
         </section>
     );
 
-    syntaxHighlight(uudiff);
+    syntaxHighlight(uudiff, noop);
 
     t.is(uudiff.outerHTML, expected.outerHTML);
 });
