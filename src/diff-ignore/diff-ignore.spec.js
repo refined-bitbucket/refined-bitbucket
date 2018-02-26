@@ -106,7 +106,8 @@ async function performAssertions(t, getNode) {
     const ignorePaths = ['second_file.js'];
 
     const node = getNode(filenames);
-    diffIgnore.init(node, ignorePaths);
+    diffIgnore.init(ignorePaths);
+    diffIgnore.execute(node);
 
     // Just wait an arbitrary short amount of time to let
     // the promise of the `await elementReady` to resolve

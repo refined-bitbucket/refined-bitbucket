@@ -7,12 +7,21 @@ import { getFilepathFromElement } from '../syntax-highlight/source-handler';
 
 let ig = null;
 
+/** @param {HTMLLIElement} li */
+const getFilename = li => li.querySelector('a').textContent.trim();
+
+export function init(ignorePaths) {
+    ig = ignore().add(ignorePaths);
+}
+
 /**
  * @param {HTMLDivElement} node
  * @param {string[]} ignorePaths
  */
-export function init(node, ignorePaths) {
-    ig = ignore().add(ignorePaths);
+export async function execute(node) {
+    await elementReady('#commit-files-summary > li', {
+        target: node
+    });
 
     const filesChanged = node.querySelectorAll('#commit-files-summary > li');
     const filesToRemove = [...filesChanged].filter(li =>
@@ -37,22 +46,13 @@ export function init(node, ignorePaths) {
 
     // Update the "Files changed" summary header to reflect the removed diffs count
     const summaryHeader = node.querySelector(
-        '#pullrequest-diff > section.main > h1, #commit-summary > h1'
+        '#pullrequest-diff > section.main > h1, #commit-summary > h1, #compare-diff-content > h1'
     );
     summaryHeader.textContent += ` - Showing ${filesChanged.length -
         filesToRemove.length} of ${filesChanged.length}`;
 }
 
-/**
- * @param {HTMLLIElement} li
- */
-function getFilename(li) {
-    return li.querySelector('a').textContent.trim();
-}
-
-/**
- * @param {HTMLSectionElement} section
- */
+/** @param {HTMLSectionElement} section */
 export function isIgnored(section) {
     const filename = getFilepathFromElement(section);
     return ig.ignores(filename);
