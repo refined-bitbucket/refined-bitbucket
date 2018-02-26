@@ -2,8 +2,6 @@
 
 ### Features:
 
-* Bring old link color (blue) back to pull request and repository titles,
-  [pull request #153](https://github.com/refined-bitbucket/refined-bitbucket/pull/153).
 * Don't carry pluses and minuses to clipboard when copying diff's contents,
   closes [issue #149](https://github.com/refined-bitbucket/refined-bitbucket/issues/149),
   [pull request #156](https://github.com/refined-bitbucket/refined-bitbucket/pull/156).

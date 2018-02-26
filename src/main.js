@@ -70,10 +70,6 @@ function init(config) {
     if (config.addSidebarCounters) {
         addSidebarCounters();
     }
-
-    if (config.oldLinkColor) {
-        require('./old-link-color.css');
-    }
 }
 
 function pullrequestListRelatedFeatures(config) {

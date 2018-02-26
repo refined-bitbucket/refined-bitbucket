@@ -26,7 +26,6 @@ chrome.storage.sync.get(null, deprecatedOptions => {
             loadAllDiffs: true,
             closeAnchorBranch: true,
             improveFonts: true,
-            oldLinkColor: true,
             addSidebarCounters: true,
             diffPlusesAndMinuses: true,
             augmentPrEntry: true,
