@@ -3,15 +3,12 @@ let stylesImported = false;
 export const execute = diff => {
     [
         ...diff.querySelectorAll(
-            'div.udiff-line > pre.source, div.udiff-line > pre.source > span.token:first-of-type'
+            'div.udiff-line.addition > pre.source, div.udiff-line.deletion > pre.source, ' +
+                'div.udiff-line.addition > pre.source > span.token:first-of-type, ' +
+                'div.udiff-line.deletion > pre.source > span.token:first-of-type'
         )
     ]
-        .filter(({ firstChild }) => {
-            return (
-                firstChild instanceof Text &&
-                /^\+|-/.test(firstChild.textContent)
-            );
-        })
+        .filter(({ firstChild }) => firstChild instanceof Text)
         .forEach(({ firstChild }) => {
             // Insert only a space to preserve
             // line breaks when the line is empty
