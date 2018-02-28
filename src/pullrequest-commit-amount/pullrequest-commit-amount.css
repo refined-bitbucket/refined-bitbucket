@@ -1,0 +1,8 @@
+.__rbb-commit-ammount {
+    display: inline-block;
+    padding: 2px 5px;
+    font-size: 10px;
+    line-height: 1;
+    background-color: rgba(27, 31, 35, 0.08);
+    border-radius: 20px;
+}

@@ -67,10 +67,6 @@ export default function syntaxHighlight(diff, afterWordDiff) {
 }
 
 function syntaxHighlightSourceCodeLines($diff) {
-    if (!$diff.find) {
-        console.log($diff);
-    }
-
     const sourceLines = Array.from(
         $diff.find('pre:not([class*=language]), pre:has(ins), pre:has(del)')
     );
