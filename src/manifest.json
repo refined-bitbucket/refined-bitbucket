@@ -12,7 +12,6 @@
 	"64": "icon_64px.png",
     "128": "icon_128px.png",
 	"256": "icon_256px.png",
-	"512": "icon_512px.png"
   },
   "options_ui": {
     "page": "options.html",
