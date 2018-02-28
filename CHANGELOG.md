@@ -1,3 +1,14 @@
+# Next Version
+
+### Bug fixes:
+
+* The "Don't carry pluses and minuses to clipboard" feature is supposed
+  to delete "+" and "-" characters from line diffs, but it was mistakenly
+  removing some other characters.
+  The previous attempt in pull request #162 at solving issue #161 didn't actually solve it,
+  closes [issue #161](https://github.com/refined-bitbucket/refined-bitbucket/issues/161),
+  [pull request #165](https://github.com/refined-bitbucket/refined-bitbucket/pull/165).
+
 # 3.7.1 (2018-02-28)
 
 ### Features:
