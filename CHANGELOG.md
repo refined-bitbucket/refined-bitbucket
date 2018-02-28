@@ -1,4 +1,4 @@
-# Next Version
+# 3.7.2 (2018-02-28)
 
 ### Bug fixes:
 
