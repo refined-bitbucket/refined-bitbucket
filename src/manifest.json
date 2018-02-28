@@ -6,8 +6,13 @@
   "author": "Ronald Rey",
   "homepage_url": "https://github.com/refined-bitbucket/refined-bitbucket",
   "icons": {
-    "48": "icon48.png",
-    "128": "icon128.png"
+	"16": "icon_16px.png",
+	"32": "icon_32px.png",
+    "48": "icon_48px.png",
+	"64": "icon_64px.png",
+    "128": "icon_128px.png",
+	"256": "icon_256px.png",
+	"512": "icon_512px.png"
   },
   "options_ui": {
     "page": "options.html",

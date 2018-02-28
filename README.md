@@ -4,7 +4,7 @@
 <sup>-</sup>
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-# Refined Bitbucket
+![Refined BitBucket](https://github.com/refined-bitbucket/refined-bitbucket/blob/dev/logo-full_200px.png)
 
 We all know BitBucket lacks some features that we have in other platforms like GitHub, GitLab and others. Originally inspired on Sindre Sorhus' [Refined Github](https://github.com/sindresorhus/refined-github) extension, _refined-bitbucket_ is born as a collaborative project by a few developers to improve upon those holes, and even add some additional functionality that will enhance the overall user experience.
 
