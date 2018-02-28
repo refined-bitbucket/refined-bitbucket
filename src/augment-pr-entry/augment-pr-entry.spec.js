@@ -39,6 +39,8 @@ const mockFetchWithSuccessfulResponse = ({
     };
 };
 
+Date.now = () => new Date('02/22/2018').getTime();
+
 const buildPrTable = () => {
     return (
         <table class="aui paged-table pull-requests-table">

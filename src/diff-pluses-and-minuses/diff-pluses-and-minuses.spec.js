@@ -27,6 +27,14 @@ test('should remove pluses and minues for regular diff', t => {
                     </div>
                     <pre class="source">+var msg = 'Hello world';</pre>
                 </div>
+                <div class="udiff-line common">
+                    <pre class="source">white-space: nowrap;</pre>
+                </div>
+                <div class="udiff-line addition">
+                    <pre class="source">
+                        + + Constants.page_rma, this.bleReadData, false);
+                    </pre>
+                </div>
             </div>
         </section>
     );
@@ -48,6 +56,15 @@ test('should remove pluses and minues for regular diff', t => {
                         <a class="line-numbers" data-fnum="1" data-tnum="1" />
                     </div>
                     <pre class="source">var msg = 'Hello world';</pre>
+                </div>
+                <div class="udiff-line common">
+                    <pre class="source">white-space: nowrap;</pre>
+                </div>
+                <div class="udiff-line addition">
+                    <pre class="source">
+                        {' '}
+                        + Constants.page_rma, this.bleReadData, false);
+                    </pre>
                 </div>
             </div>
         </section>
