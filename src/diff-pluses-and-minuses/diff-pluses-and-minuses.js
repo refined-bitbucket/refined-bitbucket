@@ -1,15 +1,20 @@
 let stylesImported = false;
 
-export const execute = diff => {
-    [
-        ...diff.querySelectorAll(
-            'div.udiff-line.addition > pre.source, div.udiff-line.deletion > pre.source, ' +
-                'div.udiff-line.addition > pre.source > span.token:first-of-type, ' +
-                'div.udiff-line.deletion > pre.source > span.token:first-of-type'
-        )
-    ]
+const selectors = [
+    'div.udiff-line.addition > pre.source:not([class*=__rbb-touched])',
+    'div.udiff-line.deletion > pre.source:not([class*=__rbb-touched])',
+    'div.udiff-line.addition > pre.source:has(ins,del)',
+    'div.udiff-line.deletion > pre.source:has(ins,del)'
+];
+
+export const execute = $diff => {
+    const diffLines = [...$diff.find(selectors.join(', '))];
+
+    diffLines
         .filter(({ firstChild }) => firstChild instanceof Text)
-        .forEach(({ firstChild }) => {
+        .forEach(el => {
+            el.classList.add('__rbb-touched');
+            const { firstChild } = el;
             // Insert only a space to preserve
             // line breaks when the line is empty
             if (
@@ -29,7 +34,9 @@ export default function removeDiffsPlusesAndMinuses(diff, afterWordDiff) {
         require('./diff-pluses-and-minuses.css');
     }
 
-    execute(diff);
+    const $diff = $(diff);
 
-    afterWordDiff(() => execute(diff));
+    execute($diff);
+
+    afterWordDiff(() => execute($diff));
 }
