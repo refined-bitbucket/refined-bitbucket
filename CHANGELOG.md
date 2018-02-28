@@ -1,10 +1,19 @@
 # 3.7.1 (2018-02-28)
 
-### Improvements:
+### Features:
 
 * Code review features now available in branch compare view,
   closes [issue #128](https://github.com/refined-bitbucket/refined-bitbucket/issues/128),
   [pull request #159](https://github.com/refined-bitbucket/refined-bitbucket/pull/159).
+
+### Bug fixes:
+
+* The "Don't carry pluses and minuses to clipboard" feature is supposed
+  to delete "+" and "-" characters from line diffs, but it was mistakenly
+  removing some other characters,
+  closes [issue #160](https://github.com/refined-bitbucket/refined-bitbucket/issues/160),
+  closes [issue #161](https://github.com/refined-bitbucket/refined-bitbucket/issues/161),
+  [pull request #162](https://github.com/refined-bitbucket/refined-bitbucket/pull/162).
 
 # 3.7.0 (2018-02-26)
 
