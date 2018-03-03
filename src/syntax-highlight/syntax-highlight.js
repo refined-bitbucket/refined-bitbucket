@@ -5,7 +5,7 @@
 import { h } from 'dom-chef';
 import elementReady from 'element-ready';
 import debounce from '../debounce';
-import { getClassBasedOnExtension } from './source-handler';
+import { getLanguageClass } from './source-handler';
 
 import './prism.css';
 import './fix.css';
@@ -28,7 +28,7 @@ export default function syntaxHighlight(diff, afterWordDiff) {
         return;
     }
 
-    const languageClass = getClassBasedOnExtension(diff);
+    const languageClass = getLanguageClass(diff);
 
     if (!languageClass) {
         return;

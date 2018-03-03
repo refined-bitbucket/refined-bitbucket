@@ -8,6 +8,8 @@
 
 ### Language support:
 
+* **Vagrantfile & Jenkinsfile**: Support for Jenkinsfile & Vagrantfile syntax highlighting.
+  [pull request #174](https://github.com/refined-bitbucket/refined-bitbucket/pull/174).
 * Powershell language support for (\*.ps1) files,
   [pull request #173](https://github.com/refined-bitbucket/refined-bitbucket/pull/173).
 
