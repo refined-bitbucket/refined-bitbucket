@@ -5,10 +5,17 @@
 * Display author of the lastest activity on a pull request,
   closes [issue #154](https://github.com/refined-bitbucket/refined-bitbucket/issues/154),
   [pull request #187](https://github.com/refined-bitbucket/refined-bitbucket/pull/187).
-
 * Insert badge with the number of commits of the current pull request next to the "Commits" tab,
   closes [issue #163](https://github.com/refined-bitbucket/refined-bitbucket/issues/163),
   [pull request #164](https://github.com/refined-bitbucket/refined-bitbucket/pull/164).
+
+### Bug fixes:
+
+* Fixed extra leading minus/plus sign in diffs when "Don't carry pluses and minuses to clipboard"
+  feature is enabled,
+  closes [issue #168](https://github.com/refined-bitbucket/refined-bitbucket/issues/168),
+  closes [issue #175](https://github.com/refined-bitbucket/refined-bitbucket/issues/175),
+  [pull request #177](https://github.com/refined-bitbucket/refined-bitbucket/pull/177).
 
 ### Language support:
 
