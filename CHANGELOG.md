@@ -1,3 +1,11 @@
+# Next Version
+
+### Improvements:
+
+* Now you can disable update notifications through the Options page,
+  closes [issue #167](https://github.com/refined-bitbucket/refined-bitbucket/issues/167),
+  [pull request #176](https://github.com/refined-bitbucket/refined-bitbucket/pull/176).
+
 # 3.7.2 (2018-02-28)
 
 ### Bug fixes:
