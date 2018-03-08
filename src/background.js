@@ -27,9 +27,9 @@ new OptionsSync().define({
         augmentPrEntry: true,
         prTemplateEnabled: true,
         defaultMergeStrategy: 'merge_commit',
-        autocollapsePaths: ['package-lock.json', 'yarn.lock'],
+        autocollapsePaths: ['package-lock.json', 'yarn.lock'].join('\n'),
         autocollapseDeletedFiles: true,
-        ignorePaths: [''],
+        ignorePaths: [''].join('\n'),
         eneableUpdateNotifications: true
     },
     migrations: [
