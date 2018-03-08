@@ -1,4 +1,11 @@
-# Next Version
+# 3.7.3 (2018-03-08)
+
+From now on, you have the option to disable update notifications that open a new browser tab each time a new version
+of the extension is released. The new option is located at the bottom of the Options page.
+
+If you are still interested in getting notified about updates but in a less intrusive way, [subscribe to this issue on
+GitHub](https://github.com/refined-bitbucket/refined-bitbucket/issues/182), which will be updated with each release
+and you will get an e-mail in your inbox.
 
 ### Improvements:
 
