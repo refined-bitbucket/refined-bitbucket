@@ -72,7 +72,7 @@ function init(config) {
 
 function pullrequestListRelatedFeatures(config) {
     // Exit early if none of the pr list related features are enabled
-    if (!config.ignoreWhitespace && !config.addSourceBranchToPrList) {
+    if (!config.ignoreWhitespace && !config.augmentPrEntry) {
         return;
     }
 
