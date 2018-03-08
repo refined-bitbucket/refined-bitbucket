@@ -6,6 +6,12 @@
   closes [issue #167](https://github.com/refined-bitbucket/refined-bitbucket/issues/167),
   [pull request #176](https://github.com/refined-bitbucket/refined-bitbucket/pull/176).
 
+### Bug fixes:
+
+* The "Add source branch" feature was not working unless the "Set Ignore whitespace ON" was enabled,
+  closes [issue #169](https://github.com/refined-bitbucket/refined-bitbucket/issues/169),
+  [pull request #179](https://github.com/refined-bitbucket/refined-bitbucket/pull/179).
+
 # 3.7.2 (2018-02-28)
 
 ### Bug fixes:
