@@ -9,3 +9,4 @@ Please try to keep the list in order.
 * [Rodrigo Proença](http://github.com/rproenca)
 * [Ronald Rey](http://github.com/reyronald)
 * [Jesse Scott](http://github.com/JesseScott)
+* [Dave Clarke](https://github.com/clarkd)
