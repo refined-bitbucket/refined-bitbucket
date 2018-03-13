@@ -15,6 +15,7 @@ import keymap from './keymap';
 import linkifyTargetBranch from './linkify-target-branch';
 import loadAllDiffs from './load-all-diffs';
 import occurrencesHighlighter from './occurrences-highlighter';
+import pullrequestCommitAmount from './pullrequest-commit-amount';
 import insertPullrequestTemplate from './pullrequest-template';
 import addSidebarCounters from './sidebar-counters';
 import syntaxHighlight from './syntax-highlight';
@@ -165,5 +166,9 @@ function pullrequestRelatedFeatures(config) {
 
     if (config.keymap) {
         keymap.init();
+    }
+
+    if (config.pullrequestCommitAmount) {
+        pullrequestCommitAmount();
     }
 }
