@@ -43,6 +43,7 @@ module.exports = {
     '.phtml': 'language-php',
     '.pl': 'language-perl',
     '.pm': 'language-perl',
+    '.ps1': 'language-powershell',
     '.py': 'language-python',
     '.rb': 'language-ruby',
     '.rlib': 'language-rust',
