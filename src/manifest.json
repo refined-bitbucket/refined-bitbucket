@@ -11,7 +11,7 @@
     "48": "icon_48px.png",
     "64": "icon_64px.png",
     "128": "icon_128px.png",
-    "256": "icon_256px.png",
+    "256": "icon_256px.png"
   },
   "options_ui": {
     "page": "options.html",
