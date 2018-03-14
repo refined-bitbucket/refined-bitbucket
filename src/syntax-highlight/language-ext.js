@@ -1,3 +1,5 @@
+/* eslint quote-props: off */
+
 // These are only the file extensions that don't directly match
 // the class name to be used by PrismJS to highlight the code,
 // or the ones to be overriden.
@@ -63,5 +65,9 @@ module.exports = {
     '.wxs': 'language-markup',
     '.xaml': 'language-markup',
     '.xsd': 'language-markup',
-    '.yml': 'language-yaml'
+    '.yml': 'language-yaml',
+
+    // Universally named files
+    jenkinsfile: 'language-groovy',
+    vagrantfile: 'language-ruby'
 };

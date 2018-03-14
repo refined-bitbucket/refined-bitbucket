@@ -12,12 +12,17 @@ import languagesExtensions from './language-ext';
  * @param  {Element} element An HTML element. Pass anything different and bear the consequences :)
  * @return {String} The class extracted from the element's file path.
  */
-export function getClassBasedOnExtension(element) {
+export function getLanguageClass(element) {
     const filePath = getFilepathFromElement(element);
     const fileExtension = getExtension(filePath).toLowerCase();
 
     if (fileExtension in languagesExtensions) {
         return languagesExtensions[fileExtension];
+    }
+
+    const fileName = getFilename(filePath).toLowerCase();
+    if (fileName in languagesExtensions) {
+        return languagesExtensions[fileName];
     }
 
     const fileExtensionWithoutDot = fileExtension.slice(1);
@@ -49,4 +54,13 @@ export function getFilepathFromElement(element) {
  */
 export function getExtension(filepath) {
     return `.${filepath.slice(((filepath.lastIndexOf('.') - 1) >>> 0) + 2)}`;
+}
+
+/**
+ * Extracts the name of the current file to be highlighted
+ * @param {String} filepath
+ * @return {String} name of the file
+ */
+function getFilename(filepath) {
+    return filepath.slice(filepath.lastIndexOf('/') + 1);
 }
