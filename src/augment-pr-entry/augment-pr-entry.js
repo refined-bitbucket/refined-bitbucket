@@ -10,8 +10,13 @@ import linkifyTargetBranch from '../linkify-target-branch/linkify-target-branch'
 
 const repoUrl = getRepoURL();
 
-export const getPrData = async prId => {
-    const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${prId}`;
+export const getPrData = async (prId, collection) => {
+    const baseUrl = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${prId}`;
+    const url =
+        typeof collection === 'undefined'
+            ? baseUrl
+            : `${baseUrl}/${collection}`;
+
     const token = getApiToken();
     const response = await fetch(url, {
         headers: new Headers({
