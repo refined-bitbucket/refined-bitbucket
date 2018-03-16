@@ -1,3 +1,5 @@
+/* eslint operator-linebreak: "off" */
+
 import { h } from 'dom-chef';
 import { ago } from 'time-ago';
 
@@ -79,16 +81,39 @@ export const addCreationDate = async (prNode, prData) => {
     prNumberAndTimestamp.appendChild(creationDateNode);
 };
 
+export const addUsernameWithLatestUpdate = async (prNode, prActivity) => {
+    // pull requests by default have the initial commit info as an activity
+    const mostRecentAction = prActivity.values[0];
+    let author = '';
+
+    // merges, commit updates
+    if (mostRecentAction.update) {
+        author = mostRecentAction.update.author.display_name;
+    } else if (mostRecentAction.approval) {
+        // approvals
+        author = mostRecentAction.approval.user.display_name;
+    } else if (mostRecentAction.comment) {
+        // comments
+        author = mostRecentAction.comment.user.display_name;
+    }
+
+    const prUpdateTime = prNode.querySelector('.pr-number-and-timestamp')
+        .firstElementChild;
+    prUpdateTime.append(` by ${author}`);
+};
+
 export default async function augmentPrEntry(prNode) {
     linkifyTargetBranch(prNode);
 
     const prId = prNode.dataset.pullRequestId;
     const prData = await getPrData(prId);
+    const prActivity = await getPrData(prId, 'activity');
 
     if (!prData) {
         return;
     }
 
     await addSourceBranch(prNode, prData);
+    await addUsernameWithLatestUpdate(prNode, prActivity);
     await addCreationDate(prNode, prData);
 }
