@@ -7,7 +7,8 @@ import '../../test/setup-jsdom';
 import {
     getPrData,
     addSourceBranch,
-    addCreationDate
+    addCreationDate,
+    addUsernameWithLatestUpdate
 } from './augment-pr-entry';
 
 // Consider using `nock` package in the future
@@ -21,7 +22,8 @@ const mockFetchWithErrorResponse = () => {
 
 const mockFetchWithSuccessfulResponse = ({
     sourceBranch = 'source-branch-name',
-    createdOn = '2018-02-09T15:07:08.160349+00:00'
+    createdOn = '2018-02-09T15:07:08.160349+00:00',
+    activityAuthor = 'Andrew Bernard'
 }) => {
     global.fetch = () => {
         return Promise.resolve({
@@ -33,7 +35,29 @@ const mockFetchWithSuccessfulResponse = ({
                         }
                     },
                     // eslint-disable-next-line camelcase
-                    created_on: createdOn
+                    created_on: createdOn,
+                    values: [
+                        {
+                            update: {
+                                author: {
+                                    // eslint-disable-next-line camelcase
+                                    display_name: activityAuthor
+                                }
+                            },
+                            approval: {
+                                user: {
+                                    // eslint-disable-next-line camelcase
+                                    display_name: activityAuthor
+                                }
+                            },
+                            comment: {
+                                user: {
+                                    // eslint-disable-next-line camelcase
+                                    display_name: activityAuthor
+                                }
+                            }
+                        }
+                    ]
                 })
         });
     };
@@ -222,5 +246,53 @@ test('addCreationDate should add date on success', async t => {
     const prNode = actual.querySelector('.pull-request-row');
     const prData = await getPrData();
     await addCreationDate(prNode, prData);
+    t.is(actual.outerHTML, expected.outerHTML);
+});
+
+test('addUsernameWithLatestUpdate should the name of author last update on success', async t => {
+    const actual = buildPrTable();
+
+    const activityAuthor = 'Andrew Bernard';
+    const expected = (
+        <table class="aui paged-table pull-requests-table">
+            <tr class="pull-request-row focused" data-pull-request-id="1">
+                <div class="title-and-target-branch">
+                    <a
+                        class="pull-request-title"
+                        title="Pull request title"
+                        href="https://bitbucket.org/user/repo/pull-requests/1"
+                    >
+                        Pull request title
+                    </a>
+                    <span class="aui-icon aui-icon-small aui-iconfont-devtools-arrow-right" />
+                    <span class="pull-request-target-branch">
+                        <span class="ref-label">
+                            <span class="ref branch">
+                                <span class="name" aria-label="branch develop">
+                                    develop
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                </div>
+                <div class="pr-number-and-timestamp">
+                    Ronald Rey - #1,
+                    <time
+                        title="23 February 2018 09:52"
+                        datetime="2018-02-23T09:52:37-0400"
+                    >
+                        last updated 39 minutes ago by Andrew Bernard
+                    </time>
+                </div>
+            </tr>
+        </table>
+    );
+
+    mockFetchWithSuccessfulResponse({ activityAuthor });
+    addApiTokenMetadata();
+
+    const prNode = actual.querySelector('.pull-request-row');
+    const prData = await getPrData();
+    await addUsernameWithLatestUpdate(prNode, prData);
     t.is(actual.outerHTML, expected.outerHTML);
 });

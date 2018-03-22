@@ -10,24 +10,35 @@ import linkifyTargetBranch from '../linkify-target-branch/linkify-target-branch'
 
 const repoUrl = getRepoURL();
 
-export const getPrData = async prId => {
-    const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${prId}`;
+const request = async url => {
     const token = getApiToken();
     const response = await fetch(url, {
         headers: new Headers({
             Authorization: `Bearer ${token}`
         })
     });
-    const prData = await response.json();
+    const result = await response.json();
 
-    if (prData.error) {
+    if (result.error) {
         logger.error(
-            `refined-bitbucket(augment-pr-entry): ${prData.error.message}`
+            `refined-bitbucket(augment-pr-entry): ${result.error.message}`
         );
         return;
     }
 
-    return prData;
+    return result;
+};
+
+export const getPrActivity = prId => {
+    const url =
+        `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${prId}/activity` +
+        '?pagelen=1';
+    return request(url);
+};
+
+export const getPrData = prId => {
+    const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${prId}`;
+    return request(url);
 };
 
 const buildSourceBranchNode = branchName => {
@@ -74,16 +85,45 @@ export const addCreationDate = async (prNode, prData) => {
     prNumberAndTimestamp.appendChild(creationDateNode);
 };
 
-export default async function augmentPrEntry(prNode) {
+export const addUsernameWithLatestUpdate = async (prNode, prActivity) => {
+    // pull requests by default have the initial commit info as an activity
+    const mostRecentAction = prActivity.values[0];
+    let author = '';
+
+    // merges, commit updates
+    if (mostRecentAction.update) {
+        author = mostRecentAction.update.author.display_name;
+    } else if (mostRecentAction.approval) {
+        // approvals
+        author = mostRecentAction.approval.user.display_name;
+    } else if (mostRecentAction.comment) {
+        // comments
+        author = mostRecentAction.comment.user.display_name;
+    }
+
+    const prUpdateTime = prNode.querySelector('.pr-number-and-timestamp')
+        .firstElementChild;
+
+    if (author && prUpdateTime) {
+        prUpdateTime.append(` by ${author}`);
+    }
+};
+
+export default function augmentPrEntry(prNode) {
     linkifyTargetBranch(prNode);
 
     const prId = prNode.dataset.pullRequestId;
-    const prData = await getPrData(prId);
 
-    if (!prData) {
-        return;
-    }
+    getPrData(prId).then(prData => {
+        if (prData) {
+            addSourceBranch(prNode, prData);
+            addCreationDate(prNode, prData);
+        }
+    });
 
-    await addSourceBranch(prNode, prData);
-    await addCreationDate(prNode, prData);
+    getPrActivity(prId).then(prActivity => {
+        if (prActivity) {
+            addUsernameWithLatestUpdate(prNode, prActivity);
+        }
+    });
 }

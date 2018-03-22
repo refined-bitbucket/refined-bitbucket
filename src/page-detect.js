@@ -23,6 +23,11 @@ export const isPullRequestList = () => getRepoPath() === 'pull-requests';
 
 export const isPullRequest = () => /^pull-requests\/\d+/.test(getRepoPath());
 
+export const isComparing = () =>
+    /^branches\/compare\/([\w\d+.\-_\/:]+)%0D([\w\d+.'-_\/:]+)/.exec(
+        getRepoPath()
+    );
+
 export const isCreatePullRequestURL = () =>
     getRepoPath() === 'pull-requests/new';
 

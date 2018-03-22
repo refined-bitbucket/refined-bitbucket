@@ -21,6 +21,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 * Diff Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the pull request or commit loads.
 * Counters for open or active branches and pull requests in the sidebar navigation menu.
 * Button to load all failed diffs in pull request and commit view.
+* Adds 'Create Pull Request' link to the 'Compare branches and tags' page.
 * Choose a default merge strategy for your pull requests.
 * Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
 * Add source branch, linkify branch names, and add creation date to each pull request row in pull request list.
