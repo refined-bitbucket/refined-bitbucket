@@ -69,6 +69,6 @@ module.exports = {
 
     // Universally named files
     jenkinsfile: 'language-groovy',
-    vagrantfile: 'language-ruby',
-    rakefile: 'language-ruby'
+    rakefile: 'language-ruby',
+    vagrantfile: 'language-ruby'
 };
