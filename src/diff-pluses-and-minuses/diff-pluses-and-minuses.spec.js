@@ -3,9 +3,7 @@ import { h } from 'dom-chef';
 import delay from 'yoctodelay';
 
 import observeForWordDiffs from '../observe-for-word-diffs';
-import removeDiffsPlusesAndMinuses, {
-    execute
-} from './diff-pluses-and-minuses';
+import removeDiffsPlusesAndMinuses from './diff-pluses-and-minuses';
 
 import '../../test/setup-jsdom';
 
@@ -51,9 +49,7 @@ test('should remove pluses and minues for regular diff', t => {
                         </a>
                         <a class="line-numbers" data-fnum="1" data-tnum="1" />
                     </div>
-                    <pre class="source __rbb-touched">
-                        var msg = 'Hello world';
-                    </pre>
+                    <pre class="source">var msg = 'Hello world';</pre>
                 </div>
                 <div class="udiff-line common">
                     <pre class="source">white-space: nowrap;</pre>
@@ -62,7 +58,7 @@ test('should remove pluses and minues for regular diff', t => {
         </section>
     );
 
-    execute($(udiff));
+    removeDiffsPlusesAndMinuses(udiff);
 
     t.is(udiff.outerHTML, expected.outerHTML);
 });
@@ -108,25 +104,21 @@ test('line breaks are preserved with empty whitespace', t => {
                         </a>
                         <a class="line-numbers" data-fnum="1" data-tnum="1" />
                     </div>
-                    <pre class="source __rbb-touched">
-                        var msg = 'Hello world';
-                    </pre>
-                    <pre class="source __rbb-touched"> </pre>
-                    <pre class="source __rbb-touched">
-                        var greeting = 'How are you?';
-                    </pre>
+                    <pre class="source">var msg = 'Hello world';</pre>
+                    <pre class="source"> </pre>
+                    <pre class="source">var greeting = 'How are you?';</pre>
                 </div>
             </div>
         </section>
     );
 
-    execute($(udiff));
+    removeDiffsPlusesAndMinuses(udiff);
 
     t.is(udiff.outerHTML, expected.outerHTML);
 });
 
 test('should remove pluses and minuses when diff has been rerendered to include word diffs', async t => {
-    const uudiff = (
+    const udiff = (
         <section class="bb-udiff" data-filename="filename.js">
             <div class="diff-container">
                 <h1 class="filename">
@@ -142,6 +134,9 @@ test('should remove pluses and minuses when diff has been rerendered to include 
                         </div>
                         <div class="udiff-line addition" id="diffed">
                             <pre class="source">+console.log(msg);</pre>
+                        </div>
+                        <div class="udiff-line addition" id="diffed-2">
+                            <pre class="source">+return;</pre>
                         </div>
                     </div>
                 </div>
@@ -161,15 +156,16 @@ test('should remove pluses and minuses when diff has been rerendered to include 
                 <div class="diff-content-container refract-container word-diff">
                     <div class="refract-content-container">
                         <div class="udiff-line addition">
-                            <pre class="source __rbb-touched">
-                                var msg = 'Hello world';
-                            </pre>
+                            <pre class="source">var msg = 'Hello world';</pre>
                         </div>
 
                         <div class="udiff-line addition" id="diffed">
-                            <pre class="source __rbb-touched">
+                            <pre class="source">
                                 console.<ins>log(msg);</ins>
                             </pre>
+                        </div>
+                        <div class="udiff-line addition" id="diffed-2">
+                            <pre class="source">return;</pre>
                         </div>
                     </div>
                 </div>
@@ -178,18 +174,23 @@ test('should remove pluses and minuses when diff has been rerendered to include 
     );
 
     // Act
-    const afterWordDiff = observeForWordDiffs(uudiff);
-    removeDiffsPlusesAndMinuses(uudiff, afterWordDiff);
+    const afterWordDiff = observeForWordDiffs(udiff);
+    removeDiffsPlusesAndMinuses(udiff, afterWordDiff);
 
     // Adding word diff
-    const line = uudiff.querySelector('#diffed');
+    const line = udiff.querySelector('#diffed');
     const diffedLine = (
-        <pre class="source __rbb-touched">
+        <pre class="source">
             +console.<ins>log(msg);</ins>
         </pre>
     );
     line.replaceChild(diffedLine, line.firstChild);
-    const diffContentContainer = uudiff.querySelector(
+
+    const line2 = udiff.querySelector('#diffed-2');
+    const diffedLine2 = <pre class="source">+return;</pre>;
+    line2.replaceChild(diffedLine2, line2.firstChild);
+
+    const diffContentContainer = udiff.querySelector(
         'div.diff-container > div.diff-content-container.refract-container'
     );
     diffContentContainer.classList.add('word-diff');
@@ -197,7 +198,7 @@ test('should remove pluses and minuses when diff has been rerendered to include 
     await delay(32);
 
     // Assert
-    t.is(uudiff.outerHTML, expected.outerHTML);
+    t.is(udiff.outerHTML, expected.outerHTML);
 });
 
 test('should do nothing and not throw or error when diff fails to load', async t => {
@@ -226,7 +227,7 @@ test('should do nothing and not throw or error when diff fails to load', async t
 
     const expected = udiff.cloneNode(true);
 
-    execute($(udiff));
+    removeDiffsPlusesAndMinuses(udiff);
 
     t.is(udiff.outerHTML, expected.outerHTML);
 });

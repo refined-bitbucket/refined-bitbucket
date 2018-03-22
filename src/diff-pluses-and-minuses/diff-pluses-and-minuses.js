@@ -1,42 +1,44 @@
 let stylesImported = false;
 
-const selectors = [
-    'div.udiff-line.addition > pre.source:not([class*=__rbb-touched])',
-    'div.udiff-line.deletion > pre.source:not([class*=__rbb-touched])',
-    'div.udiff-line.addition > pre.source:has(ins,del)',
-    'div.udiff-line.deletion > pre.source:has(ins,del)'
-];
+const diffLineSelector = [
+    'div.udiff-line.addition > pre.source',
+    'div.udiff-line.deletion > pre.source'
+].join(', ');
 
-export const execute = $diff => {
-    const diffLines = [...$diff.find(selectors.join(', '))];
-
-    diffLines
-        .filter(({ firstChild }) => firstChild instanceof Text)
-        .forEach(el => {
-            el.classList.add('__rbb-touched');
-            const { firstChild } = el;
-            // Insert only a space to preserve
-            // line breaks when the line is empty
-            if (
-                firstChild.textContent === '+' ||
-                firstChild.textContent === '-'
-            ) {
-                firstChild.textContent = ' ';
-            } else {
-                firstChild.textContent = firstChild.textContent.slice(1);
-            }
-        });
+const stripCharsFromLine = line => {
+    // Insert only a space to preserve
+    // line breaks when the line is empty
+    if (line.textContent === '+' || line.textContent === '-') {
+        line.textContent = ' ';
+    } else {
+        line.textContent = line.textContent.slice(1);
+    }
 };
 
-export default function removeDiffsPlusesAndMinuses(diff, afterWordDiff) {
+const firstPass = diff => {
+    const diffLines = [...diff.querySelectorAll(diffLineSelector)];
+
+    diffLines.forEach(({ firstChild: line }) => stripCharsFromLine(line));
+
+    return diffLines.map(({ textContent }) => textContent);
+};
+
+const secondPass = (diff, strippedLinesContent) => {
+    [...diff.querySelectorAll(diffLineSelector)]
+        .filter(({ textContent }, i) => textContent !== strippedLinesContent[i])
+        .forEach(({ firstChild: line }) => stripCharsFromLine(line));
+};
+
+export default function removeDiffsPlusesAndMinuses(
+    diff,
+    afterWordDiff = () => {}
+) {
     if (!stylesImported) {
         stylesImported = true;
         require('./diff-pluses-and-minuses.css');
     }
 
-    const $diff = $(diff);
+    const strippedLinesContent = firstPass(diff);
 
-    execute($diff);
-
-    afterWordDiff(() => execute($diff));
+    afterWordDiff(() => secondPass(diff, strippedLinesContent));
 }

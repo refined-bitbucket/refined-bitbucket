@@ -20,7 +20,8 @@ const observeForWordDiffs = (diff, timeout = 20000) => {
 
         const isModifiedOrConflict = diff.querySelector(
             'h1.filename span.diff-entry-lozenge.aui-lozenge-complete, ' +
-                'h1.filename span.diff-entry-lozenge.aui-lozenge-current'
+                'h1.filename span.diff-entry-lozenge.aui-lozenge-current, ' +
+                'h1.filename span.diff-entry-lozenge.aui-lozenge-moved'
         );
 
         // Only "Modified" and "Conflict" diffs will include word diffs
