@@ -10,24 +10,24 @@ We all know BitBucket lacks some features that we have in other platforms like G
 
 ## Current features
 
-* Adds syntax highlighting for pull requests and commits. See the full list of enabled languages [here][prismjs-languages], and then [here][language-ext]. [Test them here](http://prismjs.com/test.html). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
-* Double click on a word to highlight all occurrences.
-* ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
-* Key binding feature, which allows for quicker navigation through pull requests.
-* Button to collapse diffs in Pull Request and Commits view.
-* Autocollapse:
-    * Add filename patterns in the Options page that you would like the extension to collapse automatically when the pull request or commit loads.
-    * Deleted files are automatically collapsed.
-* Diff Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the pull request or commit loads.
-* Counters for open or active branches and pull requests in the sidebar navigation menu.
-* Button to load all failed diffs in pull request and commit view.
-* Adds 'Create Pull Request' link to the 'Compare branches and tags' page.
-* Choose a default merge strategy for your pull requests.
-* Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
-* Add source branch, linkify branch names, and add creation date to each pull request row in pull request list.
-* Don't carry pluses and minuses to clipboard when copying diff's contents.
-* Badge with the number of commits of the current pull request next to the "Commits" tab.
-* Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
+*   Adds syntax highlighting for pull requests and commits. See the full list of enabled languages [here][prismjs-languages], and then [here][language-ext]. [Test them here](http://prismjs.com/test.html). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
+*   Double click on a word to highlight all occurrences.
+*   ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
+*   Key binding feature, which allows for quicker navigation through pull requests.
+*   Button to collapse diffs in Pull Request and Commits view.
+*   Autocollapse:
+    *   Add filename patterns in the Options page that you would like the extension to collapse automatically when the pull request or commit loads.
+    *   Deleted files are automatically collapsed.
+*   Diff Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the pull request or commit loads.
+*   Counters for open or active branches and pull requests in the sidebar navigation menu.
+* . Button to load all failed diffs in pull request and commit view.
+*   Adds 'Create Pull Request' link to the 'Compare branches and tags' page.
+*   Choose a default merge strategy for your pull requests.
+*   Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
+*   Add source branch, linkify branch names, and add creation date to each pull request row in pull request list.
+*   Don't carry pluses and minuses to clipboard when copying diff's contents.
+*   Badge with the number of commits of the current pull request next to the "Commits" tab.
+*   Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
 
     ```
     /PULL_REQUEST_TEMPLATE.md
