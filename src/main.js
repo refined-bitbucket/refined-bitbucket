@@ -29,7 +29,7 @@ import {
     isPullRequestList,
     isCommit,
     isBranch,
-    isComparing
+    isComparePage
 } from './page-detect';
 
 import 'selector-observer';
@@ -62,7 +62,7 @@ function init(config) {
         }
     } else if (isCommit()) {
         codeReviewFeatures(config);
-    } else if (isComparing()) {
+    } else if (isComparePage()) {
         if (config.mergePagePullRequest) {
             mergePagePullRequest();
         }

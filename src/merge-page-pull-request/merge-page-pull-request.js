@@ -1,15 +1,27 @@
 'use strict';
 
 import { h } from 'dom-chef';
-import { isComparing, getRepoURL } from '../page-detect';
 import elementReady from 'element-ready';
+import { isComparePage, isComparing, getRepoURL } from '../page-detect';
 
 export default async function init() {
     if (isComparing()) {
-        await elementReady('#compare-tabs');
-        const [, source, destination] = isComparing();
-        addPRLink(document.querySelector('#content'), source, destination);
+        await checkComparing(); // If you are comparing two items
+    } else if (isComparePage()) {
+        // If you are on the compare page
+        const compareButton = document.querySelector(
+            'form.compare-form button[type=submit]'
+        );
+        if (compareButton) {
+            compareButton.addEventListener('click', checkComparing);
+        }
     }
+}
+
+async function checkComparing() {
+    await elementReady('#compare-tabs');
+    const [, source, destination] = isComparing();
+    addPRLink(document.querySelector('#content'), source, destination);
 }
 
 export function addPRLink(comparePage, source, destination) {
