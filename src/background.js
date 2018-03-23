@@ -25,6 +25,7 @@ new OptionsSync().define({
         addSidebarCounters: true,
         diffPlusesAndMinuses: true,
         augmentPrEntry: true,
+        comparePagePullRequest: true,
         prTemplateEnabled: true,
         pullrequestCommitAmount: true,
         defaultMergeStrategy: 'merge_commit',
