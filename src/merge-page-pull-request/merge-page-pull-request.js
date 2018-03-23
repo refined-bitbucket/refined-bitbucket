@@ -2,9 +2,11 @@
 
 import { h } from 'dom-chef';
 import { isComparing, getRepoURL } from '../page-detect';
+import elementReady from 'element-ready';
 
-export default function init() {
+export default async function init() {
     if (isComparing()) {
+        await elementReady('#compare-tabs');
         const [, source, destination] = isComparing();
         addPRLink(document.querySelector('#content'), source, destination);
     }

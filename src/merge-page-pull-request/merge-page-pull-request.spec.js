@@ -3,9 +3,9 @@ import test from 'ava';
 
 import '../../test/setup-jsdom';
 
-import { addPRLink } from './merge-compare';
+import { addPRLink } from './merge-page-pull-request';
 
-test('mergeCompare should add a create pull request link', t => {
+test('mergePagePullRequest should add a create pull request link', t => {
     const comparePage = (
         <div class="detail-summary--panel" data-contributors="[]">
             <ul class="detail-summary--section" />
