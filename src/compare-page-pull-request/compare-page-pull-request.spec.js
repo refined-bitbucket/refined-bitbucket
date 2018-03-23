@@ -3,7 +3,7 @@ import test from 'ava';
 
 import '../../test/setup-jsdom';
 
-import { addPRLink } from './merge-page-pull-request';
+import { addPRLink } from './compare-page-pull-request';
 
 test('mergePagePullRequest should add a create pull request link', t => {
     const comparePage = (
