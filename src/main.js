@@ -19,6 +19,7 @@ import pullrequestCommitAmount from './pullrequest-commit-amount';
 import insertPullrequestTemplate from './pullrequest-template';
 import addSidebarCounters from './sidebar-counters';
 import syntaxHighlight from './syntax-highlight';
+import comparePagePullRequest from './compare-page-pull-request';
 
 import observeForWordDiffs from './observe-for-word-diffs';
 
@@ -27,7 +28,8 @@ import {
     isCreatePullRequestURL,
     isPullRequestList,
     isCommit,
-    isBranch
+    isBranch,
+    isComparePage
 } from './page-detect';
 
 import 'selector-observer';
@@ -60,6 +62,10 @@ function init(config) {
         }
     } else if (isCommit()) {
         codeReviewFeatures(config);
+    } else if (isComparePage()) {
+        if (config.comparePagePullRequest) {
+            comparePagePullRequest();
+        }
     }
 
     if (config.improveFonts) {
