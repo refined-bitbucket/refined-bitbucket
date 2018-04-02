@@ -1,3 +1,9 @@
+# Unreleased
+
+### Features:
+
+* Adds a 'Create a Pull Request' link to the 'Compare branches of tags' page, closes [issue 189](https://github.com/refined-bitbucket/refined-bitbucket/issues/189), [pull request #191](https://github.com/refined-bitbucket/refined-bitbucket/pull/191)
+
 # 3.8.0 (2018-03-22)
 
 This release was possible thanks to the help of some great contributors! Special thanks to [@clarkd](http://github.com/clarkd),
