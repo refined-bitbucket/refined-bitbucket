@@ -38,7 +38,7 @@
     "prism"
   ],
   "author": "andremw",
-  "contributors": [
+  "maintainers": [
     {
       "name": "Ronald Rey",
       "email": "reyronald@gmail.com",
@@ -72,7 +72,7 @@
     "mutationobserver-shim": "^0.3.2",
     "npm-run-all": "^4.1.2",
     "path": "^0.12.7",
-    "prettier": "^1.10.2",
+    "prettier": "^1.11.1",
     "request": "^2.83.0",
     "require-hacker": "^3.0.1",
     "semver": "^5.4.1",
@@ -83,7 +83,7 @@
     "yoctodelay": "^1.1.0"
   },
   "dependencies": {
-    "dom-chef": "^3.0.0",
+    "dom-chef": "^3.1.0",
     "element-ready": "^2.2.1",
     "ignore": "^3.3.6",
     "jquery": "^3.2.1",

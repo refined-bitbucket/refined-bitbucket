@@ -15,6 +15,7 @@ global.HTMLTextAreaElement = dom.window.HTMLTextAreaElement
 global.HTMLSpanElement = dom.window.HTMLSpanElement
 global.HTMLCollection = dom.window.HTMLCollection
 global.DocumentFragment = dom.window.DocumentFragment
+global.Event = dom.window.Event
 
 global.requestAnimationFrame = fn => setTimeout(fn, 16)
 global.cancelAnimationFrame = id => clearTimeout(id)

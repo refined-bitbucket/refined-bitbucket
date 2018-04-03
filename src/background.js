@@ -28,6 +28,7 @@ new OptionsSync().define({
         comparePagePullRequest: true,
         prTemplateEnabled: true,
         pullrequestCommitAmount: true,
+        showCommentsCheckbox: true,
         defaultMergeStrategy: 'merge_commit',
         autocollapsePaths: [
             'package-lock.json',

@@ -6,6 +6,9 @@
     closes [issue #189](https://github.com/refined-bitbucket/refined-bitbucket/issues/189),
     [pull request #191](https://github.com/refined-bitbucket/refined-bitbucket/pull/191).
     Thanks [@deepakrb](http://github.com/deepakrb).
+*   Insert "Show Comments" checkbox in diff header,
+    closes [issue #172](https://github.com/refined-bitbucket/refined-bitbucket/issues/172),
+    [pull request #195](https://github.com/refined-bitbucket/refined-bitbucket/pull/195).
 
 ### Bug fixes:
 
