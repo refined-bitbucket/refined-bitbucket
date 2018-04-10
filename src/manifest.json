@@ -25,6 +25,7 @@
   "permissions": [
     "activeTab",
     "https://bitbucket.org/*",
+    "https://api.bitbucket.org/*",
     "storage"
   ],
   "content_scripts": [
