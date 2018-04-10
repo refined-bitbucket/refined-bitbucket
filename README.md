@@ -45,6 +45,8 @@ We all know BitBucket lacks some features that we have in other platforms like G
     of the template in the options page, in case you don't want to include
     the file in your repository, e.g., https://gist.githubusercontent.com/anonymous/8054a3ee32f7cf1a5975e3fd52b3c5f3/raw/f6897720e8b6b93becd246187dac36038291c3a4/PULL_REQUEST_TEMPLATE.md.
 
+    _Note: Currently, externally hosted pull request templates outside of BitBucket's domain is not supported with the Firefox addon._
+
 ## Some images
 
 <table>
