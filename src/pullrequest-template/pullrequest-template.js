@@ -35,7 +35,9 @@ export function getPullrequestTemplateUrls() {
 }
 
 export async function insertPullrequestTemplate(requests) {
-    const responses = await Promise.all(requests);
+    const responses = await Promise.all(
+        requests.map(p => p.catch(err => ({ ok: false, err })))
+    );
     const firstSuccessfulResponse = responses.find(response => response.ok);
 
     if (!firstSuccessfulResponse) {

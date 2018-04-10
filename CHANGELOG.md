@@ -7,11 +7,14 @@
   [pull request #191](https://github.com/refined-bitbucket/refined-bitbucket/pull/191).
   Thanks [@deepakrb](http://github.com/deepakrb).
 
-### Development
+### Bug fixes:
 
 * Update manifest permissions to allow Fetch requests from Firefox addon,
   closes [issue #197](https://github.com/refined-bitbucket/refined-bitbucket/issues/197),
   [pull request #198](https://github.com/refined-bitbucket/refined-bitbucket/pull/198).
+
+### Development
+
 * Fix the `package` npm script to use the `archiver` npm package instead of `admin-zip`
   so that it produces a valid Zip file,
   closes [issue #193](https://github.com/refined-bitbucket/refined-bitbucket/issues/193),
