@@ -187,9 +187,16 @@ npm install
 npm run watch
 ```
 
-This will watch any changes in the `src` folder and compile them to the `extension` folder. To test in Chrome, activate the Developer mode in `chrome://extensions`, click "Load unpacked extension..." and browse to that folder.
+This will watch any changes in the `src` folder and compile them to the `extension` folder.
 
+#### Chrome Development
+
+To test in Chrome, activate the Developer mode in `chrome://extensions`, click "Load unpacked extension..." and browse to that folder.
 If you're new to Chrome extension development, take some time to read Google's [documentation on extensions](https://developer.chrome.com/extensions).
+
+#### Firefox Development
+
+To test in Firefox, open `about:debugging` in a new tab and click "Load Temporary Add-on". Navigate to the extension folder and load `manifest.json`. For further Firefox add-on development & debugging help, please refer to Mozilla's [documentation](https://developer.mozilla.org/en-US/Add-ons).
 
 #### Integration
 
