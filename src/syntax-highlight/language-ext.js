@@ -23,6 +23,7 @@ module.exports = {
     '.csproj': 'language-markup',
     '.erl': 'language-erlang',
     '.ex': 'language-elixir',
+    '.exs': 'language-elixir',
     '.flow': 'language-jsx',
     '.fs': 'language-fsharp',
     '.fsi': 'language-fsharp',
