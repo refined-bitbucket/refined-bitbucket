@@ -29,7 +29,11 @@ new OptionsSync().define({
         prTemplateEnabled: true,
         pullrequestCommitAmount: true,
         defaultMergeStrategy: 'merge_commit',
-        autocollapsePaths: ['package-lock.json', 'yarn.lock'].join('\n'),
+        autocollapsePaths: [
+            'package-lock.json',
+            'yarn.lock',
+            'composer.lock'
+        ].join('\n'),
         autocollapseDeletedFiles: true,
         ignorePaths: [''].join('\n'),
         eneableUpdateNotifications: true
