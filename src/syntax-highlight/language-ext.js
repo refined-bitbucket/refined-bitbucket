@@ -16,6 +16,7 @@ module.exports = {
     '.cc': 'language-cpp',
     '.cfc': 'language-actionscript',
     '.cfm': 'language-markup',
+    '.cls': 'language-java',
     '.coffee': 'language-coffeescript',
     '.config': 'language-markup',
     '.cs': 'language-csharp',
