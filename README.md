@@ -22,7 +22,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 *   Counters for open or active branches and pull requests in the sidebar navigation menu.
 *   Button to load all failed diffs in pull request and commit view.
 *   Adds 'Create Pull Request' link to the 'Compare branches and tags' page.
-*   Choose a default merge strategy for your pull requests.
+*   Choose a default merge strategy for your pull requests. [Also implemented natively by Bitbucket per project](https://bitbucket.org/site/master/issues/13895/default-merge-strategy#comment-45364593)
 *   Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
 *   Add source branch, linkify branch names, and add creation date to each pull request row in pull request list.
 *   Don't carry pluses and minuses to clipboard when copying diff's contents.
