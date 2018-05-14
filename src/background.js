@@ -36,6 +36,8 @@ new OptionsSync().define({
         ].join('\n'),
         autocollapseDeletedFiles: true,
         ignorePaths: [''].join('\n'),
+        customTabSizeEnabled: true,
+        customTabSize: 4,
         eneableUpdateNotifications: true
     },
     migrations: [
