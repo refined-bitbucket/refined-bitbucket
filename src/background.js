@@ -38,11 +38,11 @@ new OptionsSync().define({
         ignorePaths: [''].join('\n'),
         customTabSizeEnabled: true,
         customTabSize: 4,
-        eneableUpdateNotifications: true
+        enableUpdateNotifications: true
     },
     migrations: [
         async savedOptions => {
-            if (savedOptions.eneableUpdateNotifications) {
+            if (savedOptions.enableUpdateNotifications) {
                 await justInstalledOrUpdated;
                 window.open(
                     'https://github.com/refined-bitbucket/refined-bitbucket/releases/latest'
