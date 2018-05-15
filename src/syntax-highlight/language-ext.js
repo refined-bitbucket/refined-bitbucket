@@ -56,6 +56,7 @@ module.exports = {
     '.sbt': 'language-scala',
     '.sfproj': 'language-markup',
     '.sh': 'language-bash',
+    '.slim': 'language-pug',
     '.snap': 'language-jsx',
     '.styl': 'language-stylus',
     '.svcmap': 'language-markup',
