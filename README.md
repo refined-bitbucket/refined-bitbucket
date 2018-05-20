@@ -27,6 +27,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 *   Add source branch, linkify branch names, and add creation date to each pull request row in pull request list.
 *   Don't carry pluses and minuses to clipboard when copying diff's contents.
 *   Badge with the number of commits of the current pull request next to the "Commits" tab.
+*   Insert "Comments" checkbox in diff header to toggle comments.
 *   Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
 
     ```

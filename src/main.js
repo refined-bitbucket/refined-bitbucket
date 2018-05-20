@@ -17,6 +17,7 @@ import loadAllDiffs from './load-all-diffs'
 import occurrencesHighlighter from './occurrences-highlighter'
 import pullrequestCommitAmount from './pullrequest-commit-amount'
 import insertPullrequestTemplate from './pullrequest-template'
+import insertShowComments from './show-comments'
 import addSidebarCounters from './sidebar-counters'
 import syntaxHighlight from './syntax-highlight'
 import comparePagePullRequest from './compare-page-pull-request'
@@ -132,6 +133,10 @@ function codeReviewFeatures(config) {
         }
 
         autocollapse.collapseIfNeeded(diff)
+
+        if (config.showCommentsCheckbox) {
+            insertShowComments(diff)
+        }
 
         if (config.diffPlusesAndMinuses || config.syntaxHighlight) {
             const afterWordDiff = observeForWordDiffs(diff)
