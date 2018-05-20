@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import { h } from 'dom-chef'
 
 const onChange = ({ target, target: { checked: showComments } }) => {
@@ -37,23 +38,26 @@ function onAddComment(section) {
         return
     }
 
+    const hasCommentsOnPreviousVersions = Boolean(
+        section.getElementsByClassName('eclipsedcount').length
+    )
     const showCommentsCheckbox = (
         <span class="__rbb-show-comments">
-            <label>
+            <label
+                style={{
+                    'font-size': 12,
+                    ...(hasCommentsOnPreviousVersions
+                        ? null
+                        : {
+                              'margin-right': 10,
+                          }),
+                }}
+            >
                 <input type="checkbox" checked onChange={onChange} />
                 Comments
             </label>
         </span>
     )
-
-    // Some style properties can't be applied with in-line styles in JSX, don't know why.
-    showCommentsCheckbox.firstChild.style.fontSize = '12px'
-    const hasCommentsOnPreviousVersions = Boolean(
-        section.getElementsByClassName('eclipsedcount').length
-    )
-    if (!hasCommentsOnPreviousVersions) {
-        showCommentsCheckbox.firstChild.style.marginRight = '10px'
-    }
 
     const diffActions = section.querySelector('.diff-actions.secondary')
     diffActions.style.minWidth = '480px'

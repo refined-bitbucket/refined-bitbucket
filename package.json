@@ -22,8 +22,12 @@
     "patch": "npm version --no-git-tag-version patch && npm run sync-version"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css,md}": [
+    "**/*.{js,jsx,json,css,md}": [
       "prettier --write",
+      "git add"
+    ],
+    "**/*.js": [
+      "npm run xo",
       "git add"
     ]
   },
@@ -95,7 +99,7 @@
     "webext-options-sync": "^0.15.0"
   },
   "xo": {
-    "semicolon": true,
+    "semicolon": false,
     "esnext": true,
     "space": 4,
     "envs": [
@@ -103,6 +107,7 @@
       "jquery"
     ],
     "rules": {
+      "comma-dangle": 0,
       "no-unused-vars": [
         2,
         {
