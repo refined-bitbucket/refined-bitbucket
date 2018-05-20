@@ -20,6 +20,7 @@ import insertPullrequestTemplate from './pullrequest-template';
 import addSidebarCounters from './sidebar-counters';
 import syntaxHighlight from './syntax-highlight';
 import comparePagePullRequest from './compare-page-pull-request';
+import setTabSize from './tab-size';
 
 import observeForWordDiffs from './observe-for-word-diffs';
 
@@ -74,6 +75,11 @@ function init(config) {
 
     if (config.addSidebarCounters) {
         addSidebarCounters();
+    }
+
+    if (config.customTabSizeEnabled) {
+        const numSpaces = config.customTabSize;
+        setTabSize(numSpaces);
     }
 }
 

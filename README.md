@@ -47,6 +47,8 @@ We all know BitBucket lacks some features that we have in other platforms like G
 
     _Note: Currently, externally hosted pull request templates outside of BitBucket's domain is not supported with the Firefox addon._
 
+*   Set custom tab indentation size of code (Bitbucket defaults to 8 spaces) when viewing commits/pull requests.
+
 ## Some images
 
 <table>

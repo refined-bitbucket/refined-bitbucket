@@ -135,13 +135,20 @@
         </div>
 
         <br>
+
+        <label>
+            <input type="checkbox" name="customTabSizeEnabled"> Tab indentation size:
+            <input type="number" name="customTabSize" min="0" max="16" style="width: 40px;">
+            <span>spaces.</span>
+        </label>
+
         <hr>
         <label style="display: flex; justify-content: space-between; align-items: center">
             <span style="width: calc(100% - 30px)">
                 Enable Update Notifications. Every time this extension is updated, the CHANGELOG for the current version will be opened in
                 a new browser tab.
             </span>
-            <input type="checkbox" name="eneableUpdateNotifications">
+            <input type="checkbox" name="enableUpdateNotifications">
         </label>
     </form>
 
