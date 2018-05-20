@@ -1,9 +1,9 @@
-import test from 'ava';
-import { h } from 'dom-chef';
+import test from 'ava'
+import { h } from 'dom-chef'
 
-import { insertCollapseDiffButton } from './collapse-diff';
+import { insertCollapseDiffButton } from './collapse-diff'
 
-import '../../test/setup-jsdom';
+import '../../test/setup-jsdom'
 
 const createNode = () => (
     <section class="bb-udiff" data-filename="filename.js">
@@ -67,46 +67,46 @@ const createNode = () => (
             </div>
         </div>
     </section>
-);
+)
 
 test('should not re-insert collapse diff button if already present', async t => {
-    const uudiff = createNode();
+    const uudiff = createNode()
 
-    insertCollapseDiffButton(uudiff);
-    insertCollapseDiffButton(uudiff);
-    insertCollapseDiffButton(uudiff);
-    insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff)
+    insertCollapseDiffButton(uudiff)
+    insertCollapseDiffButton(uudiff)
+    insertCollapseDiffButton(uudiff)
 
     const buttons = uudiff.getElementsByClassName(
         '__refined_bitbucket_collapse_diff_button'
-    );
+    )
     // one at the top, one at the bottom of the diff
-    t.true(buttons.length === 2);
-});
+    t.true(buttons.length === 2)
+})
 
 test('should insert TOP button in correct position when diff loads successfully', async t => {
-    const uudiff = createNode();
+    const uudiff = createNode()
 
-    insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff)
 
     const button = uudiff.querySelector(
         'div.secondary.diff-actions div:nth-child(4) .__refined_bitbucket_collapse_diff_button'
-    );
+    )
 
-    t.truthy(button);
-});
+    t.truthy(button)
+})
 
 test('should insert BOTTOM button in correct position when diff loads successfully', async t => {
-    const uudiff = createNode();
+    const uudiff = createNode()
 
-    insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff)
 
     const button = uudiff.querySelector(
         '.refract-content-container .skipped-container .skipped-bottom.last:last-child .__refined_bitbucket_collapse_diff_button'
-    );
+    )
 
-    t.truthy(button);
-});
+    t.truthy(button)
+})
 
 test('should insert BOTTOM button in correct position when diff has no more lines to show', async t => {
     const uudiff = (
@@ -139,62 +139,62 @@ test('should insert BOTTOM button in correct position when diff has no more line
                 </div>
             </div>
         </section>
-    );
+    )
 
-    insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff)
 
     const button = uudiff.querySelector(
         '.refract-content-container .skipped-container .skipped-bottom.last:last-child .__refined_bitbucket_collapse_diff_button'
-    );
+    )
 
-    t.truthy(button);
-});
+    t.truthy(button)
+})
 
 test('should toggle the diff, toggle messages, toggle the arrow icon and apply bottom border to heading', t => {
     // Arrange
-    const uudiff = createNode();
+    const uudiff = createNode()
 
     // Acting
-    insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff)
 
     const button = uudiff.querySelector(
         '.__refined_bitbucket_collapse_diff_button'
-    );
+    )
     const diffContentContainer = uudiff.querySelector(
         'div.diff-content-container'
-    );
+    )
     const diffMessageContainer = uudiff.querySelector(
         'div.diff-message-container'
-    );
-    const heading = uudiff.querySelector('div.heading');
-    const upArrow = button.querySelector('svg[data-arrow-direction="up"]');
-    const downArrow = button.querySelector('svg[data-arrow-direction="down"]');
+    )
+    const heading = uudiff.querySelector('div.heading')
+    const upArrow = button.querySelector('svg[data-arrow-direction="up"]')
+    const downArrow = button.querySelector('svg[data-arrow-direction="down"]')
 
-    button.click();
+    button.click()
 
     // Assering
     const hasClass = (node, className) =>
-        Array.from(node.classList).includes(className);
-    const isHidden = node => hasClass(node, '__refined_bitbucket_hide');
+        Array.from(node.classList).includes(className)
+    const isHidden = node => hasClass(node, '__refined_bitbucket_hide')
     const hasBorder = node =>
-        hasClass(node, '__refined_bitbucket_bottom_border');
+        hasClass(node, '__refined_bitbucket_bottom_border')
 
-    t.true(isHidden(diffContentContainer));
-    t.true(isHidden(diffMessageContainer));
-    t.true(isHidden(upArrow));
-    t.true(!isHidden(downArrow));
-    t.true(hasBorder(heading));
+    t.true(isHidden(diffContentContainer))
+    t.true(isHidden(diffMessageContainer))
+    t.true(isHidden(upArrow))
+    t.true(!isHidden(downArrow))
+    t.true(hasBorder(heading))
 
     // Acting
-    button.click();
+    button.click()
 
     // Assering
-    t.false(isHidden(diffContentContainer));
-    t.false(isHidden(diffMessageContainer));
-    t.false(isHidden(upArrow));
-    t.false(!isHidden(downArrow));
-    t.false(hasBorder(heading));
-});
+    t.false(isHidden(diffContentContainer))
+    t.false(isHidden(diffMessageContainer))
+    t.false(isHidden(upArrow))
+    t.false(!isHidden(downArrow))
+    t.false(hasBorder(heading))
+})
 
 test('should insert button in correct position if diff failed to load', async t => {
     const uudiff = (
@@ -228,15 +228,15 @@ test('should insert button in correct position if diff failed to load', async t 
                 </div>
             </div>
         </section>
-    );
+    )
 
-    insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff)
 
     const button = uudiff.querySelector(
         'div.secondary.diff-actions .__refined_bitbucket_collapse_diff_button'
-    );
-    t.truthy(button);
-});
+    )
+    t.truthy(button)
+})
 
 test('should insert button in correct position if diff has prev version comments', t => {
     const uudiff = (
@@ -280,13 +280,13 @@ test('should insert button in correct position if diff has prev version comments
                 </div>
             </div>
         </section>
-    );
+    )
 
-    insertCollapseDiffButton(uudiff);
+    insertCollapseDiffButton(uudiff)
 
     const button = uudiff.querySelector(
         'div.secondary.diff-actions div:nth-child(5) > button.__refined_bitbucket_collapse_diff_button'
-    );
+    )
 
-    t.truthy(button);
-});
+    t.truthy(button)
+})

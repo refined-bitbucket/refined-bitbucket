@@ -1,3 +1,3 @@
-import { init, collapseIfNeeded } from './autocollapse';
+import { init, collapseIfNeeded } from './autocollapse'
 
-export default { init, collapseIfNeeded };
+export default { init, collapseIfNeeded }

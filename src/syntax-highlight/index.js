@@ -1,1 +1,1 @@
-export { default } from './syntax-highlight';
+export { default } from './syntax-highlight'

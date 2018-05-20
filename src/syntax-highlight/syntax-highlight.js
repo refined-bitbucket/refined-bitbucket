@@ -1,53 +1,53 @@
 /* global Prism, MutationObserver */
 
-'use strict';
+'use strict'
 
-import { h } from 'dom-chef';
-import elementReady from 'element-ready';
-import debounce from '../debounce';
-import { getLanguageClass } from './source-handler';
+import { h } from 'dom-chef'
+import elementReady from 'element-ready'
+import debounce from '../debounce'
+import { getLanguageClass } from './source-handler'
 
-import './prism.css';
-import './fix.css';
+import './prism.css'
+import './fix.css'
 
 const codeContainerObserver = new MutationObserver(mutations => {
     mutations.forEach(mutation =>
         syntaxHighlightSourceCodeLines($(mutation.target))
-    );
-});
+    )
+})
 
-let debouncedSideDiffHandler = null;
+let debouncedSideDiffHandler = null
 
 export default function syntaxHighlight(diff, afterWordDiff) {
     // File was only renamed, there's no diff
     if (diff.querySelector('.content-container')) {
-        return;
+        return
     }
     // Diff failed because pull request is too big
     if (diff.querySelector('div.too-big-message')) {
-        return;
+        return
     }
 
-    const languageClass = getLanguageClass(diff);
+    const languageClass = getLanguageClass(diff)
 
     if (!languageClass) {
-        return;
+        return
     }
 
     if (!diff.classList.contains(languageClass)) {
-        diff.classList.add(languageClass);
+        diff.classList.add(languageClass)
     }
 
-    const $diff = $(diff);
-    syntaxHighlightSourceCodeLines($diff);
+    const $diff = $(diff)
+    syntaxHighlightSourceCodeLines($diff)
 
-    afterWordDiff(() => syntaxHighlightSourceCodeLines($diff));
+    afterWordDiff(() => syntaxHighlightSourceCodeLines($diff))
 
-    const codeContainer = diff.querySelector('.refract-content-container');
-    codeContainerObserver.observe(codeContainer, { childList: true });
+    const codeContainer = diff.querySelector('.refract-content-container')
+    codeContainerObserver.observe(codeContainer, { childList: true })
 
     // side by side
-    const sideBySideButton = diff.querySelector('button[href*="side-by-side"]');
+    const sideBySideButton = diff.querySelector('button[href*="side-by-side"]')
     // deleted files don't have side by side
     if (sideBySideButton) {
         sideBySideButton.addEventListener('click', () => {
@@ -57,54 +57,52 @@ export default function syntaxHighlight(diff, afterWordDiff) {
             ) {
                 const args = {
                     languageClass,
-                    diffNodeSelector: sideBySideButton.attributes.href.nodeValue
-                };
-                highlightSideDiffAsync(args);
-                listenForSideDiffScrollAsync(args);
+                    diffNodeSelector:
+                        sideBySideButton.attributes.href.nodeValue,
+                }
+                highlightSideDiffAsync(args)
+                listenForSideDiffScrollAsync(args)
             }
-        });
+        })
     }
 }
 
 function syntaxHighlightSourceCodeLines($diff) {
     const sourceLines = Array.from(
         $diff.find('pre:not([class*=language]), pre:has(ins), pre:has(del)')
-    );
+    )
 
     sourceLines.forEach(preElement => {
-        Prism.highlightElement(preElement);
-    });
+        Prism.highlightElement(preElement)
+    })
 }
 
 async function highlightSideDiffAsync({ languageClass, diffNodeSelector }) {
-    const sideBySide = document.querySelector(diffNodeSelector);
-    sideBySide.classList.add(languageClass);
+    const sideBySide = document.querySelector(diffNodeSelector)
+    sideBySide.classList.add(languageClass)
 
-    await elementReady(`${diffNodeSelector} pre`, { target: sideBySide });
+    await elementReady(`${diffNodeSelector} pre`, { target: sideBySide })
 
-    const $sideBySide = $(sideBySide);
-    syntaxHighlightSourceCodeLines($sideBySide);
+    const $sideBySide = $(sideBySide)
+    syntaxHighlightSourceCodeLines($sideBySide)
 }
 
 async function listenForSideDiffScrollAsync(args) {
-    const scrollersSelector = 'div.aperture-pane-scroller';
+    const scrollersSelector = 'div.aperture-pane-scroller'
 
-    await elementReady(scrollersSelector, { target: document });
+    await elementReady(scrollersSelector, { target: document })
 
-    const scrollers = [...document.querySelectorAll(scrollersSelector)];
+    const scrollers = [...document.querySelectorAll(scrollersSelector)]
 
     if (debouncedSideDiffHandler) {
         scrollers.forEach(scroller => {
-            scroller.removeEventListener('scroll', debouncedSideDiffHandler);
-        });
+            scroller.removeEventListener('scroll', debouncedSideDiffHandler)
+        })
     }
 
-    debouncedSideDiffHandler = debounce(
-        () => highlightSideDiffAsync(args),
-        250
-    );
+    debouncedSideDiffHandler = debounce(() => highlightSideDiffAsync(args), 250)
 
     scrollers.forEach(scroller => {
-        scroller.addEventListener('scroll', debouncedSideDiffHandler);
-    });
+        scroller.addEventListener('scroll', debouncedSideDiffHandler)
+    })
 }

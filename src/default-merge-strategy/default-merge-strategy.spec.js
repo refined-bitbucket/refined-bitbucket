@@ -1,67 +1,67 @@
-import { URL } from 'url';
-import test from 'ava';
-import { h } from 'dom-chef';
-import delay from 'yoctodelay';
+import { URL } from 'url'
+import test from 'ava'
+import { h } from 'dom-chef'
+import delay from 'yoctodelay'
 
-import '../../test/setup-jsdom';
-import { cleanDocumentBody } from '../../test/test-utils';
+import '../../test/setup-jsdom'
+import { cleanDocumentBody } from '../../test/test-utils'
 
-import * as defaultMergeStrategy from './default-merge-strategy';
+import * as defaultMergeStrategy from './default-merge-strategy'
 
-global.location = new URL('https://www.bitbucket.org');
+global.location = new URL('https://www.bitbucket.org')
 
 test('should not try to choose default merge strategy on non-pull request pages', async t => {
-    location.href = 'https://www.bitbucket.org/user/repo/is-not-a-pull-request';
+    location.href = 'https://www.bitbucket.org/user/repo/is-not-a-pull-request'
 
     try {
-        await defaultMergeStrategy.initAsync('squash');
-        t.fail();
+        await defaultMergeStrategy.initAsync('squash')
+        t.fail()
     } catch (err) {
-        t.pass();
+        t.pass()
     }
-});
+})
 
 test('should not choose default merge strategy twice', async t => {
-    location.href = 'https://www.bitbucket.org/reyronald/repo/pull-requests/1';
+    location.href = 'https://www.bitbucket.org/reyronald/repo/pull-requests/1'
 
-    const script = <script id={defaultMergeStrategy.SCRIPT_ID} />;
-    document.body.appendChild(script);
+    const script = <script id={defaultMergeStrategy.SCRIPT_ID} />
+    document.body.appendChild(script)
 
     try {
-        await defaultMergeStrategy.initAsync('squash');
-        t.fail();
+        await defaultMergeStrategy.initAsync('squash')
+        t.fail()
     } catch (err) {
-        t.pass();
+        t.pass()
     }
 
-    cleanDocumentBody();
-});
+    cleanDocumentBody()
+})
 
 test('should not choose default merge strategy if configured strategy is invalid', async t => {
-    location.href = 'https://www.bitbucket.org/reyronald/repo/pull-requests/1';
+    location.href = 'https://www.bitbucket.org/reyronald/repo/pull-requests/1'
 
-    const script = <script id={defaultMergeStrategy.SCRIPT_ID} />;
-    document.body.appendChild(script);
+    const script = <script id={defaultMergeStrategy.SCRIPT_ID} />
+    document.body.appendChild(script)
 
     try {
-        await defaultMergeStrategy.initAsync('invalid default merge strategy');
-        t.fail();
+        await defaultMergeStrategy.initAsync('invalid default merge strategy')
+        t.fail()
     } catch (err) {
-        t.pass();
+        t.pass()
     }
 
-    cleanDocumentBody();
-});
+    cleanDocumentBody()
+})
 
 test.serial('should choose default merge strategy', async t => {
-    location.href = 'https://www.bitbucket.org/reyronald/repo/pull-requests/1';
+    location.href = 'https://www.bitbucket.org/reyronald/repo/pull-requests/1'
 
-    const mergeButton = <button id="fulfill-pullrequest">Merge</button>;
-    document.body.appendChild(mergeButton);
+    const mergeButton = <button id="fulfill-pullrequest">Merge</button>
+    document.body.appendChild(mergeButton)
 
-    const promise = defaultMergeStrategy.initAsync('squash');
+    const promise = defaultMergeStrategy.initAsync('squash')
 
-    mergeButton.click();
+    mergeButton.click()
 
     const mergeStrategies = (
         <select
@@ -76,22 +76,22 @@ test.serial('should choose default merge strategy', async t => {
                 Squash
             </option>
         </select>
-    );
-    await delay(1000);
-    document.body.appendChild(mergeStrategies);
+    )
+    await delay(1000)
+    document.body.appendChild(mergeStrategies)
 
     // Assert
     try {
-        await promise;
+        await promise
         if (defaultMergeStrategy.scriptAlreadyExists()) {
-            t.pass();
+            t.pass()
         } else {
-            t.fail();
+            t.fail()
         }
     } catch (err) {
-        console.error(err);
-        t.fail();
+        console.error(err)
+        t.fail()
     }
 
-    cleanDocumentBody();
-});
+    cleanDocumentBody()
+})

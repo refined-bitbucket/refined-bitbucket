@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
-    "prettier": "prettier --single-quote --write \"./**/*.{js,jsx,json,css,md}\"",
+    "prettier": "prettier --write \"./**/*.{js,jsx,json,css,md}\"",
     "xo": "xo --fix *.js {src,test,scripts}/**/*.js !src/vendor/prism.js",
     "lint": "npm run prettier && npm run xo",
     "ava": "cross-env BABEL_ENV=testing ava",
@@ -23,7 +23,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css,md}": [
-      "prettier --single-quote --write",
+      "prettier --write",
       "git add"
     ]
   },

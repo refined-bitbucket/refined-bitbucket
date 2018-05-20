@@ -1,10 +1,10 @@
-import { h } from 'dom-chef';
+import { h } from 'dom-chef'
 
 export const cleanDocumentBody = () => {
     while (document.body.hasChildNodes()) {
-        document.body.removeChild(document.body.lastChild);
+        document.body.removeChild(document.body.lastChild)
     }
-};
+}
 
 export const addApiTokenMetadata = () => {
     const meta = (
@@ -12,6 +12,6 @@ export const addApiTokenMetadata = () => {
             name="apitoken"
             content={'{"token": "...", "expiration": 1517595777.580439}'}
         />
-    );
-    document.head.appendChild(meta);
-};
+    )
+    document.head.appendChild(meta)
+}

@@ -1,3 +1,3 @@
-import { init } from './keymap';
+import { init } from './keymap'
 
-export default { init };
+export default { init }

@@ -1,1 +1,1 @@
-export { default } from './sidebar-counters';
+export { default } from './sidebar-counters'

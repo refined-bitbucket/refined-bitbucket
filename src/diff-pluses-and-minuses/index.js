@@ -1,1 +1,1 @@
-export { default } from './diff-pluses-and-minuses';
+export { default } from './diff-pluses-and-minuses'

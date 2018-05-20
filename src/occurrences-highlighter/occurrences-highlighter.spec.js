@@ -1,14 +1,14 @@
-import test from 'ava';
-import { h } from 'dom-chef';
+import test from 'ava'
+import { h } from 'dom-chef'
 
-import '../../test/setup-jsdom';
+import '../../test/setup-jsdom'
 
-const { highlightOccurrences } = require('./occurrences-highlighter');
+const { highlightOccurrences } = require('./occurrences-highlighter')
 
 // Necessary custom mockings
 document.createRange = () => ({
-    selectNodeContents: () => {}
-});
+    selectNodeContents: () => {},
+})
 const _selectionCommon = {
     removeAllRanges: () => {},
     addRange: () => {},
@@ -16,9 +16,9 @@ const _selectionCommon = {
         return this.anchorNode.textContent.substr(
             this.anchorOffset,
             this.focusOffset - this.anchorOffset
-        );
-    }
-};
+        )
+    },
+}
 
 test('highlighting one occurrence', t => {
     const container = (
@@ -27,7 +27,7 @@ test('highlighting one occurrence', t => {
                 <pre> Hello </pre>
             </div>
         </div>
-    );
+    )
 
     const expected = (
         <div class="diff-container">
@@ -40,19 +40,19 @@ test('highlighting one occurrence', t => {
                 </pre>
             </div>
         </div>
-    );
+    )
 
     window.getSelection = () => ({
         ..._selectionCommon,
         anchorNode: container.querySelector('pre').firstChild,
         anchorOffset: 1,
-        focusOffset: 6
-    });
+        focusOffset: 6,
+    })
 
-    highlightOccurrences(container);
+    highlightOccurrences(container)
 
-    t.is(container.innerHTML, expected.innerHTML);
-});
+    t.is(container.innerHTML, expected.innerHTML)
+})
 
 test('highlighting two occurrences', t => {
     const container = (
@@ -61,7 +61,7 @@ test('highlighting two occurrences', t => {
                 <pre> Hello and Hello again </pre>
             </div>
         </div>
-    );
+    )
 
     const expected = (
         <div class="diff-container">
@@ -76,19 +76,19 @@ test('highlighting two occurrences', t => {
                 </pre>
             </div>
         </div>
-    );
+    )
 
     window.getSelection = () => ({
         ..._selectionCommon,
         anchorNode: container.querySelector('pre').firstChild,
         anchorOffset: 1,
-        focusOffset: 6
-    });
+        focusOffset: 6,
+    })
 
-    highlightOccurrences(container);
+    highlightOccurrences(container)
 
-    t.is(container.innerHTML, expected.innerHTML);
-});
+    t.is(container.innerHTML, expected.innerHTML)
+})
 
 test('highlighting two occurrences in differente nodes', t => {
     const container = (
@@ -98,7 +98,7 @@ test('highlighting two occurrences in differente nodes', t => {
                 <pre> Hello </pre>
             </div>
         </div>
-    );
+    )
 
     const expected = (
         <div class="diff-container">
@@ -117,19 +117,19 @@ test('highlighting two occurrences in differente nodes', t => {
                 </pre>
             </div>
         </div>
-    );
+    )
 
     window.getSelection = () => ({
         ..._selectionCommon,
         anchorNode: container.querySelector('pre').firstChild,
         anchorOffset: 1,
-        focusOffset: 6
-    });
+        focusOffset: 6,
+    })
 
-    highlightOccurrences(container);
+    highlightOccurrences(container)
 
-    t.is(container.innerHTML, expected.innerHTML);
-});
+    t.is(container.innerHTML, expected.innerHTML)
+})
 
 test('when selected word is inside a comment editing box (textarea)', t => {
     const container = (
@@ -142,7 +142,7 @@ test('when selected word is inside a comment editing box (textarea)', t => {
                 </div>
             </div>
         </div>
-    );
+    )
 
     const expected = (
         <div class="diff-container">
@@ -159,20 +159,20 @@ test('when selected word is inside a comment editing box (textarea)', t => {
                 </div>
             </div>
         </div>
-    );
+    )
 
     window.getSelection = () => ({
         ..._selectionCommon,
         anchorNode: container.querySelector('div.markItUpContainer'),
         anchorOffset: 1,
         focusOffset: 1,
-        toString: () => 'Hello'
-    });
+        toString: () => 'Hello',
+    })
 
-    highlightOccurrences(container);
+    highlightOccurrences(container)
 
-    t.is(container.innerHTML, expected.innerHTML);
-});
+    t.is(container.innerHTML, expected.innerHTML)
+})
 
 test('selecting whitespace should not do anything', t => {
     const container = (
@@ -183,7 +183,7 @@ test('selecting whitespace should not do anything', t => {
                 <pre> Hello </pre>
             </div>
         </div>
-    );
+    )
 
     const expected = (
         <div class="diff-container">
@@ -193,19 +193,19 @@ test('selecting whitespace should not do anything', t => {
                 <pre> Hello </pre>
             </div>
         </div>
-    );
+    )
 
     window.getSelection = () => ({
         ..._selectionCommon,
         anchorNode: container.querySelector('pre').firstChild,
         anchorOffset: 2,
-        focusOffset: 3
-    });
+        focusOffset: 3,
+    })
 
-    highlightOccurrences(container);
+    highlightOccurrences(container)
 
-    t.is(container.innerHTML, expected.innerHTML);
-});
+    t.is(container.innerHTML, expected.innerHTML)
+})
 
 test('selecting already highlighted word should not remove it', t => {
     const container = (
@@ -221,7 +221,7 @@ test('selecting already highlighted word should not remove it', t => {
                 </pre>
             </div>
         </div>
-    );
+    )
 
     const expected = (
         <div class="diff-container">
@@ -236,19 +236,19 @@ test('selecting already highlighted word should not remove it', t => {
                 </pre>
             </div>
         </div>
-    );
+    )
 
     window.getSelection = () => ({
         ..._selectionCommon,
         anchorNode: container.querySelector('span').firstChild,
         anchorOffset: 0,
-        focusOffset: 5
-    });
+        focusOffset: 5,
+    })
 
-    highlightOccurrences(container);
+    highlightOccurrences(container)
 
-    t.is(container.innerHTML, expected.innerHTML);
-});
+    t.is(container.innerHTML, expected.innerHTML)
+})
 
 // Evaluate to use 'dom-compare' package
 // https://github.com/algolia/expect-jsx

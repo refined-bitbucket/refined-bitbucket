@@ -1,9 +1,9 @@
-import { h } from 'dom-chef';
-import test from 'ava';
+import { h } from 'dom-chef'
+import test from 'ava'
 
-import '../../test/setup-jsdom';
+import '../../test/setup-jsdom'
 
-import linkifyTargetBranch from '.';
+import linkifyTargetBranch from '.'
 
 test('linkifyTargetBranch should work', t => {
     const actual = (
@@ -18,7 +18,7 @@ test('linkifyTargetBranch should work', t => {
                 </span>
             </span>
         </div>
-    );
+    )
 
     const expected = (
         <div class="title-and-target-branch">
@@ -38,9 +38,9 @@ test('linkifyTargetBranch should work', t => {
                 </span>
             </span>
         </div>
-    );
+    )
 
-    linkifyTargetBranch(actual);
+    linkifyTargetBranch(actual)
 
-    t.is(actual.outerHTML, expected.outerHTML);
-});
+    t.is(actual.outerHTML, expected.outerHTML)
+})

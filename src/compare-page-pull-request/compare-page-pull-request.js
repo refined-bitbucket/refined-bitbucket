@@ -1,10 +1,10 @@
-'use strict';
+'use strict'
 
-import { h } from 'dom-chef';
-import 'selector-observer';
-import { getRepoURL } from '../page-detect';
+import { h } from 'dom-chef'
+import 'selector-observer'
+import { getRepoURL } from '../page-detect'
 
-const COMPARE_DETAILS_SELECTOR = '#branch-compare.content-container';
+const COMPARE_DETAILS_SELECTOR = '#branch-compare.content-container'
 
 export default function comparePagePullRequest() {
     /*
@@ -12,14 +12,14 @@ export default function comparePagePullRequest() {
      *  1) The Compare button has been hit for the first time
      *  2) The branches that are being compared have changed
      */
-    document.body.observeSelector(COMPARE_DETAILS_SELECTOR, addUrlIfComparing);
+    document.body.observeSelector(COMPARE_DETAILS_SELECTOR, addUrlIfComparing)
 }
 
 function addUrlIfComparing() {
-    const { source, destination } = getSourceAndDestination();
+    const { source, destination } = getSourceAndDestination()
 
     if (source && destination) {
-        addPRLink(source, destination);
+        addPRLink(source, destination)
     }
 }
 
@@ -27,15 +27,15 @@ export function addPRLink(source, destination, comparePage = document.body) {
     // Get compare branches area
     const detailSummarySection = comparePage.querySelector(
         'ul.detail-summary--section'
-    );
-    const url = getPullRequestUrl(source, destination);
+    )
+    const url = getPullRequestUrl(source, destination)
 
     // Remove Create PR link URL if it already exists
     const previousLink = detailSummarySection.querySelector(
         '.js-pr-create-item'
-    );
+    )
     if (previousLink) {
-        previousLink.parentNode.removeChild(previousLink);
+        previousLink.parentNode.removeChild(previousLink)
     }
 
     const link = (
@@ -50,26 +50,26 @@ export function addPRLink(source, destination, comparePage = document.body) {
                 Create pull request
             </a>
         </li>
-    );
-    detailSummarySection.appendChild(link, detailSummarySection);
-    return link;
+    )
+    detailSummarySection.appendChild(link, detailSummarySection)
+    return link
 }
 
 function getPullRequestUrl(source, destination) {
     return `https://bitbucket.org/${getRepoURL()}/pull-requests/new?source=${encodeURIComponent(
         source
-    )}&dest=${encodeURIComponent(destination)}`;
+    )}&dest=${encodeURIComponent(destination)}`
 }
 
 function getSourceAndDestination() {
     // This element contains all metadata about any current compare
-    const branchCompare = document.querySelector(COMPARE_DETAILS_SELECTOR);
+    const branchCompare = document.querySelector(COMPARE_DETAILS_SELECTOR)
 
     // Get source and destination branch from data attributes
     const {
         compareSourceValue: source,
-        compareDestValue: destination
-    } = branchCompare.dataset;
+        compareDestValue: destination,
+    } = branchCompare.dataset
 
-    return { source, destination };
+    return { source, destination }
 }

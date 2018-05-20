@@ -1,1 +1,1 @@
-export { default } from './occurrences-highlighter';
+export { default } from './occurrences-highlighter'

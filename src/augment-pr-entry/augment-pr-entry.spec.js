@@ -1,29 +1,29 @@
-import { h } from 'dom-chef';
-import test from 'ava';
+import { h } from 'dom-chef'
+import test from 'ava'
 
-import { addApiTokenMetadata } from '../../test/test-utils';
-import '../../test/setup-jsdom';
+import { addApiTokenMetadata } from '../../test/test-utils'
+import '../../test/setup-jsdom'
 
 import {
     getPrData,
     addSourceBranch,
     addCreationDate,
-    addUsernameWithLatestUpdate
-} from './augment-pr-entry';
+    addUsernameWithLatestUpdate,
+} from './augment-pr-entry'
 
 // Consider using `nock` package in the future
 const mockFetchWithErrorResponse = () => {
     global.fetch = () => {
         return Promise.resolve({
-            json: () => Promise.resolve({ error: true })
-        });
-    };
-};
+            json: () => Promise.resolve({ error: true }),
+        })
+    }
+}
 
 const mockFetchWithSuccessfulResponse = ({
     sourceBranch = 'source-branch-name',
     createdOn = '2018-02-09T15:07:08.160349+00:00',
-    activityAuthor = 'Andrew Bernard'
+    activityAuthor = 'Andrew Bernard',
 }) => {
     global.fetch = () => {
         return Promise.resolve({
@@ -31,8 +31,8 @@ const mockFetchWithSuccessfulResponse = ({
                 Promise.resolve({
                     source: {
                         branch: {
-                            name: sourceBranch
-                        }
+                            name: sourceBranch,
+                        },
                     },
                     // eslint-disable-next-line camelcase
                     created_on: createdOn,
@@ -41,29 +41,29 @@ const mockFetchWithSuccessfulResponse = ({
                             update: {
                                 author: {
                                     // eslint-disable-next-line camelcase
-                                    display_name: activityAuthor
-                                }
+                                    display_name: activityAuthor,
+                                },
                             },
                             approval: {
                                 user: {
                                     // eslint-disable-next-line camelcase
-                                    display_name: activityAuthor
-                                }
+                                    display_name: activityAuthor,
+                                },
                             },
                             comment: {
                                 user: {
                                     // eslint-disable-next-line camelcase
-                                    display_name: activityAuthor
-                                }
-                            }
-                        }
-                    ]
-                })
-        });
-    };
-};
+                                    display_name: activityAuthor,
+                                },
+                            },
+                        },
+                    ],
+                }),
+        })
+    }
+}
 
-Date.now = () => new Date('02/22/2018').getTime();
+Date.now = () => new Date('02/22/2018').getTime()
 
 const buildPrTable = () => {
     return (
@@ -99,34 +99,34 @@ const buildPrTable = () => {
                 </div>
             </tr>
         </table>
-    );
-};
+    )
+}
 
 test('getPrData should return undefined on API error', async t => {
-    addApiTokenMetadata();
+    addApiTokenMetadata()
 
-    mockFetchWithErrorResponse();
+    mockFetchWithErrorResponse()
 
-    const prData = await getPrData();
+    const prData = await getPrData()
 
-    t.is(prData, undefined);
-});
+    t.is(prData, undefined)
+})
 
 test('getPrData should return proper data on successful API request', async t => {
-    addApiTokenMetadata();
+    addApiTokenMetadata()
 
-    mockFetchWithSuccessfulResponse({});
+    mockFetchWithSuccessfulResponse({})
 
-    const prData = await getPrData();
+    const prData = await getPrData()
 
-    t.truthy(prData.source.branch.name);
-    t.truthy(prData.created_on);
-});
+    t.truthy(prData.source.branch.name)
+    t.truthy(prData.created_on)
+})
 
 test('addSourceBranch should insert source branch node', async t => {
-    const actual = buildPrTable();
+    const actual = buildPrTable()
 
-    const sourceBranch = 'source-branch';
+    const sourceBranch = 'source-branch'
     const expected = (
         <table class="aui paged-table pull-requests-table">
             <tr class="pull-request-row focused" data-pull-request-id="1">
@@ -182,22 +182,22 @@ test('addSourceBranch should insert source branch node', async t => {
                 </div>
             </tr>
         </table>
-    );
+    )
 
-    mockFetchWithSuccessfulResponse({ sourceBranch });
-    addApiTokenMetadata();
+    mockFetchWithSuccessfulResponse({ sourceBranch })
+    addApiTokenMetadata()
 
-    const prNode = actual.querySelector('.pull-request-row');
-    const prData = await getPrData();
-    await addSourceBranch(prNode, prData);
+    const prNode = actual.querySelector('.pull-request-row')
+    const prData = await getPrData()
+    await addSourceBranch(prNode, prData)
 
-    t.is(actual.outerHTML, expected.outerHTML);
-});
+    t.is(actual.outerHTML, expected.outerHTML)
+})
 
 test('addCreationDate should add date on success', async t => {
-    const actual = buildPrTable();
+    const actual = buildPrTable()
 
-    const createdOn = '2018-02-09T15:07:08.160349+00:00';
+    const createdOn = '2018-02-09T15:07:08.160349+00:00'
     const expected = (
         <table class="aui paged-table pull-requests-table">
             <tr class="pull-request-row focused" data-pull-request-id="1">
@@ -238,21 +238,21 @@ test('addCreationDate should add date on success', async t => {
                 </div>
             </tr>
         </table>
-    );
+    )
 
-    mockFetchWithSuccessfulResponse({ createdOn });
-    addApiTokenMetadata();
+    mockFetchWithSuccessfulResponse({ createdOn })
+    addApiTokenMetadata()
 
-    const prNode = actual.querySelector('.pull-request-row');
-    const prData = await getPrData();
-    await addCreationDate(prNode, prData);
-    t.is(actual.outerHTML, expected.outerHTML);
-});
+    const prNode = actual.querySelector('.pull-request-row')
+    const prData = await getPrData()
+    await addCreationDate(prNode, prData)
+    t.is(actual.outerHTML, expected.outerHTML)
+})
 
 test('addUsernameWithLatestUpdate should the name of author last update on success', async t => {
-    const actual = buildPrTable();
+    const actual = buildPrTable()
 
-    const activityAuthor = 'Andrew Bernard';
+    const activityAuthor = 'Andrew Bernard'
     const expected = (
         <table class="aui paged-table pull-requests-table">
             <tr class="pull-request-row focused" data-pull-request-id="1">
@@ -286,13 +286,13 @@ test('addUsernameWithLatestUpdate should the name of author last update on succe
                 </div>
             </tr>
         </table>
-    );
+    )
 
-    mockFetchWithSuccessfulResponse({ activityAuthor });
-    addApiTokenMetadata();
+    mockFetchWithSuccessfulResponse({ activityAuthor })
+    addApiTokenMetadata()
 
-    const prNode = actual.querySelector('.pull-request-row');
-    const prData = await getPrData();
-    await addUsernameWithLatestUpdate(prNode, prData);
-    t.is(actual.outerHTML, expected.outerHTML);
-});
+    const prNode = actual.querySelector('.pull-request-row')
+    const prData = await getPrData()
+    await addUsernameWithLatestUpdate(prNode, prData)
+    t.is(actual.outerHTML, expected.outerHTML)
+})

@@ -1,15 +1,15 @@
-'use strict';
+'use strict'
 
-import 'jquery-highlight';
+import 'jquery-highlight'
 
-import './occurrences-highlighter.css';
+import './occurrences-highlighter.css'
 
 export default function occurrencesHighlighter(diff) {
-    const diffContentContainer = diff.querySelector('.diff-content-container');
+    const diffContentContainer = diff.querySelector('.diff-content-container')
 
     $(diffContentContainer).dblclick(function() {
-        highlightOccurrences(this);
-    });
+        highlightOccurrences(this)
+    })
 }
 
 export function highlightOccurrences(container) {
@@ -18,17 +18,17 @@ export function highlightOccurrences(container) {
     // <span class="description"> for tasks
     const code = $(
         container.querySelectorAll('pre, div.comment-content, span.description')
-    );
-    const selection = getSelectedText();
+    )
+    const selection = getSelectedText()
     const selectionIsInTextArea =
         selection.anchorNode.getElementsByTagName &&
-        selection.anchorNode.getElementsByTagName('textarea').length;
-    const text = selection.toString();
+        selection.anchorNode.getElementsByTagName('textarea').length
+    const text = selection.toString()
 
     // if selected text is all whitespace, don't highlight anything
     if (!/\S/.test(text)) {
-        code.unhighlight();
-        return;
+        code.unhighlight()
+        return
     }
     // if selected text is already highlighted, don't highlight anything
     if (
@@ -36,39 +36,39 @@ export function highlightOccurrences(container) {
             '__refined_bitbucket_highlight'
         )
     ) {
-        return;
+        return
     }
 
     // When the user selects a word inside a textarea, the selected text is not actually present in the DOM.
     // In that case the selection is not highlighted and our reselection logic will actually deselect the text.
     if (selectionIsInTextArea) {
-        highlightOcurrences(code, text);
+        highlightOcurrences(code, text)
     } else {
-        const selectedNode = getSelectionAsNode(selection);
+        const selectedNode = getSelectionAsNode(selection)
         const span = wrapInSpan(
             selectedNode,
             '__refined_bitbucket_selection_temporary_id'
-        );
-        highlightOcurrences(code, text);
-        const children = unwrapChildren(span);
-        const highlightedNode = getHighlightedNode(children);
+        )
+        highlightOcurrences(code, text)
+        const children = unwrapChildren(span)
+        const highlightedNode = getHighlightedNode(children)
         if (highlightedNode) {
-            selectElementContents(highlightedNode);
+            selectElementContents(highlightedNode)
         }
     }
 }
 
 function getSelectedText() {
     if (window.getSelection) {
-        return window.getSelection();
+        return window.getSelection()
     }
     if (document.getSelection) {
-        return document.getSelection();
+        return document.getSelection()
     }
     if (document.selection) {
-        return document.selection.createRange().text;
+        return document.selection.createRange().text
     }
-    return '';
+    return ''
 }
 
 /**
@@ -78,14 +78,14 @@ function getSelectedText() {
  * @param {string} text
  */
 function highlightOcurrences(code, text) {
-    code.unhighlight({ className: '__refined_bitbucket_highlight' });
+    code.unhighlight({ className: '__refined_bitbucket_highlight' })
     code.highlight([text, text.trim()], {
         className: '__refined_bitbucket_highlight',
         caseSensitive: true,
         wordsOnly: true,
         wordsBoundaryStart: '(',
-        wordsBoundaryEnd: ')'
-    });
+        wordsBoundaryEnd: ')',
+    })
 }
 
 /**
@@ -95,11 +95,11 @@ function highlightOcurrences(code, text) {
  */
 function getSelectionAsNode(selection) {
     if (selection.anchorNode instanceof Text) {
-        const word = selection.anchorNode.splitText(selection.anchorOffset);
-        word.splitText(selection.focusOffset);
-        return word;
+        const word = selection.anchorNode.splitText(selection.anchorOffset)
+        word.splitText(selection.focusOffset)
+        return word
     }
-    return selection.anchorNode;
+    return selection.anchorNode
 }
 
 /**
@@ -109,10 +109,10 @@ function getSelectionAsNode(selection) {
  * @returns {HTMLElement}
  */
 function wrapInSpan(el, id) {
-    const wrapper = document.createElement('span');
-    wrapper.id = id;
-    $(el).wrap(wrapper);
-    return el.parentNode;
+    const wrapper = document.createElement('span')
+    wrapper.id = id
+    $(el).wrap(wrapper)
+    return el.parentNode
 }
 
 /**
@@ -122,9 +122,9 @@ function wrapInSpan(el, id) {
  */
 function unwrapChildren(el) {
     if (el && el.firstElementChild) {
-        return $(el.firstElementChild).unwrap();
+        return $(el.firstElementChild).unwrap()
     }
-    return [];
+    return []
 }
 
 /**
@@ -135,15 +135,15 @@ function unwrapChildren(el) {
  */
 function getHighlightedNode(children) {
     for (let index = 0; index < children.length; index++) {
-        const node = children[index];
+        const node = children[index]
         if (node.classList.contains('__refined_bitbucket_highlight')) {
-            return node;
+            return node
         }
         const nodesWithHighlightClass = node.getElementsByClassName(
             '__refined_bitbucket_highlight'
-        );
+        )
         if (nodesWithHighlightClass.length) {
-            return nodesWithHighlightClass[0];
+            return nodesWithHighlightClass[0]
         }
     }
 }
@@ -153,9 +153,9 @@ function getHighlightedNode(children) {
  * @param {HTMLElement} element
  */
 function selectElementContents(element) {
-    const range = document.createRange();
-    range.selectNodeContents(element);
-    const selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
+    const range = document.createRange()
+    range.selectNodeContents(element)
+    const selection = window.getSelection()
+    selection.removeAllRanges()
+    selection.addRange(range)
 }

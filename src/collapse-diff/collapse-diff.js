@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-import { h } from 'dom-chef';
+import { h } from 'dom-chef'
 
-import './collapse-diff.css';
+import './collapse-diff.css'
 
 const insertTopButton = section => {
     const button = (
@@ -42,10 +42,10 @@ const insertTopButton = section => {
                 </svg>
             </button>
         </div>
-    );
+    )
 
-    const diffActions = section.querySelector('.diff-actions.secondary');
-    const diffLoaded = !section.querySelector('div.too-big-message');
+    const diffActions = section.querySelector('.diff-actions.secondary')
+    const diffLoaded = !section.querySelector('div.too-big-message')
     if (diffLoaded) {
         // NOTE: jsdom (used for unit-testing) doesn't support either `after`, `append` nor `insertAdjacentElement`
         // Insert it after the "More" button
@@ -53,21 +53,21 @@ const insertTopButton = section => {
             button,
             diffActions.querySelector('.aui-dropdown2-trigger-more')
                 .parentElement.nextElementSibling
-        );
+        )
     } else {
-        diffActions.appendChild(button);
+        diffActions.appendChild(button)
     }
 
-    return button;
-};
+    return button
+}
 
 const insertBottomButton = section => {
     const style = {
         right: 30,
         position: 'absolute',
         height: 'auto',
-        width: 32
-    };
+        width: 32,
+    }
     const bottomButton = (
         <div class="aui-buttons __rb_ellipsis" style={style}>
             <button
@@ -104,20 +104,20 @@ const insertBottomButton = section => {
                 </svg>
             </button>
         </div>
-    );
+    )
 
     const bottomLine = section.querySelector(
         'div.skipped-bottom.last:last-child'
-    );
+    )
     if (bottomLine) {
-        bottomLine.appendChild(bottomButton);
+        bottomLine.appendChild(bottomButton)
     } else {
         const contentContainer = section.querySelector(
             'div.refract-content-container'
-        );
+        )
         if (contentContainer) {
-            bottomButton.style.marginTop = 0;
-            const height = { height: 5 };
+            bottomButton.style.marginTop = 0
+            const height = { height: 5 }
             const bottomLineContainer = (
                 <div class="skipped-container">
                     <div
@@ -128,42 +128,42 @@ const insertBottomButton = section => {
                         {bottomButton}
                     </div>
                 </div>
-            );
-            contentContainer.appendChild(bottomLineContainer);
+            )
+            contentContainer.appendChild(bottomLineContainer)
         }
     }
 
-    return bottomButton;
-};
+    return bottomButton
+}
 
 export function toggleDiff(section) {
     // Hide/show the diff
     const diffContentContainer = section.querySelector(
         'div.diff-content-container'
-    );
+    )
     if (diffContentContainer) {
-        diffContentContainer.classList.toggle('__refined_bitbucket_hide');
+        diffContentContainer.classList.toggle('__refined_bitbucket_hide')
     }
 
     // Hide/show diff message, if present (when there are conflicts, for example)
     const diffMessageContainer = section.querySelector(
         'div.diff-message-container'
-    );
+    )
     if (diffMessageContainer) {
-        diffMessageContainer.classList.toggle('__refined_bitbucket_hide');
+        diffMessageContainer.classList.toggle('__refined_bitbucket_hide')
     }
 
     // Add/remove a bottom border to the diff heading
     section
         .querySelector('div.heading')
-        .classList.toggle('__refined_bitbucket_bottom_border');
+        .classList.toggle('__refined_bitbucket_bottom_border')
 
     // Toggle the collapse button icon
-    [
+    ;[
         ...section.querySelectorAll(
             '.__refined_bitbucket_collapse_diff_button svg'
-        )
-    ].forEach(svg => svg.classList.toggle('__refined_bitbucket_hide'));
+        ),
+    ].forEach(svg => svg.classList.toggle('__refined_bitbucket_hide'))
 }
 
 export function insertCollapseDiffButton(section) {
@@ -175,19 +175,19 @@ export function insertCollapseDiffButton(section) {
             '__refined_bitbucket_collapse_diff_button'
         ).length
     ) {
-        return;
+        return
     }
 
     const onClick = () => {
-        toggleDiff(section);
+        toggleDiff(section)
 
         // Scrolling to diff
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
 
-    const topButton = insertTopButton(section);
-    const bottomButton = insertBottomButton(section);
+    const topButton = insertTopButton(section)
+    const bottomButton = insertBottomButton(section)
 
-    topButton.addEventListener('click', onClick);
-    bottomButton.addEventListener('click', onClick);
+    topButton.addEventListener('click', onClick)
+    bottomButton.addEventListener('click', onClick)
 }

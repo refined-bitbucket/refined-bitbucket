@@ -1,1 +1,1 @@
-export { default } from './ignore-whitespace';
+export { default } from './ignore-whitespace'

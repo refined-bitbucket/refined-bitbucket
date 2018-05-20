@@ -1,8 +1,8 @@
 /* globals Prism */
 
-'use strict';
+'use strict'
 
-import languagesExtensions from './language-ext';
+import languagesExtensions from './language-ext'
 
 /**
  * Retrieves a class according to the element data-filename or data-path attribute.
@@ -13,24 +13,24 @@ import languagesExtensions from './language-ext';
  * @return {String} The class extracted from the element's file path.
  */
 export function getLanguageClass(element) {
-    const filePath = getFilepathFromElement(element);
-    const fileExtension = getExtension(filePath).toLowerCase();
+    const filePath = getFilepathFromElement(element)
+    const fileExtension = getExtension(filePath).toLowerCase()
 
     if (fileExtension in languagesExtensions) {
-        return languagesExtensions[fileExtension];
+        return languagesExtensions[fileExtension]
     }
 
-    const fileName = getFilename(filePath).toLowerCase();
+    const fileName = getFilename(filePath).toLowerCase()
     if (fileName in languagesExtensions) {
-        return languagesExtensions[fileName];
+        return languagesExtensions[fileName]
     }
 
-    const fileExtensionWithoutDot = fileExtension.slice(1);
+    const fileExtensionWithoutDot = fileExtension.slice(1)
     if (fileExtensionWithoutDot in Prism.languages) {
-        return `language-${fileExtensionWithoutDot}`;
+        return `language-${fileExtensionWithoutDot}`
     }
 
-    return '';
+    return ''
 }
 
 /**
@@ -44,8 +44,8 @@ export function getFilepathFromElement(element) {
         element.getAttribute('data-identifier') ||
         element.getAttribute('data-filename') ||
         element.getAttribute('data-path') ||
-        '';
-    return filepath.trim();
+        ''
+    return filepath.trim()
 }
 
 /**
@@ -53,7 +53,7 @@ export function getFilepathFromElement(element) {
  * @return {String}
  */
 export function getExtension(filepath) {
-    return `.${filepath.slice(((filepath.lastIndexOf('.') - 1) >>> 0) + 2)}`;
+    return `.${filepath.slice(((filepath.lastIndexOf('.') - 1) >>> 0) + 2)}`
 }
 
 /**
@@ -62,5 +62,5 @@ export function getExtension(filepath) {
  * @return {String} name of the file
  */
 function getFilename(filepath) {
-    return filepath.slice(filepath.lastIndexOf('/') + 1);
+    return filepath.slice(filepath.lastIndexOf('/') + 1)
 }

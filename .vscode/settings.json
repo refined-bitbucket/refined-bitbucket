@@ -4,6 +4,5 @@
   "files.exclude": {
     "**/*.css": false
   },
-  "editor.formatOnSave": true,
-  "prettier.singleQuote": true
+  "editor.formatOnSave": true
 }

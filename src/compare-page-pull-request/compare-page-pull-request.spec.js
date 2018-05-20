@@ -1,16 +1,16 @@
-import { h } from 'dom-chef';
-import test from 'ava';
+import { h } from 'dom-chef'
+import test from 'ava'
 
-import '../../test/setup-jsdom';
+import '../../test/setup-jsdom'
 
-import { addPRLink } from './compare-page-pull-request';
+import { addPRLink } from './compare-page-pull-request'
 
 test('mergePagePullRequest should add a create pull request link', t => {
     const comparePage = (
         <div class="detail-summary--panel" data-contributors="[]">
             <ul class="detail-summary--section" />
         </div>
-    );
+    )
 
     const comparePageAddPR = (
         <div class="detail-summary--panel" data-contributors="[]">
@@ -31,9 +31,9 @@ test('mergePagePullRequest should add a create pull request link', t => {
                 </li>
             </ul>
         </div>
-    );
+    )
 
-    addPRLink('TEST_SOURCE', 'TEST_DESTINATION', comparePage);
+    addPRLink('TEST_SOURCE', 'TEST_DESTINATION', comparePage)
 
-    t.is(comparePage.outerHTML, comparePageAddPR.outerHTML);
-});
+    t.is(comparePage.outerHTML, comparePageAddPR.outerHTML)
+})

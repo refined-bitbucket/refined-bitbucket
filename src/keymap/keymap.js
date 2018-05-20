@@ -1,13 +1,13 @@
-import elementReady from 'element-ready';
+import elementReady from 'element-ready'
 
-const Mousetrap = require('mousetrap');
+const Mousetrap = require('mousetrap')
 
 /**
  * Adds useful keymappings to pull requests on bitbucket.org
  * @module keymap
  */
 const PrKeyMap = (function() {
-    'use strict';
+    'use strict'
 
     /**
      * The default keymap for key binds a.k.a. shortcut keys.
@@ -20,34 +20,34 @@ const PrKeyMap = (function() {
         scrollNextComment: 'N',
         scrollPreviousComment: 'P',
         scrollPageTop: 'g g',
-        scrollPageBottom: 'G'
-    };
+        scrollPageBottom: 'G',
+    }
 
-    const keymap = {};
+    const keymap = {}
 
     const ids = {
         overview: '#pr-menu-diff',
         commits: '#pr-menu-commits',
-        activity: '#pr-menu-activity'
-    };
+        activity: '#pr-menu-activity',
+    }
 
-    const self = {};
+    const self = {}
 
-    self.commentSelector = '.iterable-item a.author';
-    self.iterableItemSelector = '.iterable-item';
-    self.comments = [];
+    self.commentSelector = '.iterable-item a.author'
+    self.iterableItemSelector = '.iterable-item'
+    self.comments = []
 
-    self.currentComment = 0;
+    self.currentComment = 0
 
     /**
      * Switches to a tab, if there is a selector available for that tab.
      */
     self.switchTo = function(tabName) {
         if (tabName in ids) {
-            const element = document.querySelector(ids[tabName]);
-            element.click();
+            const element = document.querySelector(ids[tabName])
+            element.click()
         }
-    };
+    }
 
     /**
      * Sets focus to a particular comment.
@@ -59,10 +59,10 @@ const PrKeyMap = (function() {
      *
      */
     self.focusComment = function(comment) {
-        $(self.iterableItemSelector).removeClass('focused');
-        $(comment).addClass('focused');
-        comment.scrollIntoView();
-    };
+        $(self.iterableItemSelector).removeClass('focused')
+        $(comment).addClass('focused')
+        comment.scrollIntoView()
+    }
 
     /**
      * Initializes array of comments elements to cycle through using
@@ -76,9 +76,9 @@ const PrKeyMap = (function() {
      */
     self.initComments = function(selector = '.bb-patch') {
         elementReady(selector).then(() => {
-            self.comments = document.querySelectorAll(self.commentSelector);
-        });
-    };
+            self.comments = document.querySelectorAll(self.commentSelector)
+        })
+    }
 
     /**
      * Scrolls the browser window to the next comment on the PR diff.
@@ -89,17 +89,17 @@ const PrKeyMap = (function() {
      */
     self.scrollToNextComment = function() {
         if (self.comments) {
-            $(self.comments[self.currentComment]).removeClass('focused');
-            self.currentComment++;
+            $(self.comments[self.currentComment]).removeClass('focused')
+            self.currentComment++
             if (self.currentComment >= self.comments.length) {
-                self.currentComment = 0;
+                self.currentComment = 0
             }
 
             const comment =
-                self.comments[self.currentComment].parentElement.parentElement;
-            self.focusComment(comment);
+                self.comments[self.currentComment].parentElement.parentElement
+            self.focusComment(comment)
         }
-    };
+    }
 
     /**
      * Scrolls the browser window to the previous comment on the PR diff.
@@ -109,16 +109,16 @@ const PrKeyMap = (function() {
      */
     self.scrollToPreviousComment = function() {
         if (self.comments) {
-            self.currentComment--;
+            self.currentComment--
             if (self.currentComment < 0) {
-                self.currentComment = self.comments.length - 1;
+                self.currentComment = self.comments.length - 1
             }
 
             const comment =
-                self.comments[self.currentComment].parentElement.parentElement;
-            self.focusComment(comment);
+                self.comments[self.currentComment].parentElement.parentElement
+            self.focusComment(comment)
         }
-    };
+    }
 
     /**
      * Initializes keybinds.
@@ -127,64 +127,64 @@ const PrKeyMap = (function() {
      * @param {Object} user_keymap the user-defined keymap to override default keybindings.
      */
     self.init = function(keyboard, userKeymap) {
-        Object.assign(keymap, DEFAULT_KEYMAP);
+        Object.assign(keymap, DEFAULT_KEYMAP)
         if (userKeymap) {
             // if provided, copy a user-preferred keymap to the main keymap.
-            Object.assign(keymap, userKeymap);
+            Object.assign(keymap, userKeymap)
         }
 
-        keyboard.reset();
-        self.initComments();
+        keyboard.reset()
+        self.initComments()
 
         $(ids.overview).click(() => {
-            self.initComments();
-        });
+            self.initComments()
+        })
 
         $(ids.activity).click(() => {
-            self.initComments('header .summary');
-        });
+            self.initComments('header .summary')
+        })
 
         keyboard.bind(keymap.tabOverview, event => {
-            event.preventDefault();
-            self.switchTo('overview');
-        });
+            event.preventDefault()
+            self.switchTo('overview')
+        })
 
         keyboard.bind(keymap.tabComments, event => {
-            event.preventDefault();
-            self.switchTo('commits');
-        });
+            event.preventDefault()
+            self.switchTo('commits')
+        })
 
         keyboard.bind(keymap.tabActivity, event => {
-            event.preventDefault();
-            self.switchTo('activity');
-        });
+            event.preventDefault()
+            self.switchTo('activity')
+        })
 
         keyboard.bind(keymap.scrollNextComment, event => {
-            event.preventDefault();
-            self.scrollToNextComment();
-        });
+            event.preventDefault()
+            self.scrollToNextComment()
+        })
 
         keyboard.bind(keymap.scrollPreviousComment, event => {
-            event.preventDefault();
-            self.scrollToPreviousComment();
-        });
+            event.preventDefault()
+            self.scrollToPreviousComment()
+        })
 
         keyboard.bind(keymap.scrollPageTop, event => {
             // gg to scroll to top
-            event.preventDefault();
-            window.scrollTo(0, 0);
-        });
+            event.preventDefault()
+            window.scrollTo(0, 0)
+        })
 
         keyboard.bind(keymap.scrollPageBottom, event => {
             // scroll to bottom
-            event.preventDefault();
-            window.scrollTo(0, document.body.scrollHeight);
-        });
-    };
+            event.preventDefault()
+            window.scrollTo(0, document.body.scrollHeight)
+        })
+    }
 
-    return self;
-})();
+    return self
+})()
 
 export function init() {
-    PrKeyMap.init(Mousetrap);
+    PrKeyMap.init(Mousetrap)
 }

@@ -1,11 +1,11 @@
-import test from 'ava';
-import { h } from 'dom-chef';
-import delay from 'yoctodelay';
-import ignore from 'ignore';
+import test from 'ava'
+import { h } from 'dom-chef'
+import delay from 'yoctodelay'
+import ignore from 'ignore'
 
-import diffIgnore from '.';
+import diffIgnore from '.'
 
-import '../../test/setup-jsdom';
+import '../../test/setup-jsdom'
 
 /**
  * Returns the `HTMLElement` representing the node that contains a pull request
@@ -45,7 +45,7 @@ function getPullrequestNode(filenames) {
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
 /**
@@ -82,7 +82,7 @@ function getCommitNode(filenames) {
                 </div>
             </section>
         </section>
-    );
+    )
 }
 
 /**
@@ -91,63 +91,63 @@ function getCommitNode(filenames) {
 function parseHeader(header) {
     const [, filesVisible, filesChangedString] = /Showing (\d+) of (\d+)/.exec(
         header
-    );
-    const filesChanged = parseInt(filesChangedString, 10);
-    const filesRemoved = filesChanged - filesVisible;
-    return { filesRemoved, filesChanged };
+    )
+    const filesChanged = parseInt(filesChangedString, 10)
+    const filesRemoved = filesChanged - filesVisible
+    return { filesRemoved, filesChanged }
 }
 
 async function performAssertions(t, getNode) {
     const filenames = [
         '/some path/first_file.js',
         '/some path/second_file.js',
-        '/some path/third_file.js'
-    ];
-    const ignorePaths = ['second_file.js'];
+        '/some path/third_file.js',
+    ]
+    const ignorePaths = ['second_file.js']
 
-    const node = getNode(filenames);
-    diffIgnore.init(ignorePaths);
-    diffIgnore.execute(node);
+    const node = getNode(filenames)
+    diffIgnore.init(ignorePaths)
+    diffIgnore.execute(node)
 
     // Just wait an arbitrary short amount of time to let
     // the promise of the `await elementReady` to resolve
-    await delay(16);
+    await delay(16)
 
     const header = node.querySelector('section.main > h1, #commit-summary > h1')
-        .textContent;
-    const { filesRemoved, filesChanged } = parseHeader(header);
-    t.is(filenames.length, filesChanged);
-    t.is(ignorePaths.length, filesRemoved);
+        .textContent
+    const { filesRemoved, filesChanged } = parseHeader(header)
+    t.is(filenames.length, filesChanged)
+    t.is(ignorePaths.length, filesRemoved)
 
-    const ig = ignore().add(ignorePaths);
+    const ig = ignore().add(ignorePaths)
 
     filenames.forEach(filename => {
         const diff = node.querySelector(
             `section[data-identifier="${escape(filename)}"]`
-        );
+        )
         const link = node.querySelector(
             `li[data-file-identifier="${escape(filename)}"] > a`
-        );
+        )
         const span = node.querySelector(
             `li[data-file-identifier="${escape(filename)}"] > span`
-        );
+        )
 
         if (ig.ignores(filename)) {
-            t.is(diff, null);
-            t.is(link, null);
-            t.is(span.textContent, filename);
+            t.is(diff, null)
+            t.is(link, null)
+            t.is(span.textContent, filename)
         } else {
-            t.not(diff, null);
-            t.not(link, null);
-            t.is(link.textContent, filename);
+            t.not(diff, null)
+            t.not(link, null)
+            t.is(link.textContent, filename)
         }
-    });
+    })
 }
 
 test('should remove the right diffs and update the header in a pull request', async t => {
-    await performAssertions(t, getPullrequestNode);
-});
+    await performAssertions(t, getPullrequestNode)
+})
 
 test('should remove the right diffs and update the header in a commit', async t => {
-    await performAssertions(t, getCommitNode);
-});
+    await performAssertions(t, getCommitNode)
+})

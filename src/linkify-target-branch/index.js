@@ -1,1 +1,1 @@
-export { default } from './linkify-target-branch';
+export { default } from './linkify-target-branch'

@@ -1,1 +1,1 @@
-export { default } from './tab-size';
+export { default } from './tab-size'

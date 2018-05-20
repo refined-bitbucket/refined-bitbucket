@@ -1,16 +1,16 @@
 /* global chrome */
 
-import OptionsSync from 'webext-options-sync';
+import OptionsSync from 'webext-options-sync'
 
 const justInstalledOrUpdated = new Promise((resolve, reject) => {
     chrome.runtime.onInstalled.addListener(details => {
         if (details.reason === 'install' || details.reason === 'update') {
-            resolve();
+            resolve()
         } else {
-            reject();
+            reject()
         }
-    });
-});
+    })
+})
 
 new OptionsSync().define({
     defaults: {
@@ -32,23 +32,23 @@ new OptionsSync().define({
         autocollapsePaths: [
             'package-lock.json',
             'yarn.lock',
-            'composer.lock'
+            'composer.lock',
         ].join('\n'),
         autocollapseDeletedFiles: true,
         ignorePaths: [''].join('\n'),
         customTabSizeEnabled: true,
         customTabSize: 4,
-        enableUpdateNotifications: true
+        enableUpdateNotifications: true,
     },
     migrations: [
         async savedOptions => {
             if (savedOptions.enableUpdateNotifications) {
-                await justInstalledOrUpdated;
+                await justInstalledOrUpdated
                 window.open(
                     'https://github.com/refined-bitbucket/refined-bitbucket/releases/latest'
-                );
+                )
             }
         },
-        OptionsSync.migrations.removeUnused
-    ]
-});
+        OptionsSync.migrations.removeUnused,
+    ],
+})

@@ -1,5 +1,5 @@
-import { insertCollapseDiffButton, toggleDiff } from './collapse-diff';
+import { insertCollapseDiffButton, toggleDiff } from './collapse-diff'
 
-export { toggleDiff };
+export { toggleDiff }
 
-export default { insertCollapseDiffButton };
+export default { insertCollapseDiffButton }

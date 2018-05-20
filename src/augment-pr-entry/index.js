@@ -1,1 +1,1 @@
-export { default } from './augment-pr-entry';
+export { default } from './augment-pr-entry'

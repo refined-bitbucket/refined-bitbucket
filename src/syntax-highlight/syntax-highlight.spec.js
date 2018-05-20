@@ -1,13 +1,13 @@
-import { h } from 'dom-chef';
-import test from 'ava';
+import { h } from 'dom-chef'
+import test from 'ava'
 
-import '../../test/setup-jsdom';
+import '../../test/setup-jsdom'
 
-require('../vendor/prism.js');
+require('../vendor/prism.js')
 
-const syntaxHighlight = require('.').default;
+const syntaxHighlight = require('.').default
 
-const noop = () => {};
+const noop = () => {}
 
 test('should syntax-highlight diff', t => {
     const uudiff = (
@@ -26,7 +26,7 @@ test('should syntax-highlight diff', t => {
                 <pre>var msg = 'Hello world';</pre>
             </div>
         </section>
-    );
+    )
 
     const expected = (
         <section class="bb-udiff language-jsx" data-filename="filename.js">
@@ -49,12 +49,12 @@ test('should syntax-highlight diff', t => {
                 </pre>
             </div>
         </section>
-    );
+    )
 
-    syntaxHighlight(uudiff, noop);
+    syntaxHighlight(uudiff, noop)
 
-    t.is(uudiff.outerHTML, expected.outerHTML);
-});
+    t.is(uudiff.outerHTML, expected.outerHTML)
+})
 
 test('should syntax-highlight when side-by-side button not present', t => {
     // Deleted files and files that were only renamed don't have a side-by-side button
@@ -66,7 +66,7 @@ test('should syntax-highlight when side-by-side button not present', t => {
                 <pre>var msg = 'Hello world';</pre>
             </div>
         </section>
-    );
+    )
 
     const expected = (
         <section class="bb-udiff language-jsx" data-filename="filename.js">
@@ -81,12 +81,12 @@ test('should syntax-highlight when side-by-side button not present', t => {
                 </pre>
             </div>
         </section>
-    );
+    )
 
-    syntaxHighlight(uudiff, noop);
+    syntaxHighlight(uudiff, noop)
 
-    t.is(uudiff.outerHTML, expected.outerHTML);
-});
+    t.is(uudiff.outerHTML, expected.outerHTML)
+})
 
 test('should not syntax-highlight if file was only renamed with no changes', t => {
     const uudiff = (
@@ -99,14 +99,14 @@ test('should not syntax-highlight if file was only renamed with no changes', t =
                 </div>
             </div>
         </section>
-    );
+    )
 
-    const expected = uudiff.cloneNode(true);
+    const expected = uudiff.cloneNode(true)
 
-    syntaxHighlight(uudiff);
+    syntaxHighlight(uudiff)
 
-    t.is(uudiff.outerHTML, expected.outerHTML);
-});
+    t.is(uudiff.outerHTML, expected.outerHTML)
+})
 
 test('should not syntax-highlight if diff failed to load', t => {
     const uudiff = (
@@ -130,14 +130,14 @@ test('should not syntax-highlight if diff failed to load', t => {
                 </div>
             </div>
         </section>
-    );
+    )
 
-    const expected = uudiff.cloneNode(true);
+    const expected = uudiff.cloneNode(true)
 
-    syntaxHighlight(uudiff);
+    syntaxHighlight(uudiff)
 
-    t.is(uudiff.outerHTML, expected.outerHTML);
-});
+    t.is(uudiff.outerHTML, expected.outerHTML)
+})
 
 test('should not syntax-highlight if diff is in a not supported language', t => {
     const uudiff = (
@@ -156,11 +156,11 @@ test('should not syntax-highlight if diff is in a not supported language', t => 
                 <pre>var msg = 'Hello world';</pre>
             </div>
         </section>
-    );
+    )
 
-    const expected = uudiff.cloneNode(true);
+    const expected = uudiff.cloneNode(true)
 
-    syntaxHighlight(uudiff);
+    syntaxHighlight(uudiff)
 
-    t.is(uudiff.outerHTML, expected.outerHTML);
-});
+    t.is(uudiff.outerHTML, expected.outerHTML)
+})

@@ -1,9 +1,9 @@
-import { h } from 'dom-chef';
-import test from 'ava';
+import { h } from 'dom-chef'
+import test from 'ava'
 
-import ignoreWhitespace from '.';
+import ignoreWhitespace from '.'
 
-import '../../test/setup-jsdom';
+import '../../test/setup-jsdom'
 
 test('should transform pull request link to add ignore whitespace query param to 1', t => {
     const actual = (
@@ -16,7 +16,7 @@ test('should transform pull request link to add ignore whitespace query param to
                 pull request title
             </a>
         </div>
-    );
+    )
 
     const expected = (
         <div>
@@ -28,12 +28,12 @@ test('should transform pull request link to add ignore whitespace query param to
                 pull request title
             </a>
         </div>
-    );
+    )
 
-    ignoreWhitespace(actual);
+    ignoreWhitespace(actual)
 
-    t.is(actual.outerHTML, expected.outerHTML);
-});
+    t.is(actual.outerHTML, expected.outerHTML)
+})
 
 test('should transform pull request link to toggle ignore whitespace query param to 1', t => {
     const actual = (
@@ -46,7 +46,7 @@ test('should transform pull request link to toggle ignore whitespace query param
                 pull request title
             </a>
         </div>
-    );
+    )
 
     const expected = (
         <div>
@@ -58,9 +58,9 @@ test('should transform pull request link to toggle ignore whitespace query param
                 pull request title
             </a>
         </div>
-    );
+    )
 
-    ignoreWhitespace(actual);
+    ignoreWhitespace(actual)
 
-    t.is(actual.outerHTML, expected.outerHTML);
-});
+    t.is(actual.outerHTML, expected.outerHTML)
+})

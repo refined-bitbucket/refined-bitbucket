@@ -1,11 +1,11 @@
-import test from 'ava';
-import { h } from 'dom-chef';
-import delay from 'yoctodelay';
+import test from 'ava'
+import { h } from 'dom-chef'
+import delay from 'yoctodelay'
 
-import observeForWordDiffs from '../observe-for-word-diffs';
-import removeDiffsPlusesAndMinuses from './diff-pluses-and-minuses';
+import observeForWordDiffs from '../observe-for-word-diffs'
+import removeDiffsPlusesAndMinuses from './diff-pluses-and-minuses'
 
-import '../../test/setup-jsdom';
+import '../../test/setup-jsdom'
 
 test('should remove pluses and minues for regular diff', t => {
     const udiff = (
@@ -31,7 +31,7 @@ test('should remove pluses and minues for regular diff', t => {
                 </div>
             </div>
         </section>
-    );
+    )
 
     const expected = (
         <section class="bb-udiff" data-filename="filename.js">
@@ -56,12 +56,12 @@ test('should remove pluses and minues for regular diff', t => {
                 </div>
             </div>
         </section>
-    );
+    )
 
-    removeDiffsPlusesAndMinuses(udiff);
+    removeDiffsPlusesAndMinuses(udiff)
 
-    t.is(udiff.outerHTML, expected.outerHTML);
-});
+    t.is(udiff.outerHTML, expected.outerHTML)
+})
 
 test('line breaks are preserved with empty whitespace', t => {
     const udiff = (
@@ -86,7 +86,7 @@ test('line breaks are preserved with empty whitespace', t => {
                 </div>
             </div>
         </section>
-    );
+    )
 
     const expected = (
         <section class="bb-udiff" data-filename="filename.js">
@@ -110,12 +110,12 @@ test('line breaks are preserved with empty whitespace', t => {
                 </div>
             </div>
         </section>
-    );
+    )
 
-    removeDiffsPlusesAndMinuses(udiff);
+    removeDiffsPlusesAndMinuses(udiff)
 
-    t.is(udiff.outerHTML, expected.outerHTML);
-});
+    t.is(udiff.outerHTML, expected.outerHTML)
+})
 
 test('should remove pluses and minuses when diff has been rerendered to include word diffs', async t => {
     const udiff = (
@@ -142,7 +142,7 @@ test('should remove pluses and minuses when diff has been rerendered to include 
                 </div>
             </div>
         </section>
-    );
+    )
 
     const expected = (
         <section class="bb-udiff" data-filename="filename.js">
@@ -171,35 +171,35 @@ test('should remove pluses and minuses when diff has been rerendered to include 
                 </div>
             </div>
         </section>
-    );
+    )
 
     // Act
-    const afterWordDiff = observeForWordDiffs(udiff);
-    removeDiffsPlusesAndMinuses(udiff, afterWordDiff);
+    const afterWordDiff = observeForWordDiffs(udiff)
+    removeDiffsPlusesAndMinuses(udiff, afterWordDiff)
 
     // Adding word diff
-    const line = udiff.querySelector('#diffed');
+    const line = udiff.querySelector('#diffed')
     const diffedLine = (
         <pre class="source">
             +console.<ins>log(msg);</ins>
         </pre>
-    );
-    line.replaceChild(diffedLine, line.firstChild);
+    )
+    line.replaceChild(diffedLine, line.firstChild)
 
-    const line2 = udiff.querySelector('#diffed-2');
-    const diffedLine2 = <pre class="source">+return;</pre>;
-    line2.replaceChild(diffedLine2, line2.firstChild);
+    const line2 = udiff.querySelector('#diffed-2')
+    const diffedLine2 = <pre class="source">+return;</pre>
+    line2.replaceChild(diffedLine2, line2.firstChild)
 
     const diffContentContainer = udiff.querySelector(
         'div.diff-container > div.diff-content-container.refract-container'
-    );
-    diffContentContainer.classList.add('word-diff');
+    )
+    diffContentContainer.classList.add('word-diff')
 
-    await delay(32);
+    await delay(32)
 
     // Assert
-    t.is(udiff.outerHTML, expected.outerHTML);
-});
+    t.is(udiff.outerHTML, expected.outerHTML)
+})
 
 test('should do nothing and not throw or error when diff fails to load', async t => {
     const udiff = (
@@ -223,11 +223,11 @@ test('should do nothing and not throw or error when diff fails to load', async t
                 </div>
             </div>
         </section>
-    );
+    )
 
-    const expected = udiff.cloneNode(true);
+    const expected = udiff.cloneNode(true)
 
-    removeDiffsPlusesAndMinuses(udiff);
+    removeDiffsPlusesAndMinuses(udiff)
 
-    t.is(udiff.outerHTML, expected.outerHTML);
-});
+    t.is(udiff.outerHTML, expected.outerHTML)
+})

@@ -1,9 +1,9 @@
-import test from 'ava';
-import delay from 'yoctodelay';
-import { h } from 'dom-chef';
-import closeAnchorBranch from '.';
+import test from 'ava'
+import delay from 'yoctodelay'
+import { h } from 'dom-chef'
+import closeAnchorBranch from '.'
 
-import '../../test/setup-jsdom';
+import '../../test/setup-jsdom'
 
 test('should check the "Close anchor branch" checkbox when creating/editing pr', async t => {
     const checkbox = (
@@ -14,7 +14,7 @@ test('should check the "Close anchor branch" checkbox when creating/editing pr',
             name="close_anchor_branch"
             disabled
         />
-    );
+    )
 
     const fieldGroup = (
         <div class="field-group reset-height">
@@ -29,13 +29,13 @@ test('should check the "Close anchor branch" checkbox when creating/editing pr',
                 </label>
             </div>
         </div>
-    );
+    )
 
-    document.body.appendChild(fieldGroup);
+    document.body.appendChild(fieldGroup)
 
-    delay(100).then(() => checkbox.removeAttribute('disabled'));
+    delay(100).then(() => checkbox.removeAttribute('disabled'))
 
-    await closeAnchorBranch();
+    await closeAnchorBranch()
 
-    t.is(checkbox.checked, true);
-});
+    t.is(checkbox.checked, true)
+})

@@ -1,1 +1,1 @@
-export { default } from './pullrequest-commit-amount';
+export { default } from './pullrequest-commit-amount'

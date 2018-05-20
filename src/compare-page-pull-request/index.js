@@ -1,1 +1,1 @@
-export { default } from './compare-page-pull-request';
+export { default } from './compare-page-pull-request'

@@ -1,15 +1,15 @@
-import { h } from 'dom-chef';
+import { h } from 'dom-chef'
 
-import { getRepoURL } from '../page-detect';
+import { getRepoURL } from '../page-detect'
 
-const repoUrl = getRepoURL();
+const repoUrl = getRepoURL()
 
 const linkifyTargetBranch = node => {
     const targetBranchSpan = node.querySelector(
         '.pull-request-target-branch span.name'
-    );
-    const targetBranchName = targetBranchSpan.textContent;
-    targetBranchSpan.removeChild(targetBranchSpan.lastChild);
+    )
+    const targetBranchName = targetBranchSpan.textContent
+    targetBranchSpan.removeChild(targetBranchSpan.lastChild)
     const a = (
         <a
             style={{ color: '#707070' }}
@@ -18,8 +18,8 @@ const linkifyTargetBranch = node => {
         >
             {targetBranchName}
         </a>
-    );
-    targetBranchSpan.appendChild(a);
-};
+    )
+    targetBranchSpan.appendChild(a)
+}
 
-export default linkifyTargetBranch;
+export default linkifyTargetBranch
