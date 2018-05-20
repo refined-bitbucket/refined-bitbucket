@@ -1,20 +1,38 @@
-# Unreleased
+# 3.9.0 (2018-05-20)
 
-### Features:
+### Features
 
 *   Adds a 'Create a Pull Request' link to the 'Compare branches of tags' page,
     closes [issue #189](https://github.com/refined-bitbucket/refined-bitbucket/issues/189),
     [pull request #191](https://github.com/refined-bitbucket/refined-bitbucket/pull/191).
     Thanks [@deepakrb](http://github.com/deepakrb).
-*   Insert "Show Comments" checkbox in diff header,
+*   Custom Tab Indentation,
+    closes [issue #202](https://github.com/refined-bitbucket/refined-bitbucket/issues/202),
+    [pull request #209](https://github.com/refined-bitbucket/refined-bitbucket/pull/209).
+    Thanks [@peterkrieg](http://github.com/peterkrieg).
+*   Insert "Comments" checkbox in diff header to toggle (show/hide) comments,
     closes [issue #172](https://github.com/refined-bitbucket/refined-bitbucket/issues/172),
     [pull request #196](https://github.com/refined-bitbucket/refined-bitbucket/pull/196).
 
-### Bug fixes:
+### Bug fixes
 
 *   Update manifest permissions to allow Fetch requests from Firefox addon,
     closes [issue #197](https://github.com/refined-bitbucket/refined-bitbucket/issues/197),
     [pull request #198](https://github.com/refined-bitbucket/refined-bitbucket/pull/198).
+
+### Language support
+
+*   Elixir (`.exs`), [pull request #203](https://github.com/refined-bitbucket/refined-bitbucket/pull/203).
+    Thanks [@ppraisethesun](https://github.com/ppraisethesun)!
+*   Salesforce Apex code (`.cls`) as Java syntax,
+    [pull request #207](https://github.com/refined-bitbucket/refined-bitbucket/pull/207).
+    Thanks [@wfawcett](https://github.com/wfawcett)!
+*   Clojure (`.clj`), closes [issue #211](https://github.com/refined-bitbucket/refined-bitbucket/issues/211),
+    [pull request #212](https://github.com/refined-bitbucket/refined-bitbucket/pull/212).
+*   Slim (`.slim`) as Pug syntax,
+    closes [issue #204](https://github.com/refined-bitbucket/refined-bitbucket/issues/204),
+    [pull request #213](https://github.com/refined-bitbucket/refined-bitbucket/pull/213).
+    Thanks [@villuorav](https://github.com/villuorav)!
 
 ### Development
 
@@ -22,6 +40,18 @@
     so that it produces a valid Zip file,
     closes [issue #193](https://github.com/refined-bitbucket/refined-bitbucket/issues/193),
     [pull request #194](https://github.com/refined-bitbucket/refined-bitbucket/pull/194).
+*   Add Firefox add-on development instructions to README,
+    [pull request #200](https://github.com/refined-bitbucket/refined-bitbucket/pull/200).
+    Thanks [@drexler](http://github.com/drexler)!
+
+### Misc
+
+*   Add `composer.lock` to auto-collapse default paths,
+    [pull request #205](https://github.com/refined-bitbucket/refined-bitbucket/pull/205).
+    Thanks [@Slamdunk](http://github.com/Slamdunk)!
+*   Default merge strategy: add note for default implementation,
+    [pull request #208](https://github.com/refined-bitbucket/refined-bitbucket/pull/208).
+    Thanks [@Slamdunk](http://github.com/Slamdunk)!
 
 # 3.8.0 (2018-03-22)
 

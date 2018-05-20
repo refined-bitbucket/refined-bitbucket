@@ -4,18 +4,18 @@ export default function setTabSize(numSpaces) {
 }
 
 function createCssRule(numSpaces) {
-    const rule = `
+    const cssRule = `
         .refract-container {
             tab-size: ${numSpaces}
         }
     `
-    return rule
+    return cssRule
 }
 
 // inject CSS <style> into <head> of page
-function addStyleToPage(rule) {
+function addStyleToPage(cssRule) {
     const css = document.createElement('style')
     css.type = 'text/css'
-    css.appendChild(document.createTextNode(rule))
+    css.appendChild(document.createTextNode(cssRule))
     document.getElementsByTagName('head')[0].appendChild(css)
 }

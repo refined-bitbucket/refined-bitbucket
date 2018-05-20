@@ -8,6 +8,8 @@
 
 We all know BitBucket lacks some features that we have in other platforms like GitHub, GitLab and others. Originally inspired on Sindre Sorhus' [Refined Github](https://github.com/sindresorhus/refined-github) extension, _refined-bitbucket_ is born as a collaborative project by a few developers to improve upon those holes, and even add some additional functionality that will enhance the overall user experience.
 
+[Subscribe to this issue if you would like to receive e-mail notifications on updates](https://github.com/refined-bitbucket/refined-bitbucket/issues/182).
+
 ## Current features
 
 *   Adds syntax highlighting for pull requests and commits. See the full list of enabled languages [here][prismjs-languages], and then [here][language-ext]. [Test them here](http://prismjs.com/test.html). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
@@ -27,6 +29,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 *   Add source branch, linkify branch names, and add creation date to each pull request row in pull request list.
 *   Don't carry pluses and minuses to clipboard when copying diff's contents.
 *   Badge with the number of commits of the current pull request next to the "Commits" tab.
+*   Set custom tab indentation size of code (Bitbucket defaults to 8 spaces) when viewing commits/pull requests.
 *   Insert "Comments" checkbox in diff header to toggle comments.
 *   Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
 
@@ -47,8 +50,6 @@ We all know BitBucket lacks some features that we have in other platforms like G
     the file in your repository, e.g., https://gist.githubusercontent.com/anonymous/8054a3ee32f7cf1a5975e3fd52b3c5f3/raw/f6897720e8b6b93becd246187dac36038291c3a4/PULL_REQUEST_TEMPLATE.md.
 
     _Note: Currently, externally hosted pull request templates outside of BitBucket's domain is not supported with the Firefox addon._
-
-*   Set custom tab indentation size of code (Bitbucket defaults to 8 spaces) when viewing commits/pull requests.
 
 ## Some images
 

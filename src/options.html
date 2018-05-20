@@ -88,6 +88,14 @@
         <br>
 
         <label>
+            <input type="checkbox" name="customTabSizeEnabled"> Tab indentation size:
+            <input type="number" name="customTabSize" min="0" max="16" style="width: 40px;">
+            <span>spaces.</span>
+        </label>
+        <br>
+        <br>
+
+        <label>
             <input type="checkbox" name="showCommentsCheckbox"> Insert "Comments" checkbox in diff header to toggle comments.
         </label>
         <br>
@@ -139,20 +147,14 @@
             </div>
             <textarea name="ignorePaths" rows="7" cols="60"></textarea>
         </div>
-
         <br>
-
-        <label>
-            <input type="checkbox" name="customTabSizeEnabled"> Tab indentation size:
-            <input type="number" name="customTabSize" min="0" max="16" style="width: 40px;">
-            <span>spaces.</span>
-        </label>
 
         <hr>
         <label style="display: flex; justify-content: space-between; align-items: center">
             <span style="width: calc(100% - 30px)">
                 Enable Update Notifications. Every time this extension is updated, the CHANGELOG for the current version will be opened in
                 a new browser tab.
+                <a href="https://github.com/refined-bitbucket/refined-bitbucket/issues/182">Subscribe to this issue if you would like to get e-mail notifications on updates.</a>
             </span>
             <input type="checkbox" name="enableUpdateNotifications">
         </label>
