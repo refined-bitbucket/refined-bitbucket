@@ -17,6 +17,7 @@ new OptionsSync().define({
         syntaxHighlight: true,
         highlightOcurrences: true,
         ignoreWhitespace: true,
+        copyFilename: true,
         keymap: true,
         collapseDiff: true,
         loadAllDiffs: true,

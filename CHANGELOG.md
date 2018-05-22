@@ -1,5 +1,11 @@
 # Next Version
 
+### Features
+
+*   Insert "Copy filename to clipboard" button in diff header,
+    closes [issue #210](https://github.com/refined-bitbucket/refined-bitbucket/issues/210),
+    [pull request #215](https://github.com/refined-bitbucket/refined-bitbucket/pull/215).
+
 ### Bug Fixes
 
 *   Fix Word Diffs (`<ins>` and `<del>` tags) being removed when using syntax highlighting
