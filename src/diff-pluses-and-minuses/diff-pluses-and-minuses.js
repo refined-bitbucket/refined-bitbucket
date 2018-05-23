@@ -24,7 +24,7 @@ const firstPass = diff => {
 }
 
 const secondPass = (diff, strippedLinesContent) => {
-    ;[...diff.querySelectorAll(diffLineSelector)]
+    Array.from(diff.querySelectorAll(diffLineSelector))
         .filter(({ textContent }, i) => textContent !== strippedLinesContent[i])
         .forEach(({ firstChild: line }) => stripCharsFromLine(line))
 }

@@ -27,7 +27,7 @@ export default function insertCopyFilename(diff) {
     const button = (
         <button
             type="button"
-            class="aui-button aui-button-subtle copy-to-clipboard--button"
+            class="aui-button aui-button-subtle copy-to-clipboard--button __rbb-btn-copyfilename"
             title="Copy filename to clipboard"
             original-title="Copy filename to clipboard"
             style={{ position: 'relative' }}
