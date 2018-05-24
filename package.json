@@ -26,7 +26,7 @@
       "prettier --write",
       "git add"
     ],
-    "**/*.js": [
+    "**/*.js !src/vendor/prism.js": [
       "npm run xo",
       "git add"
     ]
