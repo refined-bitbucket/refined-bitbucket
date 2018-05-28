@@ -1,3 +1,11 @@
+# Next Version
+
+### Bug Fixes
+
+*   Fix Word Diffs (`<ins>` and `<del>` tags) being removed when using syntax highlighting
+    closes [issue #216](https://github.com/refined-bitbucket/refined-bitbucket/issues/216),
+    [pull request #217](https://github.com/refined-bitbucket/refined-bitbucket/pull/217).
+
 # 3.9.0 (2018-05-20)
 
 ### Features
