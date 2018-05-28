@@ -11,6 +11,7 @@ import defaultMergeStrategy from './default-merge-strategy'
 import diffIgnore from './diff-ignore'
 import removeDiffsPlusesAndMinuses from './diff-pluses-and-minuses'
 import ignoreWhitespace from './ignore-whitespace'
+import insertCopyFilename from './insert-copy-filename'
 import keymap from './keymap'
 import linkifyTargetBranch from './linkify-target-branch'
 import loadAllDiffs from './load-all-diffs'
@@ -136,6 +137,10 @@ function codeReviewFeatures(config) {
 
         if (config.showCommentsCheckbox) {
             insertShowComments(diff)
+        }
+
+        if (config.copyFilename) {
+            insertCopyFilename(diff)
         }
 
         if (config.diffPlusesAndMinuses || config.syntaxHighlight) {
