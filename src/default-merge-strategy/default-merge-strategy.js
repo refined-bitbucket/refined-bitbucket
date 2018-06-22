@@ -17,7 +17,7 @@ export async function init(defaultMergeStrategy) {
 }
 
 /**
- * @param {'merge_commit' | 'squash'} defaultMergeStrategy
+ * @param {'merge_commit' | 'squash' | 'fast_forward'} defaultMergeStrategy
  */
 export function initAsync(defaultMergeStrategy) {
     return new Promise((resolve, reject) => {
@@ -28,7 +28,11 @@ export function initAsync(defaultMergeStrategy) {
         }
 
         // defaultMergeStrategy can be either 'merge_commit' or 'squash'
-        if (!['merge_commit', 'squash'].includes(defaultMergeStrategy)) {
+        if (
+            !['merge_commit', 'squash', 'fast_forward'].includes(
+                defaultMergeStrategy
+            )
+        ) {
             const msg = `refined-bitbucket(default-merge-strategy): Unimplemented merge strategy '${defaultMergeStrategy}'. No action taken.`
             logger.warn(msg)
             reject(msg)

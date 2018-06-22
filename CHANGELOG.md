@@ -1,3 +1,10 @@
+# Next Version
+
+### Features
+
+*   **Default-merge-strategy**: Add "Fast forward" as a possible default merge strategy for pull requests,
+    [pull request #222](https://github.com/refined-bitbucket/refined-bitbucket/pull/222).
+
 # 3.10.0 (2018-05-28)
 
 ### Features
