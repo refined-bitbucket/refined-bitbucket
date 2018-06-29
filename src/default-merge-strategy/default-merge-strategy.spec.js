@@ -75,6 +75,9 @@ test.serial('should choose default merge strategy', async t => {
             <option value="squash" data-default-commit-msg="...">
                 Squash
             </option>
+            <option value="fast_forward" data-default-commit-msg="...">
+                Fast forward
+            </option>
         </select>
     )
     await delay(1000)
