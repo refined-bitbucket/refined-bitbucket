@@ -24,7 +24,7 @@ export function collapseIfNeeded(section) {
     }
 }
 
-async function collapseIfNeededAsync(section) {
+function collapseIfNeededAsync(section) {
     const filename = section.getAttribute('data-filename').trim()
     const isDeleted = section.querySelector(
         'h1.filename span.diff-entry-lozenge.aui-lozenge-error'
@@ -34,9 +34,6 @@ async function collapseIfNeededAsync(section) {
         ig.ignores(filename) || (autocollapseDeletedFiles && isDeleted)
 
     if (shouldCollapse) {
-        await elementReady('.__refined_bitbucket_collapse_diff_button', {
-            target: section,
-        })
         toggleDiff(section)
     }
 }

@@ -5,6 +5,12 @@
 *   **Default-merge-strategy**: Add "Fast forward" as a possible default merge strategy for pull requests,
     [pull request #222](https://github.com/refined-bitbucket/refined-bitbucket/pull/222).
 
+### Bug Fixes
+
+*   **Autocollapse**: Autocollapse feature shouldn't depend on "Toggle diff text" feature to work,
+    closes [issue #221](https://github.com/refined-bitbucket/refined-bitbucket/issues/221),
+    [pull request #224](https://github.com/refined-bitbucket/refined-bitbucket/pull/224).
+
 # 3.10.0 (2018-05-28)
 
 ### Features
