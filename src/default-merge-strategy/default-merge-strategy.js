@@ -27,7 +27,7 @@ export function initAsync(defaultMergeStrategy) {
             )
         }
 
-        // defaultMergeStrategy can be either 'merge_commit' or 'squash'
+        // defaultMergeStrategy can be either 'merge_commit', 'squash' or 'fast_forward'
         if (
             !['merge_commit', 'squash', 'fast_forward'].includes(
                 defaultMergeStrategy
