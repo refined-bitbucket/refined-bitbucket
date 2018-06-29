@@ -1,6 +1,5 @@
 'use strict'
 
-import elementReady from 'element-ready'
 import ignore from 'ignore'
 import { toggleDiff } from '../collapse-diff'
 
