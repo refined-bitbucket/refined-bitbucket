@@ -11,14 +11,14 @@ const stripCharsFromLine = line => {
     if (line.textContent === '+' || line.textContent === '-') {
         line.textContent = ' '
     } else {
-        line.textContent = line.textContent.slice(1)
+        line.innerHTML = line.innerHTML.slice(1)
     }
 }
 
 const firstPass = diff => {
     const diffLines = [...diff.querySelectorAll(diffLineSelector)]
 
-    diffLines.forEach(({ firstChild: line }) => stripCharsFromLine(line))
+    diffLines.forEach(line => stripCharsFromLine(line))
 
     return diffLines.map(({ textContent }) => textContent)
 }
@@ -26,7 +26,7 @@ const firstPass = diff => {
 const secondPass = (diff, strippedLinesContent) => {
     Array.from(diff.querySelectorAll(diffLineSelector))
         .filter(({ textContent }, i) => textContent !== strippedLinesContent[i])
-        .forEach(({ firstChild: line }) => stripCharsFromLine(line))
+        .forEach(line => stripCharsFromLine(line))
 }
 
 export default function removeDiffsPlusesAndMinuses(
