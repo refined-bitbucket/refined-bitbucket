@@ -231,3 +231,40 @@ test('should do nothing and not throw or error when diff fails to load', async t
 
     t.is(udiff.outerHTML, expected.outerHTML)
 })
+
+test('should not add extra leading whitespace', t => {
+    const udiff = (
+        <section class="bb-udiff" data-filename="filename.js">
+            <div class="refract-content-container">
+                <div class="udiff-line deletion">
+                    <pre class="source">-class App extends Component </pre>
+                </div>
+
+                <div class="udiff-line addition">
+                    <pre class="source">
+                        +<ins>export default </ins>class App extends Component{' '}
+                    </pre>
+                </div>
+            </div>
+        </section>
+    )
+
+    const expected = (
+        <section class="bb-udiff" data-filename="filename.js">
+            <div class="refract-content-container">
+                <div class="udiff-line deletion">
+                    <pre class="source">class App extends Component </pre>
+                </div>
+                <div class="udiff-line addition">
+                    <pre class="source">
+                        <ins>export default </ins>class App extends Component{' '}
+                    </pre>
+                </div>
+            </div>
+        </section>
+    )
+
+    removeDiffsPlusesAndMinuses(udiff)
+
+    t.is(udiff.outerHTML, expected.outerHTML)
+})

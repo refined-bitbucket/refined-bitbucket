@@ -14,6 +14,10 @@
 *   **Autocollapse**: Autocollapse feature shouldn't depend on "Toggle diff text" feature to work,
     closes [issue #221](https://github.com/refined-bitbucket/refined-bitbucket/issues/221),
     [pull request #224](https://github.com/refined-bitbucket/refined-bitbucket/pull/224).
+*   Fixed extra leading whitespacen in diffs when "Don't carry pluses and minuses to clipboard"
+    feature is enabled,
+    closes [issue #218](https://github.com/refined-bitbucket/refined-bitbucket/issues/218),
+    [pull request #226](https://github.com/refined-bitbucket/refined-bitbucket/pull/226).
 
 # 3.10.0 (2018-05-28)
 
