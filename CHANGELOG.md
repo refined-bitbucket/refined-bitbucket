@@ -2,6 +2,9 @@
 
 ### Features
 
+*   **Custom styles**: Now it's possible to define your own CSS styles to be applied to Bitbucket using the extension through the Options page,
+    closes [issue #181](https://github.com/refined-bitbucket/refined-bitbucket/issues/181),
+    [pull request #227](https://github.com/refined-bitbucket/refined-bitbucket/pull/227).
 *   **Default-merge-strategy**: Add "Fast forward" as a possible default merge strategy for pull requests,
     [pull request #222](https://github.com/refined-bitbucket/refined-bitbucket/pull/222).
 *   Code review features (syntax highlighting, occurrences highlighting, diff collapsing, etc.) now work in

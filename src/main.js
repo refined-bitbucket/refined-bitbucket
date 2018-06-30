@@ -35,6 +35,8 @@ import {
     isComparePage,
 } from './page-detect'
 
+import addStyleToPage from './add-style'
+
 import 'selector-observer'
 
 new OptionsSync().getAll().then(options => {
@@ -73,10 +75,6 @@ function init(config) {
         }
     }
 
-    if (config.improveFonts) {
-        require('./improve-fonts.css')
-    }
-
     if (config.addSidebarCounters) {
         addSidebarCounters()
     }
@@ -84,6 +82,10 @@ function init(config) {
     if (config.customTabSizeEnabled) {
         const numSpaces = config.customTabSize
         setTabSize(numSpaces)
+    }
+
+    if (config.customStyles) {
+        addStyleToPage(config.customStyles)
     }
 }
 

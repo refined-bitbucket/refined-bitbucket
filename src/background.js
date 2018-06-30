@@ -22,7 +22,6 @@ new OptionsSync().define({
         collapseDiff: true,
         loadAllDiffs: true,
         closeAnchorBranch: true,
-        improveFonts: true,
         addSidebarCounters: true,
         diffPlusesAndMinuses: true,
         augmentPrEntry: true,
@@ -40,6 +39,7 @@ new OptionsSync().define({
         ignorePaths: [''].join('\n'),
         customTabSizeEnabled: true,
         customTabSize: 4,
+        customStyles: '',
         enableUpdateNotifications: true,
     },
     migrations: [
