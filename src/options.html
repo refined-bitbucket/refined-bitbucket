@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <form id="options-form">
+    <form id="options-form" style="width: 600px">
         <label>
             <input type="checkbox" name="syntaxHighlight"> Syntax highlighting
         </label>
@@ -46,12 +46,6 @@
 
         <label>
             <input type="checkbox" name="closeAnchorBranch"> Check the "Close anchor branch" checkbox by default when creating a new pull request
-        </label>
-        <br>
-        <br>
-
-        <label>
-            <input type="checkbox" name="improveFonts"> Improve the default font-family and size of lines of code in Source view.
         </label>
         <br>
         <br>
@@ -135,7 +129,7 @@
                     <br> The files that match the given patterns will be automatically collapsed when the Pull Request loads.
                 </label>
             </div>
-            <textarea name="autocollapsePaths" rows="7" cols="60"></textarea>
+            <textarea name="autocollapsePaths" rows="7" style="width: 100%"></textarea>
             <br>
             <label>
                 <input type="checkbox" name="autocollapseDeletedFiles"> Autocollapse deleted files
@@ -152,7 +146,17 @@
                     </div>
                 </label>
             </div>
-            <textarea name="ignorePaths" rows="7" cols="60"></textarea>
+            <textarea name="ignorePaths" rows="7" style="width: 100%"></textarea>
+        </div>
+        <br>
+
+        <div>
+            <div>
+                <label>
+                    <strong>Define your own CSS styles to be injected in every page</strong>
+                </label>
+            </div>
+            <textarea name="customStyles" rows="7" style="width: 100%"></textarea>
         </div>
         <br>
 
