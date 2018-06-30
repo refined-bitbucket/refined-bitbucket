@@ -63,6 +63,8 @@ function init(config) {
         if (config.closeAnchorBranch) {
             closeAnchorBranch()
         }
+
+        codeReviewFeatures(config)
     } else if (isCommit()) {
         codeReviewFeatures(config)
     } else if (isComparePage()) {
@@ -156,7 +158,8 @@ function codeReviewFeatures(config) {
         }
     }
 
-    const summarySelectors = '#compare-diff-content, #pr-tab-content, #commit'
+    const summarySelectors =
+        '#compare-diff-content, #pr-tab-content, #commit, #diff'
     const diffSelector = 'section.bb-udiff'
 
     // have to observe the DOM because some sections

@@ -54,8 +54,13 @@ const insertTopButton = section => {
             diffActions.querySelector('.aui-dropdown2-trigger-more')
                 .parentElement.nextElementSibling
         )
-    } else {
+    } else if (diffActions) {
         diffActions.appendChild(button)
+    } else {
+        // This happens in when creating new PRs in `/pull-requests/new?source=<branch-name>`
+        section
+            .querySelector('.heading')
+            .appendChild(<div class="secondary diff-actions">{button}</div>)
     }
 
     return button

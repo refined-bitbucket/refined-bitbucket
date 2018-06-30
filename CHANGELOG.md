@@ -4,6 +4,10 @@
 
 *   **Default-merge-strategy**: Add "Fast forward" as a possible default merge strategy for pull requests,
     [pull request #222](https://github.com/refined-bitbucket/refined-bitbucket/pull/222).
+*   Code review features (syntax highlighting, occurrences highlighting, diff collapsing, etc.) now work in
+    the "Create pull request" page,
+    closes [issue #220](https://github.com/refined-bitbucket/refined-bitbucket/issues/220),
+    [pull request #225](https://github.com/refined-bitbucket/refined-bitbucket/pull/225).
 
 ### Bug Fixes
 
