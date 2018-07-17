@@ -26,6 +26,7 @@ module.exports = {
     '.erl': 'language-erlang',
     '.ex': 'language-elixir',
     '.exs': 'language-elixir',
+    '.feature': 'language-gherkin',
     '.flow': 'language-jsx',
     '.fs': 'language-fsharp',
     '.fsi': 'language-fsharp',
