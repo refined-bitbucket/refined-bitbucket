@@ -41,7 +41,9 @@ export default function syntaxHighlight(diff, afterWordDiff) {
     const $diff = $(diff)
     syntaxHighlightSourceCodeLines($diff)
 
-    afterWordDiff(() => syntaxHighlightSourceCodeLines($diff))
+    afterWordDiff(() => {
+        syntaxHighlightSourceCodeLines($diff)
+    })
 
     const codeContainer = diff.querySelector('.refract-content-container')
     codeContainerObserver.observe(codeContainer, { childList: true })
@@ -73,7 +75,11 @@ function syntaxHighlightSourceCodeLines($diff) {
     )
 
     sourceLines.forEach(preElement => {
-        Prism.highlightElement(preElement)
+        if (!preElement.firstChild.$$rbb_isSyntaxHighlighted) {
+            Prism.highlightElement(preElement)
+            // eslint-disable-next-line camelcase
+            preElement.firstChild.$$rbb_isSyntaxHighlighted = true
+        }
     })
 }
 
@@ -87,7 +93,10 @@ async function highlightSideDiffAsync({ languageClass, diffNodeSelector }) {
     syntaxHighlightSourceCodeLines($sideBySide)
 }
 
-async function listenForSideDiffScrollAsync(args) {
+async function listenForSideDiffScrollAsync({
+    languageClass,
+    diffNodeSelector,
+}) {
     const scrollersSelector = 'div.aperture-pane-scroller'
 
     await elementReady(scrollersSelector, { target: document })
@@ -100,7 +109,10 @@ async function listenForSideDiffScrollAsync(args) {
         })
     }
 
-    debouncedSideDiffHandler = debounce(() => highlightSideDiffAsync(args), 250)
+    debouncedSideDiffHandler = debounce(
+        () => highlightSideDiffAsync({ languageClass, diffNodeSelector }),
+        250
+    )
 
     scrollers.forEach(scroller => {
         scroller.addEventListener('scroll', debouncedSideDiffHandler)

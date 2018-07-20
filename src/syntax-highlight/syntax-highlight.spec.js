@@ -164,3 +164,8 @@ test('should not syntax-highlight if diff is in a not supported language', t => 
 
     t.is(uudiff.outerHTML, expected.outerHTML)
 })
+
+// eslint-disable-next-line no-warning-comments
+// TODO: Can't test the Prism's KeepMarkup plugin until `document.createRange`
+// is implemented in jsdom. Keep an eye on https://github.com/jsdom/jsdom/issues/317
+// This is needed to test that word diffs are preserved when syntax highlighting diffs
