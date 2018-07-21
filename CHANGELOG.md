@@ -1,10 +1,16 @@
-# Next Version
+# 3.12.0 (2018-07-21)
 
 ### Bug Fixes
 
 *   Fix bad side-by-side scrolling performance with syntax highlighting enabled,
     closes [issue #183](https://github.com/refined-bitbucket/refined-bitbucket/issues/183),
     [pull request #233](https://github.com/refined-bitbucket/refined-bitbucket/pull/233).
+
+### Language Support
+
+*   Gherkin language for `.feature` files,
+    closes [issue #231](https://github.com/refined-bitbucket/refined-bitbucket/issues/231),
+    [pull request #232](https://github.com/refined-bitbucket/refined-bitbucket/pull/232).
 
 # 3.11.0 (2018-06-30)
 
