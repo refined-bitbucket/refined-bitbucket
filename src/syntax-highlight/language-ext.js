@@ -23,6 +23,8 @@ module.exports = {
     '.cs': 'language-csharp',
     '.cshtml': 'language-markup',
     '.csproj': 'language-markup',
+    '.c': 'language-cpp',
+    '.d': 'language-d',
     '.erl': 'language-erlang',
     '.ex': 'language-elixir',
     '.exs': 'language-elixir',
