@@ -17,11 +17,6 @@
     "page": "options.html",
     "chrome_style": true
   },
-  "applications": {
-    "gecko": {
-      "id": "refined-bitbucket@refined-bitbucket.org"
-    }
-  },
   "permissions": [
     "activeTab",
     "https://bitbucket.org/*",
