@@ -134,6 +134,9 @@ We all know BitBucket lacks some features that we have in other platforms like G
 		<th colspan="2">
 			Sidebar counters
 		</th>
+        <th>
+            Total lines changed in diff
+        </th>
 	</tr>
 	<tr>
 		<td>
@@ -144,6 +147,9 @@ We all know BitBucket lacks some features that we have in other platforms like G
 			<img src="https://user-images.githubusercontent.com/7514993/35742830-1c604af8-0812-11e8-936b-f6083599fb45.png" alt="collapsed" /> <br />
 			Collapsed
 		</td>
+        <td>
+            <img src="https://user-images.githubusercontent.com/3758609/44361568-48e2cd00-a48c-11e8-9f6e-302e9a54fe24.png" alt="total-lines-changed-in-diff">
+        </td>
 	</tr>
 </table>
 

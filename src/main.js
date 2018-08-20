@@ -13,6 +13,7 @@ import removeDiffsPlusesAndMinuses from './diff-pluses-and-minuses'
 import ignoreWhitespace from './ignore-whitespace'
 import insertCopyFilename from './insert-copy-filename'
 import keymap from './keymap'
+import linesAddedRemoved from './lines-added-removed'
 import linkifyTargetBranch from './linkify-target-branch'
 import loadAllDiffs from './load-all-diffs'
 import occurrencesHighlighter from './occurrences-highlighter'
@@ -121,6 +122,10 @@ function codeReviewFeatures(config) {
 
         if (config.loadAllDiffs) {
             loadAllDiffs.init(summaryNode)
+        }
+
+        if (config.linesAddedRemoved) {
+            linesAddedRemoved(summaryNode)
         }
     }
 

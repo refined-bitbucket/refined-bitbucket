@@ -1,3 +1,10 @@
+# Next Version
+
+### Features
+
+*   Adds a 'Total Lines Changed' row to the files summary list,
+    closes [issue#239](https://github.com/refined-bitbucket/refined-bitbucket/issues/239).
+
 # 3.12.0 (2018-07-21)
 
 ### Bug Fixes
