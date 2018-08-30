@@ -21,7 +21,8 @@
         <br>
 
         <label>
-            <input type="checkbox" name="ignoreWhitespace"> Set "Ignore whitespace" ON by default when entering a Pull request from the Pull requests list page
+            <input type="checkbox" name="ignoreWhitespace"> Set "Ignore whitespace" ON by default when entering a Pull request
+            from the Pull requests list page
         </label>
         <br>
         <br>
@@ -39,44 +40,50 @@
         <br>
 
         <label>
-            <input type="checkbox" name="loadAllDiffs"> Add "Load all diffs" button that automatically loads every failed diff of the pull request simultaneously
+            <input type="checkbox" name="loadAllDiffs"> Add "Load all diffs" button that automatically loads every failed
+            diff of the pull request simultaneously
         </label>
         <br>
         <br>
 
         <label>
-            <input type="checkbox" name="closeAnchorBranch"> Check the "Close anchor branch" checkbox by default when creating a new pull request
+            <input type="checkbox" name="closeAnchorBranch"> Check the "Close anchor branch" checkbox by default when creating
+            a new pull request
         </label>
         <br>
         <br>
 
         <label>
-            <input type="checkbox" name="addSidebarCounters"> Add counters to the "Branches" and "Pull requests" links in the navigation sidebar menu.
+            <input type="checkbox" name="addSidebarCounters"> Add counters to the "Branches" and "Pull requests" links in
+            the navigation sidebar menu.
         </label>
         <br>
         <br>
 
         <label>
-            <input type="checkbox" name="augmentPrEntry"> Add source branch, linkify branch names, and add creation date to each pull request row in pull request list
-            view.
+            <input type="checkbox" name="augmentPrEntry"> Add source branch, linkify branch names, and add creation date
+            to each pull request row in pull request list view.
         </label>
         <br>
         <br>
 
         <label>
-            <input type="checkbox" name="comparePagePullRequest"> Add the 'Create a Pull Request' button to the 'Compare branches and tags' page view.
+            <input type="checkbox" name="comparePagePullRequest"> Add the 'Create a Pull Request' button to the 'Compare
+            branches and tags' page view.
         </label>
         <br>
         <br>
 
         <label>
-            <input type="checkbox" name="diffPlusesAndMinuses"> Don't carry pluses and minuses to clipboard when copying diff's contents
+            <input type="checkbox" name="diffPlusesAndMinuses"> Don't carry pluses and minuses to clipboard when copying
+            diff's contents
         </label>
         <br>
         <br>
 
         <label>
-            <input type="checkbox" name="pullrequestCommitAmount"> Include number of commits next to the Commits tab in the pull request view
+            <input type="checkbox" name="pullrequestCommitAmount"> Include number of commits next to the Commits tab in the
+            pull request view
         </label>
         <br>
         <br>
@@ -106,10 +113,26 @@
             <em>PULL_REQUEST_TEMPLATE.md</em> from the repository when creating new pull requests or specify a URL with your
             own raw template (must be hosted publicly in
             <a href="http://gist.github.com/">http://gist.github.com/</a>). See the
-            <a href="http://github.com/refined-bitbucket/refined-bitbucket">README</a> of the extension for more details on how this works.
-            <i>Note: Currently, externally hosted pull request templates outside of BitBucket's domain is not supported with
+            <a href="http://github.com/refined-bitbucket/refined-bitbucket">README</a> of the extension for more details
+            on how this works.
+            <i>Note: Currently, externally hosted pull request templates outside of Bitbucket's domain is not supported with
                 the Firefox addon.</i>
             <input type="text" name="prTemplateUrl" style="width: 100%;">
+        </label>
+        <br>
+        <br>
+
+        <label>
+            <input type="checkbox" name="mergeCommitMessageEnabled"> Use a <em>MERGE_COMMIT_TEMPLATE</em> from the repository
+            or specify a URL with your own raw template where you can use variables like `id`, `title`, `description` and
+            more. See the
+            <a href="http://github.com/refined-bitbucket/refined-bitbucket">README</a> of the extension for more details
+            on how this works.
+            <i>
+                Note: Currently, externally hosted templates (outside from Bitbucket's domain) are only tested with <a href="http://gist.github.com/">http://gist.github.com/</a>,
+                and are not supported with the Firefox addon.
+            </i>
+            <input type="text" name="mergeCommitMessageUrl" style="width: 100%;">
         </label>
         <br>
         <br>
@@ -165,7 +188,8 @@
             <span style="width: calc(100% - 30px)">
                 Enable Update Notifications. Every time this extension is updated, the CHANGELOG for the current version will be opened in
                 a new browser tab.
-                <a href="https://github.com/refined-bitbucket/refined-bitbucket/issues/182">Subscribe to this issue if you would like to get e-mail notifications on updates.</a>
+                <a href="https://github.com/refined-bitbucket/refined-bitbucket/issues/182">Subscribe to this issue if you
+                    would like to get e-mail notifications on updates.</a>
             </span>
             <input type="checkbox" name="enableUpdateNotifications">
         </label>
