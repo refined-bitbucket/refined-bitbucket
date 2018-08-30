@@ -1,6 +1,5 @@
 import { h } from 'dom-chef'
-
-import getApiToken from '../get-api-token'
+import { getApiToken } from '../utils'
 import logger from '../logger'
 import { getRepoURL } from '../page-detect'
 

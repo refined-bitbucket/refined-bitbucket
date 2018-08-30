@@ -1,49 +1,37 @@
 import elementReady from 'element-ready'
 import marked from 'marked'
 import { getRepoURL } from '../page-detect'
+import { getFirstFileContents, getMainBranch } from '../utils'
 
-export default function fetchAndInsertPullrequestTemplate(externalUrl) {
+export default async function fetchAndInsertPullrequestTemplate(externalUrl) {
     const pullrequestTemplateUrls = getPullrequestTemplateUrls()
-    const requests = pullrequestTemplateUrls.map(url =>
-        fetch(url, { credentials: 'include' })
+
+    const template = await getFirstFileContents(
+        pullrequestTemplateUrls,
+        externalUrl
     )
-    if (externalUrl) {
-        requests.push(fetch(externalUrl))
+
+    if (template) {
+        insertPullrequestTemplate(template)
     }
-    insertPullrequestTemplate(requests)
 }
 
 export function getPullrequestTemplateUrls() {
     const repoURL = getRepoURL()
 
-    const defaultBranch = (() => {
-        const branchSelectValue = document.querySelector('select[name="dest"]')
-            .value
-        return branchSelectValue.substring(
-            branchSelectValue.lastIndexOf(':') + 1
-        )
-    })()
+    const mainBranch = getMainBranch()
 
     const pullrequestTemplateUrls = [
-        `https://bitbucket.org/${repoURL}/raw/${defaultBranch}/PULL_REQUEST_TEMPLATE.md`,
-        `https://bitbucket.org/${repoURL}/raw/${defaultBranch}/docs/PULL_REQUEST_TEMPLATE.md`,
-        `https://bitbucket.org/${repoURL}/raw/${defaultBranch}/.github/PULL_REQUEST_TEMPLATE.md`,
-        `https://bitbucket.org/${repoURL}/raw/${defaultBranch}/.bitbucket/PULL_REQUEST_TEMPLATE.md`,
+        `https://bitbucket.org/${repoURL}/raw/${mainBranch}/PULL_REQUEST_TEMPLATE.md`,
+        `https://bitbucket.org/${repoURL}/raw/${mainBranch}/docs/PULL_REQUEST_TEMPLATE.md`,
+        `https://bitbucket.org/${repoURL}/raw/${mainBranch}/.github/PULL_REQUEST_TEMPLATE.md`,
+        `https://bitbucket.org/${repoURL}/raw/${mainBranch}/.bitbucket/PULL_REQUEST_TEMPLATE.md`,
     ]
 
     return pullrequestTemplateUrls
 }
 
-export async function insertPullrequestTemplate(requests) {
-    const responses = await Promise.all(
-        requests.map(p => p.catch(err => ({ ok: false, err })))
-    )
-    const firstSuccessfulResponse = responses.find(response => response.ok)
-
-    if (!firstSuccessfulResponse) {
-        return
-    }
-
+export async function insertPullrequestTemplate(template) {
     const defaultEditor = elementReady('textarea[id="id_description"]')
     const atlassianEditor = elementReady(
         '#ak_editor_description div[contenteditable="true"]'
@@ -52,12 +40,10 @@ export async function insertPullrequestTemplate(requests) {
     const editor = await Promise.race(editorPromises)
     editorPromises.forEach(p => requestAnimationFrame(() => p.cancel()))
 
-    const md = await firstSuccessfulResponse.text()
-
     if (editor instanceof HTMLTextAreaElement) {
-        editor.value = md
+        editor.value = template
     } else if (editor instanceof HTMLDivElement) {
-        const html = marked(md)
+        const html = marked(template)
         editor.innerHTML = html
     } else {
         console.warn(

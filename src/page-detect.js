@@ -1,14 +1,17 @@
+import onetime from 'onetime'
+
 // Some of this functions are borrowed from https://github.com/sindresorhus/refined-github/blob/master/source/libs/page-detect.js
 
 // Drops leading and trailing slash to avoid /\/?/ everywhere
 const getCleanPathname = () => location.pathname.replace(/^[/]|[/]$/g, '')
 
 // '/user/repo/.../...' -> 'user/repo'
-export const getRepoURL = () =>
+export const getRepoURL = onetime(() =>
     location.pathname
         .slice(1)
         .split('/', 2)
         .join('/')
+)
 
 // Parses a repo's subpage, e.g.
 // '/user/repo/pull-requests/' -> 'pull-requests'

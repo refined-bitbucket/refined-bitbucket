@@ -1,47 +1,13 @@
 import { h } from 'dom-chef'
 import { ago } from 'time-ago'
-
-import getApiToken from '../get-api-token'
-import logger from '../logger'
 import { getRepoURL } from '../page-detect'
+import api from '../api'
 
 import './augment-pr-entry.css'
 import linkifyTargetBranch from '../linkify-target-branch/linkify-target-branch'
 
-const repoUrl = getRepoURL()
-
-const request = async url => {
-    const token = getApiToken()
-    const response = await fetch(url, {
-        headers: new Headers({
-            Authorization: `Bearer ${token}`,
-        }),
-    })
-    const result = await response.json()
-
-    if (result.error) {
-        logger.error(
-            `refined-bitbucket(augment-pr-entry): ${result.error.message}`
-        )
-        return
-    }
-
-    return result
-}
-
-export const getPrActivity = prId => {
-    const url =
-        `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${prId}/activity` +
-        '?pagelen=1'
-    return request(url)
-}
-
-export const getPrData = prId => {
-    const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${prId}`
-    return request(url)
-}
-
 const buildSourceBranchNode = branchName => {
+    const repoUrl = getRepoURL()
     return (
         <span class="__rbb-pull-request-source-branch">
             <span class="ref-label">
@@ -112,14 +78,14 @@ export default function augmentPrEntry(prNode) {
 
     const prId = prNode.dataset.pullRequestId
 
-    getPrData(prId).then(prData => {
+    api.getPullrequest(prId).then(prData => {
         if (prData) {
             addSourceBranch(prNode, prData)
             addCreationDate(prNode, prData)
         }
     })
 
-    getPrActivity(prId).then(prActivity => {
+    api.getPullrequestActivity(prId).then(prActivity => {
         if (prActivity) {
             addUsernameWithLatestUpdate(prNode, prActivity)
         }
