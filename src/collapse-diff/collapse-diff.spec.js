@@ -50,7 +50,8 @@ const createNode = () => (
                     href="https://confluence.atlassian.com/x/M4H8KQ"
                 >
                     Learn how
-                </a>.
+                </a>
+                .
             </div>
         </div>
 

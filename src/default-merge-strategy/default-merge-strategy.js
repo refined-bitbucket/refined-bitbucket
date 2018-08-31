@@ -65,7 +65,13 @@ export function initAsync(defaultMergeStrategy) {
             const codeStr = code
                 .toString()
                 .replace(/defaultMergeStrategy/g, defaultMergeStrategy)
-            const script = <script id={SCRIPT_ID}> ({codeStr})(); </script>
+            const script = (
+                <script id={SCRIPT_ID}>
+                    {' '}
+                    ({codeStr}
+                    )();{' '}
+                </script>
+            )
             document.body.appendChild(script)
 
             resolve()

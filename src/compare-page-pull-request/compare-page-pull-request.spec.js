@@ -23,7 +23,7 @@ test('mergePagePullRequest should add a create pull request link', t => {
                         Pull requests
                     </span>
                     <a
-                        href="https://bitbucket.org//pull-requests/new?source=TEST_SOURCE&amp;dest=TEST_DESTINATION"
+                        href="https://bitbucket.org/user/repo/pull-requests/new?source=TEST_SOURCE&amp;dest=TEST_DESTINATION"
                         title="Create a pull request"
                     >
                         Create pull request

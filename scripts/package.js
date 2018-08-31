@@ -10,7 +10,7 @@ const output = fs.createWriteStream('extension.zip')
 const archive = archiver('zip')
 
 output.on('close', () => {
-    const kbytes = Math.round(archive.pointer() / 1024 * 100) / 100
+    const kbytes = Math.round((archive.pointer() / 1024) * 100) / 100
     console.log(`'extension.zip' (${kbytes} KB) file generated.`)
 })
 

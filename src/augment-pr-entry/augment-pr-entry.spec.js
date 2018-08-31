@@ -1,67 +1,14 @@
 import { h } from 'dom-chef'
 import test from 'ava'
-
-import { addApiTokenMetadata } from '../../test/test-utils'
 import '../../test/setup-jsdom'
+import api from '../api'
+import { mockPullrequestEndpointWithSuccessfulResponse } from '../api.spec'
 
 import {
-    getPrData,
     addSourceBranch,
     addCreationDate,
     addUsernameWithLatestUpdate,
 } from './augment-pr-entry'
-
-// Consider using `nock` package in the future
-const mockFetchWithErrorResponse = () => {
-    global.fetch = () => {
-        return Promise.resolve({
-            json: () => Promise.resolve({ error: true }),
-        })
-    }
-}
-
-const mockFetchWithSuccessfulResponse = ({
-    sourceBranch = 'source-branch-name',
-    createdOn = '2018-02-09T15:07:08.160349+00:00',
-    activityAuthor = 'Andrew Bernard',
-}) => {
-    global.fetch = () => {
-        return Promise.resolve({
-            json: () =>
-                Promise.resolve({
-                    source: {
-                        branch: {
-                            name: sourceBranch,
-                        },
-                    },
-                    // eslint-disable-next-line camelcase
-                    created_on: createdOn,
-                    values: [
-                        {
-                            update: {
-                                author: {
-                                    // eslint-disable-next-line camelcase
-                                    display_name: activityAuthor,
-                                },
-                            },
-                            approval: {
-                                user: {
-                                    // eslint-disable-next-line camelcase
-                                    display_name: activityAuthor,
-                                },
-                            },
-                            comment: {
-                                user: {
-                                    // eslint-disable-next-line camelcase
-                                    display_name: activityAuthor,
-                                },
-                            },
-                        },
-                    ],
-                }),
-        })
-    }
-}
 
 Date.now = () => new Date('02/22/2018').getTime()
 
@@ -102,27 +49,6 @@ const buildPrTable = () => {
     )
 }
 
-test('getPrData should return undefined on API error', async t => {
-    addApiTokenMetadata()
-
-    mockFetchWithErrorResponse()
-
-    const prData = await getPrData()
-
-    t.is(prData, undefined)
-})
-
-test('getPrData should return proper data on successful API request', async t => {
-    addApiTokenMetadata()
-
-    mockFetchWithSuccessfulResponse({})
-
-    const prData = await getPrData()
-
-    t.truthy(prData.source.branch.name)
-    t.truthy(prData.created_on)
-})
-
 test('addSourceBranch should insert source branch node', async t => {
     const actual = buildPrTable()
 
@@ -150,7 +76,7 @@ test('addSourceBranch should insert source branch node', async t => {
                                     <a
                                         style={{ color: '#707070' }}
                                         title={sourceBranch}
-                                        href={`https://bitbucket.org//branch/${sourceBranch}`}
+                                        href={`https://bitbucket.org/user/repo/branch/${sourceBranch}`}
                                     >
                                         {sourceBranch}
                                     </a>
@@ -184,11 +110,10 @@ test('addSourceBranch should insert source branch node', async t => {
         </table>
     )
 
-    mockFetchWithSuccessfulResponse({ sourceBranch })
-    addApiTokenMetadata()
+    mockPullrequestEndpointWithSuccessfulResponse({ sourceBranch })
 
     const prNode = actual.querySelector('.pull-request-row')
-    const prData = await getPrData()
+    const prData = await api.getPullrequest()
     await addSourceBranch(prNode, prData)
 
     t.is(actual.outerHTML, expected.outerHTML)
@@ -240,11 +165,10 @@ test('addCreationDate should add date on success', async t => {
         </table>
     )
 
-    mockFetchWithSuccessfulResponse({ createdOn })
-    addApiTokenMetadata()
+    mockPullrequestEndpointWithSuccessfulResponse({ createdOn })
 
     const prNode = actual.querySelector('.pull-request-row')
-    const prData = await getPrData()
+    const prData = await api.getPullrequest()
     await addCreationDate(prNode, prData)
     t.is(actual.outerHTML, expected.outerHTML)
 })
@@ -288,11 +212,10 @@ test('addUsernameWithLatestUpdate should the name of author last update on succe
         </table>
     )
 
-    mockFetchWithSuccessfulResponse({ activityAuthor })
-    addApiTokenMetadata()
+    mockPullrequestEndpointWithSuccessfulResponse({ activityAuthor })
 
     const prNode = actual.querySelector('.pull-request-row')
-    const prData = await getPrData()
+    const prData = await api.getPullrequest()
     await addUsernameWithLatestUpdate(prNode, prData)
     t.is(actual.outerHTML, expected.outerHTML)
 })

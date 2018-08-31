@@ -70,6 +70,7 @@
     "del": "^3.0.0",
     "dotenv": "^4.0.0",
     "firefox-extension-deploy": "^1.1.0",
+    "flush-promises": "^1.0.0",
     "husky": "^0.14.3",
     "jsdom": "^11.3.0",
     "lint-staged": "^6.0.1",

@@ -1,4 +1,3 @@
-import { URL } from 'url'
 import test from 'ava'
 import { h } from 'dom-chef'
 import delay from 'yoctodelay'
@@ -12,10 +11,30 @@ import {
     insertPullrequestTemplate,
 } from './pullrequest-template'
 
-test("should get repo's pull request template urls", t => {
-    global.location = new URL(
-        'https://www.bitbucket.org/user/repo/pull-requests/new'
+function setDocumentBodyAttributes() {
+    document.body.setAttribute(
+        'data-current-repo',
+        JSON.stringify({
+            scm: 'git',
+            readOnly: false,
+            mainbranch: { name: 'develop' },
+            uuid: '12345678-4347-405e-96a4-600fd01e5f90',
+            language: 'javascript',
+            owner: {
+                username: 'user',
+                uuid: '12345678-929f-4bf1-b5e3-764d1bc80101',
+                isTeam: true,
+            },
+            fullslug: 'user/repo',
+            slug: 'repo',
+            id: 1,
+            pygmentsLanguage: 'javascript',
+        })
     )
+}
+
+test("should get repo's pull request template urls", t => {
+    setDocumentBodyAttributes()
 
     const branchSelect = (
         <select
@@ -47,10 +66,10 @@ test("should get repo's pull request template urls", t => {
     document.body.appendChild(branchSelect)
 
     const expected = [
-        'https://bitbucket.org/user/repo/raw/master/PULL_REQUEST_TEMPLATE.md',
-        'https://bitbucket.org/user/repo/raw/master/docs/PULL_REQUEST_TEMPLATE.md',
-        'https://bitbucket.org/user/repo/raw/master/.github/PULL_REQUEST_TEMPLATE.md',
-        'https://bitbucket.org/user/repo/raw/master/.bitbucket/PULL_REQUEST_TEMPLATE.md',
+        'https://bitbucket.org/user/repo/raw/develop/PULL_REQUEST_TEMPLATE.md',
+        'https://bitbucket.org/user/repo/raw/develop/docs/PULL_REQUEST_TEMPLATE.md',
+        'https://bitbucket.org/user/repo/raw/develop/.github/PULL_REQUEST_TEMPLATE.md',
+        'https://bitbucket.org/user/repo/raw/develop/.bitbucket/PULL_REQUEST_TEMPLATE.md',
     ]
 
     const actual = getPullrequestTemplateUrls()
@@ -59,35 +78,16 @@ test("should get repo's pull request template urls", t => {
 })
 
 test.serial(
-    "should not insert pull request templates if didn't find them",
-    async t => {
-        const requests = Array.from(Array(4)).map(() => {
-            return new Promise(resolve => {
-                delay(100).then(() => resolve({ ok: false }))
-            })
-        })
-
-        await insertPullrequestTemplate(requests)
-
-        t.is(document.body.innerHTML, '')
-    }
-)
-
-test.serial(
     'should insert pull request template in default editor',
     async t => {
+        setDocumentBodyAttributes()
+
         const templateContents = 'pull request template contents'
-        const requests = [
-            Promise.resolve({
-                ok: true,
-                text: () => Promise.resolve(templateContents),
-            }),
-        ]
 
         const defaultEditor = <textarea id="id_description" />
-        delay(1000).then(() => document.body.appendChild(defaultEditor))
+        delay(100).then(() => document.body.appendChild(defaultEditor))
 
-        await insertPullrequestTemplate(requests)
+        await insertPullrequestTemplate(templateContents)
 
         t.is(defaultEditor.value, templateContents)
 
@@ -99,22 +99,18 @@ test.serial(
 test.serial(
     'should insert pull request template in Atlassian editor',
     async t => {
+        setDocumentBodyAttributes()
+
         const templateContents = 'pull request template contents'
-        const requests = [
-            Promise.resolve({
-                ok: true,
-                text: () => Promise.resolve(templateContents),
-            }),
-        ]
 
         const atlassianEditor = (
             <ak-editor-bitbucket id="ak_editor_description">
                 <div contenteditable="true" />
             </ak-editor-bitbucket>
         )
-        delay(1000).then(() => document.body.appendChild(atlassianEditor))
+        delay(100).then(() => document.body.appendChild(atlassianEditor))
 
-        await insertPullrequestTemplate(requests)
+        await insertPullrequestTemplate(templateContents)
 
         const richTemplateContents = marked(templateContents)
         t.is(atlassianEditor.firstChild.innerHTML, richTemplateContents)

@@ -6,6 +6,10 @@ import onetime from 'onetime'
 const getCleanPathname = () => location.pathname.replace(/^[/]|[/]$/g, '')
 
 // '/user/repo/.../...' -> 'user/repo'
+// eslint-disable-next-line no-warning-comments
+// FIXME TODO: I noticed much later that maybe this could simply be:
+// `JSON.parse(document.body.dataset.currentRepo).fullslug`
+// Confirm, compare perf and replace in better.
 export const getRepoURL = onetime(() =>
     location.pathname
         .slice(1)
