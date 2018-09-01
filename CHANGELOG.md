@@ -1,3 +1,15 @@
+# Next Version
+
+### Features
+
+-   **Merge Commit Message Template**. Similar to how the pull request template feature works,
+    it is now possible to configure the extension to replace the default merge commit message for
+    pull requests with a template that has access to dynamically injected variables like the pull
+    request title, description, source and destination branch, and more. Check the pull request for
+    the feature for a more in-depth explanation,
+    closes [issue #97](https://github.com/refined-bitbucket/refined-bitbucket/issues/97),
+    [pull request #243](https://github.com/refined-bitbucket/refined-bitbucket/pull/243).
+
 # 3.12.0 (2018-07-21)
 
 ### Bug Fixes
