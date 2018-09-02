@@ -53,23 +53,27 @@ export const addUsernameWithLatestUpdate = async (prNode, prActivity) => {
     // pull requests by default have the initial commit info as an activity
     const mostRecentAction = prActivity.values[0]
     let author = ''
+    let activityType = ''
 
     // merges, commit updates
     if (mostRecentAction.update) {
         author = mostRecentAction.update.author.display_name
+        activityType = 'Committed'
     } else if (mostRecentAction.approval) {
         // approvals
         author = mostRecentAction.approval.user.display_name
+        activityType = 'Approved'
     } else if (mostRecentAction.comment) {
         // comments
         author = mostRecentAction.comment.user.display_name
+        activityType = 'Commented'
     }
 
     const prUpdateTime = prNode.querySelector('.pr-number-and-timestamp')
         .firstElementChild
 
     if (author && prUpdateTime) {
-        prUpdateTime.append(` by ${author}`)
+        prUpdateTime.append(` by ${author} (${activityType})`)
     }
 }
 
