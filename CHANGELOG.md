@@ -10,6 +10,14 @@
     closes [issue #97](https://github.com/refined-bitbucket/refined-bitbucket/issues/97),
     [pull request #243](https://github.com/refined-bitbucket/refined-bitbucket/pull/243).
 
+### Improvements
+
+-   **Augment PR Entry**: Besides indicating who was the last person to perform
+    any activity in the pull request in the pull request list view, also include what kind
+    of activity was it inside parenthesis. The possible values
+    are "Committed", "Commented" and "Approved",
+    [pull request #244](https://github.com/refined-bitbucket/refined-bitbucket/pull/244).
+
 # 3.12.0 (2018-07-21)
 
 ### Bug Fixes

@@ -206,6 +206,7 @@ test('addUsernameWithLatestUpdate should the name of author last update on succe
                         datetime="2018-02-23T09:52:37-0400"
                     >
                         last updated 39 minutes ago by Andrew Bernard
+                        (Committed)
                     </time>
                 </div>
             </tr>
