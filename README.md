@@ -33,6 +33,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 -   Insert "Comments" checkbox in diff header to toggle comments.
 -   Insert "Copy filename to clipboard" button in diff header.
 -   Define your own custom CSS styles to be applied to Bitbucket.
+-   URLs and emails in diffs automatically become real clickable links.
 -   Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
 
     ```

@@ -9,6 +9,8 @@
     the feature for a more in-depth explanation,
     closes [issue #97](https://github.com/refined-bitbucket/refined-bitbucket/issues/97),
     [pull request #243](https://github.com/refined-bitbucket/refined-bitbucket/pull/243).
+-   **Autolinker**: URLs and emails in diffs will now become real clickable links,
+    [pull request #245](https://github.com/refined-bitbucket/refined-bitbucket/pull/245).
 
 ### Improvements
 
