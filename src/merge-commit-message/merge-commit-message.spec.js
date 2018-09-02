@@ -47,7 +47,7 @@ const mockFetchWithSuccessfulResponse = () => {
     }
 }
 
-test('mergeCommitMessage', async t => {
+test('happy path functionality', async t => {
     // Arrange
     document.body.setAttribute(
         'data-current-repo',

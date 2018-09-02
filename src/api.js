@@ -11,7 +11,7 @@ const api = {
         return get(url)
     },
     getPullrequestActivity(id) {
-        const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/activity?pagelen=1'`
+        const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/activity?pagelen=1`
         return get(url)
     },
 }
