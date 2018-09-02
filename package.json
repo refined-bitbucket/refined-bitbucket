@@ -70,6 +70,7 @@
     "del": "^3.0.0",
     "dotenv": "^4.0.0",
     "firefox-extension-deploy": "^1.1.0",
+    "flush-promises": "^1.0.0",
     "husky": "^0.14.3",
     "jsdom": "^11.3.0",
     "lint-staged": "^6.0.1",
@@ -94,6 +95,7 @@
     "jquery-highlight": "^3.4.0",
     "marked": "^0.3.12",
     "mousetrap": "^1.6.1",
+    "onetime": "^2.0.1",
     "selector-observer": "^1.1.0",
     "time-ago": "^0.2.1",
     "webext-options-sync": "^0.15.0"

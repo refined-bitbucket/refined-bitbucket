@@ -29,7 +29,7 @@ test('linkifyTargetBranch should work', t => {
                             <a
                                 style={{ color: '#707070' }}
                                 title="develop"
-                                href="https://bitbucket.org//branch/develop"
+                                href="https://bitbucket.org/user/repo/branch/develop"
                             >
                                 develop
                             </a>

@@ -1,9 +1,8 @@
 import { h } from 'dom-chef'
 import elementReady from 'element-ready'
-
 import { getRepoURL } from '../page-detect'
-import getApiToken from '../get-api-token'
 import logger from '../logger'
+import { getApiToken } from '../utils'
 
 import './pullrequest-commit-amount.css'
 

@@ -1,10 +1,8 @@
 import { h } from 'dom-chef'
-
 import { getRepoURL } from '../page-detect'
 
-const repoUrl = getRepoURL()
-
 const linkifyTargetBranch = node => {
+    const repoUrl = getRepoURL()
     const targetBranchSpan = node.querySelector(
         '.pull-request-target-branch span.name'
     )

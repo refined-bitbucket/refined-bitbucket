@@ -23,6 +23,7 @@ import addSidebarCounters from './sidebar-counters'
 import syntaxHighlight from './syntax-highlight'
 import comparePagePullRequest from './compare-page-pull-request'
 import setTabSize from './tab-size'
+import mergeCommitMessage from './merge-commit-message'
 
 import observeForWordDiffs from './observe-for-word-diffs'
 
@@ -194,5 +195,9 @@ function pullrequestRelatedFeatures(config) {
 
     if (config.pullrequestCommitAmount) {
         pullrequestCommitAmount()
+    }
+
+    if (config.mergeCommitMessageEnabled) {
+        mergeCommitMessage(config.mergeCommitMessageUrl)
     }
 }

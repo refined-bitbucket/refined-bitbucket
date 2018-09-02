@@ -2,6 +2,7 @@
 
 import { URL, URLSearchParams } from 'url'
 import jsdom from 'jsdom'
+import { addApiTokenMetadata, setUrlLocation } from './test-utils'
 
 const dom = new jsdom.JSDOM()
 global.window = dom.window
@@ -55,3 +56,6 @@ window.Element.prototype.scrollIntoView = () => {}
 require('mutationobserver-shim')
 
 global.MutationObserver = window.MutationObserver
+
+addApiTokenMetadata()
+setUrlLocation()

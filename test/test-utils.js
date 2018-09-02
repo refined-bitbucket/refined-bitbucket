@@ -1,4 +1,5 @@
 import { h } from 'dom-chef'
+import onetime from 'onetime'
 
 export const cleanDocumentBody = () => {
     while (document.body.hasChildNodes()) {
@@ -6,7 +7,7 @@ export const cleanDocumentBody = () => {
     }
 }
 
-export const addApiTokenMetadata = () => {
+export const addApiTokenMetadata = onetime(() => {
     const meta = (
         <meta
             name="apitoken"
@@ -14,4 +15,8 @@ export const addApiTokenMetadata = () => {
         />
     )
     document.head.appendChild(meta)
+})
+
+export const setUrlLocation = () => {
+    global.location = new URL('https://www.bitbucket.org/user/repo')
 }

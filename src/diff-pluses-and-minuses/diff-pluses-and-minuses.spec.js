@@ -161,7 +161,8 @@ test('should remove pluses and minuses when diff has been rerendered to include 
 
                         <div class="udiff-line addition" id="diffed">
                             <pre class="source">
-                                console.<ins>log(msg);</ins>
+                                console.
+                                <ins>log(msg);</ins>
                             </pre>
                         </div>
                         <div class="udiff-line addition" id="diffed-2">
@@ -181,7 +182,8 @@ test('should remove pluses and minuses when diff has been rerendered to include 
     const line = udiff.querySelector('#diffed')
     const diffedLine = (
         <pre class="source">
-            +console.<ins>log(msg);</ins>
+            +console.
+            <ins>log(msg);</ins>
         </pre>
     )
     line.replaceChild(diffedLine, line.firstChild)
@@ -242,7 +244,8 @@ test('should not add extra leading whitespace', t => {
 
                 <div class="udiff-line addition">
                     <pre class="source">
-                        +<ins>export default </ins>class App extends Component{' '}
+                        +<ins>export default </ins>
+                        class App extends Component{' '}
                     </pre>
                 </div>
             </div>
@@ -257,7 +260,8 @@ test('should not add extra leading whitespace', t => {
                 </div>
                 <div class="udiff-line addition">
                     <pre class="source">
-                        <ins>export default </ins>class App extends Component{' '}
+                        <ins>export default </ins>
+                        class App extends Component{' '}
                     </pre>
                 </div>
             </div>

@@ -12,28 +12,28 @@ We all know BitBucket lacks some features that we have in other platforms like G
 
 ## Current features
 
-*   Adds syntax highlighting for pull requests and commits. See the full list of enabled languages [here][prismjs-languages], and then [here][language-ext]. [Test them here](http://prismjs.com/test.html). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
-*   Double click on a word to highlight all occurrences.
-*   ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
-*   Key binding feature, which allows for quicker navigation through pull requests.
-*   Button to collapse diffs in Pull Request and Commits view.
-*   Autocollapse:
-    *   Add filename patterns in the Options page that you would like the extension to collapse automatically when the pull request or commit loads.
-    *   Deleted files are automatically collapsed.
-*   Diff Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the pull request or commit loads.
-*   Counters for open or active branches and pull requests in the sidebar navigation menu.
-*   Button to load all failed diffs in pull request and commit view.
-*   Adds 'Create Pull Request' link to the 'Compare branches and tags' page.
-*   Choose a default merge strategy for your pull requests. [Also implemented natively by Bitbucket per project](https://bitbucket.org/site/master/issues/13895/default-merge-strategy#comment-45364593)
-*   Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
-*   Add source branch, linkify branch names, and add creation date to each pull request row in pull request list.
-*   Don't carry pluses and minuses to clipboard when copying diff's contents.
-*   Badge with the number of commits of the current pull request next to the "Commits" tab.
-*   Set custom tab indentation size of code (Bitbucket defaults to 8 spaces) when viewing commits/pull requests.
-*   Insert "Comments" checkbox in diff header to toggle comments.
-*   Insert "Copy filename to clipboard" button in diff header.
-*   Define your own custom CSS styles to be applied to Bitbucket.
-*   Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
+-   Adds syntax highlighting for pull requests and commits. See the full list of enabled languages [here][prismjs-languages], and then [here][language-ext]. [Test them here](http://prismjs.com/test.html). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
+-   Double click on a word to highlight all occurrences.
+-   ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
+-   Key binding feature, which allows for quicker navigation through pull requests.
+-   Button to collapse diffs in Pull Request and Commits view.
+-   Autocollapse:
+    -   Add filename patterns in the Options page that you would like the extension to collapse automatically when the pull request or commit loads.
+    -   Deleted files are automatically collapsed.
+-   Diff Ignore. Add filename patterns in the Options page that you would like the extension to completely remove when the pull request or commit loads.
+-   Counters for open or active branches and pull requests in the sidebar navigation menu.
+-   Button to load all failed diffs in pull request and commit view.
+-   Adds 'Create Pull Request' link to the 'Compare branches and tags' page.
+-   Choose a default merge strategy for your pull requests. [Also implemented natively by Bitbucket per project](https://bitbucket.org/site/master/issues/13895/default-merge-strategy#comment-45364593)
+-   Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
+-   Add source branch, linkify branch names, and add creation date to each pull request row in pull request list.
+-   Don't carry pluses and minuses to clipboard when copying diff's contents.
+-   Badge with the number of commits of the current pull request next to the "Commits" tab.
+-   Set custom tab indentation size of code (Bitbucket defaults to 8 spaces) when viewing commits/pull requests.
+-   Insert "Comments" checkbox in diff header to toggle comments.
+-   Insert "Copy filename to clipboard" button in diff header.
+-   Define your own custom CSS styles to be applied to Bitbucket.
+-   Include a `PULL_REQUEST_TEMPLATE.md` file in the default branch of the repository in one of the locations below, and the contents of that file template will replace the default pull request body inserted by Bitbucket when creating a new one.
 
     ```
     /PULL_REQUEST_TEMPLATE.md
@@ -52,6 +52,11 @@ We all know BitBucket lacks some features that we have in other platforms like G
     the file in your repository, e.g., https://gist.githubusercontent.com/anonymous/8054a3ee32f7cf1a5975e3fd52b3c5f3/raw/f6897720e8b6b93becd246187dac36038291c3a4/PULL_REQUEST_TEMPLATE.md.
 
     _Note: Currently, externally hosted pull request templates outside of BitBucket's domain is not supported with the Firefox addon._
+
+-   Similar to how the pull request template feature works,
+    it is now possible to configure the extension to replace the default merge commit message for
+    pull requests with a template that has access to dynamically injected variables like the pull
+    request title, description, source and destination branch, and more. [Click here for a more in-depth explanation](https://github.com/refined-bitbucket/refined-bitbucket/pull/243)
 
 ## Some images
 
