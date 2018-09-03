@@ -3,7 +3,9 @@
  * word diffs, which rerenders the diffs with <ins> and <del> tags
  * and ends up removing any previous manipulation we did with it :(
  *
- * @param {HTMLElement} diff
+ * @param {HTMLElement} diff Diff
+ * @param {number} timeout Timeout, default to 20000 (20 seconds)
+ * @returns {Function} The returning promise resolves when word diff has been applied
  */
 const observeForWordDiffs = (diff, timeout = 20000) => {
     const p = new Promise(resolve => {

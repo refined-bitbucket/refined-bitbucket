@@ -3,9 +3,9 @@ import { h } from 'dom-chef'
 
 const onChange = ({ target, target: { checked: showComments } }) => {
     const diff = target.closest('section.bb-udiff')
-    const comments = Array.from(
-        diff.getElementsByClassName('comment-thread-container')
-    )
+    const comments = [
+        ...diff.getElementsByClassName('comment-thread-container'),
+    ]
 
     comments.forEach(comment => {
         comment.style.display = showComments ? '' : 'none'

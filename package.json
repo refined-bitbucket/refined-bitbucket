@@ -6,7 +6,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "prettier": "prettier --write \"./**/*.{js,jsx,json,css,md}\"",
-    "xo": "xo --fix *.js {src,test,scripts}/**/*.js !src/vendor/prism.js",
+    "xo": "xo *.js {src,test,scripts}/**/*.js !src/vendor/prism.js",
     "lint": "npm run prettier && npm run xo",
     "ava": "cross-env BABEL_ENV=testing ava",
     "ava:w": "npm run ava -- --watch",
@@ -102,6 +102,7 @@
     "webext-options-sync": "^0.15.0"
   },
   "xo": {
+    "prettier": true,
     "semicolon": false,
     "esnext": true,
     "space": 4,
@@ -111,6 +112,7 @@
     ],
     "rules": {
       "comma-dangle": 0,
+      "import/no-unassigned-import": 0,
       "no-unused-vars": [
         2,
         {

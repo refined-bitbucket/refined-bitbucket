@@ -178,7 +178,7 @@ test('selecting whitespace should not do anything', t => {
     const container = (
         <div class="diff-container">
             <div class="diff-content-container">
-                {/* eslint-disable no-multi-spaces*/}
+                {/* eslint-disable no-multi-spaces */}
                 <pre> </pre>
                 <pre> Hello </pre>
             </div>
@@ -188,7 +188,7 @@ test('selecting whitespace should not do anything', t => {
     const expected = (
         <div class="diff-container">
             <div class="diff-content-container">
-                {/* eslint-disable no-multi-spaces*/}
+                {/* eslint-disable no-multi-spaces */}
                 <pre> </pre>
                 <pre> Hello </pre>
             </div>

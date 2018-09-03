@@ -27,6 +27,7 @@ global.location = new URL('https://www.bitbucket.org')
 
 global.Headers = function() {}
 
+// eslint-disable-next-line no-multi-assign
 global.$ = global.jQuery = require('jquery')
 
 // Remove this `closest` shim when this issue is resolved:

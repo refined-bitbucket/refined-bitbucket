@@ -70,7 +70,7 @@ const createNode = () => (
     </section>
 )
 
-test('should not re-insert collapse diff button if already present', async t => {
+test('should not re-insert collapse diff button if already present', t => {
     const uudiff = createNode()
 
     insertCollapseDiffButton(uudiff)
@@ -81,11 +81,11 @@ test('should not re-insert collapse diff button if already present', async t => 
     const buttons = uudiff.getElementsByClassName(
         '__refined_bitbucket_collapse_diff_button'
     )
-    // one at the top, one at the bottom of the diff
+    // One at the top, one at the bottom of the diff
     t.true(buttons.length === 2)
 })
 
-test('should insert TOP button in correct position when diff loads successfully', async t => {
+test('should insert TOP button in correct position when diff loads successfully', t => {
     const uudiff = createNode()
 
     insertCollapseDiffButton(uudiff)
@@ -97,7 +97,7 @@ test('should insert TOP button in correct position when diff loads successfully'
     t.truthy(button)
 })
 
-test('should insert BOTTOM button in correct position when diff loads successfully', async t => {
+test('should insert BOTTOM button in correct position when diff loads successfully', t => {
     const uudiff = createNode()
 
     insertCollapseDiffButton(uudiff)
@@ -109,7 +109,7 @@ test('should insert BOTTOM button in correct position when diff loads successful
     t.truthy(button)
 })
 
-test('should insert BOTTOM button in correct position when diff has no more lines to show', async t => {
+test('should insert BOTTOM button in correct position when diff has no more lines to show', t => {
     const uudiff = (
         <section class="bb-udiff" data-filename="filename.js">
             <div class="heading">
@@ -175,7 +175,7 @@ test('should toggle the diff, toggle messages, toggle the arrow icon and apply b
 
     // Assering
     const hasClass = (node, className) =>
-        Array.from(node.classList).includes(className)
+        [...node.classList].includes(className)
     const isHidden = node => hasClass(node, '__refined_bitbucket_hide')
     const hasBorder = node =>
         hasClass(node, '__refined_bitbucket_bottom_border')
@@ -197,7 +197,7 @@ test('should toggle the diff, toggle messages, toggle the arrow icon and apply b
     t.false(hasBorder(heading))
 })
 
-test('should insert button in correct position if diff failed to load', async t => {
+test('should insert button in correct position if diff failed to load', t => {
     const uudiff = (
         <section class="bb-udiff" data-filename="filename.js">
             <div class="heading ">

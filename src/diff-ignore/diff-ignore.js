@@ -7,7 +7,11 @@ import { getFilepathFromElement } from '../syntax-highlight/source-handler'
 
 let ig = null
 
-/** @param {HTMLLIElement} li */
+/**
+ * Get the filename from the HTMLElement
+ * @param {HTMLLIElement} li Node with the filename changed
+ * @returns {string} Filename
+ * */
 const getFilename = li => li.querySelector('a').textContent.trim()
 
 export function init(ignorePaths) {
@@ -15,15 +19,18 @@ export function init(ignorePaths) {
 }
 
 /**
- * @param {HTMLDivElement} node
- * @param {string[]} ignorePaths
+ * Removes the diffs that are ignored
+ * @param {HTMLDivElement} summaryNode Node with the summary of the changes
+ * @param {string[]} ignorePaths Paths to ignore
  */
-export async function execute(node) {
+export async function execute(summaryNode) {
     await elementReady('#commit-files-summary > li', {
-        target: node,
+        target: summaryNode,
     })
 
-    const filesChanged = node.querySelectorAll('#commit-files-summary > li')
+    const filesChanged = summaryNode.querySelectorAll(
+        '#commit-files-summary > li'
+    )
     const filesToRemove = [...filesChanged].filter(li =>
         ig.ignores(getFilename(li))
     )
@@ -39,13 +46,13 @@ export async function execute(node) {
         const dataIdentifier = li.getAttribute('data-file-identifier')
         const diff = await elementReady(
             `section[data-identifier="${dataIdentifier}"]`,
-            { target: node }
+            { target: summaryNode }
         )
         diff.remove()
     })
 
     // Update the "Files changed" summary header to reflect the removed diffs count
-    const summaryHeader = node.querySelector(
+    const summaryHeader = summaryNode.querySelector(
         '#pullrequest-diff > section.main > h1, #commit-summary > h1, #compare-diff-content > h1, ' +
             '#diff > h1'
     )
@@ -53,8 +60,12 @@ export async function execute(node) {
         filesToRemove.length} of ${filesChanged.length}`
 }
 
-/** @param {HTMLSectionElement} section */
-export function isIgnored(section) {
-    const filename = getFilepathFromElement(section)
+/**
+ * Is this diff ignored?
+ * @param {HTMLSectionElement} diff Diff
+ * @returns {boolean} Wether the diff is ignored
+ **/
+export function isIgnored(diff) {
+    const filename = getFilepathFromElement(diff)
     return ig.ignores(filename)
 }

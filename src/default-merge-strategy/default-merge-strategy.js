@@ -11,23 +11,27 @@ export const scriptAlreadyExists = () =>
 export async function init(defaultMergeStrategy) {
     try {
         await initAsync(defaultMergeStrategy)
-    } catch (err) {
+    } catch (error) {
         // ignore, to not pollute the console with errors
     }
 }
 
 /**
- * @param {'merge_commit' | 'squash' | 'fast_forward'} defaultMergeStrategy
+ * Apply default merge strategy
+ * @param {'merge_commit' | 'squash' | 'fast_forward'} defaultMergeStrategy Strategy
+ * @returns {Promise<void>} Resolves when the acton is completed
  */
 export function initAsync(defaultMergeStrategy) {
     return new Promise((resolve, reject) => {
         if (!isPullRequest() || scriptAlreadyExists()) {
             reject(
-                'This is not a pull request page, or the default merge script has already been inserted and executed.'
+                new Error(
+                    'This is not a pull request page, or the default merge script has already been inserted and executed.'
+                )
             )
         }
 
-        // defaultMergeStrategy can be either 'merge_commit', 'squash' or 'fast_forward'
+        // DefaultMergeStrategy can be either 'merge_commit', 'squash' or 'fast_forward'
         if (
             !['merge_commit', 'squash', 'fast_forward'].includes(
                 defaultMergeStrategy

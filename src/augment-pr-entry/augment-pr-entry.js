@@ -27,13 +27,13 @@ const buildSourceBranchNode = branchName => {
     )
 }
 
-export const addSourceBranch = async (prNode, prData) => {
+export const addSourceBranch = (prNode, prData) => {
     const sourceBranchNode = buildSourceBranchNode(prData.source.branch.name)
     const arrow = prNode.querySelector('span.aui-iconfont-devtools-arrow-right')
     arrow.parentElement.insertBefore(sourceBranchNode, arrow)
 }
 
-export const addCreationDate = async (prNode, prData) => {
+export const addCreationDate = (prNode, prData) => {
     const date = new Date(prData.created_on)
     const dateString = date.toDateString()
     const creationDateNode = (
@@ -49,22 +49,22 @@ export const addCreationDate = async (prNode, prData) => {
     prNumberAndTimestamp.appendChild(creationDateNode)
 }
 
-export const addUsernameWithLatestUpdate = async (prNode, prActivity) => {
-    // pull requests by default have the initial commit info as an activity
+export const addUsernameWithLatestUpdate = (prNode, prActivity) => {
+    // Pull requests by default have the initial commit info as an activity
     const mostRecentAction = prActivity.values[0]
     let author = ''
     let activityType = ''
 
-    // merges, commit updates
+    // Merges, commit updates
     if (mostRecentAction.update) {
         author = mostRecentAction.update.author.display_name
         activityType = 'Committed'
     } else if (mostRecentAction.approval) {
-        // approvals
+        // Approvals
         author = mostRecentAction.approval.user.display_name
         activityType = 'Approved'
     } else if (mostRecentAction.comment) {
-        // comments
+        // Comments
         author = mostRecentAction.comment.user.display_name
         activityType = 'Commented'
     }

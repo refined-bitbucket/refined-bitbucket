@@ -9,8 +9,8 @@ import '../../test/setup-jsdom'
 
 /**
  * Returns the `HTMLElement` representing the node that contains a pull request
- * @param {string[]} filenames
- * @return {HTMLDivElement}
+ * @param {string[]} filenames The list of changed filenames of the PR
+ * @return {HTMLDivElement} The pull request element
  */
 function getPullrequestNode(filenames) {
     return (
@@ -50,8 +50,8 @@ function getPullrequestNode(filenames) {
 
 /**
  * Returns the `HTMLElement` representing the node that contains a commit view
- * @param {string[]} filenames
- * @return {HTMLDivElement}
+ * @param {string[]} filenames Filenames
+ * @return {HTMLDivElement} Commit node
  */
 function getCommitNode(filenames) {
     return (
@@ -86,7 +86,8 @@ function getCommitNode(filenames) {
 }
 
 /**
- * @param {HTMLHeadingElement} header
+ * @param {HTMLHeadingElement} header Header
+ * @returns { {filesRemoved: number, filesChanged: number} } Result
  */
 function parseHeader(header) {
     const [, filesVisible, filesChangedString] = /Showing (\d+) of (\d+)/.exec(
