@@ -11,8 +11,7 @@
     "ava": "cross-env BABEL_ENV=testing ava",
     "ava:w": "npm run ava -- --watch",
     "build": "webpack",
-    "build:min": "cross-env NODE_ENV=production webpack",
-    "test": "npm-run-all lint ava build:min",
+    "test": "npm-run-all lint ava build",
     "watch": "webpack --watch",
     "sync-version": "node scripts/sync-version",
     "package": "node scripts/package",
@@ -56,24 +55,25 @@
   },
   "homepage": "https://github.com/refined-bitbucket/refined-bitbucket#readme",
   "devDependencies": {
-    "archiver": "^2.1.1",
-    "ava": "^0.24.0",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0",
+    "@babel/plugin-transform-react-jsx": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "archiver": "^3.0.0",
+    "ava": "^1.0.0-beta.8",
+    "babel-loader": "^8.0.0",
     "chrome-extension-deploy": "^3.0.0",
     "copy-webpack-plugin": "^4.3.1",
     "cross-env": "^5.1.0",
-    "css-loader": "^0.28.8",
+    "css-loader": "^1.0.0",
     "del": "^3.0.0",
-    "dotenv": "^4.0.0",
+    "dotenv": "^6.0.0",
     "firefox-extension-deploy": "^1.1.0",
     "flush-promises": "^1.0.0",
     "husky": "^0.14.3",
-    "jsdom": "^11.3.0",
-    "lint-staged": "^6.0.1",
+    "jsdom": "^12.0.0",
+    "lint-staged": "^7.2.2",
     "mutationobserver-shim": "^0.3.2",
     "npm-run-all": "^4.1.2",
     "path": "^0.12.7",
@@ -81,22 +81,23 @@
     "request": "^2.83.0",
     "require-hacker": "^3.0.1",
     "semver": "^5.4.1",
-    "style-loader": "^0.19.1",
+    "style-loader": "^0.23.0",
     "uglifyjs-webpack-plugin": "^1.0.0",
-    "webpack": "^3.8.1",
-    "xo": "^0.16.0",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "xo": "^0.23.0",
     "yoctodelay": "^1.1.0"
   },
   "dependencies": {
     "dom-chef": "^3.1.0",
-    "element-ready": "^2.2.1",
-    "ignore": "^3.3.6",
+    "element-ready": "^3.0.0",
+    "ignore": "^3.3.10",
     "jquery": "^3.2.1",
     "jquery-highlight": "^3.4.0",
-    "marked": "^0.3.12",
+    "marked": "^0.5.0",
     "mousetrap": "^1.6.1",
     "onetime": "^2.0.1",
-    "selector-observer": "^1.1.0",
+    "selector-observer": "^1.2.0",
     "time-ago": "^0.2.1",
     "webext-options-sync": "^0.15.0"
   },
@@ -131,14 +132,13 @@
     "files": [
       "src/**/*.spec.js"
     ],
-    "source": [
+    "sources": [
       "src/**/*.js"
     ],
     "require": [
-      "babel-register",
+      "@babel/register",
       "./scripts/ignore-utils"
     ],
-    "babel": "inherit",
     "timeout": "10s"
   },
   "babel": {
@@ -147,14 +147,14 @@
     ],
     "plugins": [
       [
-        "transform-react-jsx",
+        "@babel/plugin-transform-react-jsx",
         {
           "pragma": "h",
           "useBuiltIns": true
         }
       ],
       [
-        "transform-object-rest-spread",
+        "@babel/plugin-proposal-object-rest-spread",
         {
           "useBuiltIns": true
         }
@@ -163,7 +163,7 @@
     "env": {
       "testing": {
         "plugins": [
-          "transform-es2015-modules-commonjs"
+          "@babel/plugin-transform-modules-commonjs"
         ]
       }
     }

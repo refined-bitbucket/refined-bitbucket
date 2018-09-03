@@ -1,10 +1,10 @@
 'use strict'
 const path = require('path')
 const webpack = require('webpack')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
+    mode: 'development',
     devtool: 'source-map',
     entry: {
         main: './src/main',
@@ -48,29 +48,4 @@ module.exports = {
             },
         ],
     },
-}
-
-if (process.env.NODE_ENV === 'production') {
-    module.exports.plugins.push(
-        new UglifyJSPlugin({
-            sourceMap: false,
-            uglifyOptions: {
-                mangle: true,
-                output: {
-                    beautify: false,
-                },
-                compress: {
-                    // https://github.com/refined-bitbucket/refined-bitbucket/issues/115
-                    // https://github.com/refined-bitbucket/refined-bitbucket/pull/116
-                    // The default value of this option was producing a bundle
-                    // with broken code due to a constant variable reassignment
-                    // that ended up causing a TypeError at runtime.
-                    // See the issue and the pull request for more details.
-                    // (default: true) -- Improve optimization on variables assigned with and used as constant values.
-                    // eslint-disable-next-line camelcase
-                    reduce_vars: false,
-                },
-            },
-        })
-    )
 }
