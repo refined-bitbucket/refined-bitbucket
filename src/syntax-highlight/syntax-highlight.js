@@ -48,9 +48,9 @@ export default function syntaxHighlight(diff, afterWordDiff) {
     const codeContainer = diff.querySelector('.refract-content-container')
     codeContainerObserver.observe(codeContainer, { childList: true })
 
-    // side by side
+    // Side by side
     const sideBySideButton = diff.querySelector('button[href*="side-by-side"]')
-    // deleted files don't have side by side
+    // Deleted files don't have side by side
     if (sideBySideButton) {
         sideBySideButton.addEventListener('click', () => {
             if (
@@ -70,9 +70,9 @@ export default function syntaxHighlight(diff, afterWordDiff) {
 }
 
 function syntaxHighlightSourceCodeLines($diff) {
-    const sourceLines = Array.from(
-        $diff.find('pre:not([class*=language]), pre:has(ins), pre:has(del)')
-    )
+    const sourceLines = [
+        ...$diff.find('pre:not([class*=language]), pre:has(ins), pre:has(del)'),
+    ]
 
     sourceLines.forEach(preElement => {
         if (!preElement.firstChild.$$rbb_isSyntaxHighlighted) {

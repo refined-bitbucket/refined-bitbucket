@@ -1,10 +1,10 @@
 // Courtesy of http://underscorejs.org/
+// eslint-disable-next-line func-names
 module.exports = function debounce(func, wait, immediate) {
     let timeout
 
-    return function() {
+    return function(...args) {
         const context = this
-        const args = arguments
         const later = function() {
             timeout = null
             if (!immediate) {

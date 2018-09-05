@@ -41,6 +41,8 @@ const PrKeyMap = (function() {
 
     /**
      * Switches to a tab, if there is a selector available for that tab.
+     * @param {String} tabName Tabname
+     * @return {undefined}
      */
     self.switchTo = function(tabName) {
         if (tabName in ids) {
@@ -57,6 +59,8 @@ const PrKeyMap = (function() {
      * This provides compatibility with BitBucket's built in key binds
      * so that we don't break the existing functionality of the 'j' and 'k' keys.
      *
+     * @param {HTMLElement} comment Comment node
+     * @return {undefined}
      */
     self.focusComment = function(comment) {
         $(self.iterableItemSelector).removeClass('focused')
@@ -124,12 +128,12 @@ const PrKeyMap = (function() {
      * Initializes keybinds.
      *
      * @param {Object} keyboard the keyboard library to use to bind keys (usually Mousetrap).
-     * @param {Object} user_keymap the user-defined keymap to override default keybindings.
+     * @param {Object} userKeymap the user-defined keymap to override default keybindings.
      */
     self.init = function(keyboard, userKeymap) {
         Object.assign(keymap, DEFAULT_KEYMAP)
         if (userKeymap) {
-            // if provided, copy a user-preferred keymap to the main keymap.
+            // If provided, copy a user-preferred keymap to the main keymap.
             Object.assign(keymap, userKeymap)
         }
 
@@ -170,13 +174,13 @@ const PrKeyMap = (function() {
         })
 
         keyboard.bind(keymap.scrollPageTop, event => {
-            // gg to scroll to top
+            // Gg to scroll to top
             event.preventDefault()
             window.scrollTo(0, 0)
         })
 
         keyboard.bind(keymap.scrollPageBottom, event => {
-            // scroll to bottom
+            // Scroll to bottom
             event.preventDefault()
             window.scrollTo(0, document.body.scrollHeight)
         })

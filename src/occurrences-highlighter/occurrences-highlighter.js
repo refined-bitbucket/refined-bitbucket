@@ -25,12 +25,12 @@ export function highlightOccurrences(container) {
         selection.anchorNode.getElementsByTagName('textarea').length
     const text = selection.toString()
 
-    // if selected text is all whitespace, don't highlight anything
+    // If selected text is all whitespace, don't highlight anything
     if (!/\S/.test(text)) {
         code.unhighlight()
         return
     }
-    // if selected text is already highlighted, don't highlight anything
+    // If selected text is already highlighted, don't highlight anything
     if (
         selection.anchorNode.parentElement.classList.contains(
             '__refined_bitbucket_highlight'
@@ -74,8 +74,9 @@ function getSelectedText() {
 /**
  * Removes all previous highlights and then highlights the string `text`
  * (trimmed and untrimmed) in the `code` array of nodes
- * @param {HTMLElement[]} code
- * @param {string} text
+ * @param {HTMLElement[]} code List of code lines HTML elements
+ * @param {string} text Text to highlight
+ * @returns {undefined}
  */
 function highlightOcurrences(code, text) {
     code.unhighlight({ className: '__refined_bitbucket_highlight' })
@@ -90,8 +91,8 @@ function highlightOcurrences(code, text) {
 
 /**
  * Gets the selection as a HTML element node.
- * @param {Selection} selection
- * @returns {HTMLElement}
+ * @param {Selection} selection The selection
+ * @returns {HTMLElement} Selection's HTML node
  */
 function getSelectionAsNode(selection) {
     if (selection.anchorNode instanceof Text) {
@@ -104,9 +105,9 @@ function getSelectionAsNode(selection) {
 
 /**
  * Wraps the given DOM Element in a span with the given ID
- * @param {HTMLElement} el
- * @param {string} id
- * @returns {HTMLElement}
+ * @param {HTMLElement} el The element to wrap
+ * @param {string} id The id of the element
+ * @returns {HTMLElement} The wrapped element
  */
 function wrapInSpan(el, id) {
     const wrapper = document.createElement('span')
@@ -117,8 +118,8 @@ function wrapInSpan(el, id) {
 
 /**
  * Unwraps all the children of the given element
- * @param {HTMLElement} el
- * @returns {HTMLElement[]} - An array of the elements children
+ * @param {HTMLElement} el The element to unwrap
+ * @returns {HTMLElement[]} An array of the elements children
  */
 function unwrapChildren(el) {
     if (el && el.firstElementChild) {
@@ -130,8 +131,8 @@ function unwrapChildren(el) {
 /**
  * Gets the first element that either has the '__refined_bitbucket_highlight' class itself
  * or contains a children that has it
- * @param {HTMLElement[]} children
- * @return {HTMLElement}
+ * @param {HTMLElement[]} children Element list to search in
+ * @return {HTMLElement} Highlighted element
  */
 function getHighlightedNode(children) {
     for (let index = 0; index < children.length; index++) {
@@ -142,7 +143,7 @@ function getHighlightedNode(children) {
         const nodesWithHighlightClass = node.getElementsByClassName(
             '__refined_bitbucket_highlight'
         )
-        if (nodesWithHighlightClass.length) {
+        if (nodesWithHighlightClass.length !== 0) {
             return nodesWithHighlightClass[0]
         }
     }
@@ -150,7 +151,7 @@ function getHighlightedNode(children) {
 
 /**
  * Selects the HTMLElement element's contents
- * @param {HTMLElement} element
+ * @param {HTMLElement} element The element
  */
 function selectElementContents(element) {
     const range = document.createRange()

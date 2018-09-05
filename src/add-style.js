@@ -1,4 +1,4 @@
-// inject CSS <style> into <head> of page
+// Inject CSS <style> into <head> of page
 export default function addStyleToPage(cssRule) {
     const css = document.createElement('style')
     css.type = 'text/css'

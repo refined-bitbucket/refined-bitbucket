@@ -3,7 +3,7 @@ import { h } from 'dom-chef'
 
 import * as sourceHandler from './source-handler'
 
-import '../vendor/prism.js'
+import '../vendor/prism'
 import '../../test/setup-jsdom'
 
 test('Adds a language-xxxx class to the element that has a data-filename attr', t => {

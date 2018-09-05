@@ -203,7 +203,7 @@ test('should remove pluses and minuses when diff has been rerendered to include 
     t.is(udiff.outerHTML, expected.outerHTML)
 })
 
-test('should do nothing and not throw or error when diff fails to load', async t => {
+test('should do nothing and not throw or error when diff fails to load', t => {
     const udiff = (
         <section class="bb-udiff" data-filename="filename.js">
             <div class="diff-message-container">

@@ -27,7 +27,7 @@ export async function getFirstSuccessfulResponseText(
     requests /* : Promise[] */
 ) /* : Promise<string> | void */ {
     const responses = await Promise.all(
-        requests.map(p => p.catch(err => ({ ok: false, err })))
+        requests.map(p => p.catch(error => ({ ok: false, error })))
     )
     const firstSuccessfulResponse = responses.find(response => response.ok)
 

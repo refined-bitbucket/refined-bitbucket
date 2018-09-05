@@ -31,7 +31,7 @@ export async function init(node) {
     )
     summarySection.appendChild(button)
 
-    if (!failedDiffs.length) {
+    if (failedDiffs.length === 0) {
         button.disabled = true
         button.textContent = 'All diffs loaded successfully'
         return

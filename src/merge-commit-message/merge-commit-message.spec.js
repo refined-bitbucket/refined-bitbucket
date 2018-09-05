@@ -13,13 +13,14 @@ const mockFetchWithSuccessfulResponse = () => {
                 ok: true,
                 text: () =>
                     Promise.resolve(
-                        `{title} (#{id})\n\n` +
+                        '{title} (#{id})\n\n' +
                             '{sourceBranch} => {targetBranch}\n\n' +
                             '{description}\n\n' +
                             '{approvedByList}'
                     ),
             })
-        } else if (
+        }
+        if (
             url ===
             'https://api.bitbucket.org/2.0/repositories/user/repo/pullrequests/1'
         ) {

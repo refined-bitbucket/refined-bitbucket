@@ -16,7 +16,7 @@ test('should not try to choose default merge strategy on non-pull request pages'
     try {
         await defaultMergeStrategy.initAsync('squash')
         t.fail()
-    } catch (err) {
+    } catch (error) {
         t.pass()
     }
 })
@@ -30,7 +30,7 @@ test('should not choose default merge strategy twice', async t => {
     try {
         await defaultMergeStrategy.initAsync('squash')
         t.fail()
-    } catch (err) {
+    } catch (error) {
         t.pass()
     }
 
@@ -46,7 +46,7 @@ test('should not choose default merge strategy if configured strategy is invalid
     try {
         await defaultMergeStrategy.initAsync('invalid default merge strategy')
         t.fail()
-    } catch (err) {
+    } catch (error) {
         t.pass()
     }
 
@@ -91,8 +91,8 @@ test.serial('should choose default merge strategy', async t => {
         } else {
             t.fail()
         }
-    } catch (err) {
-        console.error(err)
+    } catch (error) {
+        console.error(error)
         t.fail()
     }
 

@@ -49,8 +49,8 @@ export function getFilepathFromElement(element) {
 }
 
 /**
- * @param {String} filepath
- * @return {String}
+ * @param {String} filepath Filepath
+ * @return {String} Extension
  */
 export function getExtension(filepath) {
     return `.${filepath.slice(((filepath.lastIndexOf('.') - 1) >>> 0) + 2)}`
@@ -58,7 +58,7 @@ export function getExtension(filepath) {
 
 /**
  * Extracts the name of the current file to be highlighted
- * @param {String} filepath
+ * @param {String} filepath Filepath
  * @return {String} name of the file
  */
 function getFilename(filepath) {

@@ -9,8 +9,8 @@ import '../../test/setup-jsdom'
 
 /**
  * Returns the `HTMLElement` representing the node that contains a pull request
- * @param {string[]} filenames
- * @return {HTMLDivElement}
+ * @param {string[]} filename The filenames of the changed files of the PR
+ * @return {HTMLDivElement} The pull request element
  */
 function getPullrequestNode(filename) {
     const escapedFilename = escape(filename)

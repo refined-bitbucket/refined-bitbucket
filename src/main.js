@@ -1,4 +1,5 @@
-/* eslint-disable import/imports-first */
+/* eslint-disable import/first */
+/* eslint-disable no-multi-assign */
 global.jQuery = global.$ = require('jquery')
 
 import OptionsSync from 'webext-options-sync'
@@ -116,7 +117,7 @@ function codeReviewFeatures(config) {
     diffIgnore.init(config.ignorePaths)
 
     const manipulateSummary = summaryNode => {
-        if (config.ignorePaths.length) {
+        if (config.ignorePaths.length !== 0) {
             diffIgnore.execute(summaryNode)
         }
 
@@ -165,7 +166,7 @@ function codeReviewFeatures(config) {
         '#compare-diff-content, #pr-tab-content, #commit, #diff'
     const diffSelector = 'section.bb-udiff'
 
-    // have to observe the DOM because some sections
+    // Have to observe the DOM because some sections
     // load asynchronously by user interactions
     document.body.observeSelector(
         [summarySelectors, diffSelector].join(', '),
@@ -178,9 +179,9 @@ function codeReviewFeatures(config) {
                 if (this.matches(diffSelector)) {
                     return manipulateDiff(this)
                 }
-            } catch (err) {
-                // something went wrong
-                console.error('refined-bitbucket(code-review): ', err)
+            } catch (error) {
+                // Something went wrong
+                console.error('refined-bitbucket(code-review): ', error)
             }
         }
     )

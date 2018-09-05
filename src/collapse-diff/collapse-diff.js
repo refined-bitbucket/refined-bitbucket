@@ -172,13 +172,13 @@ export function toggleDiff(section) {
 }
 
 export function insertCollapseDiffButton(section) {
-    // don't reinsert the button if already present.
+    // Don't reinsert the button if already present.
     // doesn't happen with vanilla Bitbucket, but can happen when interacting
     // with other extensions (like Bitbucket Diff Tree)
     if (
         section.getElementsByClassName(
             '__refined_bitbucket_collapse_diff_button'
-        ).length
+        ).length !== 0
     ) {
         return
     }
