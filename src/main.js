@@ -1,3 +1,5 @@
+// @flow
+
 /* eslint-disable import/first */
 /* eslint-disable no-multi-assign */
 global.jQuery = global.$ = require('jquery')
@@ -99,6 +101,7 @@ function pullrequestListRelatedFeatures(config) {
 
     const prTable = document.querySelector('.pull-requests-table')
 
+    // $FlowFixMe
     prTable.observeSelector('tr.pull-request-row', function() {
         if (config.ignoreWhitespace) {
             ignoreWhitespace(this)
@@ -168,6 +171,7 @@ function codeReviewFeatures(config) {
 
     // Have to observe the DOM because some sections
     // load asynchronously by user interactions
+    // $FlowFixMe
     document.body.observeSelector(
         [summarySelectors, diffSelector].join(', '),
         function() {
