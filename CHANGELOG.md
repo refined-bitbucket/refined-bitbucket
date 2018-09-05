@@ -1,3 +1,10 @@
+# Next Version
+
+### Development
+
+-   Almost all dependencies upgraded, including Webpack 4 and Babel 7!
+    [Pull request #246](https://github.com/refined-bitbucket/refined-bitbucket/pull/246).
+
 # 3.13.0 (2018-09-01)
 
 ### Features
