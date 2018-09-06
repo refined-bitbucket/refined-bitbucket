@@ -1,16 +1,19 @@
 // @flow
 import onetime from 'onetime'
 
-export const getApiToken: () => string = onetime(() => {
-    let meta = document.querySelector('meta[name="apitoken"]')
-    meta = ((meta: any): HTMLMetaElement)
-    const apiTokenContent = meta.content
-    const parsedApiTokenContent = JSON.parse(apiTokenContent)
-    return parsedApiTokenContent.token
-})
+export const getApiToken: () => string = onetime(
+    (): string => {
+        let meta = document.querySelector('meta[name="apitoken"]')
+        meta = ((meta: any): HTMLMetaElement)
+        const apiTokenContent = meta.content
+        const parsedApiTokenContent = JSON.parse(apiTokenContent)
+        return parsedApiTokenContent.token
+    }
+)
 
 export const getMainBranch: () => string = onetime(
-    () => JSON.parse((document.body || {}).dataset.currentRepo).mainbranch.name
+    (): string =>
+        JSON.parse((document.body || {}).dataset.currentRepo).mainbranch.name
 )
 
 export function getFirstFileContents(
