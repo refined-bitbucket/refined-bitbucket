@@ -1,3 +1,4 @@
+// @flow
 import { insertCollapseDiffButton, toggleDiff } from './collapse-diff'
 
 export { toggleDiff }
