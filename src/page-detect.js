@@ -1,3 +1,5 @@
+// @flow
+
 import onetime from 'onetime'
 
 // Some of this functions are borrowed from https://github.com/sindresorhus/refined-github/blob/master/source/libs/page-detect.js
@@ -23,7 +25,7 @@ export const getRepoURL = onetime(() =>
 // returns false if the path is not a repo
 const getRepoPath = () => {
     const match = /^[^/]+[/][^/]+[/]?(.*)$/.exec(getCleanPathname())
-    return match && match[1]
+    return (match && match[1]) || ''
 }
 
 export const isPullRequestList = () => getRepoPath() === 'pull-requests'

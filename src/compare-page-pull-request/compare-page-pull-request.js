@@ -1,4 +1,5 @@
-'use strict'
+// @flow
+// @jsx h
 
 import { h } from 'dom-chef'
 import 'selector-observer'
@@ -12,6 +13,7 @@ export default function comparePagePullRequest() {
      *  1) The Compare button has been hit for the first time
      *  2) The branches that are being compared have changed
      */
+    // $FlowIgnore
     document.body.observeSelector(COMPARE_DETAILS_SELECTOR, addUrlIfComparing)
 }
 
@@ -23,7 +25,11 @@ function addUrlIfComparing() {
     }
 }
 
-export function addPRLink(source, destination, comparePage = document.body) {
+export function addPRLink(
+    source: string,
+    destination: string,
+    comparePage: HTMLElement = (document.body: any)
+) {
     // Get compare branches area
     const detailSummarySection = comparePage.querySelector(
         'ul.detail-summary--section'
@@ -31,10 +37,12 @@ export function addPRLink(source, destination, comparePage = document.body) {
     const url = getPullRequestUrl(source, destination)
 
     // Remove Create PR link URL if it already exists
+    // $FlowIgnore
     const previousLink = detailSummarySection.querySelector(
         '.js-pr-create-item'
     )
     if (previousLink) {
+        // $FlowIgnore
         previousLink.parentNode.removeChild(previousLink)
     }
 
@@ -51,19 +59,25 @@ export function addPRLink(source, destination, comparePage = document.body) {
             </a>
         </li>
     )
+    // $FlowIgnore
     detailSummarySection.appendChild(link, detailSummarySection)
     return link
 }
 
-function getPullRequestUrl(source, destination) {
+function getPullRequestUrl(source: string, destination: string) {
     return `https://bitbucket.org/${getRepoURL()}/pull-requests/new?source=${encodeURIComponent(
         source
     )}&dest=${encodeURIComponent(destination)}`
 }
 
-function getSourceAndDestination() {
+function getSourceAndDestination(): {
+    source: string | void,
+    destination: string | void,
+} {
     // This element contains all metadata about any current compare
-    const branchCompare = document.querySelector(COMPARE_DETAILS_SELECTOR)
+    const branchCompare: HTMLElement = (document.querySelector(
+        COMPARE_DETAILS_SELECTOR
+    ): any)
 
     // Get source and destination branch from data attributes
     const {
