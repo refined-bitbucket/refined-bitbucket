@@ -1,12 +1,14 @@
+// @flow
+// @jsx h
 import { h } from 'dom-chef'
 import { ago } from 'time-ago'
 import { getRepoURL } from '../page-detect'
-import api from '../api'
+import api, { type PullRequest, type PullRequestActivity } from '../api'
 
 import './augment-pr-entry.css'
 import linkifyTargetBranch from '../linkify-target-branch/linkify-target-branch'
 
-const buildSourceBranchNode = branchName => {
+const buildSourceBranchNode = (branchName: string): HTMLElement => {
     const repoUrl = getRepoURL()
     return (
         <span class="__rbb-pull-request-source-branch">
@@ -27,13 +29,15 @@ const buildSourceBranchNode = branchName => {
     )
 }
 
-export const addSourceBranch = (prNode, prData) => {
+export const addSourceBranch = (prNode: HTMLElement, prData: PullRequest) => {
     const sourceBranchNode = buildSourceBranchNode(prData.source.branch.name)
     const arrow = prNode.querySelector('span.aui-iconfont-devtools-arrow-right')
-    arrow.parentElement.insertBefore(sourceBranchNode, arrow)
+    if (arrow && arrow.parentElement) {
+        arrow.parentElement.insertBefore(sourceBranchNode, arrow)
+    }
 }
 
-export const addCreationDate = (prNode, prData) => {
+export const addCreationDate = (prNode: HTMLElement, prData: PullRequest) => {
     const date = new Date(prData.created_on)
     const dateString = date.toDateString()
     const creationDateNode = (
@@ -45,11 +49,16 @@ export const addCreationDate = (prNode, prData) => {
     const prNumberAndTimestamp = prNode.querySelector(
         '.pr-number-and-timestamp'
     )
-    prNumberAndTimestamp.append(<br />)
-    prNumberAndTimestamp.appendChild(creationDateNode)
+    if (prNumberAndTimestamp) {
+        prNumberAndTimestamp.append(<br />)
+        prNumberAndTimestamp.appendChild(creationDateNode)
+    }
 }
 
-export const addUsernameWithLatestUpdate = (prNode, prActivity) => {
+export const addUsernameWithLatestUpdate = (
+    prNode: HTMLElement,
+    prActivity: PullRequestActivity
+) => {
     // Pull requests by default have the initial commit info as an activity
     const mostRecentAction = prActivity.values[0]
     let author = ''
@@ -69,15 +78,16 @@ export const addUsernameWithLatestUpdate = (prNode, prActivity) => {
         activityType = 'Commented'
     }
 
-    const prUpdateTime = prNode.querySelector('.pr-number-and-timestamp')
-        .firstElementChild
+    const prUpdateTime = ((prNode.querySelector(
+        '.pr-number-and-timestamp'
+    ): any): HTMLElement).firstElementChild
 
     if (author && prUpdateTime) {
         prUpdateTime.append(` by ${author} (${activityType})`)
     }
 }
 
-export default function augmentPrEntry(prNode) {
+export default function augmentPrEntry(prNode: HTMLElement) {
     linkifyTargetBranch(prNode)
 
     const prId = prNode.dataset.pullRequestId
