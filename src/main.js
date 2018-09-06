@@ -100,7 +100,7 @@ function pullrequestListRelatedFeatures(config) {
 
     const prTable = document.querySelector('.pull-requests-table')
 
-    // $FlowFixMe
+    // $FlowIgnore
     prTable.observeSelector('tr.pull-request-row', function() {
         if (config.ignoreWhitespace) {
             ignoreWhitespace(this)
@@ -170,7 +170,7 @@ function codeReviewFeatures(config) {
 
     // Have to observe the DOM because some sections
     // load asynchronously by user interactions
-    // $FlowFixMe
+    // $FlowIgnore
     document.body.observeSelector(
         [summarySelectors, diffSelector].join(', '),
         function() {
