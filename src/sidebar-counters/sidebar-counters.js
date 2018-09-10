@@ -11,7 +11,7 @@ export const addBadge = (
     resources: {| size: number |} | void
 ) => {
     const div: HTMLElement = (a.parentNode: any)
-    div.style.position = 'relative;'
+    div.style.position = 'relative'
 
     const size =
         resources == null || resources.size == null ? '?' : resources.size
