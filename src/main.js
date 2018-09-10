@@ -1,4 +1,5 @@
 // @flow
+
 /* eslint-disable import/first */
 /* eslint-disable no-multi-assign */
 global.jQuery = global.$ = require('jquery')
