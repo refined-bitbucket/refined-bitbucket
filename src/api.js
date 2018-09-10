@@ -42,6 +42,8 @@ export type PullRequestActivity = {|
     >,
 |}
 
+export type PullRequestCommits = {| size: number |}
+
 const repoUrl = getRepoURL()
 const token = getApiToken()
 
@@ -54,6 +56,12 @@ const api = {
         id: number | string
     ): Promise<PullRequestActivity | void> {
         const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/activity?pagelen=1`
+        return get(url)
+    },
+    getPullrequestCommits(
+        id: number | string
+    ): Promise<PullRequestCommits | void> {
+        const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/commits`
         return get(url)
     },
 }
