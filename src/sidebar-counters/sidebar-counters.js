@@ -1,44 +1,24 @@
+// @flow
+// @jsx h
 import { h } from 'dom-chef'
 import { getApiToken } from '../utils'
-import logger from '../logger'
-import { getRepoURL } from '../page-detect'
+import api from '../api'
 
 import './sidebar-counters.css'
 
-const baseApiUrl = 'https://api.bitbucket.org/2.0/repositories'
+export const addBadge = (
+    a: HTMLAnchorElement,
+    resources: {| size: number |} | void
+) => {
+    const div: HTMLElement = (a.parentNode: any)
+    div.style.position = 'relative;'
 
-export const getResourcesCount = async url => {
-    const token = getApiToken()
-    const response = await fetch(url, {
-        headers: new Headers({
-            Authorization: `Bearer ${token}`,
-        }),
-    })
-
-    const resources = await response.json()
-    if (resources.error) {
-        logger.error(
-            `refined-bitbucket(sidebar-counters): ${resources.error.message}`
-        )
-        return '?'
-    }
-
-    return resources.size
-}
-
-export const getPrCount = repoUrl =>
-    getResourcesCount(`${baseApiUrl}/${repoUrl}/pullrequests`)
-
-export const getBranchesCount = repoUrl =>
-    getResourcesCount(`${baseApiUrl}/${repoUrl}/refs/branches`)
-
-export const addBadge = (a, resourcesCount) => {
-    const div = a.parentNode
-    div.style = 'position: relative;'
+    const size =
+        resources == null || resources.size == null ? '?' : resources.size
 
     const badge = (
         <span class="__rbb-badge">
-            <span class="__rbb-badge-counter">{resourcesCount}</span>
+            <span class="__rbb-badge-counter">{size}</span>
         </span>
     )
     a.insertBefore(badge, a.firstChild)
@@ -55,21 +35,25 @@ export default async function addSideBarCounters() {
     }
 
     // Keep going
-    const repoUrl = getRepoURL()
-    const branchesCount = await getBranchesCount(repoUrl)
-    const pullrequestsCount = await getPrCount(repoUrl)
+    const [branches, pullrequests] = await Promise.all([
+        api.getBranches(),
+        api.getPullrequests(),
+    ])
 
-    const navigation = document.getElementById('adg3-navigation')
+    const navigation: HTMLElement = (document.getElementById(
+        'adg3-navigation'
+    ): any)
 
     let branchesBadge = { remove: () => {} }
     let prBadge = { remove: () => {} }
+    // $FlowIgnore
     navigation.observeSelector(navLinksSelector, function() {
         if (this.href.endsWith('branches/')) {
             branchesBadge.remove()
-            branchesBadge = addBadge(this, branchesCount)
+            branchesBadge = addBadge(this, branches)
         } else if (this.href.endsWith('pull-requests/')) {
             prBadge.remove()
-            prBadge = addBadge(this, pullrequestsCount)
+            prBadge = addBadge(this, pullrequests)
         }
     })
 }
