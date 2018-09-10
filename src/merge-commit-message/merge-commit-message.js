@@ -1,9 +1,10 @@
+// @flow
 import elementReady from 'element-ready'
 import { getRepoURL } from '../page-detect'
 import { getFirstFileContents, getMainBranch } from '../utils'
 import api from '../api'
 
-export default async function mergeCommitMessage(externalUrl) {
+export default async function mergeCommitMessage(externalUrl: string) {
     const mergeCommitTemplateUrls = getMergeCommitMessageTemplateUrls()
 
     const prNode = await elementReady('#pullrequest')
@@ -37,6 +38,10 @@ function getMergeCommitMessageTemplateUrls() {
 async function getDataToInject(prId) {
     const pullrequest = await api.getPullrequest(prId)
 
+    if (pullrequest == null) {
+        return
+    }
+
     return {
         id: pullrequest.id,
         title: pullrequest.title,
@@ -55,14 +60,18 @@ async function getDataToInject(prId) {
 }
 
 function insertMergeCommitTemplate(template, dataToInject) {
-    const fulfillPr = document.getElementById('fulfill-pullrequest')
+    const fulfillPr: HTMLElement = (document.getElementById(
+        'fulfill-pullrequest'
+    ): any)
 
     const onFulfillPullrequest = async () => {
         fulfillPr.removeEventListener('click', onFulfillPullrequest)
 
-        const textarea = await elementReady('#id_commit_message')
+        const textarea: HTMLTextAreaElement = (await elementReady(
+            '#id_commit_message'
+        ): any)
         textarea.value = template
-            .replace(/{id}/g, dataToInject.id)
+            .replace(/{id}/g, dataToInject.id + '')
             .replace(/{title}/g, dataToInject.title)
             .replace(/{description}/g, dataToInject.description)
             .replace(/{sourceBranch}/g, dataToInject.sourceBranch)

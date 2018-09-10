@@ -14,8 +14,19 @@ type BitbucketAPIErrorResponse = {|
 
 // https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pullrequests
 export type PullRequest = {|
+    id: number,
+    title: string,
+    description: string,
     created_on: Date,
     source: { branch: { name: string } },
+    destination: { branch: { name: string } },
+    participants: Array<{
+        approved: boolean,
+        user: {
+            username: string,
+            display_name: string,
+        },
+    }>,
 |}
 
 // https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pullrequests/activity
