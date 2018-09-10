@@ -76,7 +76,7 @@
     "dotenv": "^6.0.0",
     "eslint-config-xo-flow": "^0.1.0",
     "eslint-plugin-flowtype": "^2.50.0",
-    "firefox-extension-deploy": "^1.1.0",
+    "firefox-extension-deploy": "^1.1.1",
     "flow-bin": "^0.80.0",
     "flush-promises": "^1.0.0",
     "husky": "^0.14.3",
@@ -110,7 +110,7 @@
     "webext-options-sync": "^0.15.0"
   },
   "xo": {
-		"extends": "xo-flow",
+    "extends": "xo-flow",
     "prettier": true,
     "semicolon": false,
     "esnext": true,
@@ -142,11 +142,13 @@
           "avoidEscape": true
         }
       ],
-
       "flowtype/require-return-type": 0,
       "flowtype/require-parameter-type": 0,
       "flowtype/newline-after-flow-annotation": 0,
-      "flowtype/array-style-complex-type": ["error", "verbose"]
+      "flowtype/array-style-complex-type": [
+        "error",
+        "verbose"
+      ]
     }
   },
   "ava": {
