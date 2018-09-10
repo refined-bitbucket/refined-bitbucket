@@ -5,7 +5,7 @@ import { h } from 'dom-chef'
 
 import './collapse-diff.css'
 
-const insertTopButton = (section: HTMLElement): HTMLButtonElement => {
+const insertTopButton = (section: HTMLElement): HTMLDivElement => {
     const button = (
         <div class="aui-buttons">
             <button
@@ -70,7 +70,7 @@ const insertTopButton = (section: HTMLElement): HTMLButtonElement => {
     return button
 }
 
-const insertBottomButton = (section: HTMLElement): HTMLButtonElement => {
+const insertBottomButton = (section: HTMLElement): HTMLDivElement => {
     const style = {
         right: 30,
         position: 'absolute',
@@ -125,7 +125,7 @@ const insertBottomButton = (section: HTMLElement): HTMLButtonElement => {
             'div.refract-content-container'
         )
         if (contentContainer) {
-            bottomButton.style.marginTop = 0
+            bottomButton.style.marginTop = '0'
             const height = { height: 5 }
             const bottomLineContainer = (
                 <div class="skipped-container">

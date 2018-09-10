@@ -62,6 +62,6 @@ export async function init(node: Element) {
         await Promise.all(finished)
 
         button.textContent = 'All diffs loaded successfully'
-        button.setAttribute('data-complete', true)
+        button.setAttribute('data-complete', true.toString())
     })
 }
