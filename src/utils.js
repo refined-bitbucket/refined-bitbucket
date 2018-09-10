@@ -1,4 +1,5 @@
 // @flow
+
 import onetime from 'onetime'
 
 export const getApiToken: () => string = onetime(

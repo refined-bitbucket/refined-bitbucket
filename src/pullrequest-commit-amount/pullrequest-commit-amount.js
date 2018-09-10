@@ -1,5 +1,6 @@
 // @flow
 // @jsx h
+
 import { h } from 'dom-chef'
 import elementReady from 'element-ready'
 import api from '../api'
@@ -12,6 +13,7 @@ export default async function pullrequestCommitAmount() {
 
     const pullrequestCommits = await api.getPullrequestCommits(prId)
 
+    // eslint-disable-next-line eqeqeq, no-eq-null
     if (pullrequestCommits && pullrequestCommits.size != null) {
         const badge = (
             <span class="__rbb-commit-ammount">{pullrequestCommits.size}</span>

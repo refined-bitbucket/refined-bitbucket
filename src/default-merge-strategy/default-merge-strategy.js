@@ -1,14 +1,14 @@
 // @flow
 // @jsx h
 
-declare var $: any
-
 import elementReady from 'element-ready'
 import { h } from 'dom-chef'
 import logger from '../logger'
 import { isPullRequest } from '../page-detect'
 
 type Strategy = 'merge_commit' | 'squash' | 'fast_forward'
+
+declare var $: any
 
 export const SCRIPT_ID = 'refined_bitbucket_default_merge_script'
 

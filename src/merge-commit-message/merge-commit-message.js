@@ -1,4 +1,5 @@
 // @flow
+
 import elementReady from 'element-ready'
 import { getRepoURL } from '../page-detect'
 import { getFirstFileContents, getMainBranch } from '../utils'
@@ -38,6 +39,7 @@ function getMergeCommitMessageTemplateUrls() {
 async function getDataToInject(prId) {
     const pullrequest = await api.getPullrequest(prId)
 
+    // eslint-disable-next-line eqeqeq, no-eq-null
     if (pullrequest == null) {
         return
     }
@@ -71,7 +73,7 @@ function insertMergeCommitTemplate(template, dataToInject) {
             '#id_commit_message'
         ): any)
         textarea.value = template
-            .replace(/{id}/g, dataToInject.id + '')
+            .replace(/{id}/g, String(dataToInject.id))
             .replace(/{title}/g, dataToInject.title)
             .replace(/{description}/g, dataToInject.description)
             .replace(/{sourceBranch}/g, dataToInject.sourceBranch)

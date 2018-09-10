@@ -1,4 +1,5 @@
 // @flow
+
 /* eslint quote-props: off */
 
 // These are only the file extensions that don't directly match

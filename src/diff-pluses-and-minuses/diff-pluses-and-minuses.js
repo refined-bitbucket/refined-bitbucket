@@ -33,7 +33,7 @@ const secondPass = (diff: Element, strippedLinesContent: string[]) => {
 
 export default function removeDiffsPlusesAndMinuses(
     diff: Element,
-    afterWordDiff: (callback: () => void) => void = () => {}
+    afterWordDiff: (callback: () => void) => Promise<void> = async () => {}
 ) {
     if (!stylesImported) {
         stylesImported = true

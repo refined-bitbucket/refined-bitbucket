@@ -1,5 +1,6 @@
 // @flow
 // @jsx h
+
 import { h } from 'dom-chef'
 import { ago } from 'time-ago'
 import { getRepoURL } from '../page-detect'

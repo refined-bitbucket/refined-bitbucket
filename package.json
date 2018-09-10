@@ -11,9 +11,9 @@
     "ava": "cross-env BABEL_ENV=testing ava",
     "ava:w": "npm run ava -- --watch",
     "flow": "flow",
-    "flow:w": "chokidar \"src/**/*.js\" -c \"flow check\"",
+    "flow:w": "flow check & chokidar \"src/**/*.js\" -c \"flow check\"",
     "build": "webpack",
-    "test": "npm-run-all lint ava build",
+    "test": "npm-run-all lint ava flow build",
     "watch": "webpack --watch",
     "sync-version": "node scripts/sync-version",
     "package": "node scripts/package",
@@ -110,7 +110,7 @@
     "webext-options-sync": "^0.15.0"
   },
   "xo": {
-    "extends": "xo-flow",
+		"extends": "xo-flow",
     "prettier": true,
     "semicolon": false,
     "esnext": true,
@@ -141,7 +141,12 @@
         {
           "avoidEscape": true
         }
-      ]
+      ],
+
+      "flowtype/require-return-type": 0,
+      "flowtype/require-parameter-type": 0,
+      "flowtype/newline-after-flow-annotation": 0,
+      "flowtype/array-style-complex-type": ["error", "verbose"]
     }
   },
   "ava": {
@@ -159,7 +164,8 @@
   },
   "babel": {
     "presets": [
-      "@ava/stage-4"
+      "@ava/stage-4",
+      "@babel/preset-flow"
     ],
     "plugins": [
       [
@@ -178,9 +184,6 @@
     ],
     "env": {
       "testing": {
-        "presets": [
-          "@babel/preset-flow"
-        ],
         "plugins": [
           "@babel/plugin-transform-modules-commonjs"
         ]

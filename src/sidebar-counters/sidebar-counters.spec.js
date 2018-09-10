@@ -40,7 +40,7 @@ test('addBadge should work properly', t => {
     t.true(badge instanceof HTMLSpanElement)
 })
 
-test.only('addBadge should add ? character if response fails or has unexpected shape', t => {
+test('addBadge should add ? character if response fails or has unexpected shape', t => {
     // Arrange
     const template = (
         <div>

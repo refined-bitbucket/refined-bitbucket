@@ -1,4 +1,5 @@
 // @flow
+
 import logger from './logger'
 import { getRepoURL } from './page-detect'
 import { getApiToken } from './utils'
@@ -72,6 +73,7 @@ const api = {
     },
 }
 
+// eslint-disable-next-line flowtype/no-weak-types
 async function get<T: Object>(url: string): Promise<T | void> {
     const response = await fetch(url, {
         headers: new Headers({

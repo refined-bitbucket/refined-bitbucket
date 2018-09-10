@@ -1,6 +1,8 @@
 // @flow
 // @jsx h
+
 /* eslint-disable operator-linebreak */
+
 import { h } from 'dom-chef'
 
 const onChange = ({ target, target: { checked: showComments } }) => {

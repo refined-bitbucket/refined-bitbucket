@@ -1,7 +1,7 @@
 // @flow
 // @jsx h
+
 import { h } from 'dom-chef'
-import { getApiToken } from '../utils'
 import api from '../api'
 
 import './sidebar-counters.css'
@@ -14,6 +14,7 @@ export const addBadge = (
     div.style.position = 'relative'
 
     const size =
+        // eslint-disable-next-line eqeqeq, no-eq-null
         resources == null || resources.size == null ? '?' : resources.size
 
     const badge = (

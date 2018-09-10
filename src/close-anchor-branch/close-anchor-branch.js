@@ -1,4 +1,5 @@
 // @flow
+
 import elementReady from 'element-ready'
 
 export default async function closeAnchorBranch() {

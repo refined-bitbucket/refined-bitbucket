@@ -1,9 +1,9 @@
 // @flow
-/* globals Prism */
-
-declare var Prism: { languages: { [language: string]: Object } }
 
 import languagesExtensions from './language-ext'
+
+// eslint-disable-next-line flowtype/no-weak-types
+declare var Prism: { languages: { [language: string]: Object } }
 
 /**
  * Retrieves a class according to the element data-filename or data-path attribute.
