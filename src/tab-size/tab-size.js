@@ -1,6 +1,8 @@
+// @flow
+
 import addStyleToPage from '../add-style'
 
-export default function setTabSize(numSpaces) {
+export default function setTabSize(numSpaces: number | string) {
     const cssRule = createCssRule(numSpaces)
     addStyleToPage(cssRule)
 }

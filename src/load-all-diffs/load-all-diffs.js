@@ -1,9 +1,10 @@
-'use strict'
+// @flow
+// @jsx h
 
 import elementReady from 'element-ready'
 import { h } from 'dom-chef'
 
-export async function init(node) {
+export async function init(node: Element) {
     // Wait for all sections to be loaded into the view
     await elementReady('#commit-files-summary > li', {
         target: node,
@@ -11,7 +12,7 @@ export async function init(node) {
     const filesChanged = node.querySelectorAll('#commit-files-summary > li')
 
     const promises = [...filesChanged].map(li => {
-        const dataIdentifier = li.getAttribute('data-file-identifier')
+        const dataIdentifier = li.getAttribute('data-file-identifier') || ''
         return elementReady(`section[data-identifier="${dataIdentifier}"]`, {
             target: node,
         })
@@ -29,6 +30,7 @@ export async function init(node) {
     const summarySection = node.querySelector(
         '#pullrequest-diff > section.main, section#commit-summary, ul#commit-files-summary'
     )
+    // $FlowIgnore
     summarySection.appendChild(button)
 
     if (failedDiffs.length === 0) {
@@ -45,9 +47,11 @@ export async function init(node) {
         const finished = [...node.querySelectorAll('a.try-again')].map(
             tryAgain => {
                 tryAgain.click()
-                const dataIdentifier = tryAgain
-                    .closest('section')
-                    .getAttribute('data-identifier')
+                const dataIdentifier =
+                    // $FlowIgnore
+                    tryAgain
+                        .closest('section')
+                        .getAttribute('data-identifier') || ''
                 return elementReady(
                     `section[data-identifier="${dataIdentifier}"] > div.diff-container`,
                     { target: node }
@@ -58,6 +62,6 @@ export async function init(node) {
         await Promise.all(finished)
 
         button.textContent = 'All diffs loaded successfully'
-        button.setAttribute('data-complete', true)
+        button.setAttribute('data-complete', true.toString())
     })
 }

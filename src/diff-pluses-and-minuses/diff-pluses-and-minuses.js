@@ -1,3 +1,5 @@
+// @flow
+
 let stylesImported = false
 
 const diffLineSelector = [
@@ -5,7 +7,7 @@ const diffLineSelector = [
     'div.udiff-line.deletion > pre.source',
 ].join(', ')
 
-const stripCharsFromLine = line => {
+const stripCharsFromLine = (line: Element) => {
     // Insert only a space to preserve
     // line breaks when the line is empty
     if (line.textContent === '+' || line.textContent === '-') {
@@ -15,7 +17,7 @@ const stripCharsFromLine = line => {
     }
 }
 
-const firstPass = diff => {
+const firstPass = (diff: Element): string[] => {
     const diffLines = [...diff.querySelectorAll(diffLineSelector)]
 
     diffLines.forEach(line => stripCharsFromLine(line))
@@ -23,15 +25,15 @@ const firstPass = diff => {
     return diffLines.map(({ textContent }) => textContent)
 }
 
-const secondPass = (diff, strippedLinesContent) => {
+const secondPass = (diff: Element, strippedLinesContent: string[]) => {
     ;[...diff.querySelectorAll(diffLineSelector)]
         .filter(({ textContent }, i) => textContent !== strippedLinesContent[i])
         .forEach(line => stripCharsFromLine(line))
 }
 
 export default function removeDiffsPlusesAndMinuses(
-    diff,
-    afterWordDiff = () => {}
+    diff: Element,
+    afterWordDiff: (callback: () => void) => Promise<void> = async () => {}
 ) {
     if (!stylesImported) {
         stylesImported = true

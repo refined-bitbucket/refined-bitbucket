@@ -1,10 +1,11 @@
-'use strict'
+// @flow
+// @jsx h
 
 import { h } from 'dom-chef'
 
 import './collapse-diff.css'
 
-const insertTopButton = section => {
+const insertTopButton = (section: HTMLElement): HTMLDivElement => {
     const button = (
         <div class="aui-buttons">
             <button
@@ -49,8 +50,10 @@ const insertTopButton = section => {
     if (diffLoaded) {
         // NOTE: jsdom (used for unit-testing) doesn't support either `after`, `append` nor `insertAdjacentElement`
         // Insert it after the "More" button
+        // $FlowIgnore
         diffActions.insertBefore(
             button,
+            // $FlowIgnore
             diffActions.querySelector('.aui-dropdown2-trigger-more')
                 .parentElement.nextElementSibling
         )
@@ -58,6 +61,7 @@ const insertTopButton = section => {
         diffActions.appendChild(button)
     } else {
         // This happens in when creating new PRs in `/pull-requests/new?source=<branch-name>`
+        // $FlowIgnore
         section
             .querySelector('.heading')
             .appendChild(<div class="secondary diff-actions">{button}</div>)
@@ -66,7 +70,7 @@ const insertTopButton = section => {
     return button
 }
 
-const insertBottomButton = section => {
+const insertBottomButton = (section: HTMLElement): HTMLDivElement => {
     const style = {
         right: 30,
         position: 'absolute',
@@ -121,7 +125,7 @@ const insertBottomButton = section => {
             'div.refract-content-container'
         )
         if (contentContainer) {
-            bottomButton.style.marginTop = 0
+            bottomButton.style.marginTop = '0'
             const height = { height: 5 }
             const bottomLineContainer = (
                 <div class="skipped-container">
@@ -141,7 +145,7 @@ const insertBottomButton = section => {
     return bottomButton
 }
 
-export function toggleDiff(section) {
+export function toggleDiff(section: HTMLElement): void {
     // Hide/show the diff
     const diffContentContainer = section.querySelector(
         'div.diff-content-container'
@@ -159,6 +163,7 @@ export function toggleDiff(section) {
     }
 
     // Add/remove a bottom border to the diff heading
+    // $FlowIgnore
     section
         .querySelector('div.heading')
         .classList.toggle('__refined_bitbucket_bottom_border')
@@ -171,7 +176,7 @@ export function toggleDiff(section) {
     ].forEach(svg => svg.classList.toggle('__refined_bitbucket_hide'))
 }
 
-export function insertCollapseDiffButton(section) {
+export function insertCollapseDiffButton(section: HTMLElement) {
     // Don't reinsert the button if already present.
     // doesn't happen with vanilla Bitbucket, but can happen when interacting
     // with other extensions (like Bitbucket Diff Tree)

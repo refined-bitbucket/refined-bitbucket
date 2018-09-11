@@ -1,7 +1,12 @@
+// @flow
+// @jsx h
+
 import { h } from 'dom-chef'
 
 function onClick() {
-    const diff = this.closest('.bb-udiff')
+    const diff: HTMLElement = ((this: HTMLButtonElement).closest(
+        '.bb-udiff'
+    ): any)
     const { filename } = diff.dataset
     copy(filename)
 }
@@ -9,7 +14,7 @@ function onClick() {
 function copy(text) {
     const node = document.createElement('span')
     node.textContent = text
-    document.body.appendChild(node)
+    ;((document.body: any): HTMLBodyElement).appendChild(node)
 
     const range = document.createRange()
     range.selectNodeContents(node)
@@ -23,7 +28,7 @@ function copy(text) {
     node.remove()
 }
 
-export default function insertCopyFilename(diff) {
+export default function insertCopyFilename(diff: HTMLElement) {
     const button = (
         <button
             type="button"
@@ -39,7 +44,7 @@ export default function insertCopyFilename(diff) {
         </button>
     )
 
-    const header = diff.querySelector('.filename')
-    const lozenge = header.querySelector(':last-child')
+    const header: HTMLElement = (diff.querySelector('.filename'): any)
+    const lozenge: HTMLElement = (header.querySelector(':last-child'): any)
     header.insertBefore(button, lozenge)
 }

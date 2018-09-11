@@ -1,14 +1,21 @@
+// @flow
+// @jsx h
+
 import elementReady from 'element-ready'
 import { h } from 'dom-chef'
 import logger from '../logger'
 import { isPullRequest } from '../page-detect'
+
+type Strategy = 'merge_commit' | 'squash' | 'fast_forward'
+
+declare var $: any
 
 export const SCRIPT_ID = 'refined_bitbucket_default_merge_script'
 
 export const scriptAlreadyExists = () =>
     Boolean(document.getElementById(SCRIPT_ID))
 
-export async function init(defaultMergeStrategy) {
+export async function init(defaultMergeStrategy: Strategy) {
     try {
         await initAsync(defaultMergeStrategy)
     } catch (error) {
@@ -21,8 +28,8 @@ export async function init(defaultMergeStrategy) {
  * @param {'merge_commit' | 'squash' | 'fast_forward'} defaultMergeStrategy Strategy
  * @returns {Promise<void>} Resolves when the acton is completed
  */
-export function initAsync(defaultMergeStrategy) {
-    return new Promise((resolve, reject) => {
+export function initAsync(defaultMergeStrategy: Strategy) {
+    return new Promise<void>((resolve, reject) => {
         if (!isPullRequest() || scriptAlreadyExists()) {
             reject(
                 new Error(
@@ -42,7 +49,9 @@ export function initAsync(defaultMergeStrategy) {
             reject(msg)
         }
 
-        const fulfillPr = document.getElementById('fulfill-pullrequest')
+        const fulfillPr: HTMLElement = (document.getElementById(
+            'fulfill-pullrequest'
+        ): any)
 
         const onFulfillPullrequest = async () => {
             // I want this callback to run only once,
@@ -58,17 +67,18 @@ export function initAsync(defaultMergeStrategy) {
 
             // NOTE: This code will run in the page's scope, not in the extension.
             const code = () => {
-                $('#id_merge_strategy').select2('val', 'defaultMergeStrategy')
+                $('#id_merge_strategy').select2('val', '{defaultMergeStrategy}')
                 const $commitMsg = $('#id_commit_message')
                 const selectedOption = document.querySelector(
-                    "option[value='defaultMergeStrategy']"
+                    "option[value='{defaultMergeStrategy}']"
                 )
+                // $FlowIgnore
                 $commitMsg.text(selectedOption.dataset.defaultCommitMsg)
             }
 
             const codeStr = code
                 .toString()
-                .replace(/defaultMergeStrategy/g, defaultMergeStrategy)
+                .replace(/{defaultMergeStrategy}/g, defaultMergeStrategy)
             const script = (
                 <script id={SCRIPT_ID}>
                     {' '}
@@ -76,11 +86,11 @@ export function initAsync(defaultMergeStrategy) {
                     )();{' '}
                 </script>
             )
+            // $FlowIgnore
             document.body.appendChild(script)
 
             resolve()
         }
-
         fulfillPr.addEventListener('click', onFulfillPullrequest)
     })
 }

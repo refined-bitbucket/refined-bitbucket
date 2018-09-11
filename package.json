@@ -10,8 +10,10 @@
     "lint": "npm run prettier && npm run xo",
     "ava": "cross-env BABEL_ENV=testing ava",
     "ava:w": "npm run ava -- --watch",
+    "flow": "flow",
+    "flow:w": "flow check & chokidar \"src/**/*.js\" -c \"flow check\"",
     "build": "webpack",
-    "test": "npm-run-all lint ava build",
+    "test": "npm-run-all lint ava flow build",
     "watch": "webpack --watch",
     "sync-version": "node scripts/sync-version",
     "package": "node scripts/package",
@@ -59,17 +61,23 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-transform-modules-commonjs": "^7.0.0",
     "@babel/plugin-transform-react-jsx": "^7.0.0",
+    "@babel/preset-flow": "^7.0.0",
     "@babel/register": "^7.0.0",
     "archiver": "^3.0.0",
     "ava": "^1.0.0-beta.8",
+    "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.0",
+    "chokidar-cli": "^1.2.1",
     "chrome-extension-deploy": "^3.0.0",
     "copy-webpack-plugin": "^4.3.1",
     "cross-env": "^5.1.0",
     "css-loader": "^1.0.0",
     "del": "^3.0.0",
     "dotenv": "^6.0.0",
-    "firefox-extension-deploy": "^1.1.0",
+    "eslint-config-xo-flow": "^0.1.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "firefox-extension-deploy": "^1.1.1",
+    "flow-bin": "^0.80.0",
     "flush-promises": "^1.0.0",
     "husky": "^0.14.3",
     "jsdom": "^12.0.0",
@@ -91,7 +99,7 @@
   "dependencies": {
     "dom-chef": "^3.1.0",
     "element-ready": "^3.0.0",
-    "ignore": "^3.3.10",
+    "ignore": "^4.0.6",
     "jquery": "^3.2.1",
     "jquery-highlight": "^3.4.0",
     "marked": "^0.5.0",
@@ -102,6 +110,7 @@
     "webext-options-sync": "^0.15.0"
   },
   "xo": {
+    "extends": "xo-flow",
     "prettier": true,
     "semicolon": false,
     "esnext": true,
@@ -110,6 +119,11 @@
       "browser",
       "jquery"
     ],
+    "settings": {
+      "flowtype": {
+        "onlyFilesWithFlowAnnotation": true
+      }
+    },
     "rules": {
       "comma-dangle": 0,
       "import/no-unassigned-import": 0,
@@ -127,6 +141,13 @@
         {
           "avoidEscape": true
         }
+      ],
+      "flowtype/require-return-type": 0,
+      "flowtype/require-parameter-type": 0,
+      "flowtype/newline-after-flow-annotation": 0,
+      "flowtype/array-style-complex-type": [
+        "error",
+        "verbose"
       ]
     }
   },
@@ -145,7 +166,8 @@
   },
   "babel": {
     "presets": [
-      "@ava/stage-4"
+      "@ava/stage-4",
+      "@babel/preset-flow"
     ],
     "plugins": [
       [

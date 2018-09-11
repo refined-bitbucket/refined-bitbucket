@@ -1,3 +1,5 @@
+// @flow
+
 /**
  * Keep watching in case the diff is altered to include
  * word diffs, which rerenders the diffs with <ins> and <del> tags
@@ -7,7 +9,7 @@
  * @param {number} timeout Timeout, default to 20000 (20 seconds)
  * @returns {Function} The returning promise resolves when word diff has been applied
  */
-const observeForWordDiffs = (diff, timeout = 20000) => {
+const observeForWordDiffs = (diff: HTMLElement, timeout: number = 20000) => {
     const p = new Promise(resolve => {
         const diffContentContainer = diff.querySelector(
             'div.diff-container > div.diff-content-container.refract-container'
@@ -34,7 +36,7 @@ const observeForWordDiffs = (diff, timeout = 20000) => {
 
         const observer = new MutationObserver(function(mutations) {
             const isWordDiff = mutations.every(m =>
-                m.target.classList.contains('word-diff')
+                ((m.target: any): HTMLElement).classList.contains('word-diff')
             )
 
             if (isWordDiff) {
@@ -56,7 +58,7 @@ const observeForWordDiffs = (diff, timeout = 20000) => {
         }, timeout)
     })
 
-    return async callback => {
+    return async (callback: () => void) => {
         const wordDiffedDiff = await p
 
         if (wordDiffedDiff) {
