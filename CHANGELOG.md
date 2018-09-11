@@ -4,6 +4,8 @@
 
 -   Almost all dependencies upgraded, including Webpack 4 and Babel 7!
     [Pull request #246](https://github.com/refined-bitbucket/refined-bitbucket/pull/246).
+-   Introduced [Flow](http://flow.org/) for static type checking,
+    [pull request #247](https://github.com/refined-bitbucket/refined-bitbucket/pull/247).
 
 # 3.13.0 (2018-09-01)
 

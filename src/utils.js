@@ -4,8 +4,9 @@ import onetime from 'onetime'
 
 export const getApiToken: () => string = onetime(
     (): string => {
-        let meta = document.querySelector('meta[name="apitoken"]')
-        meta = ((meta: any): HTMLMetaElement)
+        const meta: HTMLMetaElement = (document.querySelector(
+            'meta[name="apitoken"]'
+        ): any)
         const apiTokenContent = meta.content
         const parsedApiTokenContent = JSON.parse(apiTokenContent)
         return parsedApiTokenContent.token
