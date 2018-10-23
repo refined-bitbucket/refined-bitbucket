@@ -5,6 +5,7 @@
 global.jQuery = global.$ = require('jquery')
 
 import OptionsSync from 'webext-options-sync'
+import SelectorObserver from 'selector-observer'
 
 import augmentPrEntry from './augment-pr-entry'
 import autocollapse from './autocollapse'
@@ -40,8 +41,6 @@ import {
 } from './page-detect'
 
 import addStyleToPage from './add-style'
-
-import 'selector-observer'
 
 new OptionsSync().getAll().then(options => {
     const config = {
@@ -101,8 +100,8 @@ function pullrequestListRelatedFeatures(config) {
 
     const prTable = document.querySelector('.pull-requests-table')
 
-    // $FlowIgnore
-    prTable.observeSelector('tr.pull-request-row', function() {
+    // eslint-disable-next-line no-new
+    new SelectorObserver(prTable, 'tr.pull-request-row', function() {
         if (config.ignoreWhitespace) {
             ignoreWhitespace(this)
         }
@@ -171,8 +170,9 @@ function codeReviewFeatures(config) {
 
     // Have to observe the DOM because some sections
     // load asynchronously by user interactions
-    // $FlowIgnore
-    document.body.observeSelector(
+    // eslint-disable-next-line no-new
+    new SelectorObserver(
+        document.body,
         [summarySelectors, diffSelector].join(', '),
         function() {
             try {

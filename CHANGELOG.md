@@ -1,11 +1,12 @@
 # Next Version
 
-### Development
+### Bug Fixes
 
--   Almost all dependencies upgraded, including Webpack 4 and Babel 7!
-    [Pull request #246](https://github.com/refined-bitbucket/refined-bitbucket/pull/246).
--   Introduced [Flow](http://flow.org/) for static type checking,
-    [pull request #247](https://github.com/refined-bitbucket/refined-bitbucket/pull/247).
+-   Fix extension in Firefox v63. Apparently a change in that version disallows
+    extending the prototype of the `Element` type, so some code that was relying
+    in that possibility had to be changed,
+    closes [issue #251](https://github.com/refined-bitbucket/refined-bitbucket/issues/251),
+    [pull request #257](https://github.com/refined-bitbucket/refined-bitbucket/pull/257).
 
 # 3.13.0 (2018-09-01)
 
