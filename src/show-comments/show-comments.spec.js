@@ -2,10 +2,9 @@ import { h } from 'dom-chef'
 import test from 'ava'
 import delay from 'yoctodelay'
 
-import insertShowComments from '.'
-
 import '../../test/setup-jsdom'
-import 'selector-observer'
+
+import insertShowComments from '.'
 
 test('"Comments" checkbox is displayed if diff has comments', t => {
     const diff = (

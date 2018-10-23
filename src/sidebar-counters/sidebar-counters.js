@@ -2,6 +2,7 @@
 // @jsx h
 
 import { h } from 'dom-chef'
+import SelectorObserver from 'selector-observer'
 import api from '../api'
 
 import './sidebar-counters.css'
@@ -47,8 +48,8 @@ export default async function addSideBarCounters() {
 
     let branchesBadge = { remove: () => {} }
     let prBadge = { remove: () => {} }
-    // $FlowIgnore
-    navigation.observeSelector(navLinksSelector, function() {
+    // eslint-disable-next-line no-new
+    new SelectorObserver(navigation, navLinksSelector, function() {
         if (this.href.endsWith('branches/')) {
             branchesBadge.remove()
             branchesBadge = addBadge(this, branches)

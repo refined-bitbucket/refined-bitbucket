@@ -2,7 +2,7 @@
 // @jsx h
 
 import { h } from 'dom-chef'
-import 'selector-observer'
+import SelectorObserver from 'selector-observer'
 import { getRepoURL } from '../page-detect'
 
 const COMPARE_DETAILS_SELECTOR = '#branch-compare.content-container'
@@ -13,8 +13,12 @@ export default function comparePagePullRequest() {
      *  1) The Compare button has been hit for the first time
      *  2) The branches that are being compared have changed
      */
-    // $FlowIgnore
-    document.body.observeSelector(COMPARE_DETAILS_SELECTOR, addUrlIfComparing)
+    // eslint-disable-next-line no-new
+    new SelectorObserver(
+        document.body,
+        COMPARE_DETAILS_SELECTOR,
+        addUrlIfComparing
+    )
 }
 
 function addUrlIfComparing() {

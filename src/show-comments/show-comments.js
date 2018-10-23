@@ -4,6 +4,7 @@
 /* eslint-disable operator-linebreak */
 
 import { h } from 'dom-chef'
+import SelectorObserver from 'selector-observer'
 
 const onChange = ({ target, target: { checked: showComments } }) => {
     const diff = target.closest('section.bb-udiff')
@@ -22,8 +23,9 @@ export default function insertShowComments(section: HTMLElement) {
         return
     }
 
-    // $FlowIgnore
-    section.observeSelector(
+    // eslint-disable-next-line no-new
+    new SelectorObserver(
+        section,
         'li.comment',
         () => onAddComment(section),
         () => onDeleteComment(section)
