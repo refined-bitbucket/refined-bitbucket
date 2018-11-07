@@ -54,6 +54,7 @@ module.exports = {
     '.ps1': 'language-powershell',
     '.py': 'language-python',
     '.rb': 'language-ruby',
+    '.re': 'language-reason',
     '.rlib': 'language-rust',
     '.rs': 'language-rust',
     '.sbt': 'language-scala',
