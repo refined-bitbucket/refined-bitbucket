@@ -1,3 +1,19 @@
+# 3.14.0 (2018-11-10)
+
+### Language Support
+
+-   Reason language support for `.re` files,
+    [pull request #258](https://github.com/refined-bitbucket/refined-bitbucket/pull/258).
+-   Salesforce related files, see pull request for more details,
+    [pull request #259](https://github.com/refined-bitbucket/refined-bitbucket/pull/259).
+
+### Development
+
+-   Almost all dependencies upgraded, including Webpack 4 and Babel 7!
+    [Pull request #246](https://github.com/refined-bitbucket/refined-bitbucket/pull/246).
+-   Introduced [Flow](http://flow.org/) for static type checking,
+    [pull request #247](https://github.com/refined-bitbucket/refined-bitbucket/pull/247).
+
 # 3.13.1 (2018-10-23)
 
 ### Bug Fixes
