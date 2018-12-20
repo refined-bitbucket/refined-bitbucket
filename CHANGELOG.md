@@ -1,3 +1,12 @@
+# Next Version
+
+### Feature
+
+-   Make the Autolinker feature for links in diffs optional. Check the Options page of the extension.
+    If you are having issues like the ones described in [#254](https://github.com/refined-bitbucket/refined-bitbucket/issues/254),
+    feel free to disable it while a fix is delivered,
+    [pull request #265](https://github.com/refined-bitbucket/refined-bitbucket/pull/265).
+
 # 3.14.0 (2018-11-10)
 
 ### Language Support

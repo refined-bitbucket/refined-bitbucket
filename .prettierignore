@@ -3,3 +3,4 @@ package.json
 extension
 manifest.json
 prism.js
+prism-autolinker.min.js

@@ -53,6 +53,10 @@ new OptionsSync().getAll().then(options => {
 })
 
 function init(config) {
+    if (config.autolinker) {
+        require('./vendor/prism-autolinker.min')
+    }
+
     if (isBranch()) {
         codeReviewFeatures(config)
     } else if (isPullRequest()) {
