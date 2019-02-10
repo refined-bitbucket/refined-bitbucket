@@ -5,7 +5,11 @@
 -   **Code Review**: Code review features (syntax highlighting, occurrences highlighting, diff collapsing, etc.) now work in
     the "Branch compare" page,
     closes [issue #262](https://github.com/refined-bitbucket/refined-bitbucket/issues/262),
-    [pull request #xxx](https://github.com/refined-bitbucket/refined-bitbucket/pull/xxx).
+    [pull request #273](https://github.com/refined-bitbucket/refined-bitbucket/pull/273).
+
+-   **Collapse description**: Add button to toggle (collapse/expand) pull request description,
+    closes [issue #267](https://github.com/refined-bitbucket/refined-bitbucket/issues/267),
+    [pull request #274](https://github.com/refined-bitbucket/refined-bitbucket/pull/274).
 
 ### Language Support
 

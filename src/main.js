@@ -28,6 +28,7 @@ import syntaxHighlight from './syntax-highlight'
 import comparePagePullRequest from './compare-page-pull-request'
 import setTabSize from './tab-size'
 import mergeCommitMessage from './merge-commit-message'
+import collapsePullRequestDescription from './collapse-pull-request-description'
 
 import observeForWordDiffs from './observe-for-word-diffs'
 
@@ -209,5 +210,9 @@ function pullrequestRelatedFeatures(config) {
 
     if (config.mergeCommitMessageEnabled) {
         mergeCommitMessage(config.mergeCommitMessageUrl)
+    }
+
+    if (config.collapsePullRequestDescription) {
+        collapsePullRequestDescription()
     }
 }

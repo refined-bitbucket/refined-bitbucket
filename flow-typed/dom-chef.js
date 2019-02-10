@@ -10,4 +10,5 @@ declare module 'dom-chef' {
     declare export function h(type: 'script'): HTMLScriptElement
     declare export function h(type: 'span'): HTMLSpanElement
     declare export function h(type: 'svg'): any // SVGElement
+    declare export function h(type: 'dd'): HTMLElement
 }
