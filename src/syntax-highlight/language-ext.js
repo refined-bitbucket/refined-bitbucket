@@ -43,6 +43,7 @@ module.exports = {
     '.h': 'language-c',
     '.hbs': 'language-handlebars',
     '.hpp': 'language-cpp',
+    '.hs': 'language-haskell',
     '.jl': 'language-julia',
     '.js': 'language-jsx',
     '.jsp': 'language-java',
