@@ -1,5 +1,12 @@
 # Next Version
 
+### Feature
+
+-   **Code Review**: Code review features (syntax highlighting, occurrences highlighting, diff collapsing, etc.) now work in
+    the "Branch compare" page,
+    closes [issue #262](https://github.com/refined-bitbucket/refined-bitbucket/issues/262),
+    [pull request #xxx](https://github.com/refined-bitbucket/refined-bitbucket/pull/xxx).
+
 ### Language Support
 
 -   Haskell language support for `.hs` files,
@@ -87,7 +94,7 @@
     [pull request #227](https://github.com/refined-bitbucket/refined-bitbucket/pull/227).
 -   **Default-merge-strategy**: Add "Fast forward" as a possible default merge strategy for pull requests,
     [pull request #222](https://github.com/refined-bitbucket/refined-bitbucket/pull/222).
--   **Code Rewview**: Code review features (syntax highlighting, occurrences highlighting, diff collapsing, etc.) now work in
+-   **Code Review**: Code review features (syntax highlighting, occurrences highlighting, diff collapsing, etc.) now work in
     the "Create pull request" page,
     closes [issue #220](https://github.com/refined-bitbucket/refined-bitbucket/issues/220),
     [pull request #225](https://github.com/refined-bitbucket/refined-bitbucket/pull/225).

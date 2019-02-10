@@ -80,6 +80,7 @@ function init(config) {
         if (config.comparePagePullRequest) {
             comparePagePullRequest()
         }
+        codeReviewFeatures(config)
     }
 
     if (config.addSidebarCounters) {
