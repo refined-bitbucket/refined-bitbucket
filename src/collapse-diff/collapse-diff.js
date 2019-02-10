@@ -81,7 +81,7 @@ const insertBottomButton = (section: HTMLElement): HTMLDivElement => {
         <div class="aui-buttons __rb_ellipsis" style={style}>
             <button
                 type="button"
-                class="aui-button aui-button __refined_bitbucket_collapse_diff_button"
+                class="aui-button __refined_bitbucket_collapse_diff_button"
                 aria-label="Toggle diff text"
                 title="Toggle diff text"
                 style={{ height: 25 }}

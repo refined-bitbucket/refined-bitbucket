@@ -1,0 +1,22 @@
+.__rbb-collapse-bar {
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #f4f5f7;
+    border-radius: 6px;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.__rbb-collapse-bar:hover {
+    background-color: #f4f5f7;
+}
+
+.__rbb-collapse-bar__collapsed {
+    border: 1px solid #dfe1e6;
+}
+
+.__refined_bitbucket_hide {
+    display: none;
+}

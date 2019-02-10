@@ -20,6 +20,7 @@ new OptionsSync().define({
         ignoreWhitespace: true,
         copyFilename: true,
         keymap: true,
+        collapsePullRequestDescription: true,
         collapseDiff: true,
         loadAllDiffs: true,
         closeAnchorBranch: true,
