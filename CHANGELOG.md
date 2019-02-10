@@ -1,3 +1,11 @@
+# Next Version
+
+### Language Support
+
+-   Haskell language support for `.hs` files,
+    [pull request #269](https://github.com/refined-bitbucket/refined-bitbucket/pull/269).
+    Thanks [@DanBurton](https://github.com/DanBurton)!
+
 # 3.14.1 (2018-12-20)
 
 ### Feature
