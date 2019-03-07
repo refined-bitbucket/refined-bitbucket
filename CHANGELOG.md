@@ -1,10 +1,10 @@
-# Next Version
+# 3.15.1 (2019-03-07)
 
 ### Bug Fixes
 
 -   **Collapse description**: While having this feature enabled, the entire extension would not work in the new PR UI due to an unhandled exception,
     closes [issue #275](https://github.com/refined-bitbucket/refined-bitbucket/issues/275),
-    [pull request #276](https://github.com/refined-bitbucket/refined-bitbucket/pull/276).
+    [pull request #277](https://github.com/refined-bitbucket/refined-bitbucket/pull/277).
 
 # 3.15.0 (2019-02-10)
 
