@@ -6,9 +6,17 @@ import { h } from 'dom-chef'
 import './collapse-pull-request-description.css'
 
 export default function collapsePullRequestDescription() {
-    const description: HTMLDivElement = (document.querySelector(
+    const description: ?HTMLDivElement = (document.querySelector(
         '.description'
     ): any)
+    // eslint-disable-next-line no-eq-null, eqeqeq
+    if (description == null) {
+        console.warn(
+            "refined-bitbucket(collapsePullRequestDescription): Can't find description node. This feature hasn't being adapted for the new PR UI."
+        )
+        return
+    }
+
     const descriptionContent: HTMLElement = (description.querySelector(
         'dd.wiki-content'
     ): any)
