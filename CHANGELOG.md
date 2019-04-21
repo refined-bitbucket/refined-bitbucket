@@ -1,3 +1,11 @@
+# 3.16.0 (2019-04-21)
+
+### Language support
+
+-   Ruby language support for `.erb` and Puppet language support for `.pp` files,
+    [pull request #276](https://github.com/refined-bitbucket/refined-bitbucket/pull/276).
+    Thanks [@ninjaslikecheese](https://github.com/ninjaslikecheese)!
+
 # 3.15.1 (2019-03-07)
 
 ### Bug Fixes
