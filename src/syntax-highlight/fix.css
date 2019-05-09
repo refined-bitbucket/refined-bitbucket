@@ -7,7 +7,7 @@ pre > code {
     padding: initial;
 }
 .refract-container .deletion pre.source {
-    background-color: #fff1f2 !important;
+    background-color: #fff1f2;
 }
 .refract-container .addition pre.source {
     background-color: #e8ffe8;
