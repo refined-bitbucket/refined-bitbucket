@@ -1,3 +1,10 @@
+# Next Version
+
+### Bug Fixes
+
+*   Fixed an issue where deleted lines sometimes had a white background when using custom themes.
+    closes [issue#283](https://github.com/refined-bitbucket/refined-bitbucket/issues/283).
+
 # 3.16.0 (2019-04-21)
 
 ### Language support
