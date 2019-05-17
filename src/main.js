@@ -29,6 +29,7 @@ import comparePagePullRequest from './compare-page-pull-request'
 import setTabSize from './tab-size'
 import mergeCommitMessage from './merge-commit-message'
 import collapsePullRequestDescription from './collapse-pull-request-description'
+import setStickyHeader from './sticky-header'
 
 import observeForWordDiffs from './observe-for-word-diffs'
 
@@ -95,6 +96,10 @@ function init(config) {
 
     if (config.customStyles) {
         addStyleToPage(config.customStyles)
+    }
+
+    if (config.stickyHeader) {
+        setStickyHeader()
     }
 }
 

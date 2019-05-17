@@ -46,14 +46,16 @@ new OptionsSync().define({
         customTabSize: 4,
         customStyles: '',
         enableUpdateNotifications: true,
+        stickyHeader: true,
     },
     migrations: [
         async savedOptions => {
             if (savedOptions.enableUpdateNotifications) {
                 await justInstalledOrUpdated
-                window.open(
-                    'https://github.com/refined-bitbucket/refined-bitbucket/releases/latest'
-                )
+                // DO NOT COMMIT THE FOLLOWING COMMENTED OUT CODE
+                // window.open(
+                //     'https://github.com/refined-bitbucket/refined-bitbucket/releases/latest'
+                // )
             }
         },
         OptionsSync.migrations.removeUnused,
