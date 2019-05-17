@@ -2,8 +2,16 @@
 
 ### Bug Fixes
 
-*   Fixed an issue where deleted lines sometimes had a white background when using custom themes.
+-   Fixed an issue where deleted lines sometimes had a white background when using custom themes.
     closes [issue#283](https://github.com/refined-bitbucket/refined-bitbucket/issues/283).
+
+# 3.17.0 (2019-05-17)
+
+### Feature
+
+-   **Sticky Header**: The filename header for each file in a pull request will now remain visible for as long
+    as the file is visible. This ensures that the filename can always be seen while content of that file is also
+    visible.
 
 # 3.16.0 (2019-04-21)
 
