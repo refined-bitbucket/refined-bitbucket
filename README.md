@@ -62,6 +62,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 
 -   Sticky Header filename toolbar
     While scrolling down viewing a large diff, the header of that diff, including the filename and actions, will remain visible## Some images
+    ![Sticky Header Small](https://user-images.githubusercontent.com/2059313/57961790-64fa9880-7950-11e9-9cf4-0f73104eb800.gif)
 
 ## Some images
 
