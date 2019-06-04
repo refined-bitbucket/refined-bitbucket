@@ -6,7 +6,7 @@ import { h } from 'dom-chef'
 import logger from '../logger'
 import { isPullRequest } from '../page-detect'
 
-type Strategy = 'merge_commit' | 'squash' | 'fast_forward'
+type Strategy = 'none' | 'merge_commit' | 'squash' | 'fast_forward'
 
 declare var $: any
 
@@ -38,6 +38,10 @@ export function initAsync(defaultMergeStrategy: Strategy) {
             )
         }
 
+        if (defaultMergeStrategy === 'none') {
+            return resolve()
+        }
+
         // DefaultMergeStrategy can be either 'merge_commit', 'squash' or 'fast_forward'
         if (
             !['merge_commit', 'squash', 'fast_forward'].includes(
@@ -46,7 +50,7 @@ export function initAsync(defaultMergeStrategy: Strategy) {
         ) {
             const msg = `refined-bitbucket(default-merge-strategy): Unimplemented merge strategy '${defaultMergeStrategy}'. No action taken.`
             logger.warn(msg)
-            reject(msg)
+            return reject(msg)
         }
 
         const fulfillPr: HTMLElement = (document.getElementById(

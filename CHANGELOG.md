@@ -1,9 +1,15 @@
 # Next Version
 
+### Improvements
+
+-   Add "None" option for the Default Merge Strategy feature, in case you don't want to use it,
+    closes [issue #288](https://github.com/refined-bitbucket/refined-bitbucket/issues/288),
+    [pull request #289](https://github.com/refined-bitbucket/refined-bitbucket/pull/289).
+
 ### Bug Fixes
 
-*   Fixed an issue where deleted lines sometimes had a white background when using custom themes.
-    closes [issue#283](https://github.com/refined-bitbucket/refined-bitbucket/issues/283).
+-   Fixed an issue where deleted lines sometimes had a white background when using custom themes.
+    closes [issue #283](https://github.com/refined-bitbucket/refined-bitbucket/issues/283).
 
 # 3.16.0 (2019-04-21)
 
