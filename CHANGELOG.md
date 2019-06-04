@@ -1,4 +1,4 @@
-# Next Version
+# 3.17.0 (2019-06-03)
 
 ### Improvements
 
