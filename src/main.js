@@ -198,7 +198,9 @@ function codeReviewFeatures(config) {
 }
 
 function pullrequestRelatedFeatures(config) {
-    defaultMergeStrategy.init(config.defaultMergeStrategy)
+    if (config.defaultMergeStrategy !== 'none') {
+        defaultMergeStrategy.init(config.defaultMergeStrategy)
+    }
 
     if (config.keymap) {
         keymap.init()
