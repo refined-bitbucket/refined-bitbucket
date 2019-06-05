@@ -1,3 +1,9 @@
+# Next Version
+
+### Language support
+
+-   HCL language support for `.tf` and `.tfvar` files.
+
 # 3.17.0 (2019-06-03)
 
 ### Improvements

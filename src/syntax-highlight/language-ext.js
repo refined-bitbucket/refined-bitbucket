@@ -78,6 +78,8 @@ module.exports = {
     '.styl': 'language-stylus',
     '.svcmap': 'language-markup',
     '.t': 'language-perl',
+    '.tf': 'language-hcl',
+    '.tfvars': 'language-hcl',
     '.tpl': 'language-smarty',
     '.trigger': 'language-java',
     '.ts': 'language-typescript',
