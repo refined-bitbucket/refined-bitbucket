@@ -14,6 +14,11 @@
     closes [issue #285](https://github.com/refined-bitbucket/refined-bitbucket/issues/285),
     [pull request #292](https://github.com/refined-bitbucket/refined-bitbucket/pull/292).
 
+### Cleanup
+
+-   Remove Augment PR Entry features that have been natively implemented by Bitbucket,
+    [pull request #293](https://github.com/refined-bitbucket/refined-bitbucket/pull/293).
+
 # 3.17.0 (2019-06-03)
 
 ### Improvements

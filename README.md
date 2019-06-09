@@ -27,7 +27,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 -   Adds 'Create Pull Request' link to the 'Compare branches and tags' page.
 -   Choose a default merge strategy for your pull requests. [Also implemented natively by Bitbucket per project](https://bitbucket.org/site/master/issues/13895/default-merge-strategy#comment-45364593)
 -   Check the "Close anchor branch" checkbox by default when creating or editing pull requests.
--   Add source branch, linkify branch names, add creation date and last person to interact with the pull request (commit, comment or approval) to each pull request row in pull request list.
+-   Add last person to interact with the pull request (commit, comment or approval) to each pull request row in pull request list.
 -   Don't carry pluses and minuses to clipboard when copying diff's contents.
 -   Badge with the number of commits of the current pull request next to the "Commits" tab.
 -   Set custom tab indentation size of code (Bitbucket defaults to 8 spaces) when viewing commits/pull requests.
