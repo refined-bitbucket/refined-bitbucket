@@ -58,10 +58,11 @@ We all know BitBucket lacks some features that we have in other platforms like G
 -   Similar to how the pull request template feature works,
     it is now possible to configure the extension to replace the default merge commit message for
     pull requests with a template that has access to dynamically injected variables like the pull
-    request title, description, source and destination branch, and more. [Click here for a more in-depth explanation](https://github.com/refined-bitbucket/refined-bitbucket/pull/243)
+    request title, description, source and destination branch, and more.
+    [Click here for a more in-depth explanation](https://github.com/refined-bitbucket/refined-bitbucket/pull/243)
 
--   Sticky Header filename toolbar
-    While scrolling down viewing a large diff, the header of that diff, including the filename and actions, will remain visible## Some images
+-   Sticky Header for diffs. While scrolling down viewing a large diff, the header of that diff,
+    including the filename and actions, will remain visible.
 
 ## Some images
 

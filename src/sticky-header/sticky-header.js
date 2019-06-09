@@ -13,6 +13,7 @@ function createCssRule() {
             position: sticky;
             top: 0px;
             z-index: 9;
+            border: 1px solid #DFE1E6;
         }
 
         @media (max-width: 979px) {

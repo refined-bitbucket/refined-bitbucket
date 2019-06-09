@@ -1,17 +1,31 @@
 # Next Version
 
-### Bug Fixes
-
--   Fixed an issue where deleted lines sometimes had a white background when using custom themes.
-    closes [issue#283](https://github.com/refined-bitbucket/refined-bitbucket/issues/283).
-
-# 3.17.0 (2019-05-17)
-
 ### Feature
 
 -   **Sticky Header**: The filename header for each file in a pull request will now remain visible for as long
     as the file is visible. This ensures that the filename can always be seen while content of that file is also
-    visible.
+    visible, [pull request #287](https://github.com/refined-bitbucket/refined-bitbucket/pull/287). Thanks [@denno020](https://github.com/denno020)
+
+### Bug Fixes
+
+-   Fix "Ignore Whitespace" feature that broke after Atlassian migrated their pull request list page
+    to a CSS-in-JS solution that autogenerates the CSS class names of the elements, making the
+    previous selectors the extension relied on useless,
+    closes [issue #285](https://github.com/refined-bitbucket/refined-bitbucket/issues/285),
+    [pull request #292](https://github.com/refined-bitbucket/refined-bitbucket/pull/292).
+
+# 3.17.0 (2019-06-03)
+
+### Improvements
+
+-   Add "None" option for the Default Merge Strategy feature, in case you don't want to use it,
+    closes [issue #288](https://github.com/refined-bitbucket/refined-bitbucket/issues/288),
+    [pull request #289](https://github.com/refined-bitbucket/refined-bitbucket/pull/289).
+
+### Bug Fixes
+
+-   Fixed an issue where deleted lines sometimes had a white background when using custom themes.
+    closes [issue #283](https://github.com/refined-bitbucket/refined-bitbucket/issues/283).
 
 # 3.16.0 (2019-04-21)
 
