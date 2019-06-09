@@ -46,6 +46,7 @@ new OptionsSync().define({
         customTabSize: 4,
         customStyles: '',
         enableUpdateNotifications: true,
+        stickyHeader: true,
     },
     migrations: [
         async savedOptions => {

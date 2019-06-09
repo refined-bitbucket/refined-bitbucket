@@ -1,5 +1,11 @@
 # Next Version
 
+### Feature
+
+-   **Sticky Header**: The filename header for each file in a pull request will now remain visible for as long
+    as the file is visible. This ensures that the filename can always be seen while content of that file is also
+    visible, [pull request #287](https://github.com/refined-bitbucket/refined-bitbucket/pull/287). Thanks [@denno020](https://github.com/denno020)
+
 ### Bug Fixes
 
 -   Fix "Ignore Whitespace" feature that broke after Atlassian migrated their pull request list page
