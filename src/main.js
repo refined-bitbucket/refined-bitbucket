@@ -17,7 +17,6 @@ import removeDiffsPlusesAndMinuses from './diff-pluses-and-minuses'
 import ignoreWhitespace from './ignore-whitespace'
 import insertCopyFilename from './insert-copy-filename'
 import keymap from './keymap'
-import linkifyTargetBranch from './linkify-target-branch'
 import loadAllDiffs from './load-all-diffs'
 import occurrencesHighlighter from './occurrences-highlighter'
 import pullrequestCommitAmount from './pullrequest-commit-amount'
@@ -119,7 +118,6 @@ function pullrequestListRelatedFeatures(config) {
             }
 
             if (config.augmentPrEntry) {
-                linkifyTargetBranch(this)
                 augmentPrEntry(this)
             }
         }
