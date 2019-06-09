@@ -2,7 +2,7 @@
 
 export default function init(prRow: Element) {
     const link: HTMLAnchorElement = (prRow.querySelector(
-        'a.pull-request-title'
+        'a[data-qa="pull-request-row-link"]'
     ): any)
     const url = new URL(link.href)
     const searchParams = new URLSearchParams(url.search)

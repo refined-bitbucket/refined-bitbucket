@@ -104,19 +104,21 @@ function pullrequestListRelatedFeatures(config) {
         return
     }
 
-    const prTable = document.querySelector('.pull-requests-table')
-
     // eslint-disable-next-line no-new
-    new SelectorObserver(prTable, 'tr.pull-request-row', function() {
-        if (config.ignoreWhitespace) {
-            ignoreWhitespace(this)
-        }
+    new SelectorObserver(
+        document.body,
+        'tr[data-qa="pull-request-row"]',
+        function() {
+            if (config.ignoreWhitespace) {
+                ignoreWhitespace(this)
+            }
 
-        if (config.augmentPrEntry) {
-            linkifyTargetBranch(this)
-            augmentPrEntry(this)
+            if (config.augmentPrEntry) {
+                linkifyTargetBranch(this)
+                augmentPrEntry(this)
+            }
         }
-    })
+    )
 }
 
 function codeReviewFeatures(config) {
