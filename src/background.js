@@ -34,7 +34,7 @@ new OptionsSync().define({
         mergeCommitMessageUrl: null,
         pullrequestCommitAmount: true,
         showCommentsCheckbox: true,
-        defaultMergeStrategy: 'merge_commit',
+        defaultMergeStrategy: 'none',
         autocollapsePaths: [
             'package-lock.json',
             'yarn.lock',
