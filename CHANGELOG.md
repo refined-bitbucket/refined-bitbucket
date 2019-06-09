@@ -1,3 +1,13 @@
+# Next Version
+
+### Bug Fixes
+
+-   Fix "Ignore Whitespace" feature that broke after Atlassian migrated their pull request list page
+    to a CSS-in-JS solution that autogenerates the CSS class names of the elements, making the
+    previous selectors the extension relied on useless,
+    closes [issue #285](https://github.com/refined-bitbucket/refined-bitbucket/issues/285),
+    [pull request #292](https://github.com/refined-bitbucket/refined-bitbucket/pull/292).
+
 # 3.17.0 (2019-06-03)
 
 ### Improvements
