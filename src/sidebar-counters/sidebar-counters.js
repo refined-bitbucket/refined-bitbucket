@@ -2,7 +2,7 @@
 // @jsx h
 
 import { h } from 'dom-chef'
-import SelectorObserver from 'selector-observer'
+import elementReady from 'element-ready'
 import api from '../api'
 
 import './sidebar-counters.css'
@@ -11,12 +11,18 @@ export const addBadge = (
     a: HTMLAnchorElement,
     resources: {| size: number |} | void
 ) => {
-    const div: HTMLElement = (a.parentNode: any)
-    div.style.position = 'relative'
+    const navLinksContainer: HTMLElement = (a.parentNode: any)
+    navLinksContainer.style.overflow = 'hidden'
+
+    a.style.position = 'relative'
 
     const size =
         // eslint-disable-next-line eqeqeq, no-eq-null
-        resources == null || resources.size == null ? '?' : resources.size
+        resources == null || resources.size == null
+            ? '?'
+            : resources.size > 999999
+                ? '999999+'
+                : resources.size
 
     const badge = (
         <span class="__rbb-badge">
@@ -30,32 +36,32 @@ export const addBadge = (
 export default async function addSideBarCounters() {
     // Exit early if can't find any of the nav links
     // that we are going to augment with badge counters
-    const navLinksSelector = 'a[href$="branches/"], a[href$="pull-requests/"]'
-    const navLinks = document.querySelector(navLinksSelector)
-    if (!navLinks) {
+    const branchesLink: HTMLAnchorElement = await elementReady(
+        'a[href$="branches/"]'
+    )
+    const pullRequestsLink: HTMLAnchorElement = await elementReady(
+        'a[href$="pull-requests/"]'
+    )
+
+    if (!branchesLink || !pullRequestsLink) {
         return
     }
 
-    // Keep going
+    const resizeButton: HTMLButtonElement = (document.querySelector(
+        '[class*="ResizerButtonInner"]'
+    ): any)
+
     const [branches, pullrequests] = await Promise.all([
         api.getBranches(),
         api.getPullrequests(),
     ])
 
-    const navigation: HTMLElement = (document.getElementById(
-        'adg3-navigation'
-    ): any)
+    const branchesBadge = addBadge(branchesLink, branches)
+    const prBadge = addBadge(pullRequestsLink, pullrequests)
 
-    let branchesBadge = { remove: () => {} }
-    let prBadge = { remove: () => {} }
-    // eslint-disable-next-line no-new
-    new SelectorObserver(navigation, navLinksSelector, function() {
-        if (this.href.endsWith('branches/')) {
-            branchesBadge.remove()
-            branchesBadge = addBadge(this, branches)
-        } else if (this.href.endsWith('pull-requests/')) {
-            prBadge.remove()
-            prBadge = addBadge(this, pullrequests)
-        }
+    resizeButton.addEventListener('click', () => {
+        const isExpanded = resizeButton.getAttribute('aria-expanded') === 'true'
+        branchesBadge.style.bottom = isExpanded ? '-1px' : 'unset'
+        prBadge.style.bottom = isExpanded ? '-1px' : 'unset'
     })
 }

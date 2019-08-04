@@ -1,6 +1,7 @@
 .__rbb-badge {
     position: absolute;
     right: 4px;
+    bottom: -1px;
 }
 
 .__rbb-badge-counter {

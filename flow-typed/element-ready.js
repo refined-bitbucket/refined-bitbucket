@@ -4,8 +4,8 @@ declare module 'element-ready' {
     |}
 
     // TODO: Replace `Promise<HTMLElement>` with PCancelable
-    declare export default function elementReady(
+    declare export default function elementReady<T: HTMLElement>(
         selector: string,
         options?: ?Options
-    ): Promise<HTMLElement>
+    ): Promise<T>
 }
