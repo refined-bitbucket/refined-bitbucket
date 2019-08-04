@@ -1,5 +1,6 @@
 import test from 'ava'
 import { h } from 'dom-chef'
+import { cleanDocumentBody } from '../../test/test-utils'
 import '../../test/setup-jsdom'
 
 import 'selector-observer'
@@ -8,6 +9,10 @@ import { addBadge } from './sidebar-counters'
 import addSidebarCounters from '.'
 
 global.fetch = {}
+
+test.afterEach(() => {
+    cleanDocumentBody()
+})
 
 test('addBadge should work properly', t => {
     // Arrange
@@ -21,8 +26,13 @@ test('addBadge should work properly', t => {
 
     const size = 5
     const expected = (
-        <div style={{ position: 'relative' }}>
-            <a aria-disabled="false" href="/user/repo/branches/" class="jRoiuT">
+        <div style={{ overflow: 'hidden' }}>
+            <a
+                aria-disabled="false"
+                href="/user/repo/branches/"
+                class="jRoiuT"
+                style={{ position: 'relative' }}
+            >
                 <span class="__rbb-badge">
                     <span class="__rbb-badge-counter">{size}</span>
                 </span>
@@ -76,58 +86,48 @@ test('addBadge should add ? character if response fails or has unexpected shape'
     t.is(actual5.querySelector('.__rbb-badge-counter').textContent, '0')
 })
 
-test('addSidebarCounters should exit early', async t => {
-    await addSidebarCounters()
-    t.pass()
-})
-
-test('addSidebarCounters should work properly', async t => {
+test.serial('addSidebarCounters should work properly', async t => {
     // Arrange
     const nav = (
-        <div id="adg3-navigation">
+        <div>
             <div>
-                <a
-                    aria-disabled="false"
-                    href="/user/repo/branches/"
-                    class="jRoiuT"
-                />
+                <a href="/user/repo/branches/" />
             </div>
             <div>
-                <a
-                    aria-disabled="false"
-                    href="/user/repo/pull-requests/"
-                    class="jRoiuT"
-                />
+                <a href="/user/repo/pull-requests/" />
             </div>
+
+            <button class="ResizerButtonInner" aria-expanded="false">
+                Resize
+            </button>
         </div>
     )
     document.body.appendChild(nav)
 
     const size = 10
     const expected = (
-        <div id="adg3-navigation">
-            <div style={{ position: 'relative' }}>
-                <a
-                    aria-disabled="false"
-                    href="/user/repo/branches/"
-                    class="jRoiuT"
-                >
+        <div>
+            <div style={{ overflow: 'hidden' }}>
+                <a href="/user/repo/branches/" style={{ position: 'relative' }}>
                     <span class="__rbb-badge">
                         <span class="__rbb-badge-counter">{size}</span>
                     </span>
                 </a>
             </div>
-            <div style={{ position: 'relative' }}>
+            <div style={{ overflow: 'hidden' }}>
                 <a
-                    aria-disabled="false"
                     href="/user/repo/pull-requests/"
-                    class="jRoiuT"
+                    style={{ position: 'relative' }}
                 >
                     <span class="__rbb-badge">
                         <span class="__rbb-badge-counter">{size}</span>
                     </span>
                 </a>
             </div>
+
+            <button class="ResizerButtonInner" aria-expanded="false">
+                Resize
+            </button>
         </div>
     )
 

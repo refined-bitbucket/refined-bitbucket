@@ -64,7 +64,7 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/register": "^7.0.0",
     "archiver": "^3.0.0",
-    "ava": "^1.0.0-beta.8",
+    "ava": "^1.4.1",
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.0",
     "chokidar-cli": "^1.2.1",
