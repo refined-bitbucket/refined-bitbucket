@@ -1,3 +1,11 @@
+# Next Version
+
+### Bug Fixes
+
+-   Fix sidebar counter badges positioning in collapsed mode when the number of branches or pull requests is too large,
+    closes [issue #301](https://github.com/refined-bitbucket/refined-bitbucket/issues/301),
+    [pull request #302](https://github.com/refined-bitbucket/refined-bitbucket/pull/302).
+
 # 3.18.0 (2019-06-08)
 
 ### Feature
