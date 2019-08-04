@@ -1,4 +1,4 @@
-# Next Version
+# 3.18.1 (2019-08-03)
 
 ### Bug Fixes
 
