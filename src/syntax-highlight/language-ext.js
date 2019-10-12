@@ -77,6 +77,7 @@ module.exports = {
     '.snap': 'language-jsx',
     '.styl': 'language-stylus',
     '.svcmap': 'language-markup',
+    '.svelte': 'language-html',
     '.t': 'language-perl',
     '.tpl': 'language-smarty',
     '.trigger': 'language-java',
