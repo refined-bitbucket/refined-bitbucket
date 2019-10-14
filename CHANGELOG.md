@@ -1,3 +1,7 @@
+### Feature
+
+-   Add a line length limit option that shows a ruler at the user-defined column.
+
 # 3.18.1 (2019-08-03)
 
 ### Bug Fixes

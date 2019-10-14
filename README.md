@@ -31,6 +31,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 -   Don't carry pluses and minuses to clipboard when copying diff's contents.
 -   Badge with the number of commits of the current pull request next to the "Commits" tab.
 -   Set custom tab indentation size of code (Bitbucket defaults to 8 spaces) when viewing commits/pull requests.
+-   Show a line length limit ruler, defaults to show in the 80th column
 -   Insert "Comments" checkbox in diff header to toggle comments.
 -   Insert "Copy filename to clipboard" button in diff header.
 -   Define your own custom CSS styles to be applied to Bitbucket.
