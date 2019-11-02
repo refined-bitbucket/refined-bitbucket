@@ -33,8 +33,9 @@ const PrKeyMap = (function() {
 
     const self = {}
 
-    self.commentSelector = '.iterable-item a.author'
+    self.commentSelector = '.comment > .iterable-item '
     self.iterableItemSelector = '.iterable-item'
+    self.focusedClass = 'focused'
     self.comments = []
 
     self.currentComment = 0
@@ -63,9 +64,18 @@ const PrKeyMap = (function() {
      * @return {undefined}
      */
     self.focusComment = function(comment) {
-        $(self.iterableItemSelector).removeClass('focused')
-        $(comment).addClass('focused')
-        comment.scrollIntoView()
+        ;[...document.querySelectorAll(self.iterableItemSelector)].forEach(
+            comment => comment.classList.remove(self.focusedClass)
+        )
+        comment.classList.add(self.focusedClass)
+        comment.scrollIntoView({
+            block: 'center',
+        })
+    }
+
+    self.focusCurrentComment = function() {
+        const comment = self.comments[self.currentComment]
+        self.focusComment(comment)
     }
 
     /**
@@ -92,16 +102,14 @@ const PrKeyMap = (function() {
      *
      */
     self.scrollToNextComment = function() {
-        if (self.comments) {
-            $(self.comments[self.currentComment]).removeClass('focused')
+        if (self.comments.length > 0) {
+            $(self.comments[self.currentComment]).removeClass(self.focusedClass)
             self.currentComment++
             if (self.currentComment >= self.comments.length) {
                 self.currentComment = 0
             }
 
-            const comment =
-                self.comments[self.currentComment].parentElement.parentElement
-            self.focusComment(comment)
+            self.focusCurrentComment()
         }
     }
 
@@ -112,15 +120,13 @@ const PrKeyMap = (function() {
      * bottom-most (last) comment on the page.
      */
     self.scrollToPreviousComment = function() {
-        if (self.comments) {
+        if (self.comments.length > 0) {
             self.currentComment--
             if (self.currentComment < 0) {
                 self.currentComment = self.comments.length - 1
             }
 
-            const comment =
-                self.comments[self.currentComment].parentElement.parentElement
-            self.focusComment(comment)
+            self.focusCurrentComment()
         }
     }
 
