@@ -161,14 +161,20 @@ We all know BitBucket lacks some features that we have in other platforms like G
 
 <table>
 	<tr>
-		<th colspan="2">
+		<th width="50%">
 			Sticky Header
 		</th>
+        <th width="50%">
+            Line length limit ruler
+        </th>
 	</tr>
 	<tr>
 		<td>
 			<img src="https://user-images.githubusercontent.com/2059313/57961790-64fa9880-7950-11e9-9cf4-0f73104eb800.gif" alt="Sticky Header"/>
 		</td>
+        <td>
+            <img src="https://user-images.githubusercontent.com/12451101/71311094-cfaf0d80-2424-11ea-8bec-b1fdfded6c1e.png" alt="Line length limit ruler"/>
+        </td>
 	</tr>
 </table>
 
