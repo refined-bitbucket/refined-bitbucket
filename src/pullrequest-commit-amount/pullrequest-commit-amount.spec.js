@@ -7,21 +7,22 @@ import pullrequestCommitAmount from '.'
 
 // Consider using `nock` package in the future
 const mockFetchWithErrorResponse = () => {
-    global.fetch = () => {
-        return Promise.resolve({
-            json: () => Promise.resolve({ error: true }),
-        })
+    global.chrome = {
+        runtime: {
+            sendMessage: (data, cb) => {
+                cb()
+            },
+        },
     }
 }
 
 const mockFetchWithSuccessfulResponse = () => {
-    global.fetch = () => {
-        return Promise.resolve({
-            json: () =>
-                Promise.resolve({
-                    size: 1,
-                }),
-        })
+    global.chrome = {
+        runtime: {
+            sendMessage: (data, cb) => {
+                cb({ size: 1 })
+            },
+        },
     }
 }
 

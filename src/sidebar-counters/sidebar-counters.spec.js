@@ -97,7 +97,7 @@ test.serial('addSidebarCounters should work properly', async t => {
                 <a href="/user/repo/pull-requests/" />
             </div>
 
-            <button class="ResizerButtonInner" aria-expanded="false">
+            <button class="ak-navigation-resize-button" aria-expanded="false">
                 Resize
             </button>
         </div>
@@ -125,16 +125,18 @@ test.serial('addSidebarCounters should work properly', async t => {
                 </a>
             </div>
 
-            <button class="ResizerButtonInner" aria-expanded="false">
+            <button class="ak-navigation-resize-button" aria-expanded="false">
                 Resize
             </button>
         </div>
     )
 
-    global.fetch = () => {
-        return Promise.resolve({
-            json: () => Promise.resolve({ size }),
-        })
+    global.chrome = {
+        runtime: {
+            sendMessage: (data, cb) => {
+                cb({ size })
+            },
+        },
     }
 
     // Act

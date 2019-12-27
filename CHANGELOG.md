@@ -1,6 +1,29 @@
+# Next Version
+
 ### Feature
 
--   Add a line length limit option that shows a ruler at the user-defined column.
+-   Add a line length limit option that shows a ruler at the user-defined column,
+    [pull request #309](https://github.com/refined-bitbucket/refined-bitbucket/pull/309).
+    Thanks [@avshalomt](https://github.com/avshalomt)!
+
+# 3.18.2 (2019-12-26)
+
+### Language support
+
+-   Svelte language support for `.svelte` files and Puppet language support for `.pp` files,
+    [pull request #305](https://github.com/refined-bitbucket/refined-bitbucket/pull/305).
+    Thanks [@Vages](https://github.com/Vages)!
+
+### Bug Fixes
+
+-   Fix "Unable to scroll to next/previous comment",
+    [pull request #312](https://github.com/refined-bitbucket/refined-bitbucket/pull/312),
+    closes [issue #296](https://github.com/refined-bitbucket/refined-bitbucket/issues/296).
+    Thanks [@nikolay-borzov](https://github.com/nikolay-borzov)!
+-   Fix Cross-Origin Requests blocking,
+    [pull request #322](https://github.com/refined-bitbucket/refined-bitbucket/pull/322),
+    closes [issue #308](https://github.com/refined-bitbucket/refined-bitbucket/issues/308),
+    closes [issue #321](https://github.com/refined-bitbucket/refined-bitbucket/issues/321),
 
 # 3.18.1 (2019-08-03)
 

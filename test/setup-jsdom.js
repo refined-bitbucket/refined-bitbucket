@@ -60,3 +60,5 @@ global.MutationObserver = window.MutationObserver
 
 addApiTokenMetadata()
 setUrlLocation()
+
+global.chrome = { runtime: { sendMessage: () => {} } }
