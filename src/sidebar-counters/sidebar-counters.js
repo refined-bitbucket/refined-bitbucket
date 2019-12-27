@@ -47,10 +47,6 @@ export default async function addSideBarCounters() {
         return
     }
 
-    const resizeButton: HTMLButtonElement = (document.querySelector(
-        '[class*="ResizerButtonInner"]'
-    ): any)
-
     const [branches, pullrequests] = await Promise.all([
         api.getBranches(),
         api.getPullrequests(),
@@ -59,9 +55,15 @@ export default async function addSideBarCounters() {
     const branchesBadge = addBadge(branchesLink, branches)
     const prBadge = addBadge(pullRequestsLink, pullrequests)
 
-    resizeButton.addEventListener('click', () => {
-        const isExpanded = resizeButton.getAttribute('aria-expanded') === 'true'
-        branchesBadge.style.bottom = isExpanded ? '-1px' : 'unset'
-        prBadge.style.bottom = isExpanded ? '-1px' : 'unset'
-    })
+    const resizeButton: HTMLButtonElement = await elementReady(
+        '.ak-navigation-resize-button'
+    )
+    if (resizeButton) {
+        resizeButton.addEventListener('click', () => {
+            const isExpanded =
+                resizeButton.getAttribute('aria-expanded') === 'true'
+            branchesBadge.style.bottom = isExpanded ? '-1px' : 'unset'
+            prBadge.style.bottom = isExpanded ? '-1px' : 'unset'
+        })
+    }
 }

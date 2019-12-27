@@ -17,10 +17,10 @@ export const mockPullrequestEndpointWithSuccessfulResponse = ({
     createdOn = '2018-02-09T15:07:08.160349+00:00',
     activityAuthor = 'Andrew Bernard',
 }) => {
-    global.fetch = () => {
-        return Promise.resolve({
-            json: () =>
-                Promise.resolve({
+    global.chrome = {
+        runtime: {
+            sendMessage: (data, cb) => {
+                cb({
                     source: {
                         branch: {
                             name: sourceBranch,
@@ -50,18 +50,11 @@ export const mockPullrequestEndpointWithSuccessfulResponse = ({
                             },
                         },
                     ],
-                }),
-        })
+                })
+            },
+        },
     }
 }
-
-test('api.getPullrequest should return undefined on API error', async t => {
-    mockFetchWithErrorResponse()
-
-    const prData = await api.getPullrequest()
-
-    t.is(prData, undefined)
-})
 
 test('api.getPullrequest should return proper data on successful API request', async t => {
     mockPullrequestEndpointWithSuccessfulResponse({})
