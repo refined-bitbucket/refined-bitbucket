@@ -1,17 +1,8 @@
 // @flow
+/* eslint-disable no-undef */
 
-import logger from './logger'
 import { getRepoURL } from './page-detect'
 import { getApiToken } from './utils'
-
-type BitbucketAPIErrorResponse = {|
-    type: string,
-    error: {
-        message: string,
-        detail?: string,
-        data?: any,
-    },
-|}
 
 // https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pullrequests
 export type PullRequest = {|
@@ -45,51 +36,41 @@ export type PullRequestActivity = {|
 
 const repoUrl = getRepoURL()
 const token = getApiToken()
+const sendMessageCb = sendMessage(repoUrl, token)
 
 const api = {
     getBranches(): Promise<{| size: number |} | void> {
-        const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/refs/branches`
-        return get(url)
+        return sendMessageCb('getBranches')
     },
     getPullrequests(): Promise<{| size: number |} | void> {
-        const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests`
-        return get(url)
+        return sendMessageCb('getPullrequests')
     },
     getPullrequest(id: number | string): Promise<PullRequest | void> {
-        const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}`
-        return get(url)
+        return sendMessageCb('getPullrequest', { id })
     },
     getPullrequestActivity(
         id: number | string
     ): Promise<PullRequestActivity | void> {
-        const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/activity?pagelen=1`
-        return get(url)
+        return sendMessageCb('getPullrequestActivity', { id })
     },
     getPullrequestCommits(
         id: number | string
     ): Promise<{| size: number |} | void> {
-        const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/commits`
-        return get(url)
+        return sendMessageCb('getPullrequestCommits', { id })
     },
 }
 
-// eslint-disable-next-line flowtype/no-weak-types
-async function get<T: Object>(url: string): Promise<T | void> {
-    const response = await fetch(url, {
-        headers: new Headers({
-            Authorization: `Bearer ${token}`,
-        }),
-    })
-    const result: BitbucketAPIErrorResponse | T = await response.json()
-
-    if (result.error) {
-        logger.error(
-            `refined-bitbucket(augment-pr-entry): ${result.error.message}`
-        )
-        return
+// https://www.chromium.org/Home/chromium-security/extension-content-script-fetches
+function sendMessage(repoUrl: string, token: string) {
+    return (name: string, data?: {}) => {
+        return new Promise(resolve => {
+            // $FlowIgnore
+            chrome.runtime.sendMessage(
+                { repoUrl, token, name, ...data },
+                resolve
+            )
+        })
     }
-
-    return result
 }
 
 export default api

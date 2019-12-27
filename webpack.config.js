@@ -10,6 +10,7 @@ module.exports = {
         main: './src/main',
         options: './src/options',
         background: './src/background',
+        'background-for-requests': './src/background-for-requests',
     },
     plugins: [
         new webpack.DefinePlugin({

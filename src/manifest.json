@@ -41,7 +41,8 @@
   ],
   "background": {
     "scripts": [
-      "background.js"
+      "background.js",
+      "background-for-requests.js"
     ],
     "persistent": false
   }
