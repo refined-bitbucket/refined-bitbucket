@@ -1,3 +1,11 @@
+# Next Version
+
+### Feature
+
+-   Add a line length limit option that shows a ruler at the user-defined column,
+    [pull request #309](https://github.com/refined-bitbucket/refined-bitbucket/pull/309).
+    Thanks [@avshalomt](https://github.com/avshalomt)!
+
 # 3.18.2 (2019-12-26)
 
 ### Language support

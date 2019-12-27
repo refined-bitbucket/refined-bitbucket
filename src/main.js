@@ -29,6 +29,7 @@ import setTabSize from './tab-size'
 import mergeCommitMessage from './merge-commit-message'
 import collapsePullRequestDescription from './collapse-pull-request-description'
 import setStickyHeader from './sticky-header'
+import setLineLengthLimit from './limit-line-length'
 
 import observeForWordDiffs from './observe-for-word-diffs'
 
@@ -200,6 +201,10 @@ function codeReviewFeatures(config) {
             }
         }
     )
+
+    if (config.lineLengthLimitEnabled) {
+        setLineLengthLimit(config.lineLengthLimit, config.stickyHeader)
+    }
 }
 
 function pullrequestRelatedFeatures(config) {

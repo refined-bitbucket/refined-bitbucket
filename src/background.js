@@ -44,6 +44,8 @@ new OptionsSync().define({
         ignorePaths: [''].join('\n'),
         customTabSizeEnabled: true,
         customTabSize: 4,
+        lineLengthLimitEnabled: true,
+        lineLengthLimit: 80,
         customStyles: '',
         enableUpdateNotifications: true,
         stickyHeader: true,
