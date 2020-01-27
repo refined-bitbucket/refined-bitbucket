@@ -8,7 +8,7 @@ function createCssRules(lineLengthLimit, isStickyHeaderEnabled) {
     }
 
     let cssRules = `
-        .refract-content-container {
+        .refract-content-container, .comment-thread-container {
             position: relative;
         }
 
