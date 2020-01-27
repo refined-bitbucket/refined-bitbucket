@@ -5,6 +5,8 @@
 -   Add a line length limit option that shows a ruler at the user-defined column,
     [pull request #309](https://github.com/refined-bitbucket/refined-bitbucket/pull/309).
     Thanks [@avshalomt](https://github.com/avshalomt)!
+-   **Merge Commit Message Template**. This feature now works in the new pull request experience.
+    [pull request #xxx](https://github.com/refined-bitbucket/refined-bitbucket/pull/xxx).
 
 # 3.18.2 (2019-12-26)
 

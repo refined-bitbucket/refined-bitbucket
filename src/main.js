@@ -27,6 +27,7 @@ import syntaxHighlight from './syntax-highlight'
 import comparePagePullRequest from './compare-page-pull-request'
 import setTabSize from './tab-size'
 import mergeCommitMessage from './merge-commit-message'
+import mergeCommitMessageNew from './merge-commit-message-new'
 import collapsePullRequestDescription from './collapse-pull-request-description'
 import setStickyHeader from './sticky-header'
 import setLineLengthLimit from './limit-line-length'
@@ -55,10 +56,6 @@ new OptionsSync().getAll().then(options => {
 })
 
 function init(config) {
-    if (config.autolinker) {
-        require('./vendor/prism-autolinker.min')
-    }
-
     if (isBranch()) {
         codeReviewFeatures(config)
     } else if (isPullRequest()) {
@@ -97,10 +94,6 @@ function init(config) {
     if (config.customStyles) {
         addStyleToPage(config.customStyles)
     }
-
-    if (config.stickyHeader) {
-        setStickyHeader()
-    }
 }
 
 function pullrequestListRelatedFeatures(config) {
@@ -129,6 +122,10 @@ function codeReviewFeatures(config) {
     autocollapse.init(config.autocollapsePaths, config.autocollapseDeletedFiles)
 
     diffIgnore.init(config.ignorePaths)
+
+    if (config.autolinker) {
+        require('./vendor/prism-autolinker.min')
+    }
 
     const manipulateSummary = summaryNode => {
         if (config.ignorePaths.length !== 0) {
@@ -205,9 +202,29 @@ function codeReviewFeatures(config) {
     if (config.lineLengthLimitEnabled) {
         setLineLengthLimit(config.lineLengthLimit, config.stickyHeader)
     }
+
+    if (config.stickyHeader) {
+        setStickyHeader()
+    }
 }
 
 function pullrequestRelatedFeatures(config) {
+    const isNewExperience = document.body.dataset.auiVersion >= '7.9.9'
+
+    if (isNewExperience) {
+        pullrequestRelatedFeaturesNew(config)
+    } else {
+        pullrequestRelatedFeaturesOld(config)
+    }
+}
+
+function pullrequestRelatedFeaturesNew(config) {
+    if (config.mergeCommitMessageEnabled) {
+        mergeCommitMessageNew(config.mergeCommitMessageUrl)
+    }
+}
+
+function pullrequestRelatedFeaturesOld(config) {
     if (config.defaultMergeStrategy !== 'none') {
         defaultMergeStrategy.init(config.defaultMergeStrategy)
     }

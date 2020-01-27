@@ -1,5 +1,6 @@
 // @flow
 
+import { h } from 'dom-chef'
 import onetime from 'onetime'
 
 export const getApiToken: () => string = onetime(
@@ -16,6 +17,28 @@ export const getApiToken: () => string = onetime(
 export const getMainBranch: () => string = onetime(
     (): string =>
         JSON.parse((document.body || {}).dataset.currentRepo).mainbranch.name
+)
+
+export const getMainBranchNew: () => string = onetime(
+    (): string => {
+        const code = () => {
+            document.body.setAttribute(
+                'data-initial-state',
+                JSON.stringify(window.__initial_state__)
+            )
+        }
+
+        document.body.appendChild(
+            <script>
+                ({code.toString()}
+                )()
+            </script>
+        )
+
+        const mbn = JSON.parse(document.body.dataset.initialState).section
+            .repository.currentRepository.mainbranch.name
+        return mbn
+    }
 )
 
 export function getFirstFileContents(
