@@ -11,7 +11,7 @@ const getCleanPathname = () => location.pathname.replace(/^[/]|[/]$/g, '')
 // eslint-disable-next-line no-warning-comments
 // FIXME TODO: I noticed much later that maybe this could simply be:
 // `JSON.parse(document.body.dataset.currentRepo).fullslug`
-// Confirm, compare perf and replace in better.
+// Confirm, compare perf and replace if better.
 export const getRepoURL = onetime(() =>
     location.pathname
         .slice(1)

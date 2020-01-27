@@ -1,15 +1,19 @@
-// @flow
-
-import elementReady from 'element-ready'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { findAllByText, findByText } from '@testing-library/dom'
 import { getRepoURL } from '../page-detect'
-import { getFirstFileContents, getMainBranch } from '../utils'
+import {
+    getFirstFileContents,
+    getMainBranchNew,
+    setInitialStateInBodyEl,
+} from '../utils'
 import api from '../api'
 
-export default async function mergeCommitMessage(externalUrl: string) {
+export default async function mergeCommitMessageNew(externalUrl) {
     const mergeCommitTemplateUrls = getMergeCommitMessageTemplateUrls()
 
-    const prNode = await elementReady('#pullrequest')
-    const prId = prNode.dataset.localId
+    setInitialStateInBodyEl()
+    const prId = JSON.parse(document.body.dataset.initialState).repository
+        .pullRequest.currentPullRequest.id
 
     const [template, dataToInject] = await Promise.all([
         getFirstFileContents(mergeCommitTemplateUrls, externalUrl),
@@ -17,14 +21,14 @@ export default async function mergeCommitMessage(externalUrl: string) {
     ])
 
     if (template && dataToInject) {
-        insertMergeCommitTemplate(template, dataToInject)
+        await insertMergeCommitTemplate(template, dataToInject)
     }
 }
 
 function getMergeCommitMessageTemplateUrls() {
     const repoURL = getRepoURL()
 
-    const mainBranch = getMainBranch()
+    const mainBranch = getMainBranchNew()
 
     const mergeCommitTemplateUrls = [
         `https://bitbucket.org/${repoURL}/raw/${mainBranch}/MERGE_COMMIT_TEMPLATE`,
@@ -61,25 +65,40 @@ async function getDataToInject(prId) {
     }
 }
 
-function insertMergeCommitTemplate(template, dataToInject) {
-    const fulfillPr: HTMLElement = (document.getElementById(
-        'fulfill-pullrequest'
-    ): any)
+async function insertMergeCommitTemplate(template, dataToInject) {
+    const mergeSpans = await findAllByText(
+        document.body,
+        'Merge',
+        {},
+        {
+            timeout: 10000,
+        }
+    )
+    const mergeBtns = mergeSpans.map(span => span.closest('button'))
 
     const onFulfillPullrequest = async () => {
-        fulfillPr.removeEventListener('click', onFulfillPullrequest)
-
-        const textarea: HTMLTextAreaElement = (await elementReady(
-            '#id_commit_message'
-        ): any)
-        textarea.value = template
+        const mergeDialogHeader = await findByText(
+            document.body,
+            'Merge pull request'
+        )
+        const textarea = mergeDialogHeader
+            .closest('[role="dialog"]')
+            .querySelector('textarea')
+        const value = template
             .replace(/{id}/g, String(dataToInject.id))
             .replace(/{title}/g, dataToInject.title)
             .replace(/{description}/g, dataToInject.description)
             .replace(/{sourceBranch}/g, dataToInject.sourceBranch)
             .replace(/{targetBranch}/g, dataToInject.targetBranch)
             .replace(/{approvedByList}/g, dataToInject.approvedByList)
+
+        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+            window.HTMLTextAreaElement.prototype,
+            'value'
+        ).set
+        nativeInputValueSetter.call(textarea, value)
+        textarea.dispatchEvent(new Event('input', { bubbles: true }))
     }
 
-    fulfillPr.addEventListener('click', onFulfillPullrequest)
+    mergeBtns.forEach(b => b.addEventListener('click', onFulfillPullrequest))
 }
