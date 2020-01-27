@@ -54,7 +54,7 @@ async function getDataToInject(prId) {
             .filter(p => p.approved)
             .map(p => {
                 return `Approved By: ${p.user.display_name} <${
-                    p.user.username
+                    p.user.nickname
                 }>`
             })
             .join('\n'),

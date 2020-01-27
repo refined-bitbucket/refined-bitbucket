@@ -209,6 +209,7 @@ function codeReviewFeatures(config) {
 }
 
 function pullrequestRelatedFeatures(config) {
+    // $FlowIgnore There's always going to be a body
     const isNewExperience = document.body.dataset.auiVersion >= '7.9.9'
 
     if (isNewExperience) {

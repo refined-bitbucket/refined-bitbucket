@@ -15,7 +15,7 @@ export type PullRequest = {|
     participants: Array<{
         approved: boolean,
         user: {
-            username: string,
+            nickname: string,
             display_name: string,
         },
     }>,

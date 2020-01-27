@@ -1,14 +1,17 @@
-// @flow
-
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { findAllByText, findByText } from '@testing-library/dom'
 import { getRepoURL } from '../page-detect'
-import { getFirstFileContents, getMainBranchNew } from '../utils'
+import {
+    getFirstFileContents,
+    getMainBranchNew,
+    setInitialStateInBodyEl,
+} from '../utils'
 import api from '../api'
 
-export default async function mergeCommitMessageNew(externalUrl: string) {
+export default async function mergeCommitMessageNew(externalUrl) {
     const mergeCommitTemplateUrls = getMergeCommitMessageTemplateUrls()
 
+    setInitialStateInBodyEl()
     const prId = JSON.parse(document.body.dataset.initialState).repository
         .pullRequest.currentPullRequest.id
 
@@ -55,7 +58,7 @@ async function getDataToInject(prId) {
             .filter(p => p.approved)
             .map(p => {
                 return `Approved By: ${p.user.display_name} <${
-                    p.user.username
+                    p.user.nickname
                 }>`
             })
             .join('\n'),

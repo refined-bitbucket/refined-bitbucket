@@ -1,4 +1,5 @@
 // @flow
+// @jsx h
 
 import { h } from 'dom-chef'
 import onetime from 'onetime'
@@ -21,25 +22,31 @@ export const getMainBranch: () => string = onetime(
 
 export const getMainBranchNew: () => string = onetime(
     (): string => {
-        const code = () => {
-            document.body.setAttribute(
-                'data-initial-state',
-                JSON.stringify(window.__initial_state__)
-            )
-        }
-
-        document.body.appendChild(
-            <script>
-                ({code.toString()}
-                )()
-            </script>
-        )
-
+        setInitialStateInBodyEl()
+        // $FlowIgnore There's always going to be a body
         const mbn = JSON.parse(document.body.dataset.initialState).section
             .repository.currentRepository.mainbranch.name
         return mbn
     }
 )
+
+export const setInitialStateInBodyEl: () => void = onetime(() => {
+    const code = () => {
+        // $FlowIgnore There's always going to be a body
+        document.body.setAttribute(
+            'data-initial-state',
+            JSON.stringify(window.__initial_state__)
+        )
+    }
+
+    // $FlowIgnore There's always going to be a body
+    document.body.appendChild(
+        <script>
+            ({code.toString()}
+            )()
+        </script>
+    )
+})
 
 export function getFirstFileContents(
     localUrls: string[],
