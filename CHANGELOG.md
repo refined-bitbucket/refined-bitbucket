@@ -6,7 +6,8 @@
     [pull request #309](https://github.com/refined-bitbucket/refined-bitbucket/pull/309).
     Thanks [@avshalomt](https://github.com/avshalomt)!
 -   **Merge Commit Message Template**. This feature now works in the new pull request experience.
-    [pull request #xxx](https://github.com/refined-bitbucket/refined-bitbucket/pull/xxx).
+    [pull request #325](https://github.com/refined-bitbucket/refined-bitbucket/pull/325),
+    related [issue #252](https://github.com/refined-bitbucket/refined-bitbucket/issues/252).
 
 # 3.18.2 (2019-12-26)
 
