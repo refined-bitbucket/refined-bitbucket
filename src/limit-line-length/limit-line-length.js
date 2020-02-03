@@ -20,6 +20,12 @@ function createCssRules(lineLengthLimit, isStickyHeaderEnabled) {
             pointer-events: none;
             color: transparent;
             user-select: none;
+            z-index: 1;
+        }
+
+        .comment-thread-container {
+            position: relative;
+            z-index: 2;
         }
     `
 

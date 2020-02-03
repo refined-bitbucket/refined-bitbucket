@@ -1,3 +1,7 @@
+### Bug Fixes
+
+-   Fix line ruler shows on top of file comments
+
 # 3.19.0 (2020-01-27)
 
 ### Features
