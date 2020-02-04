@@ -8,6 +8,10 @@ function createCssRules(lineLengthLimit, isStickyHeaderEnabled) {
     }
 
     let cssRules = `
+        .refract-content-container, .comment-thread-container {
+            position: relative;
+        }
+
         .refract-content-container > .udiff-line:first-child .source::before,
         .refract-content-container > .udiff-line:last-child .source::before,
         .refract-content-container > .udiff-line:nth-child(2):not(:last-child) .source::before {
