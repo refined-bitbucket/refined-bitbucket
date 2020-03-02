@@ -27,9 +27,11 @@ function copy(text) {
 }
 
 export default function insertCopyFilenameNew(diff: HTMLElement) {
-    const header = diff.querySelector("[data-qa='bk-filepath']")
+    const header: HTMLHeadingElement = (diff.querySelector(
+        "[data-qa='bk-filepath']"
+    ): any)
     const filepath = header.textContent
-    const headerContainer = header.parentElement
+    const headerContainer: HTMLDivElement = (header.parentElement: any)
 
     const button = (
         <button
