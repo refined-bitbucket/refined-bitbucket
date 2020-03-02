@@ -1,3 +1,10 @@
+# Next Version
+
+### Features
+
+-   **New PR UI**. Insert "Copy filename to clipboard" button in diff header,
+    [pull request #xxx](https://github.com/refined-bitbucket/refined-bitbucket/pull/xxx).
+
 # 3.19.0 (2020-01-27)
 
 ### Features
