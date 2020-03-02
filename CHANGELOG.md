@@ -1,9 +1,15 @@
-# Next Version
+# 3.20.0 (2019-03-01)
 
 ### Features
 
 -   **New PR UI**. Insert "Copy filename to clipboard" button in diff header,
     [pull request #332](https://github.com/refined-bitbucket/refined-bitbucket/pull/332).
+
+### Bug Fixes
+
+-   Hide line-limit indicator in comments,
+    [pull request #327](https://github.com/refined-bitbucket/refined-bitbucket/pull/327).
+    Thanks [@BenWildeman](https://github.com/BenWildeman)!
 
 # 3.19.0 (2020-01-27)
 
