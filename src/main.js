@@ -16,6 +16,7 @@ import diffIgnore from './diff-ignore'
 import removeDiffsPlusesAndMinuses from './diff-pluses-and-minuses'
 import ignoreWhitespace from './ignore-whitespace'
 import insertCopyFilename from './insert-copy-filename'
+import insertCopyFilenameNew from './insert-copy-filename-new'
 import keymap from './keymap'
 import loadAllDiffs from './load-all-diffs'
 import occurrencesHighlighter from './occurrences-highlighter'
@@ -222,6 +223,19 @@ function pullrequestRelatedFeatures(config) {
 function pullrequestRelatedFeaturesNew(config) {
     if (config.mergeCommitMessageEnabled) {
         mergeCommitMessageNew(config.mergeCommitMessageUrl)
+    }
+
+    if (config.copyFilename) {
+        // eslint-disable-next-line no-new
+        new SelectorObserver(
+            document.body,
+            'article[data-qa="pr-diff-file-styles"]',
+            function() {
+                if (config.copyFilename) {
+                    insertCopyFilenameNew(this)
+                }
+            }
+        )
     }
 }
 
