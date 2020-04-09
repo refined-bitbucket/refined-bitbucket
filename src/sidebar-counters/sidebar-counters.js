@@ -21,8 +21,8 @@ export const addBadge = (
         resources == null || resources.size == null
             ? '?'
             : resources.size > 999999
-                ? '999999+'
-                : resources.size
+            ? '999999+'
+            : resources.size
 
     const badge = (
         <span class="__rbb-badge">

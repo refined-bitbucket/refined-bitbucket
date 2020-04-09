@@ -19,9 +19,7 @@ export function collapseIfNeeded(section: HTMLElement) {
         collapseIfNeededAsync(section)
     } else {
         console.error(
-            `refined-bitbucket: You need to call \`.${init.name}\` before \`.${
-                collapseIfNeeded.name
-            }\``
+            `refined-bitbucket: You need to call \`.${init.name}\` before \`.${collapseIfNeeded.name}\``
         )
     }
 }
