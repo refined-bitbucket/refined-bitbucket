@@ -32,6 +32,7 @@ import mergeCommitMessageNew from './merge-commit-message-new'
 import collapsePullRequestDescription from './collapse-pull-request-description'
 import setStickyHeader from './sticky-header'
 import setLineLengthLimit from './limit-line-length'
+import insertDashboardOverviewFilters from './dashboard-pull-requests'
 
 import observeForWordDiffs from './observe-for-word-diffs'
 
@@ -42,6 +43,7 @@ import {
     isCommit,
     isBranch,
     isComparePage,
+    isDashBoardPullRequests,
 } from './page-detect'
 
 import addStyleToPage from './add-style'
@@ -81,6 +83,10 @@ function init(config) {
             comparePagePullRequest()
         }
         codeReviewFeatures(config)
+    } else if (isDashBoardPullRequests()) {
+        if (config.insertDashboardOverviewFilters) {
+            insertDashboardOverviewFilters()
+        }
     }
 
     if (config.addSidebarCounters) {

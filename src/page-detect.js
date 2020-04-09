@@ -43,3 +43,6 @@ export const isEditPullRequestURL = () =>
 export const isCommit = () => getRepoPath().startsWith('commits/')
 
 export const isBranch = () => getRepoPath().startsWith('branch/')
+
+export const isDashBoardPullRequests = () =>
+    getRepoURL().startsWith('dashboard/pullrequests')

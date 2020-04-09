@@ -28,6 +28,7 @@ new OptionsSync().define({
         diffPlusesAndMinuses: true,
         augmentPrEntry: true,
         comparePagePullRequest: true,
+        insertDashboardOverviewFilters: true,
         prTemplateEnabled: true,
         prTemplateUrl: null,
         mergeCommitMessageEnabled: false,
