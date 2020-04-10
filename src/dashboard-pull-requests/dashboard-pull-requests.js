@@ -24,6 +24,7 @@ const filtersHidingSelector = {
     successfulBuilds: 'span.aui-iconfont-error',
     allTasksResolved: 'div.list-stat span.aui-iconfont-editor-task',
     needsMyApproval: 'div.list-stat a.approval-link.approved',
+    notMe: 'span.inline-user--name',
 }
 
 function isSavedFilterChecked(filterName) {
@@ -50,18 +51,19 @@ function pullRequestRowWatcher() {
             if (isSavedFilterChecked(filterNames.needsMyApproval)) {
                 hide(
                     filtersHidingSelector.needsMyApproval,
-                    filterNames.needsMyApproval
+                    filterNames.needsMyApproval,
+                    true
                 )
             }
         }
     )
 }
 
-async function newCheckbox(filterName) {
+async function newCheckbox(filterName, notMe) {
     const checked = isSavedFilterChecked(filterName)
     if (checked) {
         await elementReady('#pullrequests')
-        hide(filtersHidingSelector[filterName], filterName)
+        hide(filtersHidingSelector[filterName], filterName, notMe)
         return (
             <input
                 name={filterName}
@@ -74,20 +76,40 @@ async function newCheckbox(filterName) {
     return <input name={filterName} style={filterStyle} type="checkbox" />
 }
 
-function hide(querySelector, filterName) {
+function getElementUuid(el, attr) {
+    const user = JSON.parse(el.getAttribute(attr))
+    return user ? user.uuid : ''
+}
+
+function performHide(el, filterName) {
+    const row = el.closest('tr')
+    if (!row) return
+
+    row.classList.add(classFilter(filterName))
+    row.classList.add(classHide)
+    return row
+}
+
+function hide(querySelector, filterName, notMe = false) {
+    if (notMe) {
+        const me = getElementUuid(document.body, 'data-current-user')
+        document
+            .getElementById('pullrequests')
+            .querySelectorAll(filtersHidingSelector.notMe)
+            .forEach(el => {
+                const uuidFound = getElementUuid(el, 'data-user')
+                if (uuidFound !== me) return
+                performHide(el, filterName)
+            })
+    }
+
     const els = document
         .getElementById('pullrequests')
         .querySelectorAll(querySelector)
-    if (!els || els.length === 0) return
-    els.forEach(el => {
-        if (!el) return
-        const row = el.closest('tr')
-        if (!row) return
 
-        row.classList.add(classFilter(filterName))
-        row.classList.add(classHide)
-        return row
-    })
+    if (!els || els.length === 0) return
+
+    els.forEach(el => performHide(el, filterName))
 }
 
 function show(filterName) {
@@ -130,7 +152,8 @@ function onFilterNeedsMyApproval(e) {
     return e.target.checked
         ? hide(
               filtersHidingSelector.needsMyApproval,
-              filterNames.needsMyApproval
+              filterNames.needsMyApproval,
+              true
           )
         : show(filterNames.needsMyApproval)
 }
