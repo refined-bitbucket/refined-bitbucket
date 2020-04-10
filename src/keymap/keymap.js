@@ -64,9 +64,9 @@ const PrKeyMap = (function() {
      * @return {undefined}
      */
     self.focusComment = function(comment) {
-        ;[
-            ...document.querySelectorAll(self.iterableItemSelector),
-        ].forEach(comment => comment.classList.remove(self.focusedClass))
+        ;[...document.querySelectorAll(self.iterableItemSelector)].forEach(
+            comment => comment.classList.remove(self.focusedClass)
+        )
         comment.classList.add(self.focusedClass)
         comment.scrollIntoView({
             block: 'center',

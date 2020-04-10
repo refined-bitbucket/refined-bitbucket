@@ -4,27 +4,31 @@
 import { h } from 'dom-chef'
 import onetime from 'onetime'
 
-export const getApiToken: () => string = onetime((): string => {
-    const meta: HTMLMetaElement = (document.querySelector(
-        'meta[name="apitoken"]'
-    ): any)
-    const apiTokenContent = meta.content
-    const parsedApiTokenContent = JSON.parse(apiTokenContent)
-    return parsedApiTokenContent.token
-})
+export const getApiToken: () => string = onetime(
+    (): string => {
+        const meta: HTMLMetaElement = (document.querySelector(
+            'meta[name="apitoken"]'
+        ): any)
+        const apiTokenContent = meta.content
+        const parsedApiTokenContent = JSON.parse(apiTokenContent)
+        return parsedApiTokenContent.token
+    }
+)
 
 export const getMainBranch: () => string = onetime(
     (): string =>
         JSON.parse((document.body || {}).dataset.currentRepo).mainbranch.name
 )
 
-export const getMainBranchNew: () => string = onetime((): string => {
-    setInitialStateInBodyEl()
-    // $FlowIgnore There's always going to be a body
-    const mbn = JSON.parse(document.body.dataset.initialState).section
-        .repository.currentRepository.mainbranch.name
-    return mbn
-})
+export const getMainBranchNew: () => string = onetime(
+    (): string => {
+        setInitialStateInBodyEl()
+        // $FlowIgnore There's always going to be a body
+        const mbn = JSON.parse(document.body.dataset.initialState).section
+            .repository.currentRepository.mainbranch.name
+        return mbn
+    }
+)
 
 export const setInitialStateInBodyEl: () => void = onetime(() => {
     const code = () => {

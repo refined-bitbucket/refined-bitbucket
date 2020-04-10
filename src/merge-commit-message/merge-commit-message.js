@@ -53,7 +53,9 @@ async function getDataToInject(prId) {
         approvedByList: pullrequest.participants
             .filter(p => p.approved)
             .map(p => {
-                return `Approved By: ${p.user.display_name} <${p.user.nickname}>`
+                return `Approved By: ${p.user.display_name} <${
+                    p.user.nickname
+                }>`
             })
             .join('\n'),
     }
