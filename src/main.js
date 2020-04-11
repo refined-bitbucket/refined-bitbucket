@@ -14,7 +14,10 @@ import collapseDiff from './collapse-diff'
 import defaultMergeStrategy from './default-merge-strategy'
 import diffIgnore from './diff-ignore'
 import removeDiffsPlusesAndMinuses from './diff-pluses-and-minuses'
-import ignoreWhitespace from './ignore-whitespace'
+import {
+    ignoreWhitespaceSearchParam,
+    ignoreWhitespaceInit,
+} from './ignore-whitespace'
 import insertCopyFilename from './insert-copy-filename'
 import insertCopyFilenameNew from './insert-copy-filename-new'
 import keymap from './keymap'
@@ -109,7 +112,7 @@ function pullrequestListRelatedFeatures(config) {
         'tr[data-qa="pull-request-row"]',
         function() {
             if (config.ignoreWhitespace) {
-                ignoreWhitespace(this)
+                ignoreWhitespaceSearchParam(this)
             }
 
             if (config.augmentPrEntry) {
@@ -246,6 +249,10 @@ function pullrequestRelatedFeaturesOld(config) {
 
     if (config.keymap) {
         keymap.init()
+    }
+
+    if (config.ignoreWhitespace) {
+        ignoreWhitespaceInit()
     }
 
     if (config.pullrequestCommitAmount) {
