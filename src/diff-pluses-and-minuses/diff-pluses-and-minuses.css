@@ -1,9 +1,15 @@
 .addition > .source:before {
-    content: '+';
-    color: #a67f59;
+    content: '+' !important;
+    color: #5aaf59 !important;
+    position: initial !important;
+    border: none !important;
+    margin-right: -0.6em;
 }
 
 .deletion > .source:before {
-    content: '-';
-    color: #a67f59;
+    content: '-' !important;
+    color: #a67f59 !important;
+    position: initial !important;
+    border: none !important;
+    margin-right: -0.6em;
 }
