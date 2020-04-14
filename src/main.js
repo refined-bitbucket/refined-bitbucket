@@ -207,6 +207,10 @@ function codeReviewFeatures(config) {
         setLineLengthLimit(config.lineLengthLimit, config.stickyHeader)
     }
 
+    if (config.ignoreWhitespace) {
+        ignoreWhitespaceInit()
+    }
+
     if (config.stickyHeader) {
         setStickyHeader()
     }
@@ -249,10 +253,6 @@ function pullrequestRelatedFeaturesOld(config) {
 
     if (config.keymap) {
         keymap.init()
-    }
-
-    if (config.ignoreWhitespace) {
-        ignoreWhitespaceInit()
     }
 
     if (config.pullrequestCommitAmount) {

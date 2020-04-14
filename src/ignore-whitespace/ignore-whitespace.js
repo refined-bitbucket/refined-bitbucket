@@ -1,4 +1,6 @@
 // @flow
+import elementReady from 'element-ready'
+
 export function ignoreWhitespaceSearchParam(prRow: Element) {
     const link: HTMLAnchorElement = (prRow.querySelector(
         'a[data-qa="pull-request-row-link"]'
@@ -10,8 +12,10 @@ export function ignoreWhitespaceSearchParam(prRow: Element) {
     link.href = url.href
 }
 
-export function ignoreWhitespaceInit() {
-    const toggle = document.querySelector('[data-key="ignoreWhitespace"]')
+export async function ignoreWhitespaceInit() {
+    const toggle: HTMLElement = await elementReady(
+        '[data-key="ignoreWhitespace"]'
+    )
     if (toggle && toggle.getAttribute('aria-checked') === 'false') {
         toggle.click()
     }
