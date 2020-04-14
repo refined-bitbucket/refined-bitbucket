@@ -22,7 +22,7 @@ import loadAllDiffs from './load-all-diffs'
 import occurrencesHighlighter from './occurrences-highlighter'
 import pullrequestCommitAmount from './pullrequest-commit-amount'
 import insertPullrequestTemplate from './pullrequest-template'
-import insertShowComments from './show-comments'
+import { insertShowComments, insertShowGeneralComments } from './show-comments'
 import addSidebarCounters from './sidebar-counters'
 import syntaxHighlight from './syntax-highlight'
 import comparePagePullRequest from './compare-page-pull-request'
@@ -140,6 +140,12 @@ function codeReviewFeatures(config) {
         }
     }
 
+    const manipulateGeneralComments = comments => {
+        if (config.showCommentsCheckbox) {
+            insertShowGeneralComments(comments)
+        }
+    }
+
     const manipulateDiff = diff => {
         if (diffIgnore.isIgnored(diff)) {
             return
@@ -180,12 +186,14 @@ function codeReviewFeatures(config) {
         '#compare-diff-content, #pr-tab-content, #commit, #diff'
     const diffSelector = 'section.bb-udiff'
 
+    const generalCommentsSelector = '#general-comments'
+
     // Have to observe the DOM because some sections
     // load asynchronously by user interactions
     // eslint-disable-next-line no-new
     new SelectorObserver(
         document.body,
-        [summarySelectors, diffSelector].join(', '),
+        [summarySelectors, diffSelector, generalCommentsSelector].join(', '),
         function() {
             try {
                 if (this.matches(summarySelectors)) {
@@ -194,6 +202,10 @@ function codeReviewFeatures(config) {
 
                 if (this.matches(diffSelector)) {
                     return manipulateDiff(this)
+                }
+
+                if (this.matches(generalCommentsSelector)) {
+                    return manipulateGeneralComments(this)
                 }
             } catch (error) {
                 // Something went wrong

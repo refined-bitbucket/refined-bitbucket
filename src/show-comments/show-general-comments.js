@@ -18,21 +18,17 @@ const onClick = e => {
         e.currentTarget.classList.add('__rbb_comments_hidden')
     }
 
-    const diff = e.target.closest('section.bb-udiff')
     const comments = [
-        ...diff.getElementsByClassName('comment-thread-container'),
+        ...document
+            .getElementById('comments-list')
+            .getElementsByClassName('comment'),
     ]
     comments.forEach(comment => {
         comment.style.display = showComments ? '' : 'none'
     })
 }
 
-export default function insertShowComments(section: HTMLElement) {
-    // Diff failed because pull request is too big
-    if (section.querySelector('div.too-big-message')) {
-        return
-    }
-
+export default function insertShowGeneralComments(section: HTMLElement) {
     // eslint-disable-next-line no-new
     new SelectorObserver(
         section,
@@ -56,34 +52,20 @@ function onAddComment(section) {
         return
     }
 
-    const hasCommentsOnPreviousVersions = Boolean(
-        section.getElementsByClassName('eclipsedcount').length
-    )
     const showCommentsButton = (
         <button
             type="button"
             class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
             title="Toggle file comments"
             original-title="Toggle file comments"
-            style={
-                hasCommentsOnPreviousVersions
-                    ? {
-                          'margin-right': 10,
-                      }
-                    : {}
-            }
             onClick={onClick}
         >
             <span class="aui-icon aui-icon-small">Toggle file comments</span>
         </button>
     )
 
-    const diffActions: HTMLElement = (section.querySelector(
-        '.diff-actions.secondary'
-    ): any)
-    diffActions.style.minWidth = '480px'
-    diffActions.style.textAlign = 'right'
-    diffActions.insertBefore(showCommentsButton, diffActions.firstChild)
+    const diffActions: HTMLElement = (section.querySelector('h1'): any)
+    diffActions.appendChild(showCommentsButton)
 }
 
 function onDeleteComment(section) {
