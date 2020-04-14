@@ -43,6 +43,7 @@ import {
     isCommit,
     isBranch,
     isComparePage,
+    isDashBoardOverview,
     isDashBoardPullRequests,
 } from './page-detect'
 
@@ -64,7 +65,7 @@ function init(config) {
     } else if (isPullRequest()) {
         codeReviewFeatures(config)
         pullrequestRelatedFeatures(config)
-    } else if (isPullRequestList()) {
+    } else if (isPullRequestList() || isDashBoardOverview()) {
         pullrequestListRelatedFeatures(config)
     } else if (isCreatePullRequestURL()) {
         if (config.prTemplateEnabled) {
