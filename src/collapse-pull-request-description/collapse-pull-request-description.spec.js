@@ -3,8 +3,31 @@ import { h } from 'dom-chef'
 
 import '../../test/setup-jsdom'
 import collapsePullRequestDescription from '.'
+import { cleanDocumentBody } from '../../test/test-utils'
+import delay from 'yoctodelay'
 
-test('should toggle pull request description properly', t => {
+test('should not disaply description container if empty', async t => {
+    // Arrange
+    const actual = (
+        <div class="clearfix description">
+            <dt>Description</dt>
+            <dd class="empty">No description</dd>
+        </div>
+    )
+
+    document.body.appendChild(actual)
+
+    // Act
+    collapsePullRequestDescription()
+
+    // Assert
+    t.is(actual.outerHTML, actual.outerHTML)
+
+    cleanDocumentBody()
+    await delay(10)
+})
+
+test('should toggle pull request description properly', async t => {
     // Arrange
     const actual = (
         <div class="clearfix description">
@@ -16,7 +39,7 @@ test('should toggle pull request description properly', t => {
     const expected = (
         <div class="clearfix description">
             <dt>Description</dt>
-            <dd>
+            <dd class="wiki-content">
                 <button
                     type="button"
                     aria-label="Toggle description text"
@@ -51,8 +74,8 @@ test('should toggle pull request description properly', t => {
                         />
                     </svg>
                 </button>
+                <div class="__rbb-collapse-content">Description content</div>
             </dd>
-            <dd class="wiki-content">Description content</dd>
         </div>
     )
 
@@ -67,7 +90,9 @@ test('should toggle pull request description properly', t => {
     const button = actual.querySelector('button')
     const upArrow = actual.querySelector('svg[data-arrow-direction="up"]')
     const downArrow = actual.querySelector('svg[data-arrow-direction="down"]')
-    const descriptionContent = actual.querySelector('.wiki-content')
+    const descriptionContent = actual.querySelector(
+        '.wiki-content .__rbb-collapse-content'
+    )
     const isHidden = el =>
         [...el.classList].includes('__refined_bitbucket_hide')
 
@@ -90,4 +115,7 @@ test('should toggle pull request description properly', t => {
     t.false(isHidden(upArrow))
     t.true(isHidden(downArrow))
     t.false(isHidden(descriptionContent))
+
+    cleanDocumentBody()
+    await delay(10)
 })
