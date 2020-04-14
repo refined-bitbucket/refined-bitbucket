@@ -42,6 +42,7 @@ import {
     isCommit,
     isBranch,
     isComparePage,
+    isDashBoardOverview,
 } from './page-detect'
 
 import addStyleToPage from './add-style'
@@ -62,7 +63,7 @@ function init(config) {
     } else if (isPullRequest()) {
         codeReviewFeatures(config)
         pullrequestRelatedFeatures(config)
-    } else if (isPullRequestList()) {
+    } else if (isPullRequestList() || isDashBoardOverview()) {
         pullrequestListRelatedFeatures(config)
     } else if (isCreatePullRequestURL()) {
         if (config.prTemplateEnabled) {
