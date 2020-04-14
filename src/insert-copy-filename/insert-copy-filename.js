@@ -3,6 +3,8 @@
 
 import { h } from 'dom-chef'
 
+import './insert-copy-filename.css'
+
 function onClick() {
     const diff: HTMLElement = ((this: HTMLButtonElement).closest(
         '.bb-udiff'
@@ -32,13 +34,13 @@ export default function insertCopyFilename(diff: HTMLElement) {
     const button = (
         <button
             type="button"
-            class="aui-button aui-button-subtle copy-to-clipboard--button __rbb-btn-copyfilename"
+            class="aui-button aui-button-subtle __rbb-btn-copyfilename"
             title="Copy filename to clipboard"
             original-title="Copy filename to clipboard"
             style={{ position: 'relative' }}
             onClick={onClick}
         >
-            <span class="aui-icon aui-icon-small aui-iconfont-copy-clipboard">
+            <span class="aui-icon aui-icon-small">
                 Copy filename to clipboard
             </span>
         </button>

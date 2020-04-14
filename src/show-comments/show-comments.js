@@ -6,12 +6,23 @@
 import { h } from 'dom-chef'
 import SelectorObserver from 'selector-observer'
 
-const onChange = ({ target, target: { checked: showComments } }) => {
-    const diff = target.closest('section.bb-udiff')
+import './show-comments.css'
+
+let showComments = true
+
+const onClick = e => {
+    showComments = !showComments
+    console.log(e)
+    if (showComments) {
+        e.currentTarget.classList.remove('__rbb_comments_hidden')
+    } else {
+        e.currentTarget.classList.add('__rbb_comments_hidden')
+    }
+
+    const diff = e.target.closest('section.bb-udiff')
     const comments = [
         ...diff.getElementsByClassName('comment-thread-container'),
     ]
-
     comments.forEach(comment => {
         comment.style.display = showComments ? '' : 'none'
     })
@@ -33,39 +44,39 @@ export default function insertShowComments(section: HTMLElement) {
 }
 
 function onAddComment(section) {
-    const existingCheckbox: HTMLInputElement = (section.querySelector(
-        '.__rbb-show-comments input'
+    const existingButton: HTMLInputElement = (section.querySelector(
+        '.__rbb-show-comments'
     ): any)
 
-    // Show comments checkbox already exists
-    if (existingCheckbox) {
-        if (!existingCheckbox.checked) {
-            existingCheckbox.checked = true
-            existingCheckbox.dispatchEvent(new Event('change'))
+    // Show comments button already exists
+    if (existingButton) {
+        if (!showComments) {
+            showComments = true
+            existingButton.dispatchEvent(new Event('click'))
         }
-
         return
     }
 
     const hasCommentsOnPreviousVersions = Boolean(
         section.getElementsByClassName('eclipsedcount').length
     )
-    const showCommentsCheckbox = (
-        <span class="__rbb-show-comments">
-            <label
-                style={{
-                    'font-size': 12,
-                    ...(hasCommentsOnPreviousVersions
-                        ? null
-                        : {
-                              'margin-right': 10,
-                          }),
-                }}
-            >
-                <input type="checkbox" checked onChange={onChange} />
-                Comments
-            </label>
-        </span>
+    const showCommentsButton = (
+        <button
+            type="button"
+            class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
+            title="Toggle file comments"
+            original-title="Toggle file comments"
+            style={
+                hasCommentsOnPreviousVersions
+                    ? {
+                          'margin-right': 10,
+                      }
+                    : {}
+            }
+            onClick={onClick}
+        >
+            <span class="aui-icon aui-icon-small">Toggle file comments</span>
+        </button>
     )
 
     const diffActions: HTMLElement = (section.querySelector(
@@ -73,7 +84,7 @@ function onAddComment(section) {
     ): any)
     diffActions.style.minWidth = '480px'
     diffActions.style.textAlign = 'right'
-    diffActions.insertBefore(showCommentsCheckbox, diffActions.firstChild)
+    diffActions.insertBefore(showCommentsButton, diffActions.firstChild)
 }
 
 function onDeleteComment(section) {
