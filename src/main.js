@@ -46,8 +46,6 @@ import {
 
 import addStyleToPage from './add-style'
 
-import './main.css'
-
 new OptionsSync().getAll().then(options => {
     const config = {
         ...options,

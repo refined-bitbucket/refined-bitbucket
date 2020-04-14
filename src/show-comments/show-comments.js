@@ -59,6 +59,9 @@ function onAddComment(section) {
     const hasCommentsOnPreviousVersions = Boolean(
         section.getElementsByClassName('eclipsedcount').length
     )
+    const hasStatusBadge = Boolean(
+        section.getElementsByClassName('aui-lozenge').length
+    )
     const showCommentsButton = (
         <button
             type="button"
@@ -66,7 +69,7 @@ function onAddComment(section) {
             title="Toggle file comments"
             original-title="Toggle file comments"
             style={
-                hasCommentsOnPreviousVersions
+                hasCommentsOnPreviousVersions || hasStatusBadge
                     ? {
                           'margin-right': 10,
                       }

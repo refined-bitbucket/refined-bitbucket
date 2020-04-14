@@ -1,4 +1,0 @@
-/* fix ability to select filename correctly in a PR, removing Icon from being selected */
-.filename span {
-    user-select: none;
-}
