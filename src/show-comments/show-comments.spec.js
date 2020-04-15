@@ -161,6 +161,73 @@ test('"Comments" button is displayed if diff has comments and on previous versio
     t.is(diff.outerHTML, expected.outerHTML)
 })
 
+test('"Comments" button is displayed in the prior-comments modal next to the time status', t => {
+    // It's almost exactly the same as when the diff doesn't have
+    // comments on previous version of the file,
+    // except that here we don't add a `marginRight`
+    const diff = (
+        <section class="diff-container">
+            <div class="heading">
+                <div class="diff-actions secondary">
+                    <span class="aui-lozenge aui-lozenge-current aui-lozenge-subtle outdated">
+                        outdated
+                    </span>
+                </div>
+            </div>
+            <div class="diff-content-container refract-container">
+                <div class="refract-content-container">
+                    <pre>var msg = 'Hello world';</pre>
+                    <div class="comment-thread-container">
+                        <li class="comment">
+                            <p>Some comment</p>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+
+    const expected = (
+        <section class="diff-container">
+            <div class="heading">
+                <div
+                    class="diff-actions secondary"
+                    style={{ minWidth: 480, textAlign: 'right' }}
+                >
+                    <button
+                        type="button"
+                        class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
+                        title="Toggle file comments"
+                        original-title="Toggle file comments"
+                        style={{ marginRight: 10 }}
+                    >
+                        <span class="aui-icon aui-icon-small">
+                            Toggle file comments
+                        </span>
+                    </button>
+                    <span class="aui-lozenge aui-lozenge-current aui-lozenge-subtle outdated">
+                        outdated
+                    </span>
+                </div>
+            </div>
+            <div class="diff-content-container refract-container">
+                <div class="refract-content-container">
+                    <pre>var msg = 'Hello world';</pre>
+                    <div class="comment-thread-container">
+                        <li class="comment">
+                            <p>Some comment</p>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+
+    insertShowComments(diff)
+
+    t.is(diff.outerHTML, expected.outerHTML)
+})
+
 test('"Comments" button is NOT displayed if diff has no comments', t => {
     const diff = (
         <section class="bb-udiff" data-filename="filename.js">

@@ -8,7 +8,7 @@ import SelectorObserver from 'selector-observer'
 
 import './show-comments.css'
 
-let stateShowComments = true
+export let stateShowComments = true
 
 const onClick = e => {
     stateShowComments = !stateShowComments
@@ -18,10 +18,12 @@ const onClick = e => {
         e.currentTarget.classList.add('__rbb_comments_hidden')
     }
 
-    const comments = [...document.querySelectorAll('#comments-list li.comment')]
-    comments.forEach(comment => {
-        comment.style.display = stateShowComments ? '' : 'none'
-    })
+    const container = e.currentTarget.closest('#general-comments')
+    ;[...container.querySelectorAll('#comments-list li.comment')].forEach(
+        comment => {
+            comment.style.display = stateShowComments ? '' : 'none'
+        }
+    )
 }
 
 export default function insertShowGeneralComments(section: HTMLElement) {
