@@ -1,2 +1,5 @@
 // @flow
-export { default } from './ignore-whitespace'
+export {
+    ignoreWhitespaceSearchParam,
+    ignoreWhitespaceInit,
+} from './ignore-whitespace'
