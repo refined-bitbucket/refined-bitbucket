@@ -8,23 +8,19 @@ import SelectorObserver from 'selector-observer'
 
 import './show-comments.css'
 
-let showComments = true
+let stateShowComments = true
 
 const onClick = e => {
-    showComments = !showComments
-    if (showComments) {
+    stateShowComments = !stateShowComments
+    if (stateShowComments) {
         e.currentTarget.classList.remove('__rbb_comments_hidden')
     } else {
         e.currentTarget.classList.add('__rbb_comments_hidden')
     }
 
-    const comments = [
-        ...document
-            .getElementById('comments-list')
-            .getElementsByClassName('comment'),
-    ]
+    const comments = [...document.querySelectorAll('#comments-list li.comment')]
     comments.forEach(comment => {
-        comment.style.display = showComments ? '' : 'none'
+        comment.style.display = stateShowComments ? '' : 'none'
     })
 }
 
@@ -45,8 +41,8 @@ function onAddComment(section) {
 
     // Show comments button already exists
     if (existingButton) {
-        if (!showComments) {
-            showComments = true
+        if (!stateShowComments) {
+            stateShowComments = false
             existingButton.dispatchEvent(new Event('click'))
         }
         return

@@ -4,9 +4,10 @@ import delay from 'yoctodelay'
 
 import '../../test/setup-jsdom'
 
-import insertShowComments from '.'
+import { insertShowComments } from '.'
+import { stateShowComments } from './show-comments'
 
-test('"Comments" checkbox is displayed if diff has comments', t => {
+test('"Comments" button is displayed if diff has comments', t => {
     const diff = (
         <section class="bb-udiff" data-filename="filename.js">
             <div class="heading">
@@ -38,12 +39,16 @@ test('"Comments" checkbox is displayed if diff has comments', t => {
                     id="side-by-side-1"
                     style={{ minWidth: 480, textAlign: 'right' }}
                 >
-                    <span className="__rbb-show-comments">
-                        <label style={{ fontSize: 12, marginRight: 10 }}>
-                            <input type="checkbox" checked />
-                            Comments
-                        </label>
-                    </span>
+                    <button
+                        type="button"
+                        class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
+                        title="Toggle file comments"
+                        original-title="Toggle file comments"
+                    >
+                        <span class="aui-icon aui-icon-small">
+                            Toggle file comments
+                        </span>
+                    </button>
                     <div class="aui-buttons">
                         <button href="#side-by-side-1-content">
                             Side-by-side diff
@@ -68,7 +73,7 @@ test('"Comments" checkbox is displayed if diff has comments', t => {
     t.is(diff.outerHTML, expected.outerHTML)
 })
 
-test('"Comments" checkbox is displayed if diff has comments and on previous versions too', t => {
+test('"Comments" button is displayed if diff has comments and on previous versions too', t => {
     // It's almost exactly the same as when the diff doesn't have
     // comments on previous version of the file,
     // except that here we don't add a `marginRight`
@@ -112,12 +117,17 @@ test('"Comments" checkbox is displayed if diff has comments and on previous vers
                     id="side-by-side-1"
                     style={{ minWidth: 480, textAlign: 'right' }}
                 >
-                    <span className="__rbb-show-comments">
-                        <label style={{ fontSize: 12 }}>
-                            <input type="checkbox" checked />
-                            Comments
-                        </label>
-                    </span>
+                    <button
+                        type="button"
+                        class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
+                        title="Toggle file comments"
+                        original-title="Toggle file comments"
+                        style={{ marginRight: 10 }}
+                    >
+                        <span class="aui-icon aui-icon-small">
+                            Toggle file comments
+                        </span>
+                    </button>
                     <button
                         class="eclipsedcount aui-button aui-button-light aui-button-subtle"
                         data-module="components/tooltip"
@@ -151,7 +161,7 @@ test('"Comments" checkbox is displayed if diff has comments and on previous vers
     t.is(diff.outerHTML, expected.outerHTML)
 })
 
-test('"Comments" checkbox is NOT displayed if diff has no comments', t => {
+test('"Comments" button is NOT displayed if diff has no comments', t => {
     const diff = (
         <section class="bb-udiff" data-filename="filename.js">
             <div class="heading">
@@ -180,7 +190,7 @@ test('"Comments" checkbox is NOT displayed if diff has no comments', t => {
     t.is(diff.outerHTML, expected.outerHTML)
 })
 
-test('Comments are shown or hidden when checkbox is toggled', t => {
+test('Comments are shown or hidden when button is toggled', t => {
     const diff = (
         <section class="bb-udiff" data-filename="filename.js">
             <div class="heading">
@@ -208,20 +218,18 @@ test('Comments are shown or hidden when checkbox is toggled', t => {
 
     // Assert
     const commentsContainer = diff.querySelector('.comment-thread-container')
-    const showComments = diff.querySelector('.__rbb-show-comments input')
+    const showComments = diff.querySelector('.__rbb-show-comments')
 
     t.is(commentsContainer.style.display, '')
 
-    showComments.checked = false
-    showComments.dispatchEvent(new Event('change'))
+    showComments.dispatchEvent(new Event('click'))
     t.is(commentsContainer.style.display, 'none')
 
-    showComments.checked = true
-    showComments.dispatchEvent(new Event('change'))
+    showComments.dispatchEvent(new Event('click'))
     t.is(commentsContainer.style.display, '')
 })
 
-test('"Comments" checkbox is added/removed when applicable if comments are added/removed', async t => {
+test('"Comments" button is added/removed when applicable if comments are added/removed', async t => {
     const diff = (
         <section class="bb-udiff" data-filename="filename.js">
             <div class="heading">
@@ -245,7 +253,7 @@ test('"Comments" checkbox is added/removed when applicable if comments are added
     // Assert
     t.falsy(
         diff.querySelector('.__rbb-show-comments'),
-        'checkbox should not exist if there are no comments'
+        'button should not exist if there are no comments'
     )
 
     // Act
@@ -261,7 +269,7 @@ test('"Comments" checkbox is added/removed when applicable if comments are added
     // Assert
     t.truthy(
         diff.querySelector('.__rbb-show-comments'),
-        'checkbox should exist if there are comments'
+        'button should exist if there are comments'
     )
     t.is(diff.querySelectorAll('.__rbb-show-comments').length, 1)
 
@@ -278,7 +286,7 @@ test('"Comments" checkbox is added/removed when applicable if comments are added
     // Assert
     t.truthy(
         diff.querySelector('.__rbb-show-comments'),
-        'checkbox should exist if there are comments'
+        'button should exist if there are comments'
     )
     t.is(diff.querySelectorAll('.__rbb-show-comments').length, 1)
 
@@ -290,11 +298,11 @@ test('"Comments" checkbox is added/removed when applicable if comments are added
 
     t.falsy(
         diff.querySelector('.__rbb-show-comments'),
-        'checkbox should not exist if there are no comments'
+        'button should not exist if there are no comments'
     )
 })
 
-test('should not insert "Comments" checkbox when diff failed to load', t => {
+test('should not insert "Comments" button when diff failed to load', t => {
     const diff = (
         <section class="bb-udiff" data-filename="filename.js">
             <div class="heading ">
@@ -332,11 +340,11 @@ test('should not insert "Comments" checkbox when diff failed to load', t => {
 
     t.falsy(
         diff.querySelector('.__rbb-show-comments'),
-        'checkbox should not exist if diff failed to load'
+        'button should not exist if diff failed to load'
     )
 })
 
-test('should re-enable Comments if a new comment is submitted', async t => {
+test('should show comments section if a new comment while comments are hidden', async t => {
     const diff = (
         <section class="bb-udiff" data-filename="filename.js">
             <div class="heading">
@@ -362,6 +370,17 @@ test('should re-enable Comments if a new comment is submitted', async t => {
 
     insertShowComments(diff)
 
+    const showComments = diff.querySelector('.__rbb-show-comments')
+    showComments.dispatchEvent(new Event('click'))
+
+    // hidden
+    diff.querySelectorAll('.comment-thread-container').forEach(comment => {
+        t.is(comment.style.display, 'none')
+    })
+
+    // The button should hide comments, all comments should be hidden
+    t.is(stateShowComments, false)
+
     // Add a comment
     diff.querySelector('.refract-content-container').appendChild(
         <div class="comment-thread-container">
@@ -371,28 +390,10 @@ test('should re-enable Comments if a new comment is submitted', async t => {
         </div>
     )
 
-    // Hide the comments by un-checking the checkbox
-    const showComments = diff.querySelector('.__rbb-show-comments input')
-    showComments.checked = false
-    showComments.dispatchEvent(new Event('change'))
+    await delay(200)
 
-    diff.querySelectorAll('.comment-thread-container').forEach(comment => {
-        t.is(comment.style.display, 'none')
-    })
-
-    // Add a new comment
-    diff.querySelector('.refract-content-container').appendChild(
-        <div class="comment-thread-container">
-            <li class="comment">
-                <p>Some comment</p>
-            </li>
-        </div>
-    )
-
-    await delay(100)
-
-    // The checkbox should be enabled, and all comments should be visible
-    t.is(showComments.checked, true)
+    // The button should show comments
+    t.is(stateShowComments, true)
 
     diff.querySelectorAll('.comment-thread-container').forEach(comment => {
         t.is(comment.style.display, '')

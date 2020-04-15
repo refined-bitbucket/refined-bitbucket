@@ -8,11 +8,11 @@ import SelectorObserver from 'selector-observer'
 
 import './show-comments.css'
 
-let showComments = true
+export let stateShowComments = true
 
 const onClick = e => {
-    showComments = !showComments
-    if (showComments) {
+    stateShowComments = !stateShowComments
+    if (stateShowComments) {
         e.currentTarget.classList.remove('__rbb_comments_hidden')
     } else {
         e.currentTarget.classList.add('__rbb_comments_hidden')
@@ -23,7 +23,7 @@ const onClick = e => {
         ...diff.getElementsByClassName('comment-thread-container'),
     ]
     comments.forEach(comment => {
-        comment.style.display = showComments ? '' : 'none'
+        comment.style.display = stateShowComments ? '' : 'none'
     })
 }
 
@@ -49,18 +49,22 @@ function onAddComment(section) {
 
     // Show comments button already exists
     if (existingButton) {
-        if (!showComments) {
-            showComments = true
+        if (!stateShowComments) {
+            stateShowComments = false
             existingButton.dispatchEvent(new Event('click'))
         }
         return
     }
 
+    const actionsSection: HTMLElement = (section.querySelector(
+        '.diff-actions.secondary'
+    ): any)
+
     const hasCommentsOnPreviousVersions = Boolean(
-        section.getElementsByClassName('eclipsedcount').length
+        actionsSection.getElementsByClassName('eclipsedcount').length
     )
     const hasStatusBadge = Boolean(
-        section.getElementsByClassName('aui-lozenge').length
+        actionsSection.getElementsByClassName('aui-lozenge').length
     )
     const showCommentsButton = (
         <button
@@ -71,7 +75,7 @@ function onAddComment(section) {
             style={
                 hasCommentsOnPreviousVersions || hasStatusBadge
                     ? {
-                          'margin-right': 10,
+                          marginRight: 10,
                       }
                     : {}
             }
@@ -81,12 +85,9 @@ function onAddComment(section) {
         </button>
     )
 
-    const diffActions: HTMLElement = (section.querySelector(
-        '.diff-actions.secondary'
-    ): any)
-    diffActions.style.minWidth = '480px'
-    diffActions.style.textAlign = 'right'
-    diffActions.insertBefore(showCommentsButton, diffActions.firstChild)
+    actionsSection.style.minWidth = '480px'
+    actionsSection.style.textAlign = 'right'
+    actionsSection.insertBefore(showCommentsButton, actionsSection.firstChild)
 }
 
 function onDeleteComment(section) {
