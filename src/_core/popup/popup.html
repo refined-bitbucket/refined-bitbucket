@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Refined Bitbucket</title>
+    <link href="popup.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <section class="container">
+        <aside class="side-menu">
+            <button type="button" class="toggle" title="Disable">
+                <!-- toggle -->
+                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24"
+                    viewBox="0 0 24 24" width="24">
+                    <g>
+                        <path d="M0 0h24v24H0z" class="circle" fill="none" />
+                        <path class="icon" fill="white"
+                            d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z" />
+                    </g>
+                </svg>
+            </button>
+            <button type="button" class="options" title="Toggle features on/off in options">
+                <!-- options svg -->
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                    <path d="M0 0h24v24H0z" class="circle" fill="none" />
+                    <path class="icon"
+                        d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z" />
+                </svg>
+            </button>
+        </aside>
+        <article class="content">
+            <!-- app -->
+            <section class="title">
+                <img class="app-icon" width="32px" height="32px" src="icon.svg">
+                <span class="app-name">
+                    <span class="upper">REFINED</span>
+                    <span class="bottom">BITBUCKET</span>
+                </span>
+            </section>
+            <!-- version -->
+            <span class="version">v.<span id="version-number">DEV</span></span>
+            <!-- menus -->
+            <section class="menus">
+                <!-- an option -->
+                <button type="button" class="option" title="Toggle Code Syntaxe Highlighting">
+                    <!-- colors svg -->
+                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24"
+                        viewBox="0 0 24 24" width="24">
+                        <g>
+                            <rect class="circle" fill="none" height="24" width="24" />
+                        </g>
+                        <g>
+                            <g>
+                                <g>
+                                    <path class="icon"
+                                        d="M6,14l3,3v5h6v-5l3-3V9H6V14z M11,2h2v3h-2V2z M3.5,5.88l1.41-1.41l2.12,2.12L5.62,8L3.5,5.88z M16.96,6.59l2.12-2.12 l1.41,1.41L18.38,8L16.96,6.59z" />
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    <label>Syntaxe Highlighting</label>
+                </button>
+            </section>
+        </article>
+        <aside class="side-line"></aside>
+    </section>
+    <script src="popup.js"></script>
+</body>
+
+</html>

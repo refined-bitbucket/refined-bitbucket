@@ -1,0 +1,165 @@
+body {
+    margin: 0;
+}
+.container {
+    width: 18em;
+    background-color: rgb(244, 245, 247);
+    color: rgb(66, 82, 110);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    display: flex;
+    flex-direction: row;
+    font-size: 1em;
+}
+
+button {
+    background-color: transparent;
+    border: medium none;
+}
+button:hover {
+    cursor: pointer;
+}
+
+.side-menu {
+    width: 3em;
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgb(7, 71, 166);
+    overflow: hidden;
+}
+.side-menu button {
+    padding: 0.5em;
+    width: inherit;
+    align-items: center;
+    border-radius: 3px;
+}
+.side-menu button svg {
+    width: 24px;
+}
+.side-menu button svg path.icon {
+    fill: white;
+}
+.side-menu button:hover svg {
+    border: medium none;
+    border-radius: 1em;
+}
+.side-menu button:hover svg path.circle {
+    fill: #0065ff;
+}
+.side-menu button:disabled svg path.icon {
+    fill: gray;
+}
+
+.side-menu button.options {
+    position: absolute;
+    bottom: 0;
+}
+
+.content {
+    width: 15em;
+    overflow: hidden;
+}
+
+.version {
+    font-size: 0.8em;
+    width: 92%;
+    margin-top: -1em;
+    display: block;
+    text-align: right;
+}
+
+.title {
+    color: white;
+    text-align: center;
+    padding: 0.5em;
+    display: flex;
+    column-gap: 0.2em;
+    line-height: 1em;
+}
+
+.app-icon {
+    display: inline-grid;
+    margin-left: auto;
+}
+
+.app-name {
+    font-size: 1.2em;
+    font-weight: 800;
+    display: inline-grid;
+    margin-right: auto;
+    text-align: left;
+}
+
+.app-name .upper {
+    color: #2684ff;
+    margin-top: 0.3em;
+}
+
+.app-name .bottom {
+    color: #253858;
+    margin-top: -0.5em;
+}
+
+.menus {
+    padding: 0 0.5em;
+}
+.menus:first-child {
+    padding-top: 0.5em;
+}
+.menus:last-child {
+    padding-bottom: 0.5em;
+}
+
+.option {
+    display: flex;
+    background-color: transparent;
+    padding: 0 0.4em;
+    height: 3em;
+    width: 100%;
+    align-items: center;
+    border: medium none;
+    border-radius: 0.3em;
+}
+.option label {
+    color: rgb(66, 82, 110);
+    font-size: 0.88;
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.option label:hover {
+    cursor: pointer;
+}
+.option:hover {
+    cursor: pointer;
+    color: rgb(0, 82, 204);
+    background-color: rgb(235, 236, 240);
+}
+.option svg {
+    padding: 0 0.3em 0 0;
+}
+.option svg path.icon {
+    pointer-events: none;
+    fill: rgb(66, 82, 110);
+}
+.option:hover svg path.icon {
+    fill: rgb(0, 82, 204);
+}
+
+.side-line {
+    background: rgba(0, 0, 0, 0)
+        linear-gradient(
+            to left,
+            rgba(0, 0, 0, 0.2) 0px,
+            rgba(0, 0, 0, 0.2) 1px,
+            rgba(0, 0, 0, 0.1) 1px,
+            rgba(0, 0, 0, 0) 100%
+        )
+        repeat scroll 0% 0%;
+    opacity: 0.7;
+    width: 3px;
+}
