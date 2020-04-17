@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    overflow: hidden;
 }
 .container {
     width: 18em;
@@ -19,6 +20,10 @@ button {
 }
 button:hover {
     cursor: pointer;
+}
+button label,
+button svg {
+    pointer-events: none;
 }
 
 .side-menu {
@@ -42,15 +47,15 @@ button:hover {
 .side-menu button svg path.icon {
     fill: white;
 }
+.side-menu button[data-state='disabled'] svg path.icon {
+    fill: gray;
+}
 .side-menu button:hover svg {
     border: medium none;
     border-radius: 1em;
 }
 .side-menu button:hover svg path.circle {
     fill: #0065ff;
-}
-.side-menu button:disabled svg path.icon {
-    fill: gray;
 }
 
 .side-menu button.options {
@@ -60,7 +65,6 @@ button:hover {
 
 .content {
     width: 15em;
-    overflow: hidden;
 }
 
 .version {
@@ -123,6 +127,10 @@ button:hover {
     border: medium none;
     border-radius: 0.3em;
 }
+.option:hover {
+    background-color: rgb(235, 236, 240);
+}
+
 .option label {
     color: rgb(66, 82, 110);
     font-size: 0.88;
@@ -131,23 +139,23 @@ button:hover {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.option label:hover {
-    cursor: pointer;
-}
-.option:hover {
-    cursor: pointer;
+.option:hover label {
     color: rgb(0, 82, 204);
-    background-color: rgb(235, 236, 240);
+}
+.option[data-state='disabled'] label {
+    color: gray;
 }
 .option svg {
     padding: 0 0.3em 0 0;
 }
 .option svg path.icon {
-    pointer-events: none;
     fill: rgb(66, 82, 110);
 }
 .option:hover svg path.icon {
     fill: rgb(0, 82, 204);
+}
+.option[data-state='disabled'] svg path.icon {
+    fill: gray;
 }
 
 .side-line {

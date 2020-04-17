@@ -10,7 +10,7 @@
 <body>
     <section class="container">
         <aside class="side-menu">
-            <button type="button" class="toggle" title="Disable">
+            <button type="button" class="toggle" id="toggle-ext-state" data-state="enabled" title="Disable">
                 <!-- toggle -->
                 <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24"
                     viewBox="0 0 24 24" width="24">
@@ -21,7 +21,7 @@
                     </g>
                 </svg>
             </button>
-            <button type="button" class="options" title="Toggle features on/off in options">
+            <button type="button" class="options" id="view-options" title="Toggle features on/off in options">
                 <!-- options svg -->
                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                     <path d="M0 0h24v24H0z" class="circle" fill="none" />
@@ -44,12 +44,18 @@
             <!-- menus -->
             <section class="menus">
                 <!-- an option -->
-                <button type="button" class="option" title="Toggle Code Syntaxe Highlighting">
-                    <!-- colors svg -->
+                <!--
+                    svg icons come from material-ui
+                    https://material.io/resources/icons
+                    -   set the class='icon' to the second <path /> of the <svg />
+                        normally that's the icon, the first one is the background
+                -->
+                <button type="button" class="option" id="toggle-syntax-highlight" data-state="enabled"
+                    title="Toggle Code Syntax Highlight">
                     <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24"
                         viewBox="0 0 24 24" width="24">
                         <g>
-                            <rect class="circle" fill="none" height="24" width="24" />
+                            <rect fill="none" height="24" width="24" />
                         </g>
                         <g>
                             <g>
@@ -60,7 +66,7 @@
                             </g>
                         </g>
                     </svg>
-                    <label>Syntaxe Highlighting</label>
+                    <label>Syntax Highlighting</label>
                 </button>
             </section>
         </article>

@@ -14,6 +14,7 @@ const justInstalledOrUpdated = new Promise((resolve, reject) => {
 
 new OptionsSync().define({
     defaults: {
+        _isExtEnabled: true,
         syntaxHighlight: true,
         autolinker: true,
         highlightOcurrences: true,
