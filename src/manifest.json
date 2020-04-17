@@ -13,9 +13,8 @@
     "128": "icon_128px.png",
     "256": "icon_256px.png"
   },
-  "browser_action": {
+  "page_action": {
     "browser_style": true,
-    "chrome_style": true,
     "default_icon": {
       "16": "icon_16px.png",
       "32": "icon_32px.png"
@@ -35,6 +34,7 @@
   },
   "permissions": [
     "activeTab",
+    "declarativeContent",
     "https://bitbucket.org/*",
     "https://api.bitbucket.org/*",
     "storage"
@@ -45,9 +45,7 @@
         "prism.js",
         "main.js"
       ],
-      "matches": [
-        "https://bitbucket.org/*", "https://*.bitbucket.org/*"
-      ]
+      "matches": ["https://bitbucket.org/*", "https://*.bitbucket.org/*"]
     }
   ],
   "background": {

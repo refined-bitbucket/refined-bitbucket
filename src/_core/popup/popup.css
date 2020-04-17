@@ -26,6 +26,10 @@ button svg {
     pointer-events: none;
 }
 
+fieldset {
+    border: none;
+}
+
 .side-menu {
     width: 3em;
     position: relative;
@@ -142,7 +146,8 @@ button svg {
 .option:hover label {
     color: rgb(0, 82, 204);
 }
-.option[data-state='disabled'] label {
+.option[data-state='disabled'] label,
+fieldset.menus:disabled .option label {
     color: gray;
 }
 .option svg {
@@ -154,7 +159,8 @@ button svg {
 .option:hover svg path.icon {
     fill: rgb(0, 82, 204);
 }
-.option[data-state='disabled'] svg path.icon {
+.option[data-state='disabled'] svg path.icon,
+fieldset.menus:disabled .option svg path.icon {
     fill: gray;
 }
 

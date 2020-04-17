@@ -21,7 +21,7 @@ var toggleSyntaxHighlight = document.getElementById('toggle-syntax-highlight')
 function run() {
     // set version tag
     var versionTag = document.getElementById('version-number')
-    versionTag.innerHTML = browser.runtime.getManifest().version
+    versionTag.innerHTML = chrome.runtime.getManifest().version
 
     // view options listener
     var buttonOptions = document.getElementById('view-options')
@@ -64,6 +64,13 @@ function handleToggleSyntaxHighlightClick(e) {
 function updateToggleExtStateButton(isEnabled, target = null) {
     if (target != null) optionsStorage.set({ _isExtEnabled: isEnabled })
     updateCommonToggleAttributes(target || toggleExtState, isEnabled)
+
+    const menuFieldset = document.getElementById('menu')
+    if (isEnabled) {
+        menuFieldset.removeAttribute('disabled')
+    } else {
+        menuFieldset.setAttribute('disabled', true)
+    }
 }
 function updateToggleSyntaxHighlightButton(isEnabled, target = null) {
     if (target != null) optionsStorage.set({ syntaxHighlight: isEnabled })
