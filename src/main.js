@@ -14,7 +14,10 @@ import collapseDiff from './collapse-diff'
 import defaultMergeStrategy from './default-merge-strategy'
 import diffIgnore from './diff-ignore'
 import removeDiffsPlusesAndMinuses from './diff-pluses-and-minuses'
-import ignoreWhitespace from './ignore-whitespace'
+import {
+    ignoreWhitespaceSearchParam,
+    ignoreWhitespaceInit,
+} from './ignore-whitespace'
 import insertCopyFilename from './insert-copy-filename'
 import insertCopyFilenameNew from './insert-copy-filename-new'
 import keymap from './keymap'
@@ -42,6 +45,7 @@ import {
     isCommit,
     isBranch,
     isComparePage,
+    isDashBoardOverview,
 } from './page-detect'
 
 import addStyleToPage from './add-style'
@@ -62,7 +66,7 @@ function init(config) {
     } else if (isPullRequest()) {
         codeReviewFeatures(config)
         pullrequestRelatedFeatures(config)
-    } else if (isPullRequestList()) {
+    } else if (isPullRequestList() || isDashBoardOverview()) {
         pullrequestListRelatedFeatures(config)
     } else if (isCreatePullRequestURL()) {
         if (config.prTemplateEnabled) {
@@ -109,7 +113,7 @@ function pullrequestListRelatedFeatures(config) {
         'tr[data-qa="pull-request-row"]',
         function() {
             if (config.ignoreWhitespace) {
-                ignoreWhitespace(this)
+                ignoreWhitespaceSearchParam(this)
             }
 
             if (config.augmentPrEntry) {
@@ -202,6 +206,10 @@ function codeReviewFeatures(config) {
 
     if (config.lineLengthLimitEnabled) {
         setLineLengthLimit(config.lineLengthLimit, config.stickyHeader)
+    }
+
+    if (config.ignoreWhitespace) {
+        ignoreWhitespaceInit()
     }
 
     if (config.stickyHeader) {
