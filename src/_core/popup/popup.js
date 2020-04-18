@@ -4,7 +4,7 @@ import OptionsSync from 'webext-options-sync'
 
 const optionsStorage = new OptionsSync()
 
-// common functions
+// Common functions
 function getToggleState(target) {
     return target.getAttribute('data-state') === 'enabled'
 }
@@ -13,18 +13,18 @@ function updateCommonToggleAttributes(target, isEnabled) {
     target.title = isEnabled ? 'Disable' : 'Enable'
 }
 
-// all toggle buttons are declared here
-var toggleExtState = document.getElementById('toggle-ext-state')
-// menu
-var toggleSyntaxHighlight = document.getElementById('toggle-syntax-highlight')
+// All toggle buttons are declared here
+const toggleExtState = document.getElementById('toggle-ext-state')
+// Menu
+const toggleSyntaxHighlight = document.getElementById('toggle-syntax-highlight')
 
 function run() {
-    // set version tag
-    var versionTag = document.getElementById('version-number')
+    // Set version tag
+    const versionTag = document.getElementById('version-number')
     versionTag.innerHTML = chrome.runtime.getManifest().version
 
-    // view options listener
-    var buttonOptions = document.getElementById('view-options')
+    // View options listener
+    const buttonOptions = document.getElementById('view-options')
     buttonOptions.addEventListener('click', () =>
         chrome.runtime.openOptionsPage()
     )
@@ -34,16 +34,16 @@ function run() {
     initOptions()
 }
 
-// init all toggle with current value of options here
+// Init all toggle with current value of options here
 async function initOptions() {
-    var { _isExtEnabled, syntaxHighlight } = await optionsStorage.getAll()
+    const { _isExtEnabled, syntaxHighlight } = await optionsStorage.getAll()
 
-    // toggle extension state
+    // Toggle extension state
     updateToggleExtStateButton(_isExtEnabled)
     updateToggleSyntaxHighlightButton(syntaxHighlight)
 }
 
-// all toggle event handler are declared here
+// All toggle event handler are declared here
 function addToggleEventListeners() {
     toggleExtState.addEventListener('click', handleToggleExtStateClick)
     toggleSyntaxHighlight.addEventListener(
@@ -52,7 +52,7 @@ function addToggleEventListeners() {
     )
 }
 
-// all toggle buttons listeners are declared below
+// All toggle buttons listeners are declared below
 function handleToggleExtStateClick(e) {
     updateToggleExtStateButton(!getToggleState(e.target), e.target)
 }
@@ -60,9 +60,9 @@ function handleToggleSyntaxHighlightClick(e) {
     updateToggleSyntaxHighlightButton(!getToggleState(e.target), e.target)
 }
 
-// all toggle buttons visual update functions are declared below
+// All toggle buttons visual update functions are declared below
 function updateToggleExtStateButton(isEnabled, target = null) {
-    if (target != null) optionsStorage.set({ _isExtEnabled: isEnabled })
+    if (target !== null) optionsStorage.set({ _isExtEnabled: isEnabled })
     updateCommonToggleAttributes(target || toggleExtState, isEnabled)
 
     const menuFieldset = document.getElementById('menu')
@@ -73,7 +73,7 @@ function updateToggleExtStateButton(isEnabled, target = null) {
     }
 }
 function updateToggleSyntaxHighlightButton(isEnabled, target = null) {
-    if (target != null) optionsStorage.set({ syntaxHighlight: isEnabled })
+    if (target !== null) optionsStorage.set({ syntaxHighlight: isEnabled })
     updateCommonToggleAttributes(target || toggleSyntaxHighlight, isEnabled)
 }
 

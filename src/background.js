@@ -3,24 +3,19 @@
 import OptionsSync from 'webext-options-sync'
 
 const justInstalledOrUpdated = new Promise((resolve, reject) => {
-    chrome.runtime.onInstalled.addListener(function(details) {
-        chrome.declarativeContent.onPageChanged.removeRules(
-            undefined,
-            function() {
-                chrome.declarativeContent.onPageChanged.addRules([
-                    {
-                        conditions: [
-                            new chrome.declarativeContent.PageStateMatcher({
-                                pageUrl: { hostEquals: 'bitbucket.org' },
-                            }),
-                        ],
-                        actions: [
-                            new chrome.declarativeContent.ShowPageAction(),
-                        ],
-                    },
-                ])
-            }
-        )
+    chrome.runtime.onInstalled.addListener(details => {
+        chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
+            chrome.declarativeContent.onPageChanged.addRules([
+                {
+                    conditions: [
+                        new chrome.declarativeContent.PageStateMatcher({
+                            pageUrl: { hostEquals: 'bitbucket.org' },
+                        }),
+                    ],
+                    actions: [new chrome.declarativeContent.ShowPageAction()],
+                },
+            ])
+        })
         if (details.reason === 'install' || details.reason === 'update') {
             resolve()
         } else {

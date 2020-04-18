@@ -1,9 +1,8 @@
 import { h } from 'dom-chef'
 import test from 'ava'
 
-import ignoreWhitespace from '.'
-
 import '../../test/setup-jsdom'
+import { ignoreWhitespaceSearchParam } from '.'
 
 test('should transform pull request link to add ignore whitespace query param to 1', t => {
     const actual = (
@@ -30,7 +29,7 @@ test('should transform pull request link to add ignore whitespace query param to
         </div>
     )
 
-    ignoreWhitespace(actual)
+    ignoreWhitespaceSearchParam(actual)
 
     t.is(actual.outerHTML, expected.outerHTML)
 })
@@ -60,7 +59,7 @@ test('should transform pull request link to toggle ignore whitespace query param
         </div>
     )
 
-    ignoreWhitespace(actual)
+    ignoreWhitespaceSearchParam(actual)
 
     t.is(actual.outerHTML, expected.outerHTML)
 })
