@@ -10,11 +10,14 @@ import './sidebar-counters.css'
 
 const HREF_BRANCHES = 'branches'
 const HREF_PULL_REQUESTS = 'pull-requests'
-const menus = [HREF_BRANCHES, HREF_PULL_REQUESTS]
+export const menus = [HREF_BRANCHES, HREF_PULL_REQUESTS]
 
 const MAX_COUNTER = 99
 
-let menusCounters = {}
+export let menusCounters = {
+    HREF_BRANCHES: null,
+    HREF_PULL_REQUESTS: null,
+}
 
 type ResultSize = $Exact<{ size: number }>
 
@@ -52,17 +55,7 @@ export async function addCounterToMenuItem(menu: HTMLElement) {
     // that we are going to augment with badge counters
     if (!wantedMenuFromHref) return
 
-    const resources: ResultSize | void = await getCounterInfo(
-        wantedMenuFromHref
-    )
-    const { size: currentSize } = resources || {}
-
-    // Fallback to old count if it fails to retrieve the new count
-    const size =
-        typeof currentSize === 'number'
-            ? currentSize
-            : menusCounters[wantedMenuFromHref]
-
+    const size = menusCounters[wantedMenuFromHref]
     const badge = getBadge(size)
 
     menu.style.overflow = 'hidden'
@@ -71,10 +64,11 @@ export async function addCounterToMenuItem(menu: HTMLElement) {
 }
 
 export default async function addSideBarCounters() {
-    menusCounters = menus.reduce(
-        async (acc, menu) => ({ [menu]: await getCounterInfo(menu) }),
-        {}
-    )
+    menus.forEach(async menu => {
+        const resources = await getCounterInfo(menu)
+        const { size: currentSize } = resources || {}
+        menusCounters[menu] = currentSize
+    })
     const contentNavigationSelector =
         'div[data-testid="Content"] div[role="presentation"]'
     const contextualNavigationSelector =

@@ -5,21 +5,20 @@ import '../../test/setup-jsdom'
 
 import 'selector-observer'
 
-import { getBadge, addCounterToMenuItem } from './sidebar-counters'
+import {
+    getBadge,
+    addCounterToMenuItem,
+    menusCounters,
+    menus,
+} from './sidebar-counters'
 import addSidebarCounters from '.'
 
 global.fetch = {}
 
 const size = 10
 
-test.beforeEach(() => {
-    global.chrome = {
-        runtime: {
-            sendMessage: (data, cb) => {
-                cb({ size })
-            },
-        },
-    }
+menus.forEach(m => {
+    menusCounters[m] = size
 })
 
 test.afterEach(() => {
