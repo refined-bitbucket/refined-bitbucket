@@ -24,3 +24,8 @@
     right: 0;
     left: 0;
 }
+
+.__rbb-badge-counter.-max::before {
+    content: '+';
+    margin: -0.2em;
+}

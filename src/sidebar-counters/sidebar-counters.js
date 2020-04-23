@@ -10,15 +10,20 @@ import './sidebar-counters.css'
 
 const HREF_BRANCHES = 'branches'
 const HREF_PULL_REQUESTS = 'pull-requests'
+const menus = [HREF_BRANCHES, HREF_PULL_REQUESTS]
+
+const MAX_COUNTER = 99
+
+let menusCounters = {}
 
 type ResultSize = $Exact<{ size: number }>
 
-export function getBadge(resources: ResultSize | void): HTMLElement {
-    const size = resources ? resources.size : undefined
+export function getBadge(size: number): HTMLElement {
+    const maxReached = size > MAX_COUNTER
     return (
         <span class="__rbb-badge">
-            <span class="__rbb-badge-counter">
-                {typeof size !== 'number' ? '!' : size > 99 ? '+99' : size}
+            <span class={`__rbb-badge-counter${maxReached ? ' -max' : ''}`}>
+                {typeof size !== 'number' ? '!' : Math.min(size, MAX_COUNTER)}
             </span>
         </span>
     )
@@ -41,9 +46,7 @@ export async function addCounterToMenuItem(menu: HTMLElement) {
     if (!link) return
 
     const hrefParts = link.getAttribute('href').split('/')
-    const wantedMenuFromHref = hrefParts.find(x =>
-        [HREF_BRANCHES, HREF_PULL_REQUESTS].includes(x)
-    )
+    const wantedMenuFromHref = hrefParts.find(x => menus.includes(x))
 
     // Exit early if can't find one of the nav links
     // that we are going to augment with badge counters
@@ -52,8 +55,15 @@ export async function addCounterToMenuItem(menu: HTMLElement) {
     const resources: ResultSize | void = await getCounterInfo(
         wantedMenuFromHref
     )
+    const { size: currentSize } = resources || {}
 
-    const badge = getBadge(resources)
+    // Fallback to old count if it fails to retrieve the new count
+    const size =
+        typeof currentSize === 'number'
+            ? currentSize
+            : menusCounters[wantedMenuFromHref]
+
+    const badge = getBadge(size)
 
     menu.style.overflow = 'hidden'
     link.style.position = 'relative'
@@ -61,6 +71,10 @@ export async function addCounterToMenuItem(menu: HTMLElement) {
 }
 
 export default async function addSideBarCounters() {
+    menusCounters = menus.reduce(
+        async (acc, menu) => ({ [menu]: await getCounterInfo(menu) }),
+        {}
+    )
     const contentNavigationSelector =
         'div[data-testid="Content"] div[role="presentation"]'
     const contextualNavigationSelector =
@@ -69,7 +83,7 @@ export default async function addSideBarCounters() {
         document.body,
         [contentNavigationSelector, contextualNavigationSelector].join(', '),
         function() {
-            addCounterToMenuItem(this)
+            addCounterToMenuItem(this, menusCounters)
         }
     )
 }

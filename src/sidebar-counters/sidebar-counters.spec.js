@@ -27,35 +27,31 @@ test.afterEach(() => {
 })
 
 test('getBadge should add ! character if response fails or has unexpected shape', t => {
-    // Act & Assert 1
+    // Act  & Assert 1
     const actual1 = getBadge(undefined)
     t.is(actual1.querySelector('.__rbb-badge-counter').textContent, '!')
 
     // Act  & Assert 2
     const actual2 = getBadge(null)
     t.is(actual2.querySelector('.__rbb-badge-counter').textContent, '!')
-
-    // Act  & Assert 3
-    const actual3 = getBadge({})
-    t.is(actual3.querySelector('.__rbb-badge-counter').textContent, '!')
-
-    // Act  & Assert 4
-    const actual4 = getBadge({ size: null })
-    t.is(actual4.querySelector('.__rbb-badge-counter').textContent, '!')
 })
 
 test('getBadge should add up to 99 using response size number', t => {
     // Act  & Assert 1
-    const actual1 = getBadge({ size: 0 })
+    const actual1 = getBadge(0)
     t.is(actual1.querySelector('.__rbb-badge-counter').textContent, '0')
 
     // Act  & Assert 2
-    const actual2 = getBadge({ size: 99 })
+    const actual2 = getBadge(99)
     t.is(actual2.querySelector('.__rbb-badge-counter').textContent, '99')
 
     // Act  & Assert 3
-    const actual3 = getBadge({ size: 100 })
-    t.is(actual3.querySelector('.__rbb-badge-counter').textContent, '+99')
+    const actual3 = getBadge(100)
+
+    t.is(actual3.querySelector('.__rbb-badge-counter').textContent, '99')
+    t.true(
+        actual3.querySelector('.__rbb-badge-counter').classList.contains('-max')
+    )
 })
 
 test.serial(
