@@ -1,0 +1,21 @@
+.diff-content-container.refract-container {
+    position: relative;
+}
+
+.refract-content-container::before {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    border-right: 1px solid #c0c0c0;
+    pointer-events: none;
+    color: transparent;
+    user-select: none;
+
+    /* same padding than the code diff to ignore column 'Line Number' */
+    padding-left: 98px;
+
+    /* same font than the code diff */
+    font-family: Consolas, Menlo, 'Liberation Mono', Courier, monospace;
+    font-size: 12px;
+    line-height: 18px;
+}
