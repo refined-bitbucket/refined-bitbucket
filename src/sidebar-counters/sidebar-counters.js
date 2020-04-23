@@ -13,7 +13,8 @@ const HREF_PULL_REQUESTS = 'pull-requests'
 
 type ResultSize = $Exact<{ size: number }>
 
-export function getBadge(size?: number): HTMLElement {
+export function getBadge(resources: ResultSize | void): HTMLElement {
+    const size = resources ? resources.size : undefined
     return (
         <span class="__rbb-badge">
             <span class="__rbb-badge-counter">
@@ -34,7 +35,7 @@ async function getCounterInfo(wantedMenuFromHref: string): Promise {
     }
 }
 
-async function addBadgesToMenu(menu: HTMLElement) {
+export async function addCounterToMenuItem(menu: HTMLElement) {
     const link: HTMLAnchorElement = menu.querySelector('a')
 
     if (!link) return
@@ -52,8 +53,7 @@ async function addBadgesToMenu(menu: HTMLElement) {
         wantedMenuFromHref
     )
 
-    const size = resources ? resources.size : undefined
-    const badge = getBadge(size)
+    const badge = getBadge(resources)
 
     menu.style.overflow = 'hidden'
     link.style.position = 'relative'
@@ -69,7 +69,7 @@ export default async function addSideBarCounters() {
         document.body,
         [contentNavigationSelector, contextualNavigationSelector].join(', '),
         function() {
-            addBadgesToMenu(this)
+            addCounterToMenuItem(this)
         }
     )
 }
