@@ -1,0 +1,99 @@
+/* overwrite style */
+#id_reviewers_group .__rbb_reviewers_container {
+    height: initial !important;
+    background: none;
+}
+#id_description_group {
+    padding-bottom: 4px !important;
+}
+
+/* custom style */
+.__rbb_reviewers_actions {
+    display: flex;
+    align-items: center;
+    margin: -2em 0 4px;
+}
+
+.__rbb_reviewers_add_all {
+    background: #0052cc;
+    background-color: rgb(0, 82, 204);
+    font-weight: 400;
+    border: 1px solid rgb(0, 82, 204);
+    position: relative;
+    border-radius: 3.01px;
+    box-shadow: none;
+    margin: 1px 5px 1px 0;
+    padding: 0 5px;
+    line-height: 20px;
+    color: #fff;
+}
+.__rbb_reviewers_add_all a::after {
+    content: '\f103';
+    font-family: 'Atlassian Icons';
+    color: #fff;
+}
+.__rbb_reviewers_add_all a {
+    text-decoration: none;
+    outline: none;
+}
+
+/* typeahead */
+
+.empty-message .tt-suggestion {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.tt-hint {
+    color: #888;
+}
+
+.tt-menu {
+    right: 0;
+    padding: 0.2em 0;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    max-height: 12em;
+    overflow-y: auto;
+}
+.tt-input::placeholder {
+    color: #172b4d;
+}
+.tt-suggestion {
+    padding: 4px 5px;
+    font-size: initial;
+}
+.tt-suggestion .mention-result--avatar {
+    margin-right: 5px !important;
+}
+.tt-suggestion .mention-result--secondary-name {
+    color: #5e6c84;
+}
+.tt-suggestion .mention-result--lozenge {
+    background-color: #fff;
+    border-color: #a5b3c2;
+    color: #4a6785;
+}
+
+.tt-suggestion:hover,
+.tt-suggestion.tt-cursor {
+    background-color: #f4f5f7;
+    cursor: pointer;
+}
+.tt-suggestion:hover .mention-result--lozenge,
+.tt-suggestion.tt-cursor .mention-result--lozenge {
+    background-color: #4a6785;
+    border-color: #4a6785;
+    color: #fff;
+}
+.tt-suggestion:hover .mention-result,
+.tt-suggestion.tt-cursor .mention-result {
+    color: #5e6c84;
+}
+
+/* fix highlight in teammate tag */
+.tt-suggestion .aui-lozenge .tt-highlight {
+    font-weight: inherit;
+}

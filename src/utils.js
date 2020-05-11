@@ -3,6 +3,7 @@
 
 import { h } from 'dom-chef'
 import onetime from 'onetime'
+import { IUser, mapUserXhrToUser } from './_core/models'
 
 export const getApiToken: () => string = onetime(
     (): string => {
@@ -15,18 +16,47 @@ export const getApiToken: () => string = onetime(
     }
 )
 
+export const getCurrentUser: () => IUser = onetime(
+    (): IUser => {
+        const data = document.body.dataset.currentUser
+        if (!data) return null
+        return mapUserXhrToUser(JSON.parse(data))
+    }
+)
+
+export const getCurrentPullRequestAuthorAccountId: () => string = onetime(
+    (): string => {
+        const data = document.body.dataset.currentPr
+        if (!data) return ''
+        var pullRequest = JSON.parse(data)
+        return (pullRequest.author && pullRequest.author['mention_id']) || ''
+    }
+)
+
+export const getCurrentUserAccountId: () => string = onetime(
+    (): string => getCurrentUser().account_id
+)
+
 export const getMainBranch: () => string = onetime(
-    (): string =>
-        JSON.parse((document.body || {}).dataset.currentRepo).mainbranch.name
+    (): string => {
+        const data = document.body.dataset.currentRepo
+        if (!data) return
+        const json = Object.assign({ mainbranch: {} }, JSON.parse(data))
+        return json.mainbranch.name
+    }
 )
 
 export const getMainBranchNew: () => string = onetime(
     (): string => {
         setInitialStateInBodyEl()
         // $FlowIgnore There's always going to be a body
-        const mbn = JSON.parse(document.body.dataset.initialState).section
-            .repository.currentRepository.mainbranch.name
-        return mbn
+        const data = document.body.dataset.initialState
+        if (!data) return
+        const json = Object.assign(
+            { section: { repository: { currentRepository: { mainbranch: {} } } } }, // prettier-ignore
+            JSON.parse(data)
+        )
+        return json.section.repository.currentRepository.mainbranch.name
     }
 )
 

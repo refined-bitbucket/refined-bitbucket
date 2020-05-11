@@ -16,11 +16,16 @@ module.exports = {
         new webpack.DefinePlugin({
             process: {},
         }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+        }),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new CopyWebpackPlugin([
             {
                 from: '*',
-                context: 'src',
+                context: 'src/*',
                 ignore: '*.js',
             },
             {
@@ -31,6 +36,14 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'extension'),
         filename: '[name].js',
+    },
+    resolve: {
+        alias: {
+            typeahead: path.resolve(
+                __dirname,
+                'src/vendor/typeahead.jquery.js'
+            ),
+        },
     },
     module: {
         rules: [

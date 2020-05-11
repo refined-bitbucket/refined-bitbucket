@@ -2,7 +2,6 @@
 
 /* eslint-disable import/first */
 /* eslint-disable no-multi-assign */
-global.jQuery = global.$ = require('jquery')
 
 import OptionsSync from 'webext-options-sync'
 import SelectorObserver from 'selector-observer'
@@ -32,8 +31,8 @@ import mergeCommitMessageNew from './merge-commit-message-new'
 import collapsePullRequestDescription from './collapse-pull-request-description'
 import setStickyHeader from './sticky-header'
 import setLineLengthLimit from './limit-line-length'
-
 import observeForWordDiffs from './observe-for-word-diffs'
+import customReviewersFeature from './custom-reviewers/custom-reviewers'
 
 import {
     isPullRequest,
@@ -42,6 +41,7 @@ import {
     isCommit,
     isBranch,
     isComparePage,
+    isEditPullRequestURL,
 } from './page-detect'
 
 import addStyleToPage from './add-style'
@@ -65,15 +65,9 @@ function init(config) {
     } else if (isPullRequestList()) {
         pullrequestListRelatedFeatures(config)
     } else if (isCreatePullRequestURL()) {
-        if (config.prTemplateEnabled) {
-            insertPullrequestTemplate(config.prTemplateUrl)
-        }
-
-        if (config.closeAnchorBranch) {
-            closeAnchorBranch()
-        }
-
-        codeReviewFeatures(config)
+        createPullRequestRelatedFeatures(config)
+    } else if (isEditPullRequestURL()) {
+        editPullRequestRelatedFeatures(config)
     } else if (isCommit()) {
         codeReviewFeatures(config)
     } else if (isComparePage()) {
@@ -95,6 +89,29 @@ function init(config) {
     if (config.customStyles) {
         addStyleToPage(config.customStyles)
     }
+}
+
+function createPullRequestRelatedFeatures(config) {
+    if (config.customReviewers) {
+        customReviewersFeature(config)
+    }
+    if (config.prTemplateEnabled) {
+        insertPullrequestTemplate(config.prTemplateUrl)
+    }
+    if (config.closeAnchorBranch) {
+        closeAnchorBranch()
+    }
+    codeReviewFeatures(config)
+}
+
+function editPullRequestRelatedFeatures(config) {
+    if (config.customReviewers) {
+        customReviewersFeature(config)
+    }
+    if (config.closeAnchorBranch) {
+        closeAnchorBranch()
+    }
+    codeReviewFeatures(config)
 }
 
 function pullrequestListRelatedFeatures(config) {
