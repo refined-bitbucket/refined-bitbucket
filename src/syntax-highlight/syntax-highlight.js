@@ -77,21 +77,21 @@ async function syntaxHighlightSourceCodeLines($diff) {
     const promises = sourceLines.map(
         preElement =>
             new Promise((resolve, reject) => {
-                const { firstChild, innerText, textContent } = preElement
+                const { classList, firstChild, innerText } = preElement
 
                 if (firstChild.$$rbb_isSyntaxHighlighted) {
                     reject('Already highlighted')
                     return
                 }
                 // Lines over the arbitrary max length of 9999 will be considered as minified
-                if ([innerText, textContent].some(x => x && x.length > 9999)) {
+                if (innerText && innerText.length > 9999) {
                     reject('Line is too long, probably minified')
                     return
                 }
 
                 Prism.highlightElement(preElement)
-                
-                preElement.classList.add('__rbb_syntax_highlight')
+
+                classList.add('__rbb_syntax_highlight')
                 // eslint-disable-next-line camelcase
                 firstChild.$$rbb_isSyntaxHighlighted = true
 
