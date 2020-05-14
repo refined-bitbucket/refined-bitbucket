@@ -39,10 +39,10 @@ export default function syntaxHighlight(diff, afterWordDiff) {
     }
 
     const $diff = $(diff)
-    // syntaxHighlightSourceCodeLines($diff)
+    syntaxHighlightSourceCodeLines($diff, 'pre.source:not([class*=language])')
 
     afterWordDiff(() => {
-        syntaxHighlightSourceCodeLines($diff)
+        syntaxHighlightSourceCodeLines($diff, '.addition pre, .deletion pre')
     })
 
     const codeContainer = diff.querySelector('.refract-content-container')
@@ -69,10 +69,8 @@ export default function syntaxHighlight(diff, afterWordDiff) {
     }
 }
 
-async function syntaxHighlightSourceCodeLines($diff) {
-    const sourceLines = [
-        ...$diff.find('pre:not([class*=language]), pre:has(ins), pre:has(del)'),
-    ]
+async function syntaxHighlightSourceCodeLines($diff, querySelector) {
+    const sourceLines = [...$diff.find(querySelector)]
 
     const promises = sourceLines.map(
         preElement =>
@@ -83,9 +81,10 @@ async function syntaxHighlightSourceCodeLines($diff) {
                     reject('Already highlighted')
                     return
                 }
+
                 // Lines over the arbitrary max length of 9999 will be considered as minified
                 if (innerText && innerText.length > 9999) {
-                    reject('Line is too long, probably minified')
+                    reject(`Line is too long, probably minified`)
                     return
                 }
 
