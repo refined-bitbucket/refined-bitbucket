@@ -39,7 +39,7 @@ export default function syntaxHighlight(diff, afterWordDiff) {
     }
 
     const $diff = $(diff)
-    syntaxHighlightSourceCodeLines($diff)
+    // syntaxHighlightSourceCodeLines($diff)
 
     afterWordDiff(() => {
         syntaxHighlightSourceCodeLines($diff)
@@ -69,18 +69,34 @@ export default function syntaxHighlight(diff, afterWordDiff) {
     }
 }
 
-function syntaxHighlightSourceCodeLines($diff) {
+async function syntaxHighlightSourceCodeLines($diff) {
     const sourceLines = [
         ...$diff.find('pre:not([class*=language]), pre:has(ins), pre:has(del)'),
     ]
 
-    sourceLines.forEach(preElement => {
-        if (!preElement.firstChild.$$rbb_isSyntaxHighlighted) {
-            Prism.highlightElement(preElement)
-            // eslint-disable-next-line camelcase
-            preElement.firstChild.$$rbb_isSyntaxHighlighted = true
-        }
-    })
+    const promises = sourceLines.map(
+        preElement =>
+            new Promise((resolve, reject) => {
+                const { firstChild, innerText, textContent } = preElement
+
+                if (firstChild.$$rbb_isSyntaxHighlighted) {
+                    reject('Already highlighted')
+                    return
+                }
+                // Lines over the arbitrary max length of 9999 will be considered as minified
+                if ([innerText, textContent].some(x => x && x.length > 9999)) {
+                    reject('Line is too long, probably minified')
+                    return
+                }
+
+                Prism.highlightElement(preElement)
+                firstChild.$$rbb_isSyntaxHighlighted = true
+
+                resolve()
+            })
+    )
+
+    await Promise.all(promises)
 }
 
 async function highlightSideDiffAsync({ languageClass, diffNodeSelector }) {
@@ -90,7 +106,7 @@ async function highlightSideDiffAsync({ languageClass, diffNodeSelector }) {
     await elementReady(`${diffNodeSelector} pre`, { target: sideBySide })
 
     const $sideBySide = $(sideBySide)
-    syntaxHighlightSourceCodeLines($sideBySide)
+    await syntaxHighlightSourceCodeLines($sideBySide)
 }
 
 async function listenForSideDiffScrollAsync({

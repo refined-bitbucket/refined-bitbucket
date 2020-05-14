@@ -143,6 +143,10 @@ function codeReviewFeatures(config) {
     }
 
     const manipulateDiff = diff => {
+        if (autocollapse.collapseIfNeeded(diff)) {
+            return
+        }
+
         if (diffIgnore.isIgnored(diff)) {
             return
         }
@@ -154,8 +158,6 @@ function codeReviewFeatures(config) {
         if (config.collapseDiff) {
             collapseDiff.insertCollapseDiffButton(diff)
         }
-
-        autocollapse.collapseIfNeeded(diff)
 
         if (config.showCommentsCheckbox) {
             insertShowComments(diff)
@@ -184,7 +186,7 @@ function codeReviewFeatures(config) {
         '#commit',
         '#diff',
     ]
-    const diffSelector = '#diff'
+    const diffSelector = 'section.bb-udiff'
     const allSelectors = [...new Set([...summarySelectors, diffSelector])].join(
         ', '
     )
@@ -201,15 +203,11 @@ function codeReviewFeatures(config) {
 
         try {
             if (this.matches(summarySelectors.join(', '))) {
-                manipulateSummary(this)
+                return manipulateSummary(this)
             }
 
             if (this.matches(diffSelector)) {
-                ;[...this.querySelectorAll('section.bb-udiff')].forEach(
-                    diff => {
-                        manipulateDiff(diff)
-                    }
-                )
+                return manipulateDiff(this)
             }
         } catch (error) {
             // Something went wrong

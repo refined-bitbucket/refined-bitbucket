@@ -1,5 +1,5 @@
 // @flow
-
+import debounce from './debounce'
 /**
  * Keep watching in case the diff is altered to include
  * word diffs, which rerenders the diffs with <ins> and <del> tags
