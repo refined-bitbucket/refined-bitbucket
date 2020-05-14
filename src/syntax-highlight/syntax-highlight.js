@@ -90,6 +90,9 @@ async function syntaxHighlightSourceCodeLines($diff) {
                 }
 
                 Prism.highlightElement(preElement)
+                
+                preElement.classList.add('__rbb_syntax_highlight')
+                // eslint-disable-next-line camelcase
                 firstChild.$$rbb_isSyntaxHighlighted = true
 
                 resolve()
