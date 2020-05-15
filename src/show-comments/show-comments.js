@@ -8,22 +8,17 @@ import SelectorObserver from 'selector-observer'
 
 import './show-comments.css'
 
-export let stateShowComments = true
-
 const onClick = e => {
-    stateShowComments = !stateShowComments
-    if (stateShowComments) {
-        e.currentTarget.classList.remove('__rbb_comments_hidden')
-    } else {
-        e.currentTarget.classList.add('__rbb_comments_hidden')
-    }
+    const ariaChecked = e.currentTarget.getAttribute('aria-checked')
+    const isChecked = ariaChecked === 'true'
+    e.currentTarget.setAttribute('aria-checked', !isChecked)
 
     const diff = e.target.closest('section.bb-udiff')
     const comments = [
         ...diff.getElementsByClassName('comment-thread-container'),
     ]
     comments.forEach(comment => {
-        comment.style.display = stateShowComments ? '' : 'none'
+        comment.style.display = isChecked ? 'none' : ''
     })
 }
 
@@ -49,8 +44,8 @@ function onAddComment(section) {
 
     // Show comments button already exists
     if (existingButton) {
-        if (!stateShowComments) {
-            stateShowComments = false
+        if (existingButton.getAttribute('aria-checked') !== 'true') {
+            existingButton.setAttribute('aria-checked', false)
             existingButton.dispatchEvent(new Event('click'))
         }
         return
@@ -71,6 +66,7 @@ function onAddComment(section) {
             type="button"
             class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
             title="Toggle file comments"
+            aria-checked="true"
             original-title="Toggle file comments"
             style={
                 hasCommentsOnPreviousVersions || hasStatusBadge
