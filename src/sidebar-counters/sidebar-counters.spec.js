@@ -8,18 +8,15 @@ import 'selector-observer'
 import {
     getBadge,
     addCounterToMenuItem,
-    menusCounters,
     menus,
+    HREF_PULL_REQUESTS,
+    HREF_BRANCHES,
 } from './sidebar-counters'
 import addSidebarCounters from '.'
 
 global.fetch = {}
 
 const size = 10
-
-menus.forEach(m => {
-    menusCounters[m] = size
-})
 
 test.afterEach(() => {
     cleanDocumentBody()
@@ -54,9 +51,14 @@ test('getBadge should add up to 99 using response size number', t => {
 })
 
 test.serial(
-    'addCounterToMenuItem should add properly branches counter to branches menu link',
+    'addCounterToMenuItem should fail if no menu link found',
     async t => {
         // Arrange
+        const menusCounters: MenuCounter = {
+            [HREF_BRANCHES]: null,
+            [HREF_PULL_REQUESTS]: 0,
+        }
+
         const menu = (
             <div role="presentation">
                 <a href="/user/repo/branches/" />
@@ -66,7 +68,41 @@ test.serial(
         const expected = (
             <div role="presentation" style={{ overflow: 'hidden' }}>
                 <a href="/user/repo/branches/" style={{ position: 'relative' }}>
-                    <span class="__rbb-badge">
+                    <span class="__rbb-badge" title="">
+                        <span class="__rbb-badge-counter">!</span>
+                    </span>
+                </a>
+            </div>
+        )
+
+        // Act
+        await addCounterToMenuItem(menu, menusCounters)
+
+        // Assert
+        t.is(menu.outerHTML, expected.outerHTML)
+        t.pass()
+    }
+)
+
+test.serial(
+    'addCounterToMenuItem should add properly branches counter to branches menu link',
+    async t => {
+        // Arrange
+        const menusCounters: MenuCounter = {
+            [HREF_BRANCHES]: size,
+            [HREF_PULL_REQUESTS]: 0,
+        }
+
+        const menu = (
+            <div role="presentation">
+                <a href="/user/repo/branches/" />
+            </div>
+        )
+
+        const expected = (
+            <div role="presentation" style={{ overflow: 'hidden' }}>
+                <a href="/user/repo/branches/" style={{ position: 'relative' }}>
+                    <span class="__rbb-badge" title={size}>
                         <span class="__rbb-badge-counter">{size}</span>
                     </span>
                 </a>
@@ -74,7 +110,7 @@ test.serial(
         )
 
         // Act
-        await addCounterToMenuItem(menu)
+        await addCounterToMenuItem(menu, menusCounters)
 
         // Assert
         t.is(menu.outerHTML, expected.outerHTML)
@@ -86,6 +122,11 @@ test.serial(
     'addCounterToMenuItem should add properly pull-requests counter to pull-requests menu link',
     async t => {
         // Arrange
+        const menusCounters: MenuCounter = {
+            [HREF_BRANCHES]: 0,
+            [HREF_PULL_REQUESTS]: size,
+        }
+
         const menu = (
             <div role="presentation">
                 <a href="/user/repo/pull-requests/" />
@@ -98,7 +139,7 @@ test.serial(
                     href="/user/repo/pull-requests/"
                     style={{ position: 'relative' }}
                 >
-                    <span class="__rbb-badge">
+                    <span class="__rbb-badge" title={size}>
                         <span class="__rbb-badge-counter">{size}</span>
                     </span>
                 </a>
@@ -106,7 +147,7 @@ test.serial(
         )
 
         // Act
-        await addCounterToMenuItem(menu)
+        await addCounterToMenuItem(menu, menusCounters)
 
         // Assert
         t.is(menu.outerHTML, expected.outerHTML)
@@ -118,6 +159,10 @@ test.serial(
     'addCounterToMenuItem should not add counter to unknown menu link',
     async t => {
         // Arrange
+        const menusCounters: MenuCounter = {
+            [HREF_BRANCHES]: size,
+            [HREF_PULL_REQUESTS]: size,
+        }
         const menu = (
             <div role="presentation">
                 <a href="/user/repo/commits/" />
@@ -125,7 +170,7 @@ test.serial(
         )
 
         // Act
-        await addCounterToMenuItem(menu)
+        await addCounterToMenuItem(menu, menusCounters)
 
         // Assert
         t.is(menu.outerHTML, menu.outerHTML)
