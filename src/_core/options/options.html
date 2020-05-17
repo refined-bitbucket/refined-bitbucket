@@ -30,8 +30,8 @@
         <br />
 
         <label>
-            <input type="checkbox" name="ignoreWhitespace" />
-            Set "Ignore whitespace" ON by default in the Old PR Experience
+            <input type="checkbox" name="ignoreWhitespace" /> Set "Ignore
+            whitespace" ON by default in the Old PR Experience
             (already natively supported in the New PR experience)
         </label>
         <br />
@@ -46,6 +46,15 @@
         <label>
             <input type="checkbox" name="collapsePullRequestDescription" />
             Add button to collapse pull request descriptions
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="collapsePullRequestSideMenus" />
+            By default on a pull request, collapse side menus when screen width is under
+            <input type="number" name="collapsePrSideMenusResolutionSize" min="0" style="width: 60px;" />
+            <span>px. (0 = unlimited)</span>
         </label>
         <br />
         <br />
