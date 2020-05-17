@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Refined Bitbucket Options</title>
+</head>
+
+<body>
+    <form id="options-form" style="width: 600px">
+        <label>
+            <input type="checkbox" name="syntaxHighlight" /> Syntax
+            highlighting
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="autolinker" /> Autolinker: Linkify
+            links in diffs
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="highlightOcurrences" /> Highlight
+            occurrences of selected words
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="ignoreWhitespace" /> Set "Ignore
+            whitespace" ON by default in the Old PR Experience (already natively supported in the New PR experience)
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="keymap" /> Enable keyboard mappings
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="collapsePullRequestDescription" />
+            Add button to collapse pull request descriptions
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="collapseDiff" /> Add "Toggle diff
+            text" button to collapse diff sections
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="loadAllDiffs" /> Add "Load all
+            diffs" button that automatically loads every failed diff of the
+            pull request simultaneously
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="closeAnchorBranch" /> Check the
+            "Close anchor branch" checkbox by default when creating a new
+            pull request
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="addSidebarCounters" /> Add counters
+            to the "Branches" and "Pull requests" links in the navigation
+            sidebar menu.
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="augmentPrEntry" /> Add source
+            branch, linkify branch names, and add creation date to each pull
+            request row in pull request list view.
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="comparePagePullRequest" /> Add the
+            'Create a Pull Request' button to the 'Compare branches and
+            tags' page view.
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="diffPlusesAndMinuses" /> Don't
+            carry pluses and minuses to clipboard when copying diff's
+            contents
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="pullrequestCommitAmount" /> Include
+            number of commits next to the Commits tab in the pull request
+            view
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="copyFilename" /> Insert "Copy
+            filename to clipboard" button in diff header
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="customTabSizeEnabled" /> Tab
+            indentation size:
+            <input type="number" name="customTabSize" min="0" max="16" style="width: 40px;" />
+            <span>spaces.</span>
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="lineLengthLimitEnabled" />
+            Set a line limit of
+            <input type="number" name="lineLengthLimit" min="0" max="200" style="width: 50px;" />
+            columns.
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="showCommentsCheckbox" /> Insert
+            "Comments" checkbox in diff header to toggle comments.
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="stickyHeader" /> Sticky Header -
+            Ensure filename and actions toolbar is always visible even for
+            long diffs
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="prTemplateEnabled" /> Use a
+            <em>PULL_REQUEST_TEMPLATE.md</em> from the repository when
+            creating new pull requests or specify a URL with your own raw
+            template (must be hosted publicly in
+            <a href="http://gist.github.com/">http://gist.github.com/</a>).
+            See the
+            <a href="http://github.com/refined-bitbucket/refined-bitbucket">README</a>
+            of the extension for more details on how this works.
+            <i>Note: Currently, externally hosted pull request templates
+                outside of Bitbucket's domain is not supported with the
+                Firefox addon.</i>
+            <input type="text" name="prTemplateUrl" style="width: 100%;" />
+        </label>
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" name="mergeCommitMessageEnabled" /> Use a
+            <em>MERGE_COMMIT_TEMPLATE</em> from the repository or specify a
+            URL with your own raw template where you can use variables like
+            `id`, `title`, `description` and more. See the
+            <a href="http://github.com/refined-bitbucket/refined-bitbucket">README</a>
+            of the extension for more details on how this works.
+            <i>
+                Note: Currently, externally hosted templates (outside from
+                Bitbucket's domain) are only tested with
+                <a href="http://gist.github.com/">http://gist.github.com/</a>, and are not supported with the Firefox
+                addon.
+            </i>
+            <input type="text" name="mergeCommitMessageUrl" style="width: 100%;" />
+        </label>
+        <br />
+        <br />
+
+        <label> Default Merge Strategy </label>
+        <div name="default-merge-strategy-form" style="margin: 0.5em 0 0 1em;">
+            <input type="radio" name="defaultMergeStrategy" value="none" />
+            None
+            <input type="radio" name="defaultMergeStrategy" value="merge_commit" checked />
+            Merge commit
+            <input type="radio" name="defaultMergeStrategy" value="squash" />
+            Squash
+            <input type="radio" name="defaultMergeStrategy" value="fast_forward" />
+            Fast forward
+        </div>
+        <br />
+
+        <div>
+            <div>
+                <label>
+                    <strong>Files to autocollapse. Use the same patterns as
+                        with .gitignore.</strong>
+                    <br />
+                    The files that match the given patterns will be
+                    automatically collapsed when the Pull Request loads.
+                </label>
+            </div>
+            <textarea name="autocollapsePaths" rows="7" style="width: 100%"></textarea>
+            <br />
+            <label>
+                <input type="checkbox" name="autocollapseDeletedFiles" />
+                Autocollapse deleted files
+            </label>
+        </div>
+        <br />
+
+        <div>
+            <div>
+                <label>
+                    <strong>Diff ignore. Use the same patterns as with
+                        .gitignore.</strong>
+                    <div>
+                        The files that match the given patterns will be
+                        completely removed and inaccessible in the Pull
+                        Request / Commit view.
+                    </div>
+                </label>
+            </div>
+            <textarea name="ignorePaths" rows="7" style="width: 100%"></textarea>
+        </div>
+        <br />
+
+        <div>
+            <div>
+                <label>
+                    <strong>Define your own CSS styles to be injected in every
+                        page</strong>
+                </label>
+            </div>
+            <textarea name="customStyles" rows="7" style="width: 100%"></textarea>
+        </div>
+        <br />
+
+        <hr />
+        <label style="display: flex; justify-content: space-between; align-items: center">
+            <span style="width: calc(100% - 30px)">
+                Enable Update Notifications. Every time this extension is
+                updated, the CHANGELOG for the current version will be
+                opened in a new browser tab.
+                <a href="https://github.com/refined-bitbucket/refined-bitbucket/issues/182">Subscribe to this issue if
+                    you would like to get e-mail
+                    notifications on updates.</a>
+            </span>
+            <input type="checkbox" name="enableUpdateNotifications" />
+        </label>
+    </form>
+
+    <script src="options.js"></script>
+</body>
+
+</html>

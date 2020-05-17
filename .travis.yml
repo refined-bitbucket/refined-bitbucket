@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "node"
+addons:
+  apt:
+    packages:
+      - xvfb
+before_install:
+  - npm i -g npm@5.3.0
+install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - npm install
+notifications:
+  email: false

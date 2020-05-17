@@ -1,0 +1,15 @@
+.addition > .source::before {
+    content: '+';
+    margin-right: -0.6em;
+}
+.addition > .source.__rbb_syntax_highlight::before {
+    color: #5aaf59;
+}
+
+.deletion > .source::before {
+    content: '-';
+    margin-right: -0.6em;
+}
+.deletion > .source.__rbb_syntax_highlight::before {
+    color: #a67f59;
+}

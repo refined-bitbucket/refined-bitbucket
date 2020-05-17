@@ -1,0 +1,16 @@
+[ignore]
+
+[include]
+
+[libs]
+
+[lints]
+all=warn
+unclear-type=off
+sketchy-null-string=off
+
+[options]
+suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
+include_warnings=true
+
+[strict]
