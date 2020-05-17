@@ -1,20 +1,44 @@
 .__rbb-collapse-bar {
     width: 100%;
-    margin-bottom: 10px;
-    background-color: #f4f5f7;
-    border-radius: 6px;
-    border: 0;
+    background-color: transparent;
+    border: none;
     display: flex;
     justify-content: center;
     cursor: pointer;
+    position: relative;
 }
 
 .__rbb-collapse-bar:hover {
-    background-color: #ebecf0;
+    background-color: transparent;
 }
-
-.__rbb-collapse-bar__collapsed {
-    border: 1px solid #dfe1e6;
+.__rbb-collapse-bar::before {
+    content: '';
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    border-radius: 0.5rem;
+    background-image: linear-gradient(rgb(200, 200, 200), transparent);
+}
+.__rbb-collapse-bar:hover::before {
+    opacity: 0.2;
+}
+.description {
+    position: relative;
+}
+.description::before {
+    content: '';
+    left: -0.25rem;
+    margin-left: 110px;
+    right: -0.25rem;
+    border-radius: 0.5rem;
+    height: 100%;
+    position: absolute;
+    border-bottom: none;
+    border: 1px solid rgb(21, 21, 22);
+    background-color: rgb(206, 212, 223);
+    border-radius: 0.5rem;
+    opacity: 0.1;
 }
 
 .__refined_bitbucket_hide {

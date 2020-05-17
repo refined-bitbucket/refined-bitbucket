@@ -14,7 +14,10 @@ import collapseDiff from './collapse-diff'
 import defaultMergeStrategy from './default-merge-strategy'
 import diffIgnore from './diff-ignore'
 import removeDiffsPlusesAndMinuses from './diff-pluses-and-minuses'
-import ignoreWhitespace from './ignore-whitespace'
+import {
+    ignoreWhitespaceSearchParam,
+    ignoreWhitespaceInit,
+} from './ignore-whitespace'
 import insertCopyFilename from './insert-copy-filename'
 import insertCopyFilenameNew from './insert-copy-filename-new'
 import keymap from './keymap'
@@ -32,6 +35,7 @@ import mergeCommitMessageNew from './merge-commit-message-new'
 import collapsePullRequestDescription from './collapse-pull-request-description'
 import setStickyHeader from './sticky-header'
 import setLineLengthLimit from './limit-line-length'
+import collapsePullRequestSideMenus from './collapse-pull-request-side-menus'
 
 import observeForWordDiffs from './observe-for-word-diffs'
 
@@ -42,11 +46,14 @@ import {
     isCommit,
     isBranch,
     isComparePage,
+    isDashBoardOverview,
 } from './page-detect'
 
 import addStyleToPage from './add-style'
 
 new OptionsSync().getAll().then(options => {
+    if (!options._isExtEnabled) return
+
     const config = {
         ...options,
         autocollapsePaths: (options.autocollapsePaths || '').split('\n'),
@@ -62,7 +69,7 @@ function init(config) {
     } else if (isPullRequest()) {
         codeReviewFeatures(config)
         pullrequestRelatedFeatures(config)
-    } else if (isPullRequestList()) {
+    } else if (isPullRequestList() || isDashBoardOverview()) {
         pullrequestListRelatedFeatures(config)
     } else if (isCreatePullRequestURL()) {
         if (config.prTemplateEnabled) {
@@ -109,7 +116,7 @@ function pullrequestListRelatedFeatures(config) {
         'tr[data-qa="pull-request-row"]',
         function() {
             if (config.ignoreWhitespace) {
-                ignoreWhitespace(this)
+                ignoreWhitespaceSearchParam(this)
             }
 
             if (config.augmentPrEntry) {
@@ -145,6 +152,10 @@ function codeReviewFeatures(config) {
     }
 
     const manipulateDiff = diff => {
+        if (autocollapse.collapseIfNeeded(diff)) {
+            return
+        }
+
         if (diffIgnore.isIgnored(diff)) {
             return
         }
@@ -156,8 +167,6 @@ function codeReviewFeatures(config) {
         if (config.collapseDiff) {
             collapseDiff.insertCollapseDiffButton(diff)
         }
-
-        autocollapse.collapseIfNeeded(diff)
 
         if (config.showCommentsCheckbox) {
             insertShowComments(diff, false)
@@ -180,40 +189,52 @@ function codeReviewFeatures(config) {
         }
     }
 
-    const summarySelectors =
-        '#compare-diff-content, #pr-tab-content, #commit, #diff'
+    const summarySelectors = [
+        '#compare-diff-content',
+        '#pr-tab-content',
+        '#commit',
+        '#diff',
+    ]
     const diffSelector = 'section.bb-udiff'
-
     const generalCommentsSelector = '#general-comments'
+    const allSelectors = [...new Set([...summarySelectors, diffSelector, generalCommentsSelector])].join(
+        ', '
+    )
 
     // Have to observe the DOM because some sections
     // load asynchronously by user interactions
     // eslint-disable-next-line no-new
-    new SelectorObserver(
-        document.body,
-        [summarySelectors, diffSelector, generalCommentsSelector].join(', '),
-        function() {
-            try {
-                if (this.matches(summarySelectors)) {
-                    return manipulateSummary(this)
-                }
+    new SelectorObserver(document.body, allSelectors, function() {
+        if (
+            this.style.display === 'none' ||
+            this.getAttribute('aria-hidden') === 'true'
+        )
+            return
 
-                if (this.matches(diffSelector)) {
-                    return manipulateDiff(this)
-                }
-
-                if (this.matches(generalCommentsSelector)) {
-                    return insertShowComments(this, true)
-                }
-            } catch (error) {
-                // Something went wrong
-                console.error('refined-bitbucket(code-review): ', error)
+        try {
+            if (this.matches(summarySelectors.join(', '))) {
+                return manipulateSummary(this)
             }
+            
+            if (this.matches(diffSelector)) {
+                return manipulateDiff(this)
+            }
+            
+            if (this.matches(generalCommentsSelector)) {
+                    return insertShowComments(this, true)
+            }
+        } catch (error) {
+            // Something went wrong
+            console.error('refined-bitbucket(code-review): ', error, this)
         }
-    )
+    })
 
     if (config.lineLengthLimitEnabled) {
         setLineLengthLimit(config.lineLengthLimit, config.stickyHeader)
+    }
+
+    if (config.ignoreWhitespace) {
+        ignoreWhitespaceInit()
     }
 
     if (config.stickyHeader) {
@@ -235,6 +256,10 @@ function pullrequestRelatedFeatures(config) {
 function pullrequestRelatedFeaturesNew(config) {
     if (config.mergeCommitMessageEnabled) {
         mergeCommitMessageNew(config.mergeCommitMessageUrl)
+    }
+
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
     }
 
     if (config.copyFilename) {
@@ -270,5 +295,9 @@ function pullrequestRelatedFeaturesOld(config) {
 
     if (config.collapsePullRequestDescription) {
         collapsePullRequestDescription()
+    }
+
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
     }
 }

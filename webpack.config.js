@@ -8,7 +8,8 @@ module.exports = {
     devtool: 'source-map',
     entry: {
         main: './src/main',
-        options: './src/options',
+        options: './src/_core/options/options',
+        popup: './src/_core/popup/popup',
         background: './src/background',
         'background-for-requests': './src/background-for-requests',
     },
@@ -26,6 +27,16 @@ module.exports = {
             {
                 from: 'src/vendor/prism.js',
             },
+            {
+                context: 'src/_core/options',
+                from: '*',
+                ignore: '*.js',
+            },
+            {
+                context: 'src/_core/popup',
+                from: '*',
+                ignore: '*.js',
+            },
         ]),
     ],
     output: {
@@ -42,8 +53,15 @@ module.exports = {
                         use: 'babel-loader',
                     },
                     {
-                        test: /\.css$/,
-                        use: ['style-loader', 'css-loader'],
+                        test: /\.css$/i,
+                        use: [
+                            {
+                                loader: 'style-loader',
+                            },
+                            {
+                                loader: 'css-loader',
+                            },
+                        ],
                     },
                 ],
             },
