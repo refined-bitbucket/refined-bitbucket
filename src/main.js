@@ -22,7 +22,7 @@ import loadAllDiffs from './load-all-diffs'
 import occurrencesHighlighter from './occurrences-highlighter'
 import pullrequestCommitAmount from './pullrequest-commit-amount'
 import insertPullrequestTemplate from './pullrequest-template'
-import { insertShowComments, insertShowGeneralComments } from './show-comments'
+import insertShowComments from './show-comments'
 import addSidebarCounters from './sidebar-counters'
 import syntaxHighlight from './syntax-highlight'
 import comparePagePullRequest from './compare-page-pull-request'
@@ -140,7 +140,7 @@ function codeReviewFeatures(config) {
 
     const manipulateGeneralComments = comments => {
         if (config.showCommentsCheckbox) {
-            insertShowGeneralComments(comments)
+            insertShowComments(comments, true)
         }
     }
 
@@ -160,7 +160,7 @@ function codeReviewFeatures(config) {
         autocollapse.collapseIfNeeded(diff)
 
         if (config.showCommentsCheckbox) {
-            insertShowComments(diff)
+            insertShowComments(diff, false)
         }
 
         if (config.copyFilename) {
@@ -203,7 +203,7 @@ function codeReviewFeatures(config) {
                 }
 
                 if (this.matches(generalCommentsSelector)) {
-                    return manipulateGeneralComments(this)
+                    return insertShowComments(this, true)
                 }
             } catch (error) {
                 // Something went wrong

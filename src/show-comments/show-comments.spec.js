@@ -4,8 +4,7 @@ import delay from 'yoctodelay'
 
 import '../../test/setup-jsdom'
 
-import { insertShowComments } from '.'
-import { stateShowComments } from './show-comments'
+import insertShowComments from './show-comments'
 
 test('"Comments" button is displayed if diff has comments', t => {
     const diff = (
@@ -43,6 +42,7 @@ test('"Comments" button is displayed if diff has comments', t => {
                         type="button"
                         class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
                         title="Toggle file comments"
+                        aria-checked="true"
                         original-title="Toggle file comments"
                     >
                         <span class="aui-icon aui-icon-small">
@@ -68,7 +68,7 @@ test('"Comments" button is displayed if diff has comments', t => {
         </section>
     )
 
-    insertShowComments(diff)
+    insertShowComments(diff, false)
 
     t.is(diff.outerHTML, expected.outerHTML)
 })
@@ -121,6 +121,7 @@ test('"Comments" button is displayed if diff has comments and on previous versio
                         type="button"
                         class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
                         title="Toggle file comments"
+                        aria-checked="true"
                         original-title="Toggle file comments"
                         style={{ marginRight: 10 }}
                     >
@@ -156,7 +157,7 @@ test('"Comments" button is displayed if diff has comments and on previous versio
         </section>
     )
 
-    insertShowComments(diff)
+    insertShowComments(diff, false)
 
     t.is(diff.outerHTML, expected.outerHTML)
 })
@@ -198,6 +199,7 @@ test('"Comments" button is displayed in the prior-comments modal next to the tim
                         type="button"
                         class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
                         title="Toggle file comments"
+                        aria-checked="true"
                         original-title="Toggle file comments"
                         style={{ marginRight: 10 }}
                     >
@@ -223,7 +225,7 @@ test('"Comments" button is displayed in the prior-comments modal next to the tim
         </section>
     )
 
-    insertShowComments(diff)
+    insertShowComments(diff, false)
 
     t.is(diff.outerHTML, expected.outerHTML)
 })
@@ -281,7 +283,7 @@ test('Comments are shown or hidden when button is toggled', t => {
         </section>
     )
 
-    insertShowComments(diff)
+    insertShowComments(diff, false)
 
     // Assert
     const commentsContainer = diff.querySelector('.comment-thread-container')
@@ -315,7 +317,7 @@ test('"Comments" button is added/removed when applicable if comments are added/r
         </section>
     )
 
-    insertShowComments(diff)
+    insertShowComments(diff, false)
 
     // Assert
     t.falsy(
@@ -403,7 +405,7 @@ test('should not insert "Comments" button when diff failed to load', t => {
         </section>
     )
 
-    insertShowComments(diff)
+    insertShowComments(diff, false)
 
     t.falsy(
         diff.querySelector('.__rbb-show-comments'),
@@ -435,7 +437,7 @@ test('should show comments section if a new comment while comments are hidden', 
         </section>
     )
 
-    insertShowComments(diff)
+    insertShowComments(diff, false)
 
     const showComments = diff.querySelector('.__rbb-show-comments')
     showComments.dispatchEvent(new Event('click'))
@@ -446,7 +448,7 @@ test('should show comments section if a new comment while comments are hidden', 
     })
 
     // The button should hide comments, all comments should be hidden
-    t.is(stateShowComments, false)
+    t.is(showComments.getAttribute('aria-checked') === 'true', false)
 
     // Add a comment
     diff.querySelector('.refract-content-container').appendChild(
@@ -460,9 +462,223 @@ test('should show comments section if a new comment while comments are hidden', 
     await delay(200)
 
     // The button should show comments
-    t.is(stateShowComments, true)
+    t.is(showComments.getAttribute('aria-checked') === 'true', true)
 
     diff.querySelectorAll('.comment-thread-container').forEach(comment => {
+        t.is(comment.style.display, '')
+    })
+})
+
+test('General "Comments" button is displayed if it has comments', t => {
+    const diff = (
+        <section id="general-comments" class="main">
+            <h1>
+                Comments (<span class="comment-count">4</span>)
+            </h1>
+            <ol id="comments-list" class="comments-list line-commenting">
+                <li class="comment">
+                    <article id="comment-145003814" class="iterable-item">
+                        Some comment
+                    </article>
+                </li>
+            </ol>
+        </section>
+    )
+
+    const expected = (
+        <section id="general-comments" class="main">
+            <h1>
+                Comments (<span class="comment-count">4</span>)
+                <button
+                    type="button"
+                    class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
+                    title="Toggle summary comments"
+                    aria-checked="true"
+                    original-title="Toggle summary comments"
+                >
+                    <span class="aui-icon aui-icon-small">
+                        Toggle summary comments
+                    </span>
+                </button>
+            </h1>
+            <ol id="comments-list" class="comments-list line-commenting">
+                <li class="comment">
+                    <article id="comment-145003814" class="iterable-item">
+                        Some comment
+                    </article>
+                </li>
+            </ol>
+        </section>
+    )
+
+    insertShowComments(diff, true)
+
+    t.is(diff.outerHTML, expected.outerHTML)
+})
+
+test('General "Comments" button is NOT displayed if it has no comments', t => {
+    const diff = (
+        <section id="general-comments" class="main">
+            <h1>
+                Comments (<span class="comment-count">4</span>)
+            </h1>
+            <ol id="comments-list" class="comments-list line-commenting" />
+        </section>
+    )
+
+    const expected = diff.cloneNode(true)
+
+    t.is(diff.outerHTML, expected.outerHTML)
+})
+
+test('General Comments are shown or hidden when button is toggled', async t => {
+    const diff = (
+        <section id="general-comments" class="main">
+            <h1>
+                Comments (<span class="comment-count">4</span>)
+            </h1>
+            <ol id="comments-list" class="comments-list line-commenting">
+                <li class="comment">
+                    <article id="comment-145003814" class="iterable-item">
+                        Some comment
+                    </article>
+                </li>
+            </ol>
+        </section>
+    )
+
+    insertShowComments(diff, true)
+
+    // Assert
+    const showComments = diff.querySelector('.__rbb-show-comments')
+    ;[...diff.querySelectorAll('.comment')].forEach(comment => {
+        t.is(comment.style.display, '')
+    })
+
+    showComments.dispatchEvent(new Event('click'))
+    ;[...diff.querySelectorAll('.comment')].forEach(comment => {
+        t.is(comment.style.display, 'none')
+    })
+
+    showComments.dispatchEvent(new Event('click'))
+    ;[...diff.querySelectorAll('.comment')].forEach(comment => {
+        t.is(comment.style.display, '')
+    })
+})
+
+test('General "Comments" button is added/removed when applicable if comments are added/removed', async t => {
+    const diff = (
+        <section id="general-comments" class="main">
+            <h1>
+                Comments (<span class="comment-count">4</span>)
+            </h1>
+            <ol id="comments-list" class="comments-list line-commenting" />
+        </section>
+    )
+
+    insertShowComments(diff, true)
+
+    // Assert
+    t.falsy(
+        diff.querySelector('.__rbb-show-comments'),
+        'button should not exist if there are no comments'
+    )
+
+    // Act
+    diff.querySelector('#comments-list').appendChild(
+        <li class="comment">
+            <article id="comment-14504522" class="iterable-item">
+                Some comment
+            </article>
+        </li>
+    )
+    await delay(100)
+
+    // Assert
+    t.truthy(
+        diff.querySelector('.__rbb-show-comments'),
+        'button should exist if there are comments'
+    )
+    t.is(diff.querySelectorAll('.__rbb-show-comments').length, 1)
+
+    // Act
+    diff.querySelector('#comments-list').appendChild(
+        <li class="comment">
+            <article id="comment-14507423" class="iterable-item">
+                Some comment
+            </article>
+        </li>
+    )
+    await delay(100)
+
+    // Assert
+    t.truthy(
+        diff.querySelector('.__rbb-show-comments'),
+        'button should exist if there are comments'
+    )
+    t.is(diff.querySelectorAll('.__rbb-show-comments').length, 1)
+
+    // Act
+    ;[...diff.querySelectorAll('#comments-list li.comment')].forEach(comment =>
+        comment.remove()
+    )
+    await delay(100)
+
+    t.falsy(
+        diff.querySelector('.__rbb-show-comments'),
+        'button should not exist if there are no comments'
+    )
+})
+
+test('should show General comments section if a new comment while comments are hidden', async t => {
+    const diff = (
+        <section id="general-comments" class="main">
+            <h1>
+                Comments (<span class="comment-count">4</span>)
+            </h1>
+            <ol id="comments-list" class="comments-list line-commenting">
+                <li class="comment">
+                    <article id="comment-145003814" class="iterable-item">
+                        Some comment
+                    </article>
+                </li>
+            </ol>
+        </section>
+    )
+
+    insertShowComments(diff, true)
+
+    // shown
+    diff.querySelectorAll('#comments-list li.comment').forEach(comment => {
+        t.is(comment.style.display, '')
+    })
+
+    const showComments = diff.querySelector('.__rbb-show-comments')
+    showComments.dispatchEvent(new Event('click'))
+
+    // hidden
+    diff.querySelectorAll('#comments-list li.comment').forEach(comment => {
+        t.is(comment.style.display, 'none')
+    })
+
+    // The button should hide comments, all comments should be hidden
+    t.is(showComments.getAttribute('aria-checked') === 'true', false)
+
+    // Add a comment
+    diff.querySelector('#comments-list').appendChild(
+        <li class="comment">
+            <article id="comment-14543345" class="iterable-item">
+                Some comment
+            </article>
+        </li>
+    )
+
+    await delay(200)
+
+    // The button should show comments
+    t.is(showComments.getAttribute('aria-checked') === 'true', true)
+
+    diff.querySelectorAll('#comments-list li').forEach(comment => {
         t.is(comment.style.display, '')
     })
 })

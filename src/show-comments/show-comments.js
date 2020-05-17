@@ -8,23 +8,48 @@ import SelectorObserver from 'selector-observer'
 
 import './show-comments.css'
 
-const onClick = e => {
+const switchToggleState = e => {
     const ariaChecked = e.currentTarget.getAttribute('aria-checked')
     const isChecked = ariaChecked === 'true'
     e.currentTarget.setAttribute('aria-checked', !isChecked)
+}
 
-    const diff = e.target.closest('section.bb-udiff')
+const hideComments = (e, comments) =>
+    comments.forEach(comment => {
+        comment.style.display =
+            e.currentTarget.getAttribute('aria-checked') === 'true'
+                ? ''
+                : 'none'
+    })
+
+const onClick = e => {
+    switchToggleState(e)
+
+    const diff = e.currentTarget.closest('section.bb-udiff')
     const comments = [
         ...diff.getElementsByClassName('comment-thread-container'),
     ]
-    comments.forEach(comment => {
-        comment.style.display = isChecked ? 'none' : ''
-    })
+
+    hideComments(e, comments)
 }
 
-export default function insertShowComments(section: HTMLElement) {
+const onGeneralClick = e => {
+    switchToggleState(e)
+
+    const container = e.currentTarget.closest('#general-comments')
+    const comments = [
+        ...container.querySelectorAll('#comments-list li.comment'),
+    ]
+
+    hideComments(e, comments)
+}
+
+export default function insertShowComments(
+    section: HTMLElement,
+    isGeneralSection: boolean
+) {
     // Diff failed because pull request is too big
-    if (section.querySelector('div.too-big-message')) {
+    if (!isGeneralSection && section.querySelector('div.too-big-message')) {
         return
     }
 
@@ -32,12 +57,12 @@ export default function insertShowComments(section: HTMLElement) {
     new SelectorObserver(
         section,
         'li.comment',
-        () => onAddComment(section),
+        () => onAddComment(section, isGeneralSection),
         () => onDeleteComment(section)
     )
 }
 
-function onAddComment(section) {
+function onAddComment(section: HTMLElement, isGeneralSection: boolean) {
     const existingButton: HTMLInputElement = (section.querySelector(
         '.__rbb-show-comments'
     ): any)
@@ -51,6 +76,22 @@ function onAddComment(section) {
         return
     }
 
+    return isGeneralSection
+        ? insertGeneralCommentButton(section)
+        : insertCommentButton(section)
+}
+
+function onDeleteComment(section: HTMLElement) {
+    // Only remove if there are no comments left in the diff
+    if (!section.querySelector('li.comment')) {
+        const node = section.querySelector('.__rbb-show-comments')
+        if (node) {
+            node.remove()
+        }
+    }
+}
+
+function insertCommentButton(section: HTMLElement): void {
     const actionsSection: HTMLElement = (section.querySelector(
         '.diff-actions.secondary'
     ): any)
@@ -86,12 +127,20 @@ function onAddComment(section) {
     actionsSection.insertBefore(showCommentsButton, actionsSection.firstChild)
 }
 
-function onDeleteComment(section) {
-    // Only remove if there are no comments left in the diff
-    if (!section.querySelector('li.comment')) {
-        const node = section.querySelector('.__rbb-show-comments')
-        if (node) {
-            node.remove()
-        }
-    }
+function insertGeneralCommentButton(section: HTMLElement): void {
+    const showCommentsButton = (
+        <button
+            type="button"
+            class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
+            title="Toggle summary comments"
+            aria-checked="true"
+            original-title="Toggle summary comments"
+            onClick={onGeneralClick}
+        >
+            <span class="aui-icon aui-icon-small">Toggle summary comments</span>
+        </button>
+    )
+
+    const diffActions: HTMLElement = (section.querySelector('h1'): any)
+    diffActions.appendChild(showCommentsButton)
 }
