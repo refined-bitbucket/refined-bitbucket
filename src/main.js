@@ -144,6 +144,10 @@ function codeReviewFeatures(config) {
     }
 
     const manipulateDiff = diff => {
+        if (autocollapse.collapseIfNeeded(diff)) {
+            return
+        }
+
         if (diffIgnore.isIgnored(diff)) {
             return
         }
@@ -155,8 +159,6 @@ function codeReviewFeatures(config) {
         if (config.collapseDiff) {
             collapseDiff.insertCollapseDiffButton(diff)
         }
-
-        autocollapse.collapseIfNeeded(diff)
 
         if (config.showCommentsCheckbox) {
             insertShowComments(diff)
@@ -179,31 +181,40 @@ function codeReviewFeatures(config) {
         }
     }
 
-    const summarySelectors =
-        '#compare-diff-content, #pr-tab-content, #commit, #diff'
+    const summarySelectors = [
+        '#compare-diff-content',
+        '#pr-tab-content',
+        '#commit',
+        '#diff',
+    ]
     const diffSelector = 'section.bb-udiff'
+    const allSelectors = [...new Set([...summarySelectors, diffSelector])].join(
+        ', '
+    )
 
     // Have to observe the DOM because some sections
     // load asynchronously by user interactions
     // eslint-disable-next-line no-new
-    new SelectorObserver(
-        document.body,
-        [summarySelectors, diffSelector].join(', '),
-        function() {
-            try {
-                if (this.matches(summarySelectors)) {
-                    return manipulateSummary(this)
-                }
+    new SelectorObserver(document.body, allSelectors, function() {
+        if (
+            this.style.display === 'none' ||
+            this.getAttribute('aria-hidden') === 'true'
+        )
+            return
 
-                if (this.matches(diffSelector)) {
-                    return manipulateDiff(this)
-                }
-            } catch (error) {
-                // Something went wrong
-                console.error('refined-bitbucket(code-review): ', error)
+        try {
+            if (this.matches(summarySelectors.join(', '))) {
+                return manipulateSummary(this)
             }
+
+            if (this.matches(diffSelector)) {
+                return manipulateDiff(this)
+            }
+        } catch (error) {
+            // Something went wrong
+            console.error('refined-bitbucket(code-review): ', error, this)
         }
-    )
+    })
 
     if (config.lineLengthLimitEnabled) {
         setLineLengthLimit(config.lineLengthLimit, config.stickyHeader)

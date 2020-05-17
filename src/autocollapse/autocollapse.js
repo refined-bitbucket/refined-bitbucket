@@ -14,19 +14,20 @@ export function init(
     autocollapseDeletedFiles = collapseDeletedFiles
 }
 
-export function collapseIfNeeded(section: HTMLElement) {
+export function collapseIfNeeded(section: HTMLElement): Boolean {
     if (ig) {
-        collapseIfNeededAsync(section)
+        return collapseIfNeededAsync(section)
     } else {
         console.error(
             `refined-bitbucket: You need to call \`.${init.name}\` before \`.${
                 collapseIfNeeded.name
             }\``
         )
+        return false
     }
 }
 
-function collapseIfNeededAsync(section: HTMLElement) {
+function collapseIfNeededAsync(section: HTMLElement): Boolean {
     const filename = ((section.getAttribute(
         'data-filename'
     ): any): string).trim()
@@ -42,4 +43,6 @@ function collapseIfNeededAsync(section: HTMLElement) {
     if (shouldCollapse) {
         toggleDiff(section)
     }
+
+    return shouldCollapse
 }
