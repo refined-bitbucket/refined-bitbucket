@@ -1,0 +1,49 @@
+{
+  "manifest_version": 2,
+  "name": "Refined Bitbucket",
+  "description": "Improves Bitbucket's user experience",
+  "version": "3.20.0",
+  "author": "Ronald Rey",
+  "homepage_url": "https://github.com/refined-bitbucket/refined-bitbucket",
+  "icons": {
+    "16": "icon_16px.png",
+    "32": "icon_32px.png",
+    "48": "icon_48px.png",
+    "64": "icon_64px.png",
+    "128": "icon_128px.png",
+    "256": "icon_256px.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "applications": {
+    "gecko": {
+      "id": "refined-bitbucket@refined-bitbucket.org"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "https://bitbucket.org/*",
+    "https://api.bitbucket.org/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "prism.js",
+        "main.js"
+      ],
+      "matches": [
+        "https://bitbucket.org/*"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "background-for-requests.js"
+    ],
+    "persistent": false
+  }
+}

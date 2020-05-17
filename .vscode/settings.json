@@ -1,0 +1,9 @@
+{
+  "files.eol": "\n",
+  "editor.tabSize": 4,
+  "files.exclude": {
+    "**/*.css": false
+  },
+  "editor.formatOnSave": true,
+  "javascript.validate.enable": false
+}

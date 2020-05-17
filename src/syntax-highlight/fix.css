@@ -1,0 +1,14 @@
+pre > code {
+    border-radius: initial;
+    display: initial;
+    line-height: initial;
+    margin-left: initial;
+    overflow-y: initial;
+    padding: initial;
+}
+.refract-container .deletion pre.source {
+    background-color: #fff1f2;
+}
+.refract-container .addition pre.source {
+    background-color: #e8ffe8;
+}
