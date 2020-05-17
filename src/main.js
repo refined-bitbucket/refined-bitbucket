@@ -52,7 +52,6 @@ import {
 import addStyleToPage from './add-style'
 
 new OptionsSync().getAll().then(options => {
-    console.log(options)
     if (!options._isExtEnabled) return
 
     const config = {
