@@ -203,9 +203,13 @@ function codeReviewFeatures(config) {
     ]
     const diffSelector = 'section.bb-udiff'
     const generalCommentsSelector = '#general-comments'
-    const allSelectors = [...new Set([...summarySelectors, diffSelector, generalCommentsSelector])].join(
-        ', '
-    )
+    const allSelectors = [
+        ...new Set([
+            ...summarySelectors,
+            diffSelector,
+            generalCommentsSelector,
+        ]),
+    ].join(', ')
 
     // Have to observe the DOM because some sections
     // load asynchronously by user interactions
@@ -221,13 +225,13 @@ function codeReviewFeatures(config) {
             if (this.matches(summarySelectors.join(', '))) {
                 return manipulateSummary(this)
             }
-            
+
             if (this.matches(diffSelector)) {
                 return manipulateDiff(this)
             }
-            
+
             if (this.matches(generalCommentsSelector)) {
-                    return insertShowComments(this, true)
+                return insertShowComments(this, true)
             }
         } catch (error) {
             // Something went wrong
