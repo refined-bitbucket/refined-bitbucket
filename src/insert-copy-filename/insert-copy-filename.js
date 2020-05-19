@@ -3,6 +3,8 @@
 
 import { h } from 'dom-chef'
 
+import './insert-copy-filename.css'
+
 function onClick() {
     const diff: HTMLElement = ((this: HTMLButtonElement).closest(
         '.bb-udiff'

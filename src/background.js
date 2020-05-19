@@ -4,6 +4,18 @@ import OptionsSync from 'webext-options-sync'
 
 const justInstalledOrUpdated = new Promise((resolve, reject) => {
     chrome.runtime.onInstalled.addListener(details => {
+        chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
+            chrome.declarativeContent.onPageChanged.addRules([
+                {
+                    conditions: [
+                        new chrome.declarativeContent.PageStateMatcher({
+                            pageUrl: { hostEquals: 'bitbucket.org' },
+                        }),
+                    ],
+                    actions: [new chrome.declarativeContent.ShowPageAction()],
+                },
+            ])
+        })
         if (details.reason === 'install' || details.reason === 'update') {
             resolve()
         } else {
@@ -14,6 +26,7 @@ const justInstalledOrUpdated = new Promise((resolve, reject) => {
 
 new OptionsSync().define({
     defaults: {
+        _isExtEnabled: true,
         syntaxHighlight: true,
         autolinker: true,
         highlightOcurrences: true,
@@ -21,6 +34,8 @@ new OptionsSync().define({
         copyFilename: true,
         keymap: true,
         collapsePullRequestDescription: true,
+        collapsePullRequestSideMenus: true,
+        collapsePrSideMenusResolutionSize: 1360,
         collapseDiff: true,
         loadAllDiffs: true,
         closeAnchorBranch: true,

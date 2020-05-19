@@ -35,6 +35,7 @@ import mergeCommitMessageNew from './merge-commit-message-new'
 import collapsePullRequestDescription from './collapse-pull-request-description'
 import setStickyHeader from './sticky-header'
 import setLineLengthLimit from './limit-line-length'
+import collapsePullRequestSideMenus from './collapse-pull-request-side-menus'
 import insertDashboardOverviewFilters from './dashboard-pull-requests'
 
 import observeForWordDiffs from './observe-for-word-diffs'
@@ -53,6 +54,8 @@ import {
 import addStyleToPage from './add-style'
 
 new OptionsSync().getAll().then(options => {
+    if (!options._isExtEnabled) return
+
     const config = {
         ...options,
         autocollapsePaths: (options.autocollapsePaths || '').split('\n'),
@@ -148,7 +151,17 @@ function codeReviewFeatures(config) {
         }
     }
 
+    const manipulateGeneralComments = comments => {
+        if (config.showCommentsCheckbox) {
+            insertShowComments(comments, true)
+        }
+    }
+
     const manipulateDiff = diff => {
+        if (autocollapse.collapseIfNeeded(diff)) {
+            return
+        }
+
         if (diffIgnore.isIgnored(diff)) {
             return
         }
@@ -161,10 +174,8 @@ function codeReviewFeatures(config) {
             collapseDiff.insertCollapseDiffButton(diff)
         }
 
-        autocollapse.collapseIfNeeded(diff)
-
         if (config.showCommentsCheckbox) {
-            insertShowComments(diff)
+            insertShowComments(diff, false)
         }
 
         if (config.copyFilename) {
@@ -184,31 +195,45 @@ function codeReviewFeatures(config) {
         }
     }
 
-    const summarySelectors =
-        '#compare-diff-content, #pr-tab-content, #commit, #diff'
+    const summarySelectors = [
+        '#compare-diff-content',
+        '#pr-tab-content',
+        '#commit',
+        '#diff',
+    ]
     const diffSelector = 'section.bb-udiff'
+    const generalCommentsSelector = '#general-comments'
+    const allSelectors = [...new Set([...summarySelectors, diffSelector, generalCommentsSelector])].join(
+        ', '
+    )
 
     // Have to observe the DOM because some sections
     // load asynchronously by user interactions
     // eslint-disable-next-line no-new
-    new SelectorObserver(
-        document.body,
-        [summarySelectors, diffSelector].join(', '),
-        function() {
-            try {
-                if (this.matches(summarySelectors)) {
-                    return manipulateSummary(this)
-                }
+    new SelectorObserver(document.body, allSelectors, function() {
+        if (
+            this.style.display === 'none' ||
+            this.getAttribute('aria-hidden') === 'true'
+        )
+            return
 
-                if (this.matches(diffSelector)) {
-                    return manipulateDiff(this)
-                }
-            } catch (error) {
-                // Something went wrong
-                console.error('refined-bitbucket(code-review): ', error)
+        try {
+            if (this.matches(summarySelectors.join(', '))) {
+                return manipulateSummary(this)
             }
+            
+            if (this.matches(diffSelector)) {
+                return manipulateDiff(this)
+            }
+            
+            if (this.matches(generalCommentsSelector)) {
+                    return insertShowComments(this, true)
+            }
+        } catch (error) {
+            // Something went wrong
+            console.error('refined-bitbucket(code-review): ', error, this)
         }
-    )
+    })
 
     if (config.lineLengthLimitEnabled) {
         setLineLengthLimit(config.lineLengthLimit, config.stickyHeader)
@@ -237,6 +262,10 @@ function pullrequestRelatedFeatures(config) {
 function pullrequestRelatedFeaturesNew(config) {
     if (config.mergeCommitMessageEnabled) {
         mergeCommitMessageNew(config.mergeCommitMessageUrl)
+    }
+
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
     }
 
     if (config.copyFilename) {
@@ -272,5 +301,9 @@ function pullrequestRelatedFeaturesOld(config) {
 
     if (config.collapsePullRequestDescription) {
         collapsePullRequestDescription()
+    }
+
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
     }
 }
