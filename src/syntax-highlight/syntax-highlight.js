@@ -77,6 +77,7 @@ function syntaxHighlightSourceCodeLines($diff) {
     sourceLines.forEach(preElement => {
         if (!preElement.firstChild.$$rbb_isSyntaxHighlighted) {
             Prism.highlightElement(preElement)
+            preElement.classList.add('__rbb_syntax_highlight')
             // eslint-disable-next-line camelcase
             preElement.firstChild.$$rbb_isSyntaxHighlighted = true
         }
