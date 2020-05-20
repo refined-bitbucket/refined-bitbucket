@@ -203,7 +203,7 @@ function codeReviewFeatures(config) {
                 }
 
                 if (this.matches(generalCommentsSelector)) {
-                    return insertShowComments(this, true)
+                    return manipulateGeneralComments(this)
                 }
             } catch (error) {
                 // Something went wrong
