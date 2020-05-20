@@ -243,10 +243,6 @@ function codeReviewFeatures(config) {
         setLineLengthLimit(config.lineLengthLimit, config.stickyHeader)
     }
 
-    if (config.ignoreWhitespace) {
-        ignoreWhitespaceInit()
-    }
-
     if (config.stickyHeader) {
         setStickyHeader()
     }
@@ -287,6 +283,10 @@ function pullrequestRelatedFeaturesNew(config) {
 }
 
 function pullrequestRelatedFeaturesOld(config) {
+    if (config.ignoreWhitespace) {
+        ignoreWhitespaceInit()
+    }
+
     if (config.defaultMergeStrategy !== 'none') {
         defaultMergeStrategy.init(config.defaultMergeStrategy)
     }
