@@ -9,15 +9,15 @@ import SelectorObserver from 'selector-observer'
 import './show-comments.css'
 
 const switchToggleState = e => {
-    const ariaChecked = e.currentTarget.getAttribute('aria-checked')
+    const ariaChecked = e.currentTarget.getAttribute('aria-expanded')
     const isChecked = ariaChecked === 'true'
-    e.currentTarget.setAttribute('aria-checked', !isChecked)
+    e.currentTarget.setAttribute('aria-expanded', !isChecked)
 }
 
 const hideComments = (e, comments) =>
     comments.forEach(comment => {
         comment.style.display =
-            e.currentTarget.getAttribute('aria-checked') === 'true'
+            e.currentTarget.getAttribute('aria-expanded') === 'true'
                 ? ''
                 : 'none'
     })
@@ -69,8 +69,8 @@ function onAddComment(section: HTMLElement, isGeneralSection: boolean) {
 
     // Show comments button already exists
     if (existingButton) {
-        if (existingButton.getAttribute('aria-checked') !== 'true') {
-            existingButton.setAttribute('aria-checked', false)
+        if (existingButton.getAttribute('aria-expanded') !== 'true') {
+            existingButton.setAttribute('aria-expanded', false)
             existingButton.dispatchEvent(new Event('click'))
         }
         return
@@ -107,7 +107,7 @@ function insertCommentButton(section: HTMLElement): void {
             type="button"
             class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
             title="Toggle file comments"
-            aria-checked="true"
+            aria-expanded="true"
             original-title="Toggle file comments"
             style={
                 hasCommentsOnPreviousVersions || hasStatusBadge
@@ -133,7 +133,7 @@ function insertGeneralCommentButton(section: HTMLElement): void {
             type="button"
             class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
             title="Toggle summary comments"
-            aria-checked="true"
+            aria-expanded="true"
             original-title="Toggle summary comments"
             onClick={onGeneralClick}
         >
