@@ -442,7 +442,7 @@ test('should show comments section if a new comment while comments are hidden', 
     const showComments = diff.querySelector('.__rbb-show-comments')
     showComments.dispatchEvent(new Event('click'))
 
-    // hidden
+    // Hidden
     diff.querySelectorAll('.comment-thread-container').forEach(comment => {
         t.is(comment.style.display, 'none')
     })
@@ -531,7 +531,7 @@ test('General "Comments" button is NOT displayed if it has no comments', t => {
     t.is(diff.outerHTML, expected.outerHTML)
 })
 
-test('General Comments are shown or hidden when button is toggled', async t => {
+test('General Comments are shown or hidden when button is toggled', t => {
     const diff = (
         <section id="general-comments" class="main">
             <h1>
@@ -648,7 +648,7 @@ test('should show General comments section if a new comment while comments are h
 
     insertShowComments(diff, true)
 
-    // shown
+    // Shown
     diff.querySelectorAll('#comments-list li.comment').forEach(comment => {
         t.is(comment.style.display, '')
     })
@@ -656,7 +656,7 @@ test('should show General comments section if a new comment while comments are h
     const showComments = diff.querySelector('.__rbb-show-comments')
     showComments.dispatchEvent(new Event('click'))
 
-    // hidden
+    // Hidden
     diff.querySelectorAll('#comments-list li.comment').forEach(comment => {
         t.is(comment.style.display, 'none')
     })

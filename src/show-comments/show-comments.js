@@ -1,8 +1,6 @@
 // @flow
 // @jsx h
 
-/* eslint-disable operator-linebreak */
-
 import { h } from 'dom-chef'
 import SelectorObserver from 'selector-observer'
 
@@ -14,7 +12,7 @@ const switchToggleState = e => {
     e.currentTarget.setAttribute('aria-expanded', !isChecked)
 }
 
-const hideComments = (e, comments) =>
+const toggleComments = (e, comments) =>
     comments.forEach(comment => {
         comment.style.display =
             e.currentTarget.getAttribute('aria-expanded') === 'true'
@@ -30,7 +28,7 @@ const onClick = e => {
         ...diff.getElementsByClassName('comment-thread-container'),
     ]
 
-    hideComments(e, comments)
+    toggleComments(e, comments)
 }
 
 const onGeneralClick = e => {
@@ -41,7 +39,7 @@ const onGeneralClick = e => {
         ...container.querySelectorAll('#comments-list li.comment'),
     ]
 
-    hideComments(e, comments)
+    toggleComments(e, comments)
 }
 
 export default function insertShowComments(
@@ -70,7 +68,7 @@ function onAddComment(section: HTMLElement, isGeneralSection: boolean) {
     // Show comments button already exists
     if (existingButton) {
         if (existingButton.getAttribute('aria-expanded') !== 'true') {
-            existingButton.setAttribute('aria-expanded', false)
+            existingButton.setAttribute('aria-expanded', false.toString())
             existingButton.dispatchEvent(new Event('click'))
         }
         return
