@@ -42,7 +42,7 @@ test('"Comments" button is displayed if diff has comments', t => {
                         type="button"
                         class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
                         title="Toggle file comments"
-                        aria-checked="true"
+                        aria-expanded="true"
                         original-title="Toggle file comments"
                     >
                         <span class="aui-icon aui-icon-small">
@@ -121,7 +121,7 @@ test('"Comments" button is displayed if diff has comments and on previous versio
                         type="button"
                         class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
                         title="Toggle file comments"
-                        aria-checked="true"
+                        aria-expanded="true"
                         original-title="Toggle file comments"
                         style={{ marginRight: 10 }}
                     >
@@ -199,7 +199,7 @@ test('"Comments" button is displayed in the prior-comments modal next to the tim
                         type="button"
                         class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
                         title="Toggle file comments"
-                        aria-checked="true"
+                        aria-expanded="true"
                         original-title="Toggle file comments"
                         style={{ marginRight: 10 }}
                     >
@@ -448,7 +448,7 @@ test('should show comments section if a new comment while comments are hidden', 
     })
 
     // The button should hide comments, all comments should be hidden
-    t.is(showComments.getAttribute('aria-checked') === 'true', false)
+    t.is(showComments.getAttribute('aria-expanded') === 'true', false)
 
     // Add a comment
     diff.querySelector('.refract-content-container').appendChild(
@@ -462,7 +462,7 @@ test('should show comments section if a new comment while comments are hidden', 
     await delay(200)
 
     // The button should show comments
-    t.is(showComments.getAttribute('aria-checked') === 'true', true)
+    t.is(showComments.getAttribute('aria-expanded') === 'true', true)
 
     diff.querySelectorAll('.comment-thread-container').forEach(comment => {
         t.is(comment.style.display, '')
@@ -493,7 +493,7 @@ test('General "Comments" button is displayed if it has comments', t => {
                     type="button"
                     class="aui-button aui-button-subtle aui-button-light __rbb-show-comments"
                     title="Toggle summary comments"
-                    aria-checked="true"
+                    aria-expanded="true"
                     original-title="Toggle summary comments"
                 >
                     <span class="aui-icon aui-icon-small">
@@ -662,7 +662,7 @@ test('should show General comments section if a new comment while comments are h
     })
 
     // The button should hide comments, all comments should be hidden
-    t.is(showComments.getAttribute('aria-checked') === 'true', false)
+    t.is(showComments.getAttribute('aria-expanded') === 'true', false)
 
     // Add a comment
     diff.querySelector('#comments-list').appendChild(
@@ -676,7 +676,7 @@ test('should show General comments section if a new comment while comments are h
     await delay(200)
 
     // The button should show comments
-    t.is(showComments.getAttribute('aria-checked') === 'true', true)
+    t.is(showComments.getAttribute('aria-expanded') === 'true', true)
 
     diff.querySelectorAll('#comments-list li').forEach(comment => {
         t.is(comment.style.display, '')
