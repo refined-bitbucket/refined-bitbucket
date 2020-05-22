@@ -33,9 +33,12 @@ export default function collapsePullRequestDescription() {
             .querySelectorAll('svg')
             .forEach(svg => svg.classList.toggle('__refined_bitbucket_hide'))
 
-        descriptionContent
-            .querySelector('.__rbb-collapse-content')
-            .classList.toggle('__refined_bitbucket_hide')
+        const collapseContent = descriptionContent.querySelector(
+            '.__rbb-collapse-content'
+        )
+        if (collapseContent) {
+            collapseContent.classList.toggle('__refined_bitbucket_hide')
+        }
     }
 
     const collapseBar = (
