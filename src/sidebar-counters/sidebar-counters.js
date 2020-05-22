@@ -9,7 +9,7 @@ import './sidebar-counters.css'
 
 export const addBadge = (
     a: HTMLAnchorElement,
-    resources: {| size: number |} | void
+    resources: $Exact<{ size: number }> | void
 ) => {
     const navLinksContainer: HTMLElement = (a.parentNode: any)
     navLinksContainer.style.overflow = 'hidden'
