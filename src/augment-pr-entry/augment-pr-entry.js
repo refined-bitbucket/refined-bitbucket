@@ -4,8 +4,16 @@
 import { h } from 'dom-chef'
 import api, { type PullRequestActivity } from '../api'
 
+function addSourceBranch(prRow) {
+    if (window.innerWidth <= 1200)
+        $(prRow)
+            .find('td :hidden')
+            .has('div[role="button"]')
+            .show()
+}
+
 export const addUsernameWithLatestUpdate = (
-    prNode: HTMLElement,
+    prRow: HTMLElement,
     prActivity: PullRequestActivity
 ) => {
     // Pull requests by default have the initial commit info as an activity
@@ -27,17 +35,22 @@ export const addUsernameWithLatestUpdate = (
         activityType = 'Commented'
     }
 
-    const prUpdateTime = ((prNode.querySelector(
-        '.pr-number-and-timestamp'
-    ): any): HTMLElement).firstElementChild
+    const prSubline = ((prRow.querySelector('td small'): any): HTMLElement)
 
-    if (author && prUpdateTime) {
-        prUpdateTime.append(` by ${author} (${activityType})`)
+    if (author && prSubline) {
+        prSubline.appendChild(<span>{` by ${author} (${activityType})`}</span>)
     }
 }
 
-export default function augmentPrEntry(prNode: HTMLElement) {
-    const prId = prNode.dataset.pullRequestId
+export default function augmentPrEntry(prRow: HTMLElement) {
+    addSourceBranch(prRow)
+
+    const link: HTMLAnchorElement = prRow.querySelector(
+        'a[data-qa="pull-request-row-link"]'
+    )
+    const url = new URL(link.href)
+    const splitPath = url.pathname.split('/')
+    const prId = splitPath[splitPath.length - 1]
 
     if (!prId) {
         return
@@ -45,7 +58,7 @@ export default function augmentPrEntry(prNode: HTMLElement) {
 
     api.getPullrequestActivity(prId).then(prActivity => {
         if (prActivity) {
-            addUsernameWithLatestUpdate(prNode, prActivity)
+            addUsernameWithLatestUpdate(prRow, prActivity)
         }
     })
 }
