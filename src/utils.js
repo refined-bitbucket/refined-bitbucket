@@ -34,7 +34,10 @@ export const getCurrentPullRequestAuthorAccountId: () => string = onetime(
 )
 
 export const getCurrentUserAccountId: () => string = onetime(
-    (): string => getCurrentUser().account_id
+    (): string => {
+        const user = getCurrentUser()
+        return user ? user.account_id : undefined
+    }
 )
 
 export const getMainBranch: () => string = onetime(

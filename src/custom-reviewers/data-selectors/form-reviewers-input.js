@@ -88,6 +88,7 @@ export function removeReviewer(user: IUser): void {
     const updatedReviewers: IUser[] = getCurrentReviewers().filter(
         u => u.account_id !== user.account_id
     )
+    console.log(updatedReviewers)
     setCurrentReviewers(updatedReviewers)
     setReviewersFieldValue(updatedReviewers.map(u => u.account_id))
 }

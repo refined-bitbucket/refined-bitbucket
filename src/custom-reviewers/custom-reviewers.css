@@ -13,6 +13,9 @@
     align-items: center;
     margin: -2em 0 4px;
 }
+.__rbb_reviewers_actions button {
+    transition: background-color 0.5s ease;
+}
 
 .__rbb_reviewers_add_all {
     background: #0052cc;

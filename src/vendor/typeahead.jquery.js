@@ -686,7 +686,7 @@
                 .insertAfter($input)
         }
         function areQueriesEquivalent(a, b) {
-            return Input.normalizeQuery(a) === Input.normalizeQuery(b)
+            return !a || Input.normalizeQuery(a) === Input.normalizeQuery(b)
         }
         function withModifier($e) {
             return $e.altKey || $e.ctrlKey || $e.metaKey || $e.shiftKey
@@ -1097,7 +1097,7 @@
                 return $selectable.length ? $selectable : null
             },
             update: function update(query) {
-                var isValidUpdate = query !== this.query
+                var isValidUpdate = !query || query !== this.query
                 if (isValidUpdate) {
                     this.query = query
                     _.each(this.datasets, updateDataset)

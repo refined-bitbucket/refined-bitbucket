@@ -2,38 +2,55 @@
 import { h } from 'dom-chef'
 import {
     setStorageSyncValue,
-    getStorageSyncValue,
     getDefaultReviewersStorageKey,
+    getStorageSyncValue,
 } from '../../storage'
-import { getRepoURL } from '../../page-detect'
 import {
     getCurrentReviewers,
-    saveSearchReviewersResults,
+    prefetchAllReviewers,
+    isDefaultReviewersSameThanSelected,
+    getReviewersFieldValue,
 } from '../data-selectors'
-import api from '../../api'
-import debounce from '../../debounce'
-import { IUserXHR, IUser, mapUsersXhrToUsers } from '../../_core/models'
 
 const smallButtonStlye = {
     height: 'initial',
     lineHeight: 'initial',
 }
 
-async function handleSaveSelectionAsDefault() {
+const buttonFeedback = (button, succeeded) => {
+    if (succeeded) {
+        button.style.backgroundColor = 'rgb(220,255,180)'
+    } else {
+        button.style.backgroundColor = 'rgb(255,200,200)'
+    }
+
+    setTimeout(() => {
+        button.style.backgroundColor = ''
+    }, 2000)
+}
+
+async function handleSaveSelectionAsDefault(e) {
     await setStorageSyncValue(
         getDefaultReviewersStorageKey(),
         getCurrentReviewers()
     )
+
+    const savedReviewers: IUser[] = await getStorageSyncValue(
+        getDefaultReviewersStorageKey()
+    )
+    const currentReviewersIds: string[] = getReviewersFieldValue()
+
+    buttonFeedback(
+        e.target,
+        (savedReviewers || []).every(r =>
+            currentReviewersIds.includes(r.account_id)
+        )
+    )
 }
 
-async function handleLoadAllUsers() {
-    const dataPromises = Array.from({ length: 26 }).map((_, i) => {
-        const q = String.fromCharCode(i + 65)
-        return api.getSearchedUsers(q)
-    })
-    const data: IUserXHR[] = (await Promise.all(dataPromises)).flatMap(x => x)
-    const users: IUser[] = mapUsersXhrToUsers(data)
-    saveSearchReviewersResults(users)
+async function handleLoadAllUsers(e) {
+    const result = await prefetchAllReviewers()
+    buttonFeedback(e.target, result)
 }
 
 function handleManageReviewersTeams() {}
@@ -43,6 +60,7 @@ function getActionsElement(isTeamFeatureEnabled: boolean): HTMLElement {
         <div class="__rbb_reviewers_actions">
             <div style={{ flexGrow: 1 }} />
             <div class="aui-buttons">
+                {/* upcoming feature */}
                 {isTeamFeatureEnabled && (
                     <button
                         type="button"
@@ -59,18 +77,18 @@ function getActionsElement(isTeamFeatureEnabled: boolean): HTMLElement {
                     class="aui-button"
                     style={smallButtonStlye}
                     onClick={handleLoadAllUsers}
-                    title="Load all available users"
+                    title="Load all available users as search results"
                 >
-                    Load All
+                    Fetch All
                 </button>
                 <button
                     type="button"
                     class="aui-button"
                     style={smallButtonStlye}
                     onClick={handleSaveSelectionAsDefault}
-                    title="Save current reviewers as default"
+                    title="Save current reviewers as default for this repository"
                 >
-                    Save as default
+                    Save As Default
                 </button>
             </div>
         </div>
