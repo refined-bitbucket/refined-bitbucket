@@ -2,13 +2,13 @@
 import addStyleToPage from '../add-style'
 import './limit-line-length.css'
 
-function createCssRules(lineLengthLimit, isStickyHeaderEnabled) {
+function createCssRules(lineLengthLimit) {
     let filler = ''
     for (let i = 0; i < lineLengthLimit; i++) {
         filler += '#'
     }
 
-    let cssRules = `
+    const cssRules = `
         .refract-content-container::before {
             content: "-${filler}";
         }
@@ -17,13 +17,7 @@ function createCssRules(lineLengthLimit, isStickyHeaderEnabled) {
     return cssRules
 }
 
-export default function setLineLengthLimit(
-    lineLengthLimit: number | string,
-    isStickyHeaderEnabled: boolean
-) {
-    const cssRules = createCssRules(
-        parseInt(lineLengthLimit, 10),
-        isStickyHeaderEnabled
-    )
+export default function setLineLengthLimit(lineLengthLimit: number | string) {
+    const cssRules = createCssRules(parseInt(lineLengthLimit, 10))
     addStyleToPage(cssRules)
 }

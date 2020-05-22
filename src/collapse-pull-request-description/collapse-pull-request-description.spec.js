@@ -1,10 +1,10 @@
 import test from 'ava'
+import delay from 'yoctodelay'
 import { h } from 'dom-chef'
 
 import '../../test/setup-jsdom'
-import collapsePullRequestDescription from '.'
 import { cleanDocumentBody } from '../../test/test-utils'
-import delay from 'yoctodelay'
+import collapsePullRequestDescription from '.'
 
 test('should not disaply description container if empty', async t => {
     // Arrange
