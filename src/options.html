@@ -131,7 +131,7 @@
         <label>
             <input type="checkbox" name="lineLengthLimitEnabled" />
             Set a line limit of
-            <input type="number" name="lineLengthLimit" min="0" max="200" style="width: 40px;" />
+            <input type="number" name="lineLengthLimit" min="0" max="200" style="width: 50px;" />
             columns.
         </label>
         <br />
@@ -144,120 +144,120 @@
         <br />
         <br />
 
-        <l abel>
+        <label>
             <input type="checkbox" name="stickyHeader" /> Sticky Header -
             Ensure filename and actions toolbar is always visible even for
             long diffs
-            </label>
-            <br />
-            <br />
+        </label>
+        <br />
+        <br />
 
-            <label>
-                <input type="checkbox" name="prTemplateEnabled" /> Use a
-                <em>PULL_REQUEST_TEMPLATE.md</em> from the repository when
-                creating new pull requests or specify a URL with your own raw
-                template (must be hosted publicly in
-                <a href="http://gist.github.com/">http://gist.github.com/</a>).
-                See the
-                <a href="http://github.com/refined-bitbucket/refined-bitbucket">README</a>
-                of the extension for more details on how this works.
-                <i>Note: Currently, externally hosted pull request templates
-                    outside of Bitbucket's domain is not supported with the
-                    Firefox addon.</i>
-                <input type="text" name="prTemplateUrl" style="width: 100%;" />
-            </label>
-            <br />
-            <br />
+        <label>
+            <input type="checkbox" name="prTemplateEnabled" /> Use a
+            <em>PULL_REQUEST_TEMPLATE.md</em> from the repository when
+            creating new pull requests or specify a URL with your own raw
+            template (must be hosted publicly in
+            <a href="http://gist.github.com/">http://gist.github.com/</a>).
+            See the
+            <a href="http://github.com/refined-bitbucket/refined-bitbucket">README</a>
+            of the extension for more details on how this works.
+            <i>Note: Currently, externally hosted pull request templates
+                outside of Bitbucket's domain is not supported with the
+                Firefox addon.</i>
+            <input type="text" name="prTemplateUrl" style="width: 100%;" />
+        </label>
+        <br />
+        <br />
 
-            <label>
-                <input type="checkbox" name="mergeCommitMessageEnabled" /> Use a
-                <em>MERGE_COMMIT_TEMPLATE</em> from the repository or specify a
-                URL with your own raw template where you can use variables like
-                `id`, `title`, `description` and more. See the
-                <a href="http://github.com/refined-bitbucket/refined-bitbucket">README</a>
-                of the extension for more details on how this works.
-                <i>
-                    Note: Currently, externally hosted templates (outside from
-                    Bitbucket's domain) are only tested with
-                    <a href="http://gist.github.com/">http://gist.github.com/</a>, and are not supported with the
-                    Firefox addon.
-                </i>
-                <input type="text" name="mergeCommitMessageUrl" style="width: 100%;" />
-            </label>
-            <br />
-            <br />
+        <label>
+            <input type="checkbox" name="mergeCommitMessageEnabled" /> Use a
+            <em>MERGE_COMMIT_TEMPLATE</em> from the repository or specify a
+            URL with your own raw template where you can use variables like
+            `id`, `title`, `description` and more. See the
+            <a href="http://github.com/refined-bitbucket/refined-bitbucket">README</a>
+            of the extension for more details on how this works.
+            <i>
+                Note: Currently, externally hosted templates (outside from
+                Bitbucket's domain) are only tested with
+                <a href="http://gist.github.com/">http://gist.github.com/</a>, and are not supported with the Firefox
+                addon.
+            </i>
+            <input type="text" name="mergeCommitMessageUrl" style="width: 100%;" />
+        </label>
+        <br />
+        <br />
 
-            <label> Default Merge Strategy </label>
-            <div name="default-merge-strategy-form" style="margin: 0.5em 0 0 1em;">
-                <input type="radio" name="defaultMergeStrategy" value="none" />
-                None
-                <input type="radio" name="defaultMergeStrategy" value="merge_commit" checked />
-                Merge commit
-                <input type="radio" name="defaultMergeStrategy" value="squash" />
-                Squash
-                <input type="radio" name="defaultMergeStrategy" value="fast_forward" />
-                Fast forward
-            </div>
-            <br />
+        <label> Default Merge Strategy </label>
+        <div name="default-merge-strategy-form" style="margin: 0.5em 0 0 1em;">
+            <input type="radio" name="defaultMergeStrategy" value="none" />
+            None
+            <input type="radio" name="defaultMergeStrategy" value="merge_commit" checked />
+            Merge commit
+            <input type="radio" name="defaultMergeStrategy" value="squash" />
+            Squash
+            <input type="radio" name="defaultMergeStrategy" value="fast_forward" />
+            Fast forward
+        </div>
+        <br />
 
+        <div>
             <div>
-                <div>
-                    <label>
-                        <strong>Files to autocollapse. Use the same patterns as
-                            with .gitignore.</strong>
-                        <br />
-                        The files that match the given patterns will be
-                        automatically collapsed when the Pull Request loads.
-                    </label>
-                </div>
-                <textarea name="autocollapsePaths" rows="7" style="width: 100%"></textarea>
-                <br />
                 <label>
-                    <input type="checkbox" name="autocollapseDeletedFiles" />
-                    Autocollapse deleted files
+                    <strong>Files to autocollapse. Use the same patterns as
+                        with .gitignore.</strong>
+                    <br />
+                    The files that match the given patterns will be
+                    automatically collapsed when the Pull Request loads.
                 </label>
             </div>
+            <textarea name="autocollapsePaths" rows="7" style="width: 100%"></textarea>
             <br />
-
-            <div>
-                <div>
-                    <label>
-                        <strong>Diff ignore. Use the same patterns as with
-                            .gitignore.</strong>
-                        <div>
-                            The files that match the given patterns will be
-                            completely removed and inaccessible in the Pull
-                            Request / Commit view.
-                        </div>
-                    </label>
-                </div>
-                <textarea name="ignorePaths" rows="7" style="width: 100%"></textarea>
-            </div>
-            <br />
-
-            <div>
-                <div>
-                    <label>
-                        <strong>Define your own CSS styles to be injected in every
-                            page</strong>
-                    </label>
-                </div>
-                <textarea name="customStyles" rows="7" style="width: 100%"></textarea>
-            </div>
-            <br />
-
-            <hr />
-            <label style="display: flex; justify-content: space-between; align-items: center">
-                <span style="width: calc(100% - 30px)">
-                    Enable Update Notifications. Every time this extension is
-                    updated, the CHANGELOG for the current version will be
-                    opened in a new browser tab.
-                    <a href="https://github.com/refined-bitbucket/refined-bitbucket/issues/182">Subscribe to this issue
-                        if you would like to get e-mail
-                        notifications on updates.</a>
-                </span>
-                <input type="checkbox" name="enableUpdateNotifications" />
+            <label>
+                <input type="checkbox" name="autocollapseDeletedFiles" />
+                Autocollapse deleted files
             </label>
+        </div>
+        <br />
+
+        <div>
+            <div>
+                <label>
+                    <strong>Diff ignore. Use the same patterns as with
+                        .gitignore.</strong>
+                    <div>
+                        The files that match the given patterns will be
+                        completely removed and inaccessible in the Pull
+                        Request / Commit view.
+                    </div>
+                </label>
+            </div>
+            <textarea name="ignorePaths" rows="7" style="width: 100%"></textarea>
+        </div>
+        <br />
+
+        <div>
+            <div>
+                <label>
+                    <strong>Define your own CSS styles to be injected in every
+                        page</strong>
+                </label>
+            </div>
+            <textarea name="customStyles" rows="7" style="width: 100%"></textarea>
+        </div>
+        <br />
+
+        <hr />
+        <label style="display: flex; justify-content: space-between; align-items: center">
+            <span style="width: calc(100% - 30px)">
+                Enable Update Notifications. Every time this extension is
+                updated, the CHANGELOG for the current version will be
+                opened in a new browser tab.
+                <a href="https://github.com/refined-bitbucket/refined-bitbucket/issues/182">Subscribe to this issue if
+                    you would like to get e-mail
+                    notifications on updates.</a>
+            </span>
+            <input type="checkbox" name="enableUpdateNotifications" />
+        </label>
     </form>
 
     <script src="options.js"></script>

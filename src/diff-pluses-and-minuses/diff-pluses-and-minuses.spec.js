@@ -49,7 +49,7 @@ test('should remove pluses and minues for regular diff', t => {
                         </a>
                         <a class="line-numbers" data-fnum="1" data-tnum="1" />
                     </div>
-                    <pre class="source">var msg = 'Hello world';</pre>
+                    <pre class="source"> var msg = 'Hello world';</pre>
                 </div>
                 <div class="udiff-line common">
                     <pre class="source">white-space: nowrap;</pre>
@@ -104,9 +104,9 @@ test('line breaks are preserved with empty whitespace', t => {
                         </a>
                         <a class="line-numbers" data-fnum="1" data-tnum="1" />
                     </div>
-                    <pre class="source">var msg = 'Hello world';</pre>
+                    <pre class="source"> var msg = 'Hello world';</pre>
                     <pre class="source"> </pre>
-                    <pre class="source">var greeting = 'How are you?';</pre>
+                    <pre class="source"> var greeting = 'How are you?';</pre>
                 </div>
             </div>
         </section>
@@ -156,17 +156,18 @@ test('should remove pluses and minuses when diff has been rerendered to include 
                 <div class="diff-content-container refract-container word-diff">
                     <div class="refract-content-container">
                         <div class="udiff-line addition">
-                            <pre class="source">var msg = 'Hello world';</pre>
+                            <pre class="source"> var msg = 'Hello world';</pre>
                         </div>
 
                         <div class="udiff-line addition" id="diffed">
                             <pre class="source">
+                                {' '}
                                 console.
                                 <ins>log(msg);</ins>
                             </pre>
                         </div>
                         <div class="udiff-line addition" id="diffed-2">
-                            <pre class="source">return;</pre>
+                            <pre class="source"> return;</pre>
                         </div>
                     </div>
                 </div>
@@ -234,7 +235,7 @@ test('should do nothing and not throw or error when diff fails to load', t => {
     t.is(udiff.outerHTML, expected.outerHTML)
 })
 
-test('should not add extra leading whitespace', t => {
+test('should keep extra leading whitespace to keep text align if copied to clipboard', t => {
     const udiff = (
         <section class="bb-udiff" data-filename="filename.js">
             <div class="refract-content-container">
@@ -256,10 +257,11 @@ test('should not add extra leading whitespace', t => {
         <section class="bb-udiff" data-filename="filename.js">
             <div class="refract-content-container">
                 <div class="udiff-line deletion">
-                    <pre class="source">class App extends Component </pre>
+                    <pre class="source"> class App extends Component </pre>
                 </div>
                 <div class="udiff-line addition">
                     <pre class="source">
+                        {' '}
                         <ins>export default </ins>
                         class App extends Component{' '}
                     </pre>

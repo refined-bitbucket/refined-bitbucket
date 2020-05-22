@@ -13,7 +13,7 @@ const stripCharsFromLine = (line: Element) => {
     if (line.textContent === '+' || line.textContent === '-') {
         line.textContent = ' '
     } else {
-        line.innerHTML = line.innerHTML.slice(1)
+        line.innerHTML = ' ' + line.innerHTML.slice(1)
     }
 }
 
