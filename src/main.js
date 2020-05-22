@@ -142,6 +142,12 @@ function codeReviewFeatures(config) {
         }
     }
 
+    const manipulateGeneralComments = comments => {
+        if (config.showCommentsCheckbox) {
+            insertShowComments(comments, true)
+        }
+    }
+
     const manipulateDiff = diff => {
         if (autocollapse.collapseIfNeeded(diff)) {
             return
@@ -160,7 +166,7 @@ function codeReviewFeatures(config) {
         }
 
         if (config.showCommentsCheckbox) {
-            insertShowComments(diff)
+            insertShowComments(diff, false)
         }
 
         if (config.copyFilename) {
@@ -187,9 +193,14 @@ function codeReviewFeatures(config) {
         '#diff',
     ]
     const diffSelector = 'section.bb-udiff'
-    const allSelectors = [...new Set([...summarySelectors, diffSelector])].join(
-        ', '
-    )
+    const generalCommentsSelector = '#general-comments'
+    const allSelectors = [
+        ...new Set([
+            ...summarySelectors,
+            diffSelector,
+            generalCommentsSelector,
+        ]),
+    ].join(', ')
 
     // Have to observe the DOM because some sections
     // load asynchronously by user interactions
@@ -200,7 +211,6 @@ function codeReviewFeatures(config) {
             this.getAttribute('aria-hidden') === 'true'
         )
             return
-
         try {
             if (this.matches(summarySelectors.join(', '))) {
                 return manipulateSummary(this)
@@ -209,14 +219,18 @@ function codeReviewFeatures(config) {
             if (this.matches(diffSelector)) {
                 return manipulateDiff(this)
             }
+
+            if (this.matches(generalCommentsSelector)) {
+                return manipulateGeneralComments(this)
+            }
         } catch (error) {
             // Something went wrong
-            console.error('refined-bitbucket(code-review): ', error, this)
+            console.error('refined-bitbucket(code-review): ', error)
         }
     })
 
     if (config.lineLengthLimitEnabled) {
-        setLineLengthLimit(config.lineLengthLimit, config.stickyHeader)
+        setLineLengthLimit(config.lineLengthLimit)
     }
 
     if (config.ignoreWhitespace) {
