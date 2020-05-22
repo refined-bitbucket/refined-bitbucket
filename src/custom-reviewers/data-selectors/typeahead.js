@@ -34,6 +34,14 @@ function getSearchReviewersResults(): IUser[] {
     return results.filter(r => !restrictedUserIds.includes(r.account_id))
 }
 
+function sortUserByDisplayName(a, b) {
+    return a.display_name > b.display_name
+        ? 1
+        : a.display_name < b.display_name
+            ? -1
+            : 0
+}
+
 export function saveSearchReviewersResults(users: IUser[]): void {
     const element = $('#search_reviewers .typeahead.tt-input')
     const updatedResults = users.reduce((res, user) => {
@@ -41,7 +49,7 @@ export function saveSearchReviewersResults(users: IUser[]): void {
             ? res
             : [...res, user]
     }, element.data('results') || [])
-    element.data('results', updatedResults)
+    element.data('results', updatedResults.sort(sortUserByDisplayName))
 }
 
 export async function getSearchedReviewers(query: string): IUser[] {

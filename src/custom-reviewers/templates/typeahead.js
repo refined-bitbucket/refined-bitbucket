@@ -42,6 +42,7 @@ function getSuggestionResultElement(user: IUser): HTMLElement {
     const { display_name: name, nickname } = user
     const username = nickname == name ? '' : nickname
     const title = [name, username].filter(Boolean).join(' - ')
+
     return (
         <div title={title} id={getSearchReviewerResultLineId(user)}>
             <span class="mention-result">
@@ -56,9 +57,11 @@ function getSuggestionResultElement(user: IUser): HTMLElement {
                 <span class="username mention-result--secondary-name mention-result--username">
                     {username ? `(${username})` : ''}
                 </span>
-                <span class="aui-lozenge mention-result--lozenge">
-                    {user.is_teammate ? 'teammate' : ''}
-                </span>
+                {user.is_teammate && (
+                    <span class="aui-lozenge mention-result--lozenge">
+                        teammate
+                    </span>
+                )}
             </span>
         </div>
     )
