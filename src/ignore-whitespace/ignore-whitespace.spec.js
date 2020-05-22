@@ -1,11 +1,8 @@
 import { h } from 'dom-chef'
 import test from 'ava'
 
-import { ignoreWhitespaceSearchParam } from '.'
-
 import '../../test/setup-jsdom'
-import { ignoreWhitespaceInit } from './ignore-whitespace'
-import { cleanDocumentBody } from '../../test/test-utils'
+import { ignoreWhitespaceSearchParam } from '.'
 
 test('should transform pull request link to add ignore whitespace query param to 1', t => {
     const actual = (
