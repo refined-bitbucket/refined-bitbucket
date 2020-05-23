@@ -240,7 +240,7 @@ function codeReviewFeatures(config) {
     })
 
     if (config.lineLengthLimitEnabled) {
-        setLineLengthLimit(config.lineLengthLimit, config.stickyHeader)
+        setLineLengthLimit(config.lineLengthLimit)
     }
 
     if (config.stickyHeader) {
