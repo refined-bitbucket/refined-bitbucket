@@ -3,7 +3,6 @@ import test from 'ava'
 
 import '../../test/setup-jsdom'
 import { ignoreWhitespaceSearchParam } from '.'
-
 test('should transform pull request link to add ignore whitespace query param to 1', t => {
     const actual = (
         <div>

@@ -9,7 +9,7 @@ import './show-comments.css'
 const switchToggleState = e => {
     const ariaChecked = e.currentTarget.getAttribute('aria-expanded')
     const isChecked = ariaChecked === 'true'
-    e.currentTarget.setAttribute('aria-expanded', !isChecked)
+    e.currentTarget.setAttribute('aria-expanded', !isChecked.toString())
 }
 
 const toggleComments = (e, comments) =>

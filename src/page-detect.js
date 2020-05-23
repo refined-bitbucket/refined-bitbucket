@@ -46,3 +46,6 @@ export const isBranch = () => getRepoPath().startsWith('branch/')
 
 export const isDashBoardOverview = () =>
     getRepoURL().startsWith('dashboard/overview')
+
+export const isDashBoardPullRequests = () =>
+    getRepoURL().startsWith('dashboard/pullrequests')

@@ -35,6 +35,8 @@ import mergeCommitMessageNew from './merge-commit-message-new'
 import collapsePullRequestDescription from './collapse-pull-request-description'
 import setStickyHeader from './sticky-header'
 import setLineLengthLimit from './limit-line-length'
+import collapsePullRequestSideMenus from './collapse-pull-request-side-menus'
+import insertDashboardOverviewFilters from './dashboard-pull-requests'
 
 import observeForWordDiffs from './observe-for-word-diffs'
 
@@ -46,11 +48,14 @@ import {
     isBranch,
     isComparePage,
     isDashBoardOverview,
+    isDashBoardPullRequests,
 } from './page-detect'
 
 import addStyleToPage from './add-style'
 
 new OptionsSync().getAll().then(options => {
+    if (!options._isExtEnabled) return
+
     const config = {
         ...options,
         autocollapsePaths: (options.autocollapsePaths || '').split('\n'),
@@ -85,6 +90,10 @@ function init(config) {
             comparePagePullRequest()
         }
         codeReviewFeatures(config)
+    } else if (isDashBoardPullRequests()) {
+        if (config.insertDashboardOverviewFilters) {
+            insertDashboardOverviewFilters()
+        }
     }
 
     if (config.addSidebarCounters) {
@@ -221,7 +230,7 @@ function codeReviewFeatures(config) {
             }
 
             if (this.matches(generalCommentsSelector)) {
-                return manipulateGeneralComments(this)
+                return insertShowComments(this, true)
             }
         } catch (error) {
             // Something went wrong
@@ -231,10 +240,6 @@ function codeReviewFeatures(config) {
 
     if (config.lineLengthLimitEnabled) {
         setLineLengthLimit(config.lineLengthLimit)
-    }
-
-    if (config.ignoreWhitespace) {
-        ignoreWhitespaceInit()
     }
 
     if (config.stickyHeader) {
@@ -258,6 +263,10 @@ function pullrequestRelatedFeaturesNew(config) {
         mergeCommitMessageNew(config.mergeCommitMessageUrl)
     }
 
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
+    }
+
     if (config.copyFilename) {
         // eslint-disable-next-line no-new
         new SelectorObserver(
@@ -273,6 +282,10 @@ function pullrequestRelatedFeaturesNew(config) {
 }
 
 function pullrequestRelatedFeaturesOld(config) {
+    if (config.ignoreWhitespace) {
+        ignoreWhitespaceInit()
+    }
+
     if (config.defaultMergeStrategy !== 'none') {
         defaultMergeStrategy.init(config.defaultMergeStrategy)
     }
@@ -291,5 +304,9 @@ function pullrequestRelatedFeaturesOld(config) {
 
     if (config.collapsePullRequestDescription) {
         collapsePullRequestDescription()
+    }
+
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
     }
 }
