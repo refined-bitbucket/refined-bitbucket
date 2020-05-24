@@ -178,6 +178,21 @@ We all know BitBucket lacks some features that we have in other platforms like G
 	</tr>
 </table>
 
+<table>
+	<tr>
+		<th colspan="1">
+			Dashboard Pull requests page view filters
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://user-images.githubusercontent.com/23088305/79023416-4ac03f00-7b4e-11ea-837a-1c5628e451b6.gif" alt="preview"/> <br />
+			A copy of the filters from Dashboard Your Work.
+            It autosaves checked values.
+		</td>
+	</tr>
+</table>
+
 ## Installing
 
 _refined-bitbucket_ is available on the [Google Chrome Web Store][chrome-install] and [Add-ons for Firefox][firefox-install]. When installed, go check the extension's Options to customize it to your needs.
