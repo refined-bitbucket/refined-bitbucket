@@ -13,7 +13,10 @@ import collapseDiff from './collapse-diff'
 import defaultMergeStrategy from './default-merge-strategy'
 import diffIgnore from './diff-ignore'
 import removeDiffsPlusesAndMinuses from './diff-pluses-and-minuses'
-import ignoreWhitespace from './ignore-whitespace'
+import {
+    ignoreWhitespaceSearchParam,
+    ignoreWhitespaceInit,
+} from './ignore-whitespace'
 import insertCopyFilename from './insert-copy-filename'
 import insertCopyFilenameNew from './insert-copy-filename-new'
 import keymap from './keymap'
@@ -41,6 +44,7 @@ import {
     isCommit,
     isBranch,
     isComparePage,
+    isDashBoardOverview,
     isEditPullRequestURL,
 } from './page-detect'
 
@@ -62,7 +66,7 @@ function init(config) {
     } else if (isPullRequest()) {
         codeReviewFeatures(config)
         pullrequestRelatedFeatures(config)
-    } else if (isPullRequestList()) {
+    } else if (isPullRequestList() || isDashBoardOverview()) {
         pullrequestListRelatedFeatures(config)
     } else if (isCreatePullRequestURL()) {
         createPullRequestRelatedFeatures(config)
@@ -126,7 +130,7 @@ function pullrequestListRelatedFeatures(config) {
         'tr[data-qa="pull-request-row"]',
         function() {
             if (config.ignoreWhitespace) {
-                ignoreWhitespace(this)
+                ignoreWhitespaceSearchParam(this)
             }
 
             if (config.augmentPrEntry) {
@@ -155,6 +159,12 @@ function codeReviewFeatures(config) {
         }
     }
 
+    const manipulateGeneralComments = comments => {
+        if (config.showCommentsCheckbox) {
+            insertShowComments(comments, true)
+        }
+    }
+
     const manipulateDiff = diff => {
         if (diffIgnore.isIgnored(diff)) {
             return
@@ -171,7 +181,7 @@ function codeReviewFeatures(config) {
         autocollapse.collapseIfNeeded(diff)
 
         if (config.showCommentsCheckbox) {
-            insertShowComments(diff)
+            insertShowComments(diff, false)
         }
 
         if (config.copyFilename) {
@@ -195,12 +205,14 @@ function codeReviewFeatures(config) {
         '#compare-diff-content, #pr-tab-content, #commit, #diff'
     const diffSelector = 'section.bb-udiff'
 
+    const generalCommentsSelector = '#general-comments'
+
     // Have to observe the DOM because some sections
     // load asynchronously by user interactions
     // eslint-disable-next-line no-new
     new SelectorObserver(
         document.body,
-        [summarySelectors, diffSelector].join(', '),
+        [summarySelectors, diffSelector, generalCommentsSelector].join(', '),
         function() {
             try {
                 if (this.matches(summarySelectors)) {
@@ -210,6 +222,10 @@ function codeReviewFeatures(config) {
                 if (this.matches(diffSelector)) {
                     return manipulateDiff(this)
                 }
+
+                if (this.matches(generalCommentsSelector)) {
+                    return manipulateGeneralComments(this)
+                }
             } catch (error) {
                 // Something went wrong
                 console.error('refined-bitbucket(code-review): ', error)
@@ -218,7 +234,11 @@ function codeReviewFeatures(config) {
     )
 
     if (config.lineLengthLimitEnabled) {
-        setLineLengthLimit(config.lineLengthLimit, config.stickyHeader)
+        setLineLengthLimit(config.lineLengthLimit)
+    }
+
+    if (config.ignoreWhitespace) {
+        ignoreWhitespaceInit()
     }
 
     if (config.stickyHeader) {

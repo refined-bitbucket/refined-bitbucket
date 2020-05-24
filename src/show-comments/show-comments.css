@@ -1,0 +1,22 @@
+.__rbb-show-comments .aui-icon {
+    pointer-events: none;
+}
+.__rbb-show-comments .aui-icon::before {
+    content: '\f11D';
+}
+.__rbb-show-comments .aui-icon::after,
+.__rbb-show-comments[aria-expanded='false'] .aui-icon::after {
+    content: '';
+    background: transparent;
+    transform: rotate(142deg) translate3d(25%, -1px, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 160%;
+    height: 10%;
+    -webkit-transition: background 100ms linear;
+    transition: background 100ms linear;
+}
+.__rbb-show-comments[aria-expanded='false'] .aui-icon::after {
+    background: #505f79;
+}
