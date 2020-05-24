@@ -3,13 +3,13 @@ import { h } from 'dom-chef'
 import delay from 'yoctodelay'
 
 import '../../test/setup-jsdom'
+import { cleanDocumentBody } from '../../test/test-utils'
 
 import insertDashboardOverviewFilters, {
     classFilter,
     filterNames,
     filterStyle,
 } from './dashboard-pull-requests'
-import { cleanDocumentBody } from '../../test/test-utils'
 
 function initial() {
     return (

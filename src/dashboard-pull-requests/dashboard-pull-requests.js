@@ -12,7 +12,7 @@ export const filterStyle = {
 
 const classHide = '__refined_bitbucket_hide'
 
-export const classFilter = id => `__refined_bitbucket_filter_${id}`
+export const classFilter = (id: string) => `__refined_bitbucket_filter_${id}`
 
 export const filterNames = {
     successfulBuilds: 'successfulBuilds',
@@ -76,12 +76,12 @@ async function newCheckbox(filterName, notMe) {
     return <input name={filterName} style={filterStyle} type="checkbox" />
 }
 
-function getElementUuid(el, attr) {
-    const user = JSON.parse(el.getAttribute(attr))
-    return user ? user.uuid : ''
+function getElementUuid(el: HTMLElement, attr: string) {
+    const user = JSON.parse(el.getAttribute(attr) || '{}')
+    return user.uuid || ''
 }
 
-function performHide(el, filterName) {
+function performHide(el: HTMLElement, filterName: string) {
     const row = el.closest('tr')
     if (!row) return
 
@@ -91,45 +91,46 @@ function performHide(el, filterName) {
 }
 
 function hide(querySelector, filterName, notMe = false) {
+    const container: HTMLElement = (document.getElementById(
+        'pullrequests'
+    ): any)
+
     if (notMe) {
-        const me = getElementUuid(document.body, 'data-current-user')
-        document
-            .getElementById('pullrequests')
-            .querySelectorAll(filtersHidingSelector.notMe)
-            .forEach(el => {
-                const uuidFound = getElementUuid(el, 'data-user')
-                if (uuidFound !== me) return
-                performHide(el, filterName)
-            })
+        const me: string = getElementUuid(
+            (document.body: any),
+            'data-current-user'
+        )
+        container.querySelectorAll(filtersHidingSelector.notMe).forEach(el => {
+            const uuidFound = getElementUuid(el, 'data-user')
+            if (uuidFound !== me) return
+            return performHide(el, filterName)
+        })
     }
 
-    const els = document
-        .getElementById('pullrequests')
+    container
         .querySelectorAll(querySelector)
-
-    if (!els || els.length === 0) return
-
-    els.forEach(el => performHide(el, filterName))
+        .forEach(el => performHide(el, filterName))
 }
 
 function show(filterName) {
-    const els = document
-        .getElementById('pullrequests')
-        .querySelectorAll(`tr.${classFilter(filterName)}`)
-    els.forEach(el => {
+    const container: HTMLElement = (document.getElementById(
+        'pullrequests'
+    ): any)
+
+    container.querySelectorAll(`tr.${classFilter(filterName)}`).forEach(el => {
         el.classList.remove(classFilter(filterName))
         el.classList.remove(classHide)
         return el
     })
 }
 
-function save(filterName, checked) {
-    localStorage.setItem([classFilter(filterName)], checked)
+function save(filterName: string, checked: boolean) {
+    localStorage.setItem(classFilter(filterName), checked.toString())
 }
 
-function onFilterSuccessfulBuilds(e) {
-    save(filterNames.successfulBuilds, e.target.checked)
-    return e.target.checked
+function onFilterSuccessfulBuilds({ target: { checked } }: any) {
+    save(filterNames.successfulBuilds, checked)
+    return checked
         ? hide(
               filtersHidingSelector.successfulBuilds,
               filterNames.successfulBuilds
@@ -137,9 +138,9 @@ function onFilterSuccessfulBuilds(e) {
         : show(filterNames.successfulBuilds)
 }
 
-function onFilterAllTasksResolved(e) {
-    save(filterNames.allTasksResolved, e.target.checked)
-    return e.target.checked
+function onFilterAllTasksResolved({ target: { checked } }: any) {
+    save(filterNames.allTasksResolved, checked)
+    return checked
         ? hide(
               filtersHidingSelector.allTasksResolved,
               filterNames.allTasksResolved
@@ -147,9 +148,9 @@ function onFilterAllTasksResolved(e) {
         : show(filterNames.allTasksResolved)
 }
 
-function onFilterNeedsMyApproval(e) {
-    save(filterNames.needsMyApproval, e.target.checked)
-    return e.target.checked
+function onFilterNeedsMyApproval({ target: { checked } }: any) {
+    save(filterNames.needsMyApproval, checked)
+    return checked
         ? hide(
               filtersHidingSelector.needsMyApproval,
               filterNames.needsMyApproval,
