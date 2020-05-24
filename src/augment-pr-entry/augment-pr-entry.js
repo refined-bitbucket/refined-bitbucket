@@ -4,11 +4,13 @@
 import { h } from 'dom-chef'
 import api, { type PullRequestActivity } from '../api'
 
-function addSourceBranch(prRow) {
+declare var $: any
+
+export function addSourceBranch(prRow: HTMLElement) {
     if (window.innerWidth <= 1200)
         $(prRow)
             .find('td :hidden')
-            .has('div[role="button"]')
+            .has('div[role="button"]:hidden')
             .show()
 }
 
@@ -38,16 +40,16 @@ export const addUsernameWithLatestUpdate = (
     const prSubline = ((prRow.querySelector('td small'): any): HTMLElement)
 
     if (author && prSubline) {
-        prSubline.appendChild(<span>{` by ${author} (${activityType})`}</span>)
+        prSubline.append(` by ${author} (${activityType})`)
     }
 }
 
 export default function augmentPrEntry(prRow: HTMLElement) {
     addSourceBranch(prRow)
 
-    const link: HTMLAnchorElement = prRow.querySelector(
+    const link: HTMLAnchorElement = (prRow.querySelector(
         'a[data-qa="pull-request-row-link"]'
-    )
+    ): any)
     const url = new URL(link.href)
     const splitPath = url.pathname.split('/')
     const prId = splitPath[splitPath.length - 1]

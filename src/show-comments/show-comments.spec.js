@@ -592,7 +592,7 @@ test('General "Comments" button is added/removed when applicable if comments are
             </article>
         </li>
     )
-    await delay(100)
+    await delay(200)
 
     // Assert
     t.truthy(
@@ -609,7 +609,7 @@ test('General "Comments" button is added/removed when applicable if comments are
             </article>
         </li>
     )
-    await delay(100)
+    await delay(200)
 
     // Assert
     t.truthy(
@@ -622,7 +622,7 @@ test('General "Comments" button is added/removed when applicable if comments are
     ;[...diff.querySelectorAll('#comments-list li.comment')].forEach(comment =>
         comment.remove()
     )
-    await delay(100)
+    await delay(200)
 
     t.falsy(
         diff.querySelector('.__rbb-show-comments'),
