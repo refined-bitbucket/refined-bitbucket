@@ -17,7 +17,7 @@ export async function ignoreWhitespaceInit() {
         '[data-key="ignoreWhitespace"]'
     )
     if (toggle && toggle.getAttribute('aria-checked') === 'false') {
-        toggle.dataset['jumpTo'] = '#'
+        toggle.dataset.jumpTo = '#'
         toggle.click()
     }
 }
