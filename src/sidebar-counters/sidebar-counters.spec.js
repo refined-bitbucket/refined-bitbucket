@@ -5,14 +5,7 @@ import '../../test/setup-jsdom'
 
 import 'selector-observer'
 
-import {
-    getBadge,
-    addCounterToMenuItem,
-    menus,
-    HREF_PULL_REQUESTS,
-    HREF_BRANCHES,
-} from './sidebar-counters'
-import addSidebarCounters from '.'
+import { getBadge, addCounterToMenuItem } from './sidebar-counters'
 
 global.fetch = {}
 
@@ -54,9 +47,9 @@ test.serial(
     'addCounterToMenuItem should fail if no menu link found',
     async t => {
         // Arrange
-        const menusCounters: MenuCounter = {
-            [HREF_BRANCHES]: null,
-            [HREF_PULL_REQUESTS]: 0,
+        const menusCounters = {
+            branches: null,
+            'pull-requests': 0,
         }
 
         const menu = (
@@ -88,9 +81,9 @@ test.serial(
     'addCounterToMenuItem should add properly branches counter to branches menu link',
     async t => {
         // Arrange
-        const menusCounters: MenuCounter = {
-            [HREF_BRANCHES]: size,
-            [HREF_PULL_REQUESTS]: 0,
+        const menusCounters = {
+            branches: size,
+            'pull-requests': 0,
         }
 
         const menu = (
@@ -122,9 +115,9 @@ test.serial(
     'addCounterToMenuItem should add properly pull-requests counter to pull-requests menu link',
     async t => {
         // Arrange
-        const menusCounters: MenuCounter = {
-            [HREF_BRANCHES]: 0,
-            [HREF_PULL_REQUESTS]: size,
+        const menusCounters = {
+            branches: 0,
+            'pull-requests': size,
         }
 
         const menu = (
@@ -159,9 +152,9 @@ test.serial(
     'addCounterToMenuItem should not add counter to unknown menu link',
     async t => {
         // Arrange
-        const menusCounters: MenuCounter = {
-            [HREF_BRANCHES]: size,
-            [HREF_PULL_REQUESTS]: size,
+        const menusCounters = {
+            branches: size,
+            'pull-requests': size,
         }
         const menu = (
             <div role="presentation">

@@ -83,9 +83,9 @@ async function get<T: Object>(
     try {
         const result: BitbucketAPIErrorResponse | T = await response.json()
         return result
-    } catch (ex) {
-        console.error(ex)
-        return ex
+    } catch (error) {
+        console.error(error)
+        throw error
     }
 }
 

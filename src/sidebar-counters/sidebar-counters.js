@@ -2,22 +2,20 @@
 // @jsx h
 
 import { h } from 'dom-chef'
-import elementReady from 'element-ready'
-import api from '../api'
 import SelectorObserver from 'selector-observer'
+
+import api from '../api'
 
 import './sidebar-counters.css'
 
-export const HREF_BRANCHES = 'branches'
-export const HREF_PULL_REQUESTS = 'pull-requests'
-export const menus = [HREF_BRANCHES, HREF_PULL_REQUESTS]
+type MenuCounter = $Exact<{
+    branches: number,
+    'pull-requests': number,
+}>
+
+const menus = ['branches', 'pull-requests']
 
 const MAX_COUNTER = 99
-
-type MenuCounter = $Exact<{
-    [HREF_BRANCHES]: number,
-    [HREF_PULL_REQUESTS]: number,
-}>
 
 export function getBadge(size: number): HTMLElement {
     const maxReached = size > MAX_COUNTER
@@ -38,15 +36,15 @@ export function getBadge(size: number): HTMLElement {
     )
 }
 
-export async function addCounterToMenuItem(
+export function addCounterToMenuItem(
     menu: HTMLElement,
     menusCounters: MenuCounter
-) {
-    const link: HTMLAnchorElement = menu.querySelector('a')
+): void {
+    const link: HTMLAnchorElement = (menu.querySelector('a'): any)
 
     if (!link) return
 
-    const hrefParts = link.getAttribute('href').split('/')
+    const hrefParts = (link.getAttribute('href') || '').split('/')
     const wantedMenuFromHref = hrefParts.find(x => menus.includes(x))
 
     // Exit early if can't find one of the nav links
@@ -71,14 +69,16 @@ export default async function addSideBarCounters() {
     const pullRequestsCount = (pullrequests || {}).size
 
     const menusCounters: MenuCounter = {
-        [HREF_BRANCHES]: branchesCount,
-        [HREF_PULL_REQUESTS]: pullRequestsCount,
+        branches: branchesCount,
+        'pull-requests': pullRequestsCount,
     }
 
     const contentNavigationSelector =
         'div[data-testid="Content"] div[role="presentation"]'
     const contextualNavigationSelector =
         'div[data-testid="ContextualNavigation"] div[role="presentation"]'
+
+    // eslint-disable-next-line no-new
     new SelectorObserver(
         document.body,
         [contentNavigationSelector, contextualNavigationSelector].join(', '),
