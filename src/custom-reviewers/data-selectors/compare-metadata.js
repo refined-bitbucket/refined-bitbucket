@@ -1,17 +1,19 @@
 // @flow
 import { h } from 'dom-chef'
 import { IUser } from '../../_core/models'
-import { getCurrentPullRequestAuthorAccountId } from '../../utils'
+import {
+    getCurrentPullRequestAuthorAccountId,
+    getCurrentUserAccountId,
+} from '../../utils'
 
-const currentPullRequestAuthorAccountId: string = getCurrentPullRequestAuthorAccountId()
+const authorId = getCurrentPullRequestAuthorAccountId()
+const meId = getCurrentUserAccountId()
 
 export function getAuthorReviewers(): IUser[] {
     const el = $('#compare-metadata')
     const authors = el.data('authors')
     if (!el || !Array.isArray(authors)) return []
-    return authors.filter(
-        (u: IUser) => u.account_id !== currentPullRequestAuthorAccountId
-    )
+    return authors.filter((u: IUser) => u.account_id !== (authorId || meId))
 }
 
 export function isUserAuthorReviewer(user: IUser): boolean {
