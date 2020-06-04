@@ -3,6 +3,7 @@
 
 import elementReady from 'element-ready'
 import { h } from 'dom-chef'
+import delay from 'yoctodelay'
 
 export async function init(node: Element) {
     // Wait for all sections to be loaded into the view
@@ -43,6 +44,9 @@ export async function init(node: Element) {
     button.addEventListener('click', async () => {
         button.disabled = true
         button.textContent = 'Please wait'
+
+        // Needs to re-render with new textContent otherwise it will complete without it
+        await delay(50)
 
         const finished = [...node.querySelectorAll('a.try-again')].map(
             tryAgain => {
