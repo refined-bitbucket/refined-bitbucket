@@ -12,7 +12,10 @@ import './fix.css'
 
 const codeContainerObserver = new MutationObserver(mutations => {
     mutations.forEach(mutation =>
-        syntaxHighlightSourceCodeLines($(mutation.target))
+        syntaxHighlightSourceCodeLines(
+            $(mutation.target),
+            'pre.source:not([class*=language])'
+        )
     )
 })
 
