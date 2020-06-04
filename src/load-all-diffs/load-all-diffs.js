@@ -53,7 +53,7 @@ export async function init(node: Element) {
                         .closest('section')
                         .getAttribute('data-identifier') || ''
                 return elementReady(
-                    `section[data-identifier="${dataIdentifier}"] > div.diff-container`,
+                    `section[data-identifier="${dataIdentifier}"] > div.diff-container, section[data-identifier="${dataIdentifier}"] .try-again-failed`,
                     { target: node }
                 )
             }
