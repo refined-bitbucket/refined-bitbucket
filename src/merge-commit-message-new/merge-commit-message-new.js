@@ -71,7 +71,7 @@ async function insertMergeCommitTemplate(template, dataToInject) {
         'Merge',
         {},
         {
-            timeout: 10000,
+            timeout: 90000,
         }
     )
     const mergeBtns = mergeSpans.map(span => span.closest('button'))
