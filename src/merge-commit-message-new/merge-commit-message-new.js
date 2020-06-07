@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { findAllByText, findByText } from '@testing-library/dom'
+import elementReady from 'element-ready'
 import { getRepoURL } from '../page-detect'
 import {
     getFirstFileContents,
@@ -77,27 +78,24 @@ async function insertMergeCommitTemplate(template, dataToInject) {
     const mergeBtns = mergeSpans.map(span => span.closest('button'))
 
     const onFulfillPullrequest = async () => {
-        const mergeDialogHeader = await findByText(
-            document.body,
-            'Merge pull request'
-        )
-        const textarea = mergeDialogHeader
-            .closest('[role="dialog"]')
-            .querySelector('textarea')
-        const value = template
-            .replace(/{id}/g, String(dataToInject.id))
-            .replace(/{title}/g, dataToInject.title)
-            .replace(/{description}/g, dataToInject.description)
-            .replace(/{sourceBranch}/g, dataToInject.sourceBranch)
-            .replace(/{targetBranch}/g, dataToInject.targetBranch)
-            .replace(/{approvedByList}/g, dataToInject.approvedByList)
+        const dialog = await elementReady('[role="dialog"]')
+        if (dialog) {
+            const textarea = dialog.querySelector('textarea')
+            const value = template
+                .replace(/{id}/g, String(dataToInject.id))
+                .replace(/{title}/g, dataToInject.title)
+                .replace(/{description}/g, dataToInject.description)
+                .replace(/{sourceBranch}/g, dataToInject.sourceBranch)
+                .replace(/{targetBranch}/g, dataToInject.targetBranch)
+                .replace(/{approvedByList}/g, dataToInject.approvedByList)
 
-        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-            window.HTMLTextAreaElement.prototype,
-            'value'
-        ).set
-        nativeInputValueSetter.call(textarea, value)
-        textarea.dispatchEvent(new Event('input', { bubbles: true }))
+            const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+                window.HTMLTextAreaElement.prototype,
+                'value'
+            ).set
+            nativeInputValueSetter.call(textarea, value)
+            textarea.dispatchEvent(new Event('input', { bubbles: true }))
+        }
     }
 
     mergeBtns.forEach(b => b.addEventListener('click', onFulfillPullrequest))
