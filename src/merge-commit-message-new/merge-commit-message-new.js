@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { findAllByText, findByText } from '@testing-library/dom'
+import { findAllByText } from '@testing-library/dom'
 import elementReady from 'element-ready'
 import { getRepoURL } from '../page-detect'
 import {
