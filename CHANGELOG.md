@@ -1,3 +1,28 @@
+# 3.21.0 (2019-06-07)
+
+### Features
+
+-   feat: Trigger ignore whitespace on PR load ([#340](https://github.com/refined-bitbucket/refined-bitbucket/pull/340)) ([a588ad3](https://github.com/refined-bitbucket/refined-bitbucket/commit/a588ad3599638eda295811fd1b08adcf00722cff)). Thanks [@jwallet](https://github.com/jwallet)!
+-   feat: Add PR list features to Overview page ([#338](https://github.com/refined-bitbucket/refined-bitbucket/pull/338)) ([2958224](https://github.com/refined-bitbucket/refined-bitbucket/commit/2958224988e618bada885a46575dc36120895753)). Thanks [@jwallet](https://github.com/jwallet)!
+
+### Improvements
+
+-   enh: plus/minus on Firefox + line limit ruler ([#341](https://github.com/refined-bitbucket/refined-bitbucket/pull/341)) ([09cba87](https://github.com/refined-bitbucket/refined-bitbucket/commit/09cba8747bfc4485fa407c6a521af7b59b9058ed)). Thanks [@jwallet](https://github.com/jwallet)!
+-   enh: add user-select none to filename badge ([#346](https://github.com/refined-bitbucket/refined-bitbucket/pull/346)) ([456730e](https://github.com/refined-bitbucket/refined-bitbucket/commit/456730e28290d5ddefd4a58437ac2d4bd903495a)). Thanks [@jwallet](https://github.com/jwallet)!
+-   enh: UI update of collapse description ([#343](https://github.com/refined-bitbucket/refined-bitbucket/pull/343)) ([46f697a](https://github.com/refined-bitbucket/refined-bitbucket/commit/46f697abdbe5032565b279d60cccc142efac89c0)). Thanks [@jwallet](https://github.com/jwallet)!
+-   enh: Show comments ([#345](https://github.com/refined-bitbucket/refined-bitbucket/pull/345)) ([0ee2a99](https://github.com/refined-bitbucket/refined-bitbucket/commit/0ee2a99a87e8fc82dba8633b7ee2b2a6fc257936)). Thanks [@jwallet](https://github.com/jwallet)!
+
+### Bug fixes
+
+-   fix: increase merge commit timeout ([#367](https://github.com/refined-bitbucket/refined-bitbucket/pull/367)) ([67ac887](https://github.com/refined-bitbucket/refined-bitbucket/commit/67ac88774672324e46e3e8400462d3e82e7c59c3)).
+-   fix: merge commit template ([#368](https://github.com/refined-bitbucket/refined-bitbucket/pull/368)) ([31a60a8](https://github.com/refined-bitbucket/refined-bitbucket/commit/31a60a8ec79a599eafc49c227e01883cd6cccb69)).
+-   fix: collapse description, small fixes ([#364](https://github.com/refined-bitbucket/refined-bitbucket/pull/364)) ([f7c3e80](https://github.com/refined-bitbucket/refined-bitbucket/commit/f7c3e801b20ba9f21c790706ae1a8a319b4ba5eb)). Thanks [@jwallet](https://github.com/jwallet)!
+
+### Chore
+
+-   chore(deps): bump acorn from 5.7.2 to 5.7.4 ([#337](https://github.com/refined-bitbucket/refined-bitbucket/pull/337)) ([39e4ddc](https://github.com/refined-bitbucket/refined-bitbucket/commit/39e4ddcf121500b1f5bff31e7cdbc4706f1c11df)).
+-   chore(deps): bump jquery from 3.4.0 to 3.5.0 ([#353](https://github.com/refined-bitbucket/refined-bitbucket/pull/353)) ([8a05731](https://github.com/refined-bitbucket/refined-bitbucket/commit/8a05731726d6a977e44dfa01973a392c39e07aaf)).
+
 # 3.20.0 (2019-03-01)
 
 ### Features
