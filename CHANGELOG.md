@@ -1,4 +1,4 @@
-# 3.21.0 (2019-06-07)
+# 3.21.0 (2020-06-07)
 
 ### Features
 
@@ -23,7 +23,7 @@
 -   chore(deps): bump acorn from 5.7.2 to 5.7.4 ([#337](https://github.com/refined-bitbucket/refined-bitbucket/pull/337)) ([39e4ddc](https://github.com/refined-bitbucket/refined-bitbucket/commit/39e4ddcf121500b1f5bff31e7cdbc4706f1c11df)).
 -   chore(deps): bump jquery from 3.4.0 to 3.5.0 ([#353](https://github.com/refined-bitbucket/refined-bitbucket/pull/353)) ([8a05731](https://github.com/refined-bitbucket/refined-bitbucket/commit/8a05731726d6a977e44dfa01973a392c39e07aaf)).
 
-# 3.20.0 (2019-03-01)
+# 3.20.0 (2020-03-01)
 
 ### Features
 
