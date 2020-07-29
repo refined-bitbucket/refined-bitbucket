@@ -6,7 +6,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "prettier": "prettier --write \"./**/*.{js,jsx,json,css,md,html}\"",
-    "xo": "xo *.js {src,test,scripts}/**/*.js !src/vendor/prism.js",
+    "xo": "xo *.js {src,test,scripts}/**/*.js !src/vendor/*.*",
     "ava": "cross-env BABEL_ENV=testing ava",
     "ava:w": "npm run ava -- --watch",
     "flow": "flow check --color=always",
