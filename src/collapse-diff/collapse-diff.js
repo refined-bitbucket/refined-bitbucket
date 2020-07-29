@@ -188,16 +188,18 @@ export function insertCollapseDiffButton(section: HTMLElement) {
         return
     }
 
-    const onClick = () => {
+    const onClick = ({ scrollingEffect }) => () => {
         toggleDiff(section)
 
         // Scrolling to diff
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        if (scrollingEffect) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
     }
 
     const topButton = insertTopButton(section)
     const bottomButton = insertBottomButton(section)
 
-    topButton.addEventListener('click', onClick)
-    bottomButton.addEventListener('click', onClick)
+    topButton.addEventListener('click', onClick({ scrollingEffect: false }))
+    bottomButton.addEventListener('click', onClick({ scrollingEffect: true }))
 }
