@@ -6,15 +6,25 @@
   "author": "Ronald Rey",
   "homepage_url": "https://github.com/refined-bitbucket/refined-bitbucket",
   "icons": {
-    "16": "icon_16px.png",
-    "32": "icon_32px.png",
-    "48": "icon_48px.png",
-    "64": "icon_64px.png",
-    "128": "icon_128px.png",
-    "256": "icon_256px.png"
+    "16": "icons/icon_16px.png",
+    "32": "icons/icon_32px.png",
+    "48": "icons/icon_48px.png",
+    "64": "icons/icon_64px.png",
+    "128": "icons/icon_128px.png",
+    "256": "icons/icon_256px.png"
+  },
+  "page_action": {
+    "browser_style": true,
+    "default_icon": {
+      "16": "icons/icon_16px.png",
+      "32": "icons/icon_32px.png"
+    },
+    "show_matches": ["https://bitbucket.org/*", "https://*.bitbucket.org/*"],
+    "default_title": "Refined Bitbucket",
+    "default_popup": "popup/popup.html"
   },
   "options_ui": {
-    "page": "options.html",
+    "page": "options/options.html",
     "chrome_style": true
   },
   "applications": {
@@ -24,6 +34,7 @@
   },
   "permissions": [
     "activeTab",
+    "declarativeContent",
     "https://bitbucket.org/*",
     "https://api.bitbucket.org/*",
     "storage"
@@ -34,9 +45,7 @@
         "prism.js",
         "main.js"
       ],
-      "matches": [
-        "https://bitbucket.org/*"
-      ]
+      "matches": ["https://bitbucket.org/*", "https://*.bitbucket.org/*"]
     }
   ],
   "background": {
