@@ -15,6 +15,7 @@ const justInstalledOrUpdated = new Promise((resolve, reject) => {
 new OptionsSync().define({
     defaults: {
         syntaxHighlight: true,
+        compactFileTree: false,
         autolinker: true,
         highlightOcurrences: true,
         ignoreWhitespace: true,

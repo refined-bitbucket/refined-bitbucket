@@ -13,6 +13,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 ## Current features
 
 -   Adds syntax highlighting for pull requests and commits. See the full list of enabled languages [here][prismjs-languages], and then [here][language-ext]. [Test them here](http://prismjs.com/test.html). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
+-   Removes Whitespace from the FileTree Menu in the New PR UI (false by default, enable in extension options)
 -   Double click on a word to highlight all occurrences.
 -   ~~Block pull request merging without a minimum number of approvals (defaults to 2 minimum approvals).~~ Removed. [Implemented natively by Bitbucket with "merge checks"](https://confluence.atlassian.com/bitbucketserver/checks-for-merging-pull-requests-776640039.html)
 -   Key binding feature, which allows for quicker navigation through pull requests.
@@ -175,6 +176,19 @@ We all know BitBucket lacks some features that we have in other platforms like G
         <td>
             <img src="https://user-images.githubusercontent.com/12451101/71311094-cfaf0d80-2424-11ea-8bec-b1fdfded6c1e.png" alt="Line length limit ruler"/>
         </td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<th>
+			Compact PR File Trees
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://user-images.githubusercontent.com/1762464/95523316-4dd0a680-099c-11eb-82f1-1aa8ceba90f6.png" alt="compactTree">
+		</td>
 	</tr>
 </table>
 
