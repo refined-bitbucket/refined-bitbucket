@@ -47,6 +47,6 @@ export default function insertCopyFilename(diff: HTMLElement) {
     )
 
     const header: HTMLElement = (diff.querySelector('.filename'): any)
-    const lozenge: HTMLElement = (header.querySelector(':last-child'): any)
+    const lozenge: HTMLElement = (header.querySelector('h1 > :last-child'): any)
     header.insertBefore(button, lozenge)
 }

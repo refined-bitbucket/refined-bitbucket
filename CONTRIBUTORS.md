@@ -10,3 +10,4 @@ Please try to keep the list in order.
 -   [Ronald Rey](http://github.com/reyronald)
 -   [Jesse Scott](http://github.com/JesseScott)
 -   [Dave Clarke](https://github.com/clarkd)
+-   [Robert Christ](https://github.com/RobertChrist)

@@ -1,7 +1,7 @@
 import { h } from 'dom-chef'
 import test from 'ava'
 
-import insertCopyFilename from '.'
+import insertExpandDiff from '.'
 
 import '../../test/setup-jsdom'
 
@@ -51,13 +51,13 @@ const sectionWithButton = (
                         filename.js
                         <button
                             type="button"
-                            class="aui-button aui-button-subtle copy-to-clipboard--button __rbb-btn-copyfilename"
-                            title="Copy filename to clipboard"
-                            original-title="Copy filename to clipboard"
+                            class="aui-button aui-button-subtle devtools-task-in-progress--button __rbb-btn-expandDiff"
+                            title="Expand unexpanded diff sections once"
+                            original-title="Expand unexpanded diff sections once"
                             style={{ position: 'relative' }}
                         >
-                            <span class="aui-icon aui-icon-small aui-iconfont-copy-clipboard">
-                                Copy filename to clipboard
+                            <span class="aui-icon aui-icon-small aui-iconfont-devtools-task-in-progress">
+                                Load all diff sections, once
                             </span>
                         </button>
                         <span class="diff-entry-lozenge aui-lozenge aui-lozenge-subtle aui-lozenge-complete">
@@ -70,15 +70,15 @@ const sectionWithButton = (
     </section>
 )
 
-test('`insertCopyFilename` should insert button', t => {
+test('`insertExpandDiff` should insert button', t => {
     const diff = cleanSection.cloneNode(true)
 
-    insertCopyFilename(diff)
+    insertExpandDiff(diff)
 
     t.is(diff.outerHTML, sectionWithButton.outerHTML)
 })
 
-test('`insertCopyFilename` should insert a button, even if other buttons already exist', t => {
+test('`insertExpandDiff` should insert a button, even if other buttons already exist', t => {
     const sectionWithTwoButtons = (
         <section
             class="iterable-item bb-udiff maskable commentable-diff"
@@ -98,24 +98,24 @@ test('`insertCopyFilename` should insert a button, even if other buttons already
                             filename.js
                             <button
                                 type="button"
-                                class="aui-button aui-button-subtle copy-to-clipboard--button __rbb-btn-copyfilename"
-                                title="Copy filename to clipboard"
-                                original-title="Copy filename to clipboard"
+                                class="aui-button aui-button-subtle devtools-task-in-progress--button __rbb-btn-expandDiff"
+                                title="Expand unexpanded diff sections once"
+                                original-title="Expand unexpanded diff sections once"
                                 style={{ position: 'relative' }}
                             >
-                                <span class="aui-icon aui-icon-small aui-iconfont-copy-clipboard">
-                                    Copy filename to clipboard
+                                <span class="aui-icon aui-icon-small aui-iconfont-devtools-task-in-progress">
+                                    Load all diff sections, once
                                 </span>
                             </button>
                             <button
                                 type="button"
-                                class="aui-button aui-button-subtle copy-to-clipboard--button __rbb-btn-copyfilename"
-                                title="Copy filename to clipboard"
-                                original-title="Copy filename to clipboard"
+                                class="aui-button aui-button-subtle devtools-task-in-progress--button __rbb-btn-expandDiff"
+                                title="Expand unexpanded diff sections once"
+                                original-title="Expand unexpanded diff sections once"
                                 style={{ position: 'relative' }}
                             >
-                                <span class="aui-icon aui-icon-small aui-iconfont-copy-clipboard">
-                                    Copy filename to clipboard
+                                <span class="aui-icon aui-icon-small aui-iconfont-devtools-task-in-progress">
+                                    Load all diff sections, once
                                 </span>
                             </button>
                             <span class="diff-entry-lozenge aui-lozenge aui-lozenge-subtle aui-lozenge-complete">
@@ -130,7 +130,7 @@ test('`insertCopyFilename` should insert a button, even if other buttons already
 
     const diff = sectionWithButton.cloneNode(true)
 
-    insertCopyFilename(diff)
+    insertExpandDiff(diff)
 
     t.is(diff.outerHTML, sectionWithTwoButtons.outerHTML)
 })
