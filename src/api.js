@@ -39,6 +39,9 @@ const token = getApiToken()
 const sendMessageCb = sendMessage(repoUrl, token)
 
 const api = {
+    getRepo(): Promise<{ mainbranch: { type: string, name: string } }> {
+        return sendMessageCb('getRepo')
+    },
     getBranches(): Promise<{| size: number |} | void> {
         return sendMessageCb('getBranches')
     },

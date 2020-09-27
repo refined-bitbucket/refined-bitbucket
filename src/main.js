@@ -2,6 +2,7 @@
 
 /* eslint-disable import/first */
 /* eslint-disable no-multi-assign */
+/* eslint-disable no-undef */
 global.jQuery = global.$ = require('jquery')
 
 import OptionsSync from 'webext-options-sync'
@@ -58,6 +59,13 @@ new OptionsSync().getAll().then(options => {
     }
 
     init(config)
+
+    // $FlowIgnore
+    chrome.runtime.onMessage.addListener(request => {
+        if (request.message === 'onHistoryStateUpdated') {
+            init(config)
+        }
+    })
 })
 
 function init(config) {
