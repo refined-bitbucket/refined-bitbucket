@@ -4,6 +4,9 @@
 
 type Request = { token: string, repoUrl: string } & (
     | {
+          name: 'getRepo',
+      }
+    | {
           name: 'getBranches',
       }
     | {
@@ -29,30 +32,27 @@ chrome.runtime.onMessage.addListener(
         ;(async () => {
             const { repoUrl, token } = request
 
-            let resultPromise
-            if (request.name === 'getBranches') {
-                const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/refs/branches`
-                resultPromise = get(url, token)
+            let url
+            if (request.name === 'getRepo') {
+                url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}`
+            } else if (request.name === 'getBranches') {
+                url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/refs/branches`
             } else if (request.name === 'getPullrequests') {
-                const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests`
-                resultPromise = get(url, token)
+                url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests`
             } else if (request.name === 'getPullrequest') {
                 const { id } = request
-                const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}`
-                resultPromise = get(url, token)
+                url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}`
             } else if (request.name === 'getPullrequestActivity') {
                 const { id } = request
-                const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/activity?pagelen=1`
-                resultPromise = get(url, token)
+                url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/activity?pagelen=1`
             } else if (request.name === 'getPullrequestCommits') {
                 const { id } = request
-                const url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/commits`
-                resultPromise = get(url, token)
+                url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/commits`
             } else {
                 exhaustiveCheck(request.name)
             }
 
-            const result = await resultPromise
+            const result = await get(url, token)
 
             sendResponse(result)
         })()

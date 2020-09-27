@@ -23,10 +23,11 @@
     }
   },
   "permissions": [
+    "storage",
     "activeTab",
+    "webNavigation",
     "https://bitbucket.org/*",
-    "https://api.bitbucket.org/*",
-    "storage"
+    "https://api.bitbucket.org/*"
   ],
   "content_scripts": [
     {
@@ -42,7 +43,8 @@
   "background": {
     "scripts": [
       "background.js",
-      "background-for-requests.js"
+      "background-for-requests.js",
+      "background-for-webnavigation.js"
     ],
     "persistent": false
   }

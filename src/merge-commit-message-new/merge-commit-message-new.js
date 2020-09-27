@@ -1,20 +1,16 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { findAllByText } from '@testing-library/dom'
 import elementReady from 'element-ready'
-import { getRepoURL } from '../page-detect'
-import {
-    getFirstFileContents,
-    getMainBranchNew,
-    setInitialStateInBodyEl,
-} from '../utils'
+import { getRepoURL, getPullRequestId } from '../page-detect'
+import { getFirstFileContents, setInitialStateInBodyEl } from '../utils'
 import api from '../api'
 
 export default async function mergeCommitMessageNew(externalUrl) {
-    const mergeCommitTemplateUrls = getMergeCommitMessageTemplateUrls()
+    const mergeCommitTemplateUrls = await getMergeCommitMessageTemplateUrls()
 
     setInitialStateInBodyEl()
-    const prId = JSON.parse(document.body.dataset.initialState).repository
-        .pullRequest.currentPullRequest.id
+
+    const prId = getPullRequestId()
 
     const [template, dataToInject] = await Promise.all([
         getFirstFileContents(mergeCommitTemplateUrls, externalUrl),
@@ -26,10 +22,10 @@ export default async function mergeCommitMessageNew(externalUrl) {
     }
 }
 
-function getMergeCommitMessageTemplateUrls() {
+async function getMergeCommitMessageTemplateUrls() {
     const repoURL = getRepoURL()
 
-    const mainBranch = getMainBranchNew()
+    const mainBranch = await getMainBranch()
 
     const mergeCommitTemplateUrls = [
         `https://bitbucket.org/${repoURL}/raw/${mainBranch}/MERGE_COMMIT_TEMPLATE`,
@@ -39,6 +35,11 @@ function getMergeCommitMessageTemplateUrls() {
     ]
 
     return mergeCommitTemplateUrls
+}
+
+async function getMainBranch() {
+    const repo = await api.getRepo()
+    return repo.mainbranch.name
 }
 
 async function getDataToInject(prId) {
