@@ -1,5 +1,4 @@
 // @flow
-import elementReady from 'element-ready'
 
 export function ignoreWhitespaceSearchParam(prRow: Element) {
     const link: HTMLAnchorElement = (prRow.querySelector(
@@ -12,11 +11,11 @@ export function ignoreWhitespaceSearchParam(prRow: Element) {
     link.href = url.href
 }
 
-export async function ignoreWhitespaceInit() {
-    const toggle: HTMLElement = await elementReady(
-        '[data-key="ignoreWhitespace"]'
-    )
-    if (toggle && toggle.getAttribute('aria-checked') === 'false') {
-        toggle.click()
+export function ignoreWhitespaceInit() {
+    const searchParams = new URLSearchParams(window.location.search)
+    if (searchParams.get('w') !== '1') {
+        searchParams.append('w', '1')
+        const nextUrl = window.location.pathname + '?' + searchParams.toString()
+        window.location.replace(nextUrl)
     }
 }
