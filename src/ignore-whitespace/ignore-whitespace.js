@@ -11,7 +11,7 @@ export function ignoreWhitespaceSearchParam(prRow: Element) {
     link.href = url.href
 }
 
-export async function ignoreWhitespaceInit() {
+export function ignoreWhitespaceInit() {
     const searchParams = new URLSearchParams(window.location.search)
     if (searchParams.get('w') !== '1') {
         searchParams.append('w', '1')
