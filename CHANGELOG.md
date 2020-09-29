@@ -1,3 +1,10 @@
+# 3.22.3 (2020-09-29)
+
+### Bug fixes
+
+-   fix(old-ui): duplicated elements in pull request view (#382)
+-   fix(old-ui): ignore whitespace feature (#383)
+
 # 3.22.0 (2020-09-27)
 
 ### Improvements
