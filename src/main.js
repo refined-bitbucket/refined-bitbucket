@@ -51,6 +51,12 @@ import {
 
 import addStyleToPage from './add-style'
 
+function getIsNewExperience() {
+    // $FlowIgnore There's always going to be a body
+    const isNewExperience = document.body.dataset.auiVersion >= '7.9.9'
+    return isNewExperience
+}
+
 new OptionsSync().getAll().then(options => {
     const config = {
         ...options,
@@ -60,12 +66,17 @@ new OptionsSync().getAll().then(options => {
 
     init(config)
 
-    // $FlowIgnore
-    chrome.runtime.onMessage.addListener(request => {
-        if (request.message === 'onHistoryStateUpdated') {
-            init(config)
-        }
-    })
+    if (getIsNewExperience()) {
+        // $FlowIgnore
+        chrome.runtime.onMessage.addListener(request => {
+            if (request.message === 'onHistoryStateUpdated') {
+                if (isPullRequest()) {
+                    codeReviewFeatures(config)
+                    pullrequestRelatedFeatures(config)
+                }
+            }
+        })
+    }
 })
 
 function init(config) {
@@ -238,8 +249,7 @@ function codeReviewFeatures(config) {
 }
 
 function pullrequestRelatedFeatures(config) {
-    // $FlowIgnore There's always going to be a body
-    const isNewExperience = document.body.dataset.auiVersion >= '7.9.9'
+    const isNewExperience = getIsNewExperience()
 
     if (isNewExperience) {
         pullrequestRelatedFeaturesNew(config)
