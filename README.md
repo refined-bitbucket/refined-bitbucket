@@ -10,7 +10,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 
 [Subscribe to this issue if you would like to receive e-mail notifications on updates](https://github.com/refined-bitbucket/refined-bitbucket/issues/182).
 
-## Current features
+## Current Amazing features
 
 -   Adds syntax highlighting for pull requests and commits. See the full list of enabled languages [here][prismjs-languages], and then [here][language-ext]. [Test them here](http://prismjs.com/test.html). Missing any language? [Let me know](https://github.com/refined-bitbucket/refined-bitbucket/issues) or submit a pull request!
 -   Double click on a word to highlight all occurrences.
