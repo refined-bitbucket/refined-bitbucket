@@ -5,6 +5,10 @@
  Ported for PrismJS by Hector Matos
  Website: https://krakendev.io
  Twitter Handle: https://twitter.com/allonsykraken)
+ 
+Updated by Robert Christ for Bitbucket-Refined.  
+I took this file, and in the current commit, removed all components
+that do not play nicely with Bitbucket.
 */
 
 /*
@@ -28,62 +32,6 @@ cyan      #2aa198
 green     #859900
 */
 
-code[class*='language-'],
-pre[class*='language-'] {
-    color: #657b83; /* base00 */
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    font-size: 1em;
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-
-    line-height: 1.5;
-
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
-}
-
-pre[class*='language-']::-moz-selection,
-pre[class*='language-'] ::-moz-selection,
-code[class*='language-']::-moz-selection,
-code[class*='language-'] ::-moz-selection {
-    background: #073642; /* base02 */
-}
-
-pre[class*='language-']::selection,
-pre[class*='language-'] ::selection,
-code[class*='language-']::selection,
-code[class*='language-'] ::selection {
-    background: #073642; /* base02 */
-}
-
-/* Code blocks */
-pre[class*='language-'] {
-    padding: 1em;
-    margin: 0.5em 0;
-    overflow: auto;
-    border-radius: 0.3em;
-}
-
-:not(pre) > code[class*='language-'],
-pre[class*='language-'] {
-    background-color: #fdf6e3; /* base3 */
-}
-
-/* Inline code */
-:not(pre) > code[class*='language-'] {
-    padding: 0.1em;
-    border-radius: 0.3em;
-}
-
 .token.comment,
 .token.prolog,
 .token.doctype,
@@ -95,7 +43,7 @@ pre[class*='language-'] {
     color: #586e75; /* base01 */
 }
 
-.token.namespace {
+.namespace {
     opacity: 0.7;
 }
 
