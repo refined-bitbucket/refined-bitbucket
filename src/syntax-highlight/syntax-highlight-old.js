@@ -29,8 +29,8 @@ export default function syntaxHighlight(diff, afterWordDiff) {
         return
     }
 
-    const filePath = getFilepathFromElement(element)
-    const languageClass = getLanguageClass(dfilePathiff)
+    const filePath = getFilepathFromElement(diff)
+    const languageClass = getLanguageClass(filePath)
 
     if (!languageClass) {
         return

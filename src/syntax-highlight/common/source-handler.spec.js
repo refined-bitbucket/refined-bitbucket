@@ -1,14 +1,14 @@
 import test from 'ava'
-import { h } from 'dom-chef'
 
 import * as sourceHandler from './source-handler'
 
-import '../vendor/prism'
-import '../../test/setup-jsdom'
+import '../../vendor/prism'
 
 test('Adds a language-xxxx class to the element that has a data-filename attr', t => {
-    const element = <div data-filename="z/path/to/file/the-file.java" />
-    const languageClass = sourceHandler.getLanguageClass(element)
+    const languageClass = sourceHandler.getLanguageClass(
+        'z/path/to/file/the-file.java'
+    )
+
     t.is(
         languageClass,
         'language-java',
@@ -17,8 +17,10 @@ test('Adds a language-xxxx class to the element that has a data-filename attr', 
 })
 
 test('Adds a language-ruby class to the element that has a data-filename attr for a Vagrantfile', t => {
-    const element = <div data-filename="z/path/to/Vagrantfile" />
-    const languageClass = sourceHandler.getLanguageClass(element)
+    const languageClass = sourceHandler.getLanguageClass(
+        'z/path/to/Vagrantfile'
+    )
+
     t.is(
         languageClass,
         'language-ruby',
@@ -27,8 +29,10 @@ test('Adds a language-ruby class to the element that has a data-filename attr fo
 })
 
 test('Adds a language-ruby class to the element that has a data-filename attr for a Jenknsfile', t => {
-    const element = <div data-filename="z/path/to/Jenkinsfile" />
-    const languageClass = sourceHandler.getLanguageClass(element)
+    const languageClass = sourceHandler.getLanguageClass(
+        'z/path/to/Jenkinsfile'
+    )
+
     t.is(
         languageClass,
         'language-groovy',
