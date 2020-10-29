@@ -198,7 +198,11 @@ function codeReviewFeatures(config) {
             }
 
             if (config.syntaxHighlight) {
-                syntaxHighlightOldUI(diff, afterWordDiff)
+                syntaxHighlightOldUI(
+                    diff,
+                    afterWordDiff,
+                    config.syntaxHighlightTheme
+                )
             }
         }
     }
@@ -282,7 +286,7 @@ function pullrequestRelatedFeaturesNew(config) {
             'section[aria-label="Diffs"]',
             function() {
                 if (config.syntaxHighlight) {
-                    syntaxHighlightNewUI(this)
+                    syntaxHighlightNewUI(this, config.syntaxHighlightTheme)
                 }
             }
         )

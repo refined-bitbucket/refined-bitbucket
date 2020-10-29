@@ -5,8 +5,7 @@
 'use strict'
 
 import { getLanguageClass } from './common/source-handler'
-
-import './common/prism.css'
+import loadTheme from './prism-themes/loadTheme'
 
 const _rbbClassName = '__rbb_syntax_highlight'
 const _allCodeLinesCssSelector = '[data-qa=code-line] pre > span:last-child'
@@ -29,7 +28,12 @@ const allDiffsObserver = new MutationObserver(mutations => {
     }
 })
 
-export default function syntaxHighlight(sectionAllDiffs: HTMLElement) {
+export default function syntaxHighlight(
+    sectionAllDiffs: HTMLElement,
+    theme: string
+) {
+    loadTheme(theme)
+
     // Set up an observer to pay attention to all potential code changes in the diff section
     allDiffsObserver.observe(sectionAllDiffs, {
         childList: true,
