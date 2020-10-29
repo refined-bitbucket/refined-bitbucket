@@ -28,7 +28,7 @@ import pullrequestCommitAmount from './pullrequest-commit-amount'
 import insertPullrequestTemplate from './pullrequest-template'
 import insertShowComments from './show-comments'
 import addSidebarCounters from './sidebar-counters'
-import syntaxHighlight from './syntax-highlight'
+import syntaxHighlightOldUI from './syntax-highlight-old'
 import comparePagePullRequest from './compare-page-pull-request'
 import setTabSize from './tab-size'
 import mergeCommitMessage from './merge-commit-message'
@@ -198,7 +198,7 @@ function codeReviewFeatures(config) {
             }
 
             if (config.syntaxHighlight) {
-                syntaxHighlight(diff, afterWordDiff)
+                syntaxHighlightOldUI(diff, afterWordDiff)
             }
         }
     }
