@@ -28,7 +28,7 @@ import pullrequestCommitAmount from './pullrequest-commit-amount'
 import insertPullrequestTemplate from './pullrequest-template'
 import insertShowComments from './show-comments'
 import addSidebarCounters from './sidebar-counters'
-import syntaxHighlightOldUI from './syntax-highlight-old'
+import { syntaxHighlightOldUI, syntaxHighlightNewUI } from './syntax-highlight'
 import comparePagePullRequest from './compare-page-pull-request'
 import setTabSize from './tab-size'
 import mergeCommitMessage from './merge-commit-message'
@@ -271,6 +271,18 @@ function pullrequestRelatedFeaturesNew(config) {
             function() {
                 if (config.copyFilename) {
                     insertCopyFilenameNew(this)
+                }
+            }
+        )
+    }
+
+    if (config.syntaxHighlight) {
+        new SelectorObserver(
+            document.body,
+            'section[aria-label="Diffs"]',
+            function() {
+                if (config.syntaxHighlight) {
+                    syntaxHighlightNewUI(this)
                 }
             }
         )

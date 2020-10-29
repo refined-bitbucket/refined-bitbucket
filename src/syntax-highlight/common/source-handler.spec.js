@@ -4,7 +4,7 @@ import * as sourceHandler from './source-handler'
 
 import '../../vendor/prism'
 
-test('Adds a language-xxxx class to the element that has a data-filename attr', t => {
+test('Returns a language-xxxx class from the native Prism languages list', t => {
     const languageClass = sourceHandler.getLanguageClass(
         'z/path/to/file/the-file.java'
     )
@@ -12,11 +12,23 @@ test('Adds a language-xxxx class to the element that has a data-filename attr', 
     t.is(
         languageClass,
         'language-java',
-        'proper language-xxxx class added to the element'
+        'proper language-xxxx class returned from native Prism languages list'
     )
 })
 
-test('Adds a language-ruby class to the element that has a data-filename attr for a Vagrantfile', t => {
+test('Returns a language-xxx from the language extensions file', t => {
+    const languageClass = sourceHandler.getLanguageClass(
+        'filepath/withALanguage/Extension/like.coffee'
+    )
+
+    t.is(
+        languageClass,
+        'language-coffeescript',
+        'proper language-cofeescript returned from language extension list'
+    )
+})
+
+test('Returns a language-ruby class when handling non-extension but globally file named Vagrantfiles', t => {
     const languageClass = sourceHandler.getLanguageClass(
         'z/path/to/Vagrantfile'
     )
@@ -24,11 +36,11 @@ test('Adds a language-ruby class to the element that has a data-filename attr fo
     t.is(
         languageClass,
         'language-ruby',
-        'proper language-ruby class added to the element'
+        'proper language-ruby class returned for globally named vagrantfile'
     )
 })
 
-test('Adds a language-ruby class to the element that has a data-filename attr for a Jenknsfile', t => {
+test('Returns a language-ruby class when handling non-extension but globally file named named Jenknsfiles', t => {
     const languageClass = sourceHandler.getLanguageClass(
         'z/path/to/Jenkinsfile'
     )
@@ -36,6 +48,6 @@ test('Adds a language-ruby class to the element that has a data-filename attr fo
     t.is(
         languageClass,
         'language-groovy',
-        'proper language-groovy class added to the element'
+        'proper language-groovy returned for globally named Jenknsfile'
     )
 })
