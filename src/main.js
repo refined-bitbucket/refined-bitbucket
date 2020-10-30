@@ -281,6 +281,7 @@ function pullrequestRelatedFeaturesNew(config) {
     }
 
     if (config.syntaxHighlight) {
+        // eslint-disable-next-line no-new
         new SelectorObserver(
             document.body,
             'section[aria-label="Diffs"]',

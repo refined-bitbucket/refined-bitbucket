@@ -7,7 +7,7 @@ import elementReady from 'element-ready'
 import debounce from '../debounce'
 import { getFilepathFromElement } from './old-ui/get-file-path'
 import { getLanguageClass } from './common/source-handler'
-import loadTheme from './prism-themes/loadTheme'
+import loadThemeOnce from './prism-themes/load-theme-once'
 
 import './old-ui/fix.css'
 
@@ -20,7 +20,7 @@ const codeContainerObserver = new MutationObserver(mutations => {
 let debouncedSideDiffHandler = null
 
 export default function syntaxHighlight(diff, afterWordDiff, theme) {
-    loadTheme(theme)
+    loadThemeOnce(theme)
 
     // File was only renamed, there's no diff
     if (diff.querySelector('.content-container')) {

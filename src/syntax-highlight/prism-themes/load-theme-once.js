@@ -4,7 +4,7 @@
 
 let stylesImported = false
 
-export default function loadTheme(themeName: string) {
+export default function loadThemeOnce(themeName: string) {
     if (stylesImported) return
 
     switch (themeName) {

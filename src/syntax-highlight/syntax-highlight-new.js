@@ -5,22 +5,24 @@
 'use strict'
 
 import { getLanguageClass } from './common/source-handler'
-import loadTheme from './prism-themes/loadTheme'
+import loadThemeOnce from './prism-themes/load-theme-once'
 
 const _rbbClassName = '__rbb_syntax_highlight'
 const _allCodeLinesCssSelector = '[data-qa=code-line] pre > span:last-child'
-let _allUnformattedCodeLinesCssSelector =
+const _allUnformattedCodeLinesCssSelector =
     _allCodeLinesCssSelector + ':not(.' + _rbbClassName + ')'
 
 const allDiffsObserver = new MutationObserver(mutations => {
-    for (let mutation of mutations) {
+    for (const mutation of mutations) {
         // Only act when new nodes are added
-        if (!(mutation.type === 'childList' && mutation.addedNodes.length)) {
+        if (
+            !(mutation.type === 'childList' && mutation.addedNodes.length > 0)
+        ) {
             continue
         }
 
         // For each line in the diff block
-        mutation.target
+        ;((mutation.target: any): HTMLElement)
             .querySelectorAll(_allUnformattedCodeLinesCssSelector)
             .forEach(elem => {
                 highlightDiff(elem)
@@ -32,7 +34,7 @@ export default function syntaxHighlight(
     sectionAllDiffs: HTMLElement,
     theme: string
 ) {
-    loadTheme(theme)
+    loadThemeOnce(theme)
 
     // Set up an observer to pay attention to all potential code changes in the diff section
     allDiffsObserver.observe(sectionAllDiffs, {
@@ -58,6 +60,7 @@ function highlightDiff(codeElemInDiff: HTMLElement) {
         const article = codeElemInDiff.closest(
             'article[data-qa="pr-diff-file-styles"]'
         )
+
         if (!article) return
 
         const ariaAttribute = article.getAttribute('aria-label')
@@ -76,32 +79,21 @@ function highlightDiff(codeElemInDiff: HTMLElement) {
         const lang = getLanguageClass(filePath)
 
         if (!lang) {
-            // quit if this is not a language supported by Prism
+            // Quit if this is not a language supported by Prism
             return
         }
 
         // Get all lines from the same file and put it into the holder
         const nodes = article.querySelectorAll(_allCodeLinesCssSelector)
+        nodes.forEach(node => {
+            node.classList.add(lang)
+            node.classList.add(_rbbClassName)
 
-        // Create a holder to hold all codes from the same file
-        const code = document.createElement('code')
+            // $FlowIgnore Prism is a loaded global, it will not be null
+            Prism.highlightElement(node)
 
-        // Set the language so prism do not have to guess
-        code.classList.add(lang)
-
-        code.textContent = Array.from(nodes)
-            .map(node => node.innerText)
-            .join('\n')
-
-        // Then highlight the holder
-        Prism.highlightElement(code)
-
-        // After that, split the holder to get the highlighted figments then inject them back
-        const highlightedNodes = code.innerHTML.split('\n')
-        nodes.forEach((_node, idx) => {
-            _node.classList.add(lang)
-            _node.classList.add(_rbbClassName)
-            _node.innerHTML = highlightedNodes[idx]
+            // $FlowIgnore node is from the DOM, is guaranteed to have a parentElement
+            node.parentElement.classList.remove(lang)
         })
     })
 }
