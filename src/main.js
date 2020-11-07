@@ -36,6 +36,7 @@ import mergeCommitMessageNew from './merge-commit-message-new'
 import collapsePullRequestDescription from './collapse-pull-request-description'
 import setStickyHeader from './sticky-header'
 import setLineLengthLimit from './limit-line-length'
+import collapsePullRequestSideMenus from './collapse-pull-request-side-menus'
 
 import observeForWordDiffs from './observe-for-word-diffs'
 
@@ -264,6 +265,10 @@ function pullrequestRelatedFeaturesNew(config) {
         mergeCommitMessageNew(config.mergeCommitMessageUrl)
     }
 
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
+    }
+
     if (config.copyFilename) {
         // eslint-disable-next-line no-new
         new SelectorObserver(
@@ -297,5 +302,9 @@ function pullrequestRelatedFeaturesOld(config) {
 
     if (config.collapsePullRequestDescription) {
         collapsePullRequestDescription()
+    }
+
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
     }
 }
