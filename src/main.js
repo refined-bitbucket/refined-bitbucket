@@ -239,7 +239,8 @@ function codeReviewFeatures(config) {
         setLineLengthLimit(config.lineLengthLimit)
     }
 
-    if (config.ignoreWhitespace) {
+    const isNewExperience = getIsNewExperience()
+    if (!isNewExperience && config.ignoreWhitespace) {
         ignoreWhitespaceInit()
     }
 
