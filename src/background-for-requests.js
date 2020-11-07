@@ -80,8 +80,13 @@ async function get<T: Object>(
             Authorization: `Bearer ${token}`,
         }),
     })
-    const result: BitbucketAPIErrorResponse | T = await response.json()
-    return result
+    try {
+        const result: BitbucketAPIErrorResponse | T = await response.json()
+        return result
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
 }
 
 function exhaustiveCheck(value: empty) {
