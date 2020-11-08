@@ -23,10 +23,10 @@
 .__rbb-collapse-bar:hover::before {
     opacity: 0.2;
 }
-.description {
+#pull-request-diff-header .description {
     position: relative;
 }
-.description::before {
+#pull-request-diff-header .description::before {
     content: '';
     left: -0.25rem;
     margin-left: 110px;
@@ -39,6 +39,7 @@
     background-color: rgb(206, 212, 223);
     border-radius: 0.5rem;
     opacity: 0.1;
+    pointer-events: none;
 }
 
 .__refined_bitbucket_hide {

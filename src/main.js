@@ -2,6 +2,7 @@
 
 /* eslint-disable import/first */
 /* eslint-disable no-multi-assign */
+/* eslint-disable no-undef */
 global.jQuery = global.$ = require('jquery')
 
 import OptionsSync from 'webext-options-sync'
@@ -35,6 +36,7 @@ import mergeCommitMessageNew from './merge-commit-message-new'
 import collapsePullRequestDescription from './collapse-pull-request-description'
 import setStickyHeader from './sticky-header'
 import setLineLengthLimit from './limit-line-length'
+import collapsePullRequestSideMenus from './collapse-pull-request-side-menus'
 
 import observeForWordDiffs from './observe-for-word-diffs'
 
@@ -50,6 +52,12 @@ import {
 
 import addStyleToPage from './add-style'
 
+function getIsNewExperience() {
+    // $FlowIgnore There's always going to be a body
+    const isNewExperience = document.body.dataset.auiVersion >= '7.9.9'
+    return isNewExperience
+}
+
 new OptionsSync().getAll().then(options => {
     const config = {
         ...options,
@@ -58,6 +66,18 @@ new OptionsSync().getAll().then(options => {
     }
 
     init(config)
+
+    if (getIsNewExperience()) {
+        // $FlowIgnore
+        chrome.runtime.onMessage.addListener(request => {
+            if (request.message === 'onHistoryStateUpdated') {
+                if (isPullRequest()) {
+                    codeReviewFeatures(config)
+                    pullrequestRelatedFeatures(config)
+                }
+            }
+        })
+    }
 })
 
 function init(config) {
@@ -220,7 +240,8 @@ function codeReviewFeatures(config) {
         setLineLengthLimit(config.lineLengthLimit)
     }
 
-    if (config.ignoreWhitespace) {
+    const isNewExperience = getIsNewExperience()
+    if (!isNewExperience && config.ignoreWhitespace) {
         ignoreWhitespaceInit()
     }
 
@@ -230,8 +251,7 @@ function codeReviewFeatures(config) {
 }
 
 function pullrequestRelatedFeatures(config) {
-    // $FlowIgnore There's always going to be a body
-    const isNewExperience = document.body.dataset.auiVersion >= '7.9.9'
+    const isNewExperience = getIsNewExperience()
 
     if (isNewExperience) {
         pullrequestRelatedFeaturesNew(config)
@@ -243,6 +263,10 @@ function pullrequestRelatedFeatures(config) {
 function pullrequestRelatedFeaturesNew(config) {
     if (config.mergeCommitMessageEnabled) {
         mergeCommitMessageNew(config.mergeCommitMessageUrl)
+    }
+
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
     }
 
     if (config.copyFilename) {
@@ -278,5 +302,9 @@ function pullrequestRelatedFeaturesOld(config) {
 
     if (config.collapsePullRequestDescription) {
         collapsePullRequestDescription()
+    }
+
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
     }
 }

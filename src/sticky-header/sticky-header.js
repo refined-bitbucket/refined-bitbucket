@@ -8,11 +8,12 @@ export default function setStickyHeader() {
 }
 
 function createCssRule() {
+    // Z-index above 1 hide the dynamic side menu
     const cssRule = `
         .diff-container .heading {
             position: sticky;
             top: 0px;
-            z-index: 9;
+            z-index: 1;
             border: 1px solid #DFE1E6;
         }
 

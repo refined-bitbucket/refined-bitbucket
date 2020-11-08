@@ -1,19 +1,16 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { findAllByText, findByText } from '@testing-library/dom'
-import { getRepoURL } from '../page-detect'
-import {
-    getFirstFileContents,
-    getMainBranchNew,
-    setInitialStateInBodyEl,
-} from '../utils'
+import { findAllByText } from '@testing-library/dom'
+import elementReady from 'element-ready'
+import { getRepoURL, getPullRequestId } from '../page-detect'
+import { getFirstFileContents, setInitialStateInBodyEl } from '../utils'
 import api from '../api'
 
 export default async function mergeCommitMessageNew(externalUrl) {
-    const mergeCommitTemplateUrls = getMergeCommitMessageTemplateUrls()
+    const mergeCommitTemplateUrls = await getMergeCommitMessageTemplateUrls()
 
     setInitialStateInBodyEl()
-    const prId = JSON.parse(document.body.dataset.initialState).repository
-        .pullRequest.currentPullRequest.id
+
+    const prId = getPullRequestId()
 
     const [template, dataToInject] = await Promise.all([
         getFirstFileContents(mergeCommitTemplateUrls, externalUrl),
@@ -25,10 +22,10 @@ export default async function mergeCommitMessageNew(externalUrl) {
     }
 }
 
-function getMergeCommitMessageTemplateUrls() {
+async function getMergeCommitMessageTemplateUrls() {
     const repoURL = getRepoURL()
 
-    const mainBranch = getMainBranchNew()
+    const mainBranch = await getMainBranch()
 
     const mergeCommitTemplateUrls = [
         `https://bitbucket.org/${repoURL}/raw/${mainBranch}/MERGE_COMMIT_TEMPLATE`,
@@ -38,6 +35,11 @@ function getMergeCommitMessageTemplateUrls() {
     ]
 
     return mergeCommitTemplateUrls
+}
+
+async function getMainBranch() {
+    const repo = await api.getRepo()
+    return repo.mainbranch.name
 }
 
 async function getDataToInject(prId) {
@@ -71,33 +73,30 @@ async function insertMergeCommitTemplate(template, dataToInject) {
         'Merge',
         {},
         {
-            timeout: 10000,
+            timeout: 90000,
         }
     )
     const mergeBtns = mergeSpans.map(span => span.closest('button'))
 
     const onFulfillPullrequest = async () => {
-        const mergeDialogHeader = await findByText(
-            document.body,
-            'Merge pull request'
-        )
-        const textarea = mergeDialogHeader
-            .closest('[role="dialog"]')
-            .querySelector('textarea')
-        const value = template
-            .replace(/{id}/g, String(dataToInject.id))
-            .replace(/{title}/g, dataToInject.title)
-            .replace(/{description}/g, dataToInject.description)
-            .replace(/{sourceBranch}/g, dataToInject.sourceBranch)
-            .replace(/{targetBranch}/g, dataToInject.targetBranch)
-            .replace(/{approvedByList}/g, dataToInject.approvedByList)
+        const dialog = await elementReady('[role="dialog"]')
+        if (dialog) {
+            const textarea = dialog.querySelector('textarea')
+            const value = template
+                .replace(/{id}/g, String(dataToInject.id))
+                .replace(/{title}/g, dataToInject.title)
+                .replace(/{description}/g, dataToInject.description)
+                .replace(/{sourceBranch}/g, dataToInject.sourceBranch)
+                .replace(/{targetBranch}/g, dataToInject.targetBranch)
+                .replace(/{approvedByList}/g, dataToInject.approvedByList)
 
-        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-            window.HTMLTextAreaElement.prototype,
-            'value'
-        ).set
-        nativeInputValueSetter.call(textarea, value)
-        textarea.dispatchEvent(new Event('input', { bubbles: true }))
+            const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+                window.HTMLTextAreaElement.prototype,
+                'value'
+            ).set
+            nativeInputValueSetter.call(textarea, value)
+            textarea.dispatchEvent(new Event('input', { bubbles: true }))
+        }
     }
 
     mergeBtns.forEach(b => b.addEventListener('click', onFulfillPullrequest))

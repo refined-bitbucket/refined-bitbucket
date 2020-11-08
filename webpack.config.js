@@ -11,6 +11,7 @@ module.exports = {
         options: './src/options',
         background: './src/background',
         'background-for-requests': './src/background-for-requests',
+        'background-for-webnavigation': './src/background-for-webnavigation',
     },
     plugins: [
         new webpack.DefinePlugin({
