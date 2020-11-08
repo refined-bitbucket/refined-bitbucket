@@ -32,6 +32,12 @@ export const isPullRequestList = () => getRepoPath() === 'pull-requests'
 
 export const isPullRequest = () => /^pull-requests\/\d+/.test(getRepoPath())
 
+export const getPullRequestId = () => {
+    const repoPath = getRepoPath()
+    const matches = repoPath.match(/pull-requests\/(\d*)/)
+    return matches ? matches[1] || null : null
+}
+
 export const isComparePage = () => /^branches\/compare/.exec(getRepoPath())
 
 export const isCreatePullRequestURL = () =>

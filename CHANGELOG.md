@@ -1,3 +1,22 @@
+# 3.22.3 (2020-09-29)
+
+### Bug fixes
+
+-   fix(old-ui): duplicated elements in pull request view (#382)
+-   fix(old-ui): ignore whitespace feature (#383)
+
+# 3.22.0 (2020-09-27)
+
+### Improvements
+
+-   enh: Collapse diff scrolling effect only on bottom toggle (#357). Thanks [@jwallet](https://github.com/jwallet)!
+
+### Bug fixes
+
+-   fix: Autolinker plugin (#355). Thanks [@jwallet](https://github.com/jwallet)!
+-   fix: Load diff was pending on failed load diff (#365). Thanks [@jwallet](https://github.com/jwallet)!
+-   fix(new-ui): Merge commit template in pull requests should now work when navigating from other routes (#378).
+
 # 3.21.0 (2020-06-07)
 
 ### Features

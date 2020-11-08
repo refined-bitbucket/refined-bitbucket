@@ -21,15 +21,6 @@ void (async function() {
         zip: fs.readFileSync(zipPath),
     })
 
-    const firefoxPromise = firefoxDeploy({
-        issuer: process.env.FIREFOX_ISSUER,
-        secret: process.env.FIREFOX_SECRET,
-        id: 'refined-bitbucket@refined-bitbucket.org',
-        // eslint-disable-next-line import/no-unresolved
-        version: require('../extension/manifest.json').version, // eslint-disable-line global-require
-        src: fs.createReadStream(zipPath),
-    })
-
     let chromeSuccess
     try {
         await chromePromise
@@ -39,6 +30,15 @@ void (async function() {
         console.error('❌ Chrome deployment failed: ', error)
         chromeSuccess = false
     }
+
+    const firefoxPromise = firefoxDeploy({
+        issuer: process.env.FIREFOX_ISSUER,
+        secret: process.env.FIREFOX_SECRET,
+        id: 'refined-bitbucket@refined-bitbucket.org',
+        // eslint-disable-next-line import/no-unresolved
+        version: require('../extension/manifest.json').version, // eslint-disable-line global-require
+        src: fs.createReadStream(zipPath),
+    })
 
     let firefoxSucceess
     try {
