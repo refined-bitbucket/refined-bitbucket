@@ -1,3 +1,28 @@
+# 3.23.0 (2020-11-16)
+
+### Features
+
+-   feat: Collapse pull request side menus on load (#342) ([aa5af1f](https://github.com/refined-bitbucket/refined-bitbucket/commit/aa5af1f48121478281a4b84be0193c1aa548792e)).
+    Thanks [@jwallet](https://github.com/jwallet)!
+
+### Bug fixes
+
+-   fix(new-ui): merge commit template (#390) ([4df6072](https://github.com/refined-bitbucket/refined-bitbucket/commit/4df6072c6b9902db928cee96d0441591cf89c785)).  
+    Fix merge commit template when PRs is loaded with whitespaces off.
+-   fix: Augment PR entry (#362) ([3f829b1](https://github.com/refined-bitbucket/refined-bitbucket/commit/3f829b159720f48d1edbb9e6fc9192ee448737d8)).
+    Thanks [@jwallet](https://github.com/jwallet)!
+
+### Improvements
+
+-   enh: re-insert badges when side menu expands (#350) ([5123119](https://github.com/refined-bitbucket/refined-bitbucket/commit/512311999b88d0dc87f248b76bc9247ef6f338db)).
+    Thanks [@jwallet](https://github.com/jwallet)!
+
+### Chore
+
+-   chore(deps): bump bl from 1.2.2 to 1.2.3 (#392) ([5e8ee50](https://github.com/refined-bitbucket/refined-bitbucket/commit/5e8ee500250347c1b5c1fd81f67e45f1890fa51a))
+-   chore(deps): bump dot-prop from 4.2.0 to 4.2.1 (#391) ([ee88f95](https://github.com/refined-bitbucket/refined-bitbucket/commit/ee88f95bd0795d448e682e36db0179c159c4d9ce))
+-   chore(deps): bump elliptic from 6.4.1 to 6.5.3 (#375) ([04f8e65](https://github.com/refined-bitbucket/refined-bitbucket/commit/04f8e6593111e66f9465e91119815e6e87b06229))
+
 # 3.22.3 (2020-09-29)
 
 ### Bug fixes
