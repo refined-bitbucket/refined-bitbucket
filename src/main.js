@@ -37,6 +37,7 @@ import collapsePullRequestDescription from './collapse-pull-request-description'
 import setStickyHeader from './sticky-header'
 import setLineLengthLimit from './limit-line-length'
 import setCompactPRFileTree from './compact-pull-request-file-tree'
+import collapsePullRequestSideMenus from './collapse-pull-request-side-menus'
 
 import observeForWordDiffs from './observe-for-word-diffs'
 
@@ -240,7 +241,8 @@ function codeReviewFeatures(config) {
         setLineLengthLimit(config.lineLengthLimit)
     }
 
-    if (config.ignoreWhitespace) {
+    const isNewExperience = getIsNewExperience()
+    if (!isNewExperience && config.ignoreWhitespace) {
         ignoreWhitespaceInit()
     }
 
@@ -262,6 +264,10 @@ function pullrequestRelatedFeatures(config) {
 function pullrequestRelatedFeaturesNew(config) {
     if (config.mergeCommitMessageEnabled) {
         mergeCommitMessageNew(config.mergeCommitMessageUrl)
+    }
+
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
     }
 
     if (config.copyFilename) {
@@ -301,5 +307,9 @@ function pullrequestRelatedFeaturesOld(config) {
 
     if (config.collapsePullRequestDescription) {
         collapsePullRequestDescription()
+    }
+
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
     }
 }

@@ -22,6 +22,8 @@ new OptionsSync().define({
         copyFilename: true,
         keymap: true,
         collapsePullRequestDescription: true,
+        collapsePullRequestSideMenus: true,
+        collapsePrSideMenusResolutionSize: 1360,
         collapseDiff: true,
         loadAllDiffs: true,
         closeAnchorBranch: true,
