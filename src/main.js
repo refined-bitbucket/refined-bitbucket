@@ -36,6 +36,7 @@ import mergeCommitMessageNew from './merge-commit-message-new'
 import collapsePullRequestDescription from './collapse-pull-request-description'
 import setStickyHeader from './sticky-header'
 import setLineLengthLimit from './limit-line-length'
+import setCompactPRFileTree from './compact-pull-request-file-tree'
 import collapsePullRequestSideMenus from './collapse-pull-request-side-menus'
 
 import observeForWordDiffs from './observe-for-word-diffs'
@@ -280,6 +281,10 @@ function pullrequestRelatedFeaturesNew(config) {
                 }
             }
         )
+    }
+
+    if (config.compactFileTree) {
+        setCompactPRFileTree()
     }
 }
 
