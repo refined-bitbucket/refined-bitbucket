@@ -76,7 +76,7 @@ async function syntaxHighlightSourceCodeLines(diff, querySelector) {
 
     const promises = sourceLines.map(
         preElement =>
-            new Promise((resolve, reject) => {
+            new Promise(resolve => {
                 const { classList, firstChild, innerText } = preElement
 
                 if (firstChild.$$rbb_isSyntaxHighlighted) {
