@@ -205,37 +205,48 @@ function codeReviewFeatures(config) {
         }
     }
 
-    const summarySelectors =
-        '#compare-diff-content, #pr-tab-content, #commit, #diff'
+    const summarySelectors = [
+        '#compare-diff-content',
+        '#pr-tab-content',
+        '#commit',
+        '#diff',
+    ]
     const diffSelector = 'section.bb-udiff'
-
     const generalCommentsSelector = '#general-comments'
+    const allSelectors = [
+        ...new Set([
+            ...summarySelectors,
+            diffSelector,
+            generalCommentsSelector,
+        ]),
+    ].join(', ')
 
     // Have to observe the DOM because some sections
     // load asynchronously by user interactions
     // eslint-disable-next-line no-new
-    new SelectorObserver(
-        document.body,
-        [summarySelectors, diffSelector, generalCommentsSelector].join(', '),
-        function() {
-            try {
-                if (this.matches(summarySelectors)) {
-                    return manipulateSummary(this)
-                }
-
-                if (this.matches(diffSelector)) {
-                    return manipulateDiff(this)
-                }
-
-                if (this.matches(generalCommentsSelector)) {
-                    return manipulateGeneralComments(this)
-                }
-            } catch (error) {
-                // Something went wrong
-                console.error('refined-bitbucket(code-review): ', error)
+    new SelectorObserver(document.body, allSelectors, function() {
+        if (
+            this.style.display === 'none' ||
+            this.getAttribute('aria-hidden') === 'true'
+        )
+            return
+        try {
+            if (this.matches(summarySelectors.join(', '))) {
+                return manipulateSummary(this)
             }
+
+            if (this.matches(diffSelector)) {
+                return manipulateDiff(this)
+            }
+
+            if (this.matches(generalCommentsSelector)) {
+                return manipulateGeneralComments(this)
+            }
+        } catch (error) {
+            // Something went wrong
+            console.error('refined-bitbucket(code-review): ', error)
         }
-    )
+    })
 
     if (config.lineLengthLimitEnabled) {
         setLineLengthLimit(config.lineLengthLimit)
