@@ -4,8 +4,18 @@ import elementReady from 'element-ready'
 import { getRepoURL } from '../page-detect'
 import { getFirstFileContents, getMainBranch } from '../utils'
 import api from '../api'
+import logger from '../logger'
 
 export default async function mergeCommitMessage(externalUrl: string) {
+    const fulfillPr: HTMLElement = getMergeButton()
+
+    if (!fulfillPr) {
+        logger.info(
+            '[refined-bitbucket] User doesn\'t have permissions to merge this pull request. Skipping "mergeCommitMessage" feature.'
+        )
+        return
+    }
+
     const mergeCommitTemplateUrls = getMergeCommitMessageTemplateUrls()
 
     const prNode = await elementReady('#pullrequest')
@@ -62,9 +72,7 @@ async function getDataToInject(prId) {
 }
 
 function insertMergeCommitTemplate(template, dataToInject) {
-    const fulfillPr: HTMLElement = (document.getElementById(
-        'fulfill-pullrequest'
-    ): any)
+    const fulfillPr: HTMLElement = getMergeButton()
 
     const onFulfillPullrequest = async () => {
         fulfillPr.removeEventListener('click', onFulfillPullrequest)
@@ -82,4 +90,11 @@ function insertMergeCommitTemplate(template, dataToInject) {
     }
 
     fulfillPr.addEventListener('click', onFulfillPullrequest)
+}
+
+function getMergeButton() {
+    const fulfillPr: HTMLElement = (document.getElementById(
+        'fulfill-pullrequest'
+    ): any)
+    return fulfillPr
 }
