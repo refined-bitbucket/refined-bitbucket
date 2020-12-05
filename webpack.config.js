@@ -15,7 +15,7 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            process: {},
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new CopyWebpackPlugin([
