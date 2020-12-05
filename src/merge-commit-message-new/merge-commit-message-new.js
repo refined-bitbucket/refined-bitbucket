@@ -4,6 +4,7 @@ import elementReady from 'element-ready'
 import { getRepoURL, getPullRequestId } from '../page-detect'
 import { getFirstFileContents, setInitialStateInBodyEl } from '../utils'
 import api from '../api'
+import logger from '../logger'
 
 export default async function mergeCommitMessageNew(externalUrl) {
     const mergeCommitTemplateUrls = await getMergeCommitMessageTemplateUrls()
@@ -68,36 +69,44 @@ async function getDataToInject(prId) {
 }
 
 async function insertMergeCommitTemplate(template, dataToInject) {
-    const mergeSpans = await findAllByText(
-        document.body,
-        'Merge',
-        {},
-        {
-            timeout: 90000,
-        }
-    )
-    const mergeBtns = mergeSpans.map(span => span.closest('button'))
+    try {
+        const mergeSpans = await findAllByText(
+            document.body,
+            'Merge',
+            {},
+            {
+                timeout: 9000,
+            }
+        )
+        const mergeBtns = mergeSpans.map(span => span.closest('button'))
 
-    const onFulfillPullrequest = async () => {
-        const dialog = await elementReady('[role="dialog"]')
-        if (dialog) {
-            const textarea = dialog.querySelector('textarea')
-            const value = template
-                .replace(/{id}/g, String(dataToInject.id))
-                .replace(/{title}/g, dataToInject.title)
-                .replace(/{description}/g, dataToInject.description)
-                .replace(/{sourceBranch}/g, dataToInject.sourceBranch)
-                .replace(/{targetBranch}/g, dataToInject.targetBranch)
-                .replace(/{approvedByList}/g, dataToInject.approvedByList)
+        const onFulfillPullrequest = async () => {
+            const dialog = await elementReady('[role="dialog"]')
+            if (dialog) {
+                const textarea = dialog.querySelector('textarea')
+                const value = template
+                    .replace(/{id}/g, String(dataToInject.id))
+                    .replace(/{title}/g, dataToInject.title)
+                    .replace(/{description}/g, dataToInject.description)
+                    .replace(/{sourceBranch}/g, dataToInject.sourceBranch)
+                    .replace(/{targetBranch}/g, dataToInject.targetBranch)
+                    .replace(/{approvedByList}/g, dataToInject.approvedByList)
 
-            const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-                window.HTMLTextAreaElement.prototype,
-                'value'
-            ).set
-            nativeInputValueSetter.call(textarea, value)
-            textarea.dispatchEvent(new Event('input', { bubbles: true }))
+                const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+                    window.HTMLTextAreaElement.prototype,
+                    'value'
+                ).set
+                nativeInputValueSetter.call(textarea, value)
+                textarea.dispatchEvent(new Event('input', { bubbles: true }))
+            }
         }
+
+        mergeBtns.forEach(b =>
+            b.addEventListener('click', onFulfillPullrequest)
+        )
+    } catch (error) {
+        logger.info(
+            `[refined-bitbucket] User doesn't have permissions to merge this pull request. Skipping "mergeCommitMessage" feature.`
+        )
     }
-
-    mergeBtns.forEach(b => b.addEventListener('click', onFulfillPullrequest))
 }
