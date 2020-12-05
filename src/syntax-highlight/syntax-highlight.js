@@ -13,7 +13,7 @@ import './fix.css'
 const codeContainerObserver = new MutationObserver(mutations => {
     mutations.forEach(mutation =>
         syntaxHighlightSourceCodeLines(
-            $(mutation.target),
+            mutation.target,
             'pre.source:not([class*=language])'
         )
     )
@@ -41,11 +41,10 @@ export default function syntaxHighlight(diff, afterWordDiff) {
         diff.classList.add(languageClass)
     }
 
-    const $diff = $(diff)
-    syntaxHighlightSourceCodeLines($diff, 'pre.source:not([class*=language])')
+    syntaxHighlightSourceCodeLines(diff, 'pre.source:not([class*=language])')
 
     afterWordDiff(() => {
-        syntaxHighlightSourceCodeLines($diff, '.addition pre, .deletion pre')
+        syntaxHighlightSourceCodeLines(diff, '.addition pre, .deletion pre')
     })
 
     const codeContainer = diff.querySelector('.refract-content-container')
@@ -72,22 +71,22 @@ export default function syntaxHighlight(diff, afterWordDiff) {
     }
 }
 
-async function syntaxHighlightSourceCodeLines($diff, querySelector) {
-    const sourceLines = [...$diff.find(querySelector)]
+async function syntaxHighlightSourceCodeLines(diff, querySelector) {
+    const sourceLines = [...diff.querySelectorAll(querySelector)]
 
     const promises = sourceLines.map(
         preElement =>
-            new Promise((resolve, reject) => {
+            new Promise(resolve => {
                 const { classList, firstChild, innerText } = preElement
 
                 if (firstChild.$$rbb_isSyntaxHighlighted) {
-                    reject(new Error('Already highlighted'))
+                    resolve()
                     return
                 }
 
                 // Lines over the arbitrary max length of 9999 will be considered as minified
                 if (innerText && innerText.length > 9999) {
-                    reject(new Error('Line is too long, probably minified'))
+                    resolve()
                     return
                 }
 
@@ -110,8 +109,7 @@ async function highlightSideDiffAsync({ languageClass, diffNodeSelector }) {
 
     await elementReady(`${diffNodeSelector} pre`, { target: sideBySide })
 
-    const $sideBySide = $(sideBySide)
-    await syntaxHighlightSourceCodeLines($sideBySide)
+    await syntaxHighlightSourceCodeLines(sideBySide)
 }
 
 async function listenForSideDiffScrollAsync({
