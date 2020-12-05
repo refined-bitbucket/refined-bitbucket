@@ -20,7 +20,6 @@ import {
     ignoreWhitespaceInit,
 } from './ignore-whitespace'
 import insertCopyFilename from './insert-copy-filename'
-import insertCopyFilenameNew from './insert-copy-filename-new'
 import keymap from './keymap'
 import loadAllDiffs from './load-all-diffs'
 import occurrencesHighlighter from './occurrences-highlighter'
@@ -279,19 +278,6 @@ function pullrequestRelatedFeaturesNew(config) {
 
     if (config.collapsePullRequestSideMenus) {
         collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
-    }
-
-    if (config.copyFilename) {
-        // eslint-disable-next-line no-new
-        new SelectorObserver(
-            document.body,
-            'article[data-qa="pr-diff-file-styles"]',
-            function() {
-                if (config.copyFilename) {
-                    insertCopyFilenameNew(this)
-                }
-            }
-        )
     }
 
     if (config.compactFileTree) {
