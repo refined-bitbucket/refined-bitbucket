@@ -106,7 +106,7 @@ async function insertMergeCommitTemplate(template, dataToInject) {
         )
     } catch (error) {
         logger.info(
-            `[refined-bitbucket] User doesn't have permissions to merge this pull request. Skipping "mergeCommitMessage" feature.`
+            '[refined-bitbucket] User doesn\'t have permissions to merge this pull request. Skipping "mergeCommitMessage" feature.'
         )
     }
 }
