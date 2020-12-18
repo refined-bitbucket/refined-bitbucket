@@ -33,7 +33,12 @@ export default function insertExpandDiff(diff: HTMLElement) {
             class="aui-button aui-button-subtle devtools-task-in-progress--button __rbb-btn-expandDiff"
             title="Expand unexpanded diff sections once"
             original-title="Expand unexpanded diff sections once"
-            style={{ position: 'relative' }}
+            style={{
+                position: 'relative',
+                margin: '0',
+                paddingLeft: '5px',
+                paddingRight: '5px',
+            }}
             onclick={e => onClick(diff)}
         >
             <span class="aui-icon aui-icon-small aui-iconfont-devtools-task-in-progress">
