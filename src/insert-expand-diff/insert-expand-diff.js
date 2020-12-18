@@ -2,16 +2,31 @@
 // @jsx h
 
 import { h } from 'dom-chef'
+import SelectorObserver from 'selector-observer'
 
-const onClick = (diff: HTMLElement) => {
-    const expandElipses = diff.querySelectorAll('.ellipsis')
+const _ellipsesSelector = '.ellipsis'
 
-    if (!expandElipses) return
+function queryForExpandButtons(diff) {
+    return diff.querySelectorAll(_ellipsesSelector)
+}
 
-    expandElipses.forEach(expander => expander.click())
+function conditionallyDisableButton(diff, button) {
+    const newExpandEllipses = queryForExpandButtons(diff)
+
+    if (!newExpandEllipses || !newExpandEllipses.length) button.disabled = true
+}
+
+function onClick(diff: HTMLElement) {
+    const expandEllipses = queryForExpandButtons(diff)
+
+    if (!expandEllipses) return
+
+    expandEllipses.forEach(expander => expander.click())
 }
 
 export default function insertExpandDiff(diff: HTMLElement) {
+    const expandEllipses = queryForExpandButtons(diff)
+
     const button = (
         <button
             type="button"
@@ -19,13 +34,15 @@ export default function insertExpandDiff(diff: HTMLElement) {
             title="Expand unexpanded diff sections once"
             original-title="Expand unexpanded diff sections once"
             style={{ position: 'relative' }}
-            onclick={() => onClick(diff)}
+            onclick={e => onClick(diff)}
         >
             <span class="aui-icon aui-icon-small aui-iconfont-devtools-task-in-progress">
                 Load all diff sections, once
             </span>
         </button>
     )
+
+    conditionallyDisableButton(diff, button)
 
     const header: ?HTMLElement = diff.querySelector('.filename')
 
@@ -36,4 +53,8 @@ export default function insertExpandDiff(diff: HTMLElement) {
     if (!lozenge) return
 
     header.insertBefore(button, lozenge)
+
+    new SelectorObserver(diff, _ellipsesSelector, null, function() {
+        conditionallyDisableButton(diff, button)
+    })
 }

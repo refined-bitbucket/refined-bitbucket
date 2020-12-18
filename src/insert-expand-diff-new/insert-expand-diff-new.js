@@ -2,15 +2,28 @@
 // @jsx h
 
 import { h } from 'dom-chef'
+import SelectorObserver from 'selector-observer'
 
-function onClick(e, diff) {
+const _ellipsesSelector = 'button.show-more-lines-button'
+
+function queryForExpandButtons(diff) {
+    return diff.querySelectorAll(_ellipsesSelector)
+}
+
+function conditionallyDisableButton(diff, button) {
+    const newExpandEllipses = queryForExpandButtons(diff)
+
+    if (!newExpandEllipses || !newExpandEllipses.length) button.disabled = true
+}
+
+function onClick(e, diff: HTMLElement) {
     e.stopPropagation()
 
-    const expandElipses = diff.querySelectorAll('button.show-more-lines-button')
+    const expandEllipses = queryForExpandButtons(diff)
 
-    if (!expandElipses) return
+    if (!expandEllipses) return
 
-    expandElipses.forEach(expander => expander.click())
+    expandEllipses.forEach(expander => expander.click())
 }
 
 export default function insertExpandDiffNew(diff: HTMLElement) {
@@ -34,6 +47,8 @@ export default function insertExpandDiffNew(diff: HTMLElement) {
         </button>
     )
 
+    conditionallyDisableButton(diff, button)
+
     const header: ?HTMLElement = diff.querySelector("[data-qa='bk-filepath']")
 
     if (!header) return
@@ -42,4 +57,8 @@ export default function insertExpandDiffNew(diff: HTMLElement) {
     const headerContainer: HTMLDivElement = header.parentElement
 
     headerContainer.appendChild(button)
+
+    new SelectorObserver(diff, _ellipsesSelector, null, function() {
+        conditionallyDisableButton(diff, button)
+    })
 }
