@@ -33,7 +33,8 @@ export const isPullRequestList = () => getRepoPath() === 'pull-requests'
 export const isPullRequest = () => /^pull-requests\/\d+/.test(getRepoPath())
 
 export const getPullRequestId = () => {
-    const matches = getRepoPath().match(/pull-requests\/(.*)/)
+    const repoPath = getRepoPath()
+    const matches = repoPath.match(/pull-requests\/(\d*)/)
     return matches ? matches[1] || null : null
 }
 

@@ -13,7 +13,10 @@ import './old-ui/fix.css'
 
 const codeContainerObserver = new MutationObserver(mutations => {
     mutations.forEach(mutation =>
-        syntaxHighlightSourceCodeLines($(mutation.target))
+        syntaxHighlightSourceCodeLines(
+            mutation.target,
+            'pre.source:not([class*=language])'
+        )
     )
 })
 
@@ -42,11 +45,10 @@ export default function syntaxHighlight(diff, afterWordDiff, theme) {
         diff.classList.add(languageClass)
     }
 
-    const $diff = $(diff)
-    syntaxHighlightSourceCodeLines($diff)
+    syntaxHighlightSourceCodeLines(diff, 'pre.source:not([class*=language])')
 
     afterWordDiff(() => {
-        syntaxHighlightSourceCodeLines($diff)
+        syntaxHighlightSourceCodeLines(diff, '.addition pre, .deletion pre')
     })
 
     const codeContainer = diff.querySelector('.refract-content-container')
@@ -73,19 +75,36 @@ export default function syntaxHighlight(diff, afterWordDiff, theme) {
     }
 }
 
-function syntaxHighlightSourceCodeLines($diff) {
-    const sourceLines = [
-        ...$diff.find('pre:not([class*=language]), pre:has(ins), pre:has(del)'),
-    ]
+async function syntaxHighlightSourceCodeLines(diff, querySelector) {
+    const sourceLines = [...diff.querySelectorAll(querySelector)]
 
-    sourceLines.forEach(preElement => {
-        if (!preElement.firstChild.$$rbb_isSyntaxHighlighted) {
-            Prism.highlightElement(preElement)
-            preElement.classList.add('__rbb_syntax_highlight')
-            // eslint-disable-next-line camelcase
-            preElement.firstChild.$$rbb_isSyntaxHighlighted = true
-        }
-    })
+    const promises = sourceLines.map(
+        preElement =>
+            new Promise(resolve => {
+                const { classList, firstChild, innerText } = preElement
+
+                if (firstChild.$$rbb_isSyntaxHighlighted) {
+                    resolve()
+                    return
+                }
+
+                // Lines over the arbitrary max length of 9999 will be considered as minified
+                if (innerText && innerText.length > 9999) {
+                    resolve()
+                    return
+                }
+
+                Prism.highlightElement(preElement)
+
+                classList.add('__rbb_syntax_highlight')
+                // eslint-disable-next-line camelcase
+                firstChild.$$rbb_isSyntaxHighlighted = true
+
+                resolve()
+            })
+    )
+
+    await Promise.all(promises)
 }
 
 async function highlightSideDiffAsync({ languageClass, diffNodeSelector }) {
@@ -94,8 +113,7 @@ async function highlightSideDiffAsync({ languageClass, diffNodeSelector }) {
 
     await elementReady(`${diffNodeSelector} pre`, { target: sideBySide })
 
-    const $sideBySide = $(sideBySide)
-    syntaxHighlightSourceCodeLines($sideBySide)
+    await syntaxHighlightSourceCodeLines(sideBySide)
 }
 
 async function listenForSideDiffScrollAsync({

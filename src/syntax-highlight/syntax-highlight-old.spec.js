@@ -23,7 +23,7 @@ test('should syntax-highlight diff', t => {
             </div>
 
             <div class="refract-content-container">
-                <pre>var msg = 'Hello world';</pre>
+                <pre class="source">var msg = 'Hello world';</pre>
             </div>
         </section>
     )
@@ -41,7 +41,7 @@ test('should syntax-highlight diff', t => {
             </div>
 
             <div class="refract-content-container">
-                <pre class="language-jsx __rbb_syntax_highlight">
+                <pre class="source language-jsx __rbb_syntax_highlight">
                     <span class="token keyword">var</span> msg{' '}
                     <span class="token operator">=</span>{' '}
                     <span class="token string">'Hello world'</span>
@@ -63,7 +63,7 @@ test('should syntax-highlight when side-by-side button not present', t => {
             {/* no side-by-side button */}
 
             <div class="refract-content-container">
-                <pre>var msg = 'Hello world';</pre>
+                <pre class="source">var msg = 'Hello world';</pre>
             </div>
         </section>
     )
@@ -73,7 +73,7 @@ test('should syntax-highlight when side-by-side button not present', t => {
             {/* no side-by-side button */}
 
             <div class="refract-content-container">
-                <pre class="language-jsx __rbb_syntax_highlight">
+                <pre class="source language-jsx __rbb_syntax_highlight">
                     <span class="token keyword">var</span> msg{' '}
                     <span class="token operator">=</span>{' '}
                     <span class="token string">'Hello world'</span>
@@ -153,7 +153,7 @@ test('should not syntax-highlight if diff is in a not supported language', t => 
             </div>
 
             <div class="refract-content-container">
-                <pre>var msg = 'Hello world';</pre>
+                <pre class="source">var msg = 'Hello world';</pre>
             </div>
         </section>
     )

@@ -20,7 +20,6 @@ import {
     ignoreWhitespaceInit,
 } from './ignore-whitespace'
 import insertCopyFilename from './insert-copy-filename'
-import insertCopyFilenameNew from './insert-copy-filename-new'
 import keymap from './keymap'
 import loadAllDiffs from './load-all-diffs'
 import occurrencesHighlighter from './occurrences-highlighter'
@@ -36,6 +35,8 @@ import mergeCommitMessageNew from './merge-commit-message-new'
 import collapsePullRequestDescription from './collapse-pull-request-description'
 import setStickyHeader from './sticky-header'
 import setLineLengthLimit from './limit-line-length'
+import setCompactPRFileTree from './compact-pull-request-file-tree'
+import collapsePullRequestSideMenus from './collapse-pull-request-side-menus'
 
 import observeForWordDiffs from './observe-for-word-diffs'
 
@@ -207,43 +208,55 @@ function codeReviewFeatures(config) {
         }
     }
 
-    const summarySelectors =
-        '#compare-diff-content, #pr-tab-content, #commit, #diff'
+    const summarySelectors = [
+        '#compare-diff-content',
+        '#pr-tab-content',
+        '#commit',
+        '#diff',
+    ]
     const diffSelector = 'section.bb-udiff'
-
     const generalCommentsSelector = '#general-comments'
+    const allSelectors = [
+        ...new Set([
+            ...summarySelectors,
+            diffSelector,
+            generalCommentsSelector,
+        ]),
+    ].join(', ')
 
     // Have to observe the DOM because some sections
     // load asynchronously by user interactions
     // eslint-disable-next-line no-new
-    new SelectorObserver(
-        document.body,
-        [summarySelectors, diffSelector, generalCommentsSelector].join(', '),
-        function() {
-            try {
-                if (this.matches(summarySelectors)) {
-                    return manipulateSummary(this)
-                }
-
-                if (this.matches(diffSelector)) {
-                    return manipulateDiff(this)
-                }
-
-                if (this.matches(generalCommentsSelector)) {
-                    return manipulateGeneralComments(this)
-                }
-            } catch (error) {
-                // Something went wrong
-                console.error('refined-bitbucket(code-review): ', error)
+    new SelectorObserver(document.body, allSelectors, function() {
+        if (
+            this.style.display === 'none' ||
+            this.getAttribute('aria-hidden') === 'true'
+        )
+            return
+        try {
+            if (this.matches(summarySelectors.join(', '))) {
+                return manipulateSummary(this)
             }
+
+            if (this.matches(diffSelector)) {
+                return manipulateDiff(this)
+            }
+
+            if (this.matches(generalCommentsSelector)) {
+                return manipulateGeneralComments(this)
+            }
+        } catch (error) {
+            // Something went wrong
+            console.error('refined-bitbucket(code-review): ', error)
         }
-    )
+    })
 
     if (config.lineLengthLimitEnabled) {
         setLineLengthLimit(config.lineLengthLimit)
     }
 
-    if (config.ignoreWhitespace) {
+    const isNewExperience = getIsNewExperience()
+    if (!isNewExperience && config.ignoreWhitespace) {
         ignoreWhitespaceInit()
     }
 
@@ -267,17 +280,12 @@ function pullrequestRelatedFeaturesNew(config) {
         mergeCommitMessageNew(config.mergeCommitMessageUrl)
     }
 
-    if (config.copyFilename) {
-        // eslint-disable-next-line no-new
-        new SelectorObserver(
-            document.body,
-            'article[data-qa="pr-diff-file-styles"]',
-            function() {
-                if (config.copyFilename) {
-                    insertCopyFilenameNew(this)
-                }
-            }
-        )
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
+    }
+
+    if (config.compactFileTree) {
+        setCompactPRFileTree()
     }
 
     if (config.syntaxHighlight) {
@@ -313,5 +321,9 @@ function pullrequestRelatedFeaturesOld(config) {
 
     if (config.collapsePullRequestDescription) {
         collapsePullRequestDescription()
+    }
+
+    if (config.collapsePullRequestSideMenus) {
+        collapsePullRequestSideMenus(config.collapsePrSideMenusResolutionSize)
     }
 }

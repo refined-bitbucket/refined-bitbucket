@@ -1,9 +1,11 @@
 // @flow
 
+const isTestingEnvironment = process.env.NODE_ENV === 'test'
+
 const logger: typeof console = Object.keys(console).reduce(
     (previous, current) => {
         previous[current] = (...args: any[]) => {
-            if (!process) {
+            if (!isTestingEnvironment) {
                 console[current](...args)
             }
         }
