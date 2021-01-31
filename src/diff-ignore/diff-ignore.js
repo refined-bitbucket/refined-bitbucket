@@ -4,7 +4,7 @@
 import elementReady from 'element-ready'
 import ignore, { type Ignore } from 'ignore'
 import { h } from 'dom-chef'
-import { getFilepathFromElement } from '../syntax-highlight/source-handler'
+import { getFilepathFromElement } from '../syntax-highlight/old-ui/get-file-path'
 
 let ig: Ignore
 

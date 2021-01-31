@@ -1,0 +1,74 @@
+/**
+ * prism.js Twilight theme
+ * Based (more or less) on the Twilight theme originally of Textmate fame.
+ * @author Remy Bach
+ * 
+ * Updated by Robert Christ for Bitbucket-Refined.  
+ * I took this file, and in the current commit, removed all components
+ * that do not play nicely with Bitbucket.
+ */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: hsl(0, 0%, 47%); /* #777777 */
+}
+
+.token.punctuation {
+    opacity: 0.7;
+}
+
+.namespace {
+    opacity: 0.7;
+}
+
+.token.tag,
+.token.boolean,
+.token.number,
+.token.deleted {
+    color: hsl(14, 58%, 55%); /* #CF6A4C */
+}
+
+.token.keyword,
+.token.property,
+.token.selector,
+.token.constant,
+.token.symbol,
+.token.builtin {
+    color: hsl(53, 89%, 79%); /* #F9EE98 */
+}
+
+.token.attr-name,
+.token.attr-value,
+.token.string,
+.token.char,
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable,
+.token.inserted {
+    color: hsl(76, 21%, 52%); /* #8F9D6A */
+}
+
+.token.atrule {
+    color: hsl(218, 22%, 55%); /* #7587A6 */
+}
+
+.token.regex,
+.token.important {
+    color: hsl(42, 75%, 65%); /* #E9C062 */
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}

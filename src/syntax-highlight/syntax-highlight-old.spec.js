@@ -5,7 +5,7 @@ import '../../test/setup-jsdom'
 
 require('../vendor/prism.js')
 
-const syntaxHighlight = require('.').default
+const syntaxHighlight = require('.').syntaxHighlightOldUI
 
 const noop = () => {}
 

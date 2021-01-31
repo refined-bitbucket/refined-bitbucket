@@ -5,10 +5,11 @@
 import { h } from 'dom-chef'
 import elementReady from 'element-ready'
 import debounce from '../debounce'
-import { getLanguageClass } from './source-handler'
+import { getFilepathFromElement } from './old-ui/get-file-path'
+import { getLanguageClass } from './common/source-handler'
+import loadThemeOnce from './prism-themes/load-theme-once'
 
-import './prism.css'
-import './fix.css'
+import './old-ui/fix.css'
 
 const codeContainerObserver = new MutationObserver(mutations => {
     mutations.forEach(mutation =>
@@ -21,7 +22,9 @@ const codeContainerObserver = new MutationObserver(mutations => {
 
 let debouncedSideDiffHandler = null
 
-export default function syntaxHighlight(diff, afterWordDiff) {
+export default function syntaxHighlight(diff, afterWordDiff, theme) {
+    loadThemeOnce(theme)
+
     // File was only renamed, there's no diff
     if (diff.querySelector('.content-container')) {
         return
@@ -31,7 +34,8 @@ export default function syntaxHighlight(diff, afterWordDiff) {
         return
     }
 
-    const languageClass = getLanguageClass(diff)
+    const filePath = getFilepathFromElement(diff)
+    const languageClass = getLanguageClass(filePath)
 
     if (!languageClass) {
         return
