@@ -1,3 +1,17 @@
+# 3.25.0 (2021-02-13)
+
+### Features
+
+-   ft(new-ui): Syntax Highlighting and Theme support.
+    ([c3c339c](https://github.com/refined-bitbucket/refined-bitbucket/commit/c3c339ccf79133e82ac7983de9a6d1f091b53325))
+    Thanks [@RobertChrist](https://github.com/RobertChrist)
+
+### Language support
+
+-   Adds support for Apex (#399).
+    ([9521cbe](https://github.com/refined-bitbucket/refined-bitbucket/commit/9521cbe43a3a5d0f68a76157223e6d16f140d3c2))
+    Thanks [@srgclr](https://github.com/@srgclr)
+
 # 3.24.0 (2020-12-21)
 
 ### Features
