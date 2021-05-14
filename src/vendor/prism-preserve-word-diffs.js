@@ -7,7 +7,7 @@
 	
 	Prism.hooks.add('before-highlight', function (env) {
 		var elt = env.element;
-		if (!elt.hasAttribute('data-keep-tags') && elt.parentNode.tagName.toLowerCase() === 'pre') {
+		if (elt.parentNode.tagName.toLowerCase() === 'pre') {
 			elt = elt.parentNode;
 		}
 		var tags = ['del', 'ins']
