@@ -14,7 +14,7 @@ let totalRemoved: number
 
 export default async function totalLinesChanged(url) {
     let filesTab: HTMLElement = await elementReady(
-        `${FILES_TAB_SELECTOR} > span + span`
+        `${FILES_TAB_SELECTOR} > span:nth-child(2)`
     )
 
     const matches = url.match(/\/pull-requests\/(\d+)/)
@@ -54,8 +54,14 @@ export default async function totalLinesChanged(url) {
                 )
                 // Refetch since the element could have been re-rendered in the meantime
                 filesTab = document.querySelector(FILES_TAB_SELECTOR)
-                filesTab.appendChild(linesAddedBadge)
-                filesTab.appendChild(linesRemovedBadge)
+                const filesCounter = document.querySelector(
+                    `${FILES_TAB_SELECTOR} > span:nth-child(2)`
+                )
+                filesTab.insertBefore(
+                    linesRemovedBadge,
+                    filesCounter.nextSibling
+                )
+                filesTab.insertBefore(linesAddedBadge, filesCounter.nextSibling)
             } else {
                 console.warn('There seem to be no changed files')
             }
