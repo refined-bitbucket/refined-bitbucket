@@ -1,0 +1,21 @@
+.__rbb-total-lines-added,
+.__rbb-total-lines-removed {
+    font-size: 0.857143em;
+    font-style: inherit;
+    line-height: 1.33333;
+    font-weight: 600;
+    margin-top: 0;
+    padding: 3px 4px;
+}
+
+.__rbb-total-lines-added {
+    background-color: rgb(227, 252, 239);
+    color: rgb(0, 102, 68);
+    border-radius: 3px 0 0 3px;
+}
+
+.__rbb-total-lines-removed {
+    background-color: rgb(255, 235, 230);
+    color: rgb(191, 38, 0);
+    border-radius: 0 3px 3px 0;
+}
