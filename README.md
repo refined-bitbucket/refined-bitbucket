@@ -200,7 +200,7 @@ We all know BitBucket lacks some features that we have in other platforms like G
 	</tr>
 	<tr>
 		<td>
-			<img src="https://user-images.githubusercontent.com/1710840/135918236-58e2b35b-18ad-4aba-b612-fb517b7533ba.png" alt="total lines added and removed for PR">
+			<img src="https://user-images.githubusercontent.com/1710840/135920358-b9d0b758-c325-466c-984e-ad9e1a61399a.png" alt="total lines added and removed for PR">
 		</td>
 	</tr>
 </table>
