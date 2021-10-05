@@ -12,7 +12,8 @@ const FILES_TAB_SELECTOR = '[data-testid="sidebar-tab-files"]'
 function toReadableNumber(num: number): string {
     if (num > 1000000) {
         return String(Math.round(num / 1000000)) + 'M'
-    } else if (num > 1000) {
+    }
+    if (num > 1000) {
         return String(Math.round(num / 1000)) + 'K'
     }
     return String(num)
@@ -65,9 +66,7 @@ function handleDiffStats(diffStats) {
 }
 
 export default async function totalLinesChanged(url: string) {
-    let filesTab: HTMLElement | null = await elementReady(
-        `${FILES_TAB_SELECTOR} > span:nth-child(2)`
-    )
+    await elementReady(`${FILES_TAB_SELECTOR} > span:nth-child(2)`)
 
     const matches = url.match(/\/pull-requests\/(\d+)/)
     const prId: string | typeof undefined = (matches || [])[1]
