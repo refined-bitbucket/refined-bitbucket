@@ -40,7 +40,7 @@ function handleDiffStats(diffStats) {
                 </span>
             )
             // Refetch since the element could have been re-rendered in the meantime
-            const filesTab: HTMLElement | nullfilesTab = document.querySelector(
+            const filesTab: HTMLElement | null = document.querySelector(
                 FILES_TAB_SELECTOR
             )
             const filesCounter = document.querySelector(

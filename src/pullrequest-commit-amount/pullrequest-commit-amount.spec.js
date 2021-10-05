@@ -20,7 +20,7 @@ const mockFetchWithSuccessfulResponse = () => {
     global.chrome = {
         runtime: {
             sendMessage: (data, cb) => {
-                cb({ size: 1 })
+                cb({ pagelen: 1 })
             },
         },
     }
