@@ -14,9 +14,11 @@ export default async function pullrequestCommitAmount() {
     const pullrequestCommits = await api.getPullrequestCommits(prId)
 
     // eslint-disable-next-line eqeqeq, no-eq-null
-    if (pullrequestCommits && pullrequestCommits.size != null) {
+    if (pullrequestCommits && pullrequestCommits.pagelen != null) {
         const badge = (
-            <span class="__rbb-commit-ammount">{pullrequestCommits.size}</span>
+            <span class="__rbb-commit-ammount">
+                {pullrequestCommits.pagelen}
+            </span>
         )
         const commitsLink: HTMLElement = (document.getElementById(
             'pr-menu-commits'

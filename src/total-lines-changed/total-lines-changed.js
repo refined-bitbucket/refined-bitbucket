@@ -11,32 +11,35 @@ const FILES_TAB_SELECTOR = '[data-testid="sidebar-tab-files"]'
 
 function toReadableNumber(num: number): string {
     if (num > 1000000) {
-        return Math.round(num / 1000000) + 'M'
+        return String(Math.round(num / 1000000)) + 'M'
     } else if (num > 1000) {
-        return Math.round(num / 1000) + 'K'
+        return String(Math.round(num / 1000)) + 'K'
     } else {
-        return num
+        return String(num)
     }
 }
 
-export default async function totalLinesChanged(url) {
-    let filesTab: HTMLElement = await elementReady(
+export default async function totalLinesChanged(url: string) {
+    let filesTab: HTMLElement | null = await elementReady(
         `${FILES_TAB_SELECTOR} > span:nth-child(2)`
     )
 
     const matches = url.match(/\/pull-requests\/(\d+)/)
-    const prId = matches[1]
+    const prId: string | typeof undefined = (matches || [])[1]
 
     if (prId) {
         const commits = await api.getPullrequestCommits(prId)
         const activity = await api.getPullrequestActivity(prId)
 
-        const hash1 = commits.values[0].hash
+        const hash1 = (((commits || {}).values || [])[0] || {}).hash
         const hash2 = (
             (
                 (
-                    (activity.values.find(value => Boolean(value.update)) || {})
-                        .update || {}
+                    (
+                        ((activity || {}).values || []).find(value =>
+                            Boolean((value: any).update)
+                        ) || {}
+                    ).update || {}
                 ).destination || {}
             ).commit || {}
         ).hash
@@ -68,14 +71,18 @@ export default async function totalLinesChanged(url) {
                     const filesCounter = document.querySelector(
                         `${FILES_TAB_SELECTOR} > span:nth-child(2)`
                     )
-                    filesTab.insertBefore(
-                        linesRemovedBadge,
-                        filesCounter.nextSibling
-                    )
-                    filesTab.insertBefore(
-                        linesAddedBadge,
-                        filesCounter.nextSibling
-                    )
+                    if (filesTab && filesCounter) {
+                        filesTab.insertBefore(
+                            linesRemovedBadge,
+                            filesCounter.nextSibling
+                        )
+                        filesTab.insertBefore(
+                            linesAddedBadge,
+                            filesCounter.nextSibling
+                        )
+                    } else {
+                        console.warn('Failed to find files tab counter')
+                    }
                 } else {
                     console.warn(
                         'More than a 1000 files changed, skipping total calculation'
