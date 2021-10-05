@@ -71,3 +71,6 @@ extension.zip
 *.js.map
 .env
 extension
+
+# Files created by the IntelliJ IDE
+.idea
