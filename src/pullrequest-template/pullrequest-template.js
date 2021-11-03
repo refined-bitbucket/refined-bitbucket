@@ -6,7 +6,8 @@ import { getRepoURL } from '../page-detect'
 import { getFirstFileContents, getMainBranch } from '../utils'
 
 export default async function fetchAndInsertPullrequestTemplate(
-    externalUrl: string
+    externalUrl: string,
+    prTemplateCommits: boolean
 ) {
     const pullrequestTemplateUrls = getPullrequestTemplateUrls()
 
@@ -16,7 +17,7 @@ export default async function fetchAndInsertPullrequestTemplate(
     )
 
     if (template) {
-        insertPullrequestTemplate(template)
+        insertPullrequestTemplate(template, prTemplateCommits)
     }
 }
 
@@ -35,7 +36,10 @@ export function getPullrequestTemplateUrls() {
     return pullrequestTemplateUrls
 }
 
-export async function insertPullrequestTemplate(template: string) {
+export async function insertPullrequestTemplate(
+    template: string,
+    prTemplateCommits: boolean
+) {
     const defaultEditor = elementReady('textarea[id="id_description"]')
     const atlassianEditor = elementReady(
         '#ak_editor_description div[contenteditable="true"]'
@@ -48,7 +52,10 @@ export async function insertPullrequestTemplate(template: string) {
     if (editor instanceof HTMLTextAreaElement) {
         editor.value = template
     } else if (editor instanceof HTMLDivElement) {
-        const html = marked(template)
+        let html = marked(template)
+        if (prTemplateCommits) {
+            html += editor.innerHTML
+        }
         editor.innerHTML = html
     } else {
         console.warn(

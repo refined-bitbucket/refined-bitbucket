@@ -90,7 +90,10 @@ function init(config) {
         pullrequestListRelatedFeatures(config)
     } else if (isCreatePullRequestURL()) {
         if (config.prTemplateEnabled) {
-            insertPullrequestTemplate(config.prTemplateUrl)
+            insertPullrequestTemplate(
+                config.prTemplateUrl,
+                config.prTemplateCommits
+            )
         }
 
         if (config.closeAnchorBranch) {

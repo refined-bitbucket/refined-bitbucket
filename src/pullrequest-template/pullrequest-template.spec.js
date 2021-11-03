@@ -97,9 +97,49 @@ test.serial(
 )
 
 test.serial(
-    'should insert pull request template in Atlassian editor',
+    'should insert pull request template in Atlassian editor with commits',
     async t => {
         setDocumentBodyAttributes()
+        const prCommits = true
+
+        const templateContents = 'pull request template contents'
+
+        const atlassianEditor = (
+            <ak-editor-bitbucket id="ak_editor_description">
+                <div contenteditable="true">
+                    <ul class="ak-ul" data-indent-level="1">
+                        <li>
+                            <p>feat: example commit in list</p>
+                        </li>
+                        <li>
+                            <p>feat: second commit example in list</p>
+                        </li>
+                    </ul>
+                </div>
+            </ak-editor-bitbucket>
+        )
+        const editorCurrentCommits = atlassianEditor.firstChild.innerHTML
+
+        delay(100).then(() => document.body.appendChild(atlassianEditor))
+
+        await insertPullrequestTemplate(templateContents, prCommits)
+
+        let richTemplateContents = marked(templateContents)
+        if (prCommits) {
+            richTemplateContents += editorCurrentCommits
+        }
+        t.is(atlassianEditor.firstChild.innerHTML, richTemplateContents)
+
+        cleanDocumentBody()
+        await delay(16)
+    }
+)
+
+test.serial(
+    'should insert pull request template in Atlassian editor without commits',
+    async t => {
+        setDocumentBodyAttributes()
+        const prCommits = false
 
         const templateContents = 'pull request template contents'
 
@@ -110,7 +150,7 @@ test.serial(
         )
         delay(100).then(() => document.body.appendChild(atlassianEditor))
 
-        await insertPullrequestTemplate(templateContents)
+        await insertPullrequestTemplate(templateContents, prCommits)
 
         const richTemplateContents = marked(templateContents)
         t.is(atlassianEditor.firstChild.innerHTML, richTemplateContents)
