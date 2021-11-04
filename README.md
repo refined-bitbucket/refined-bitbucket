@@ -192,6 +192,19 @@ We all know BitBucket lacks some features that we have in other platforms like G
 	</tr>
 </table>
 
+<table>
+	<tr>
+		<th>
+            Show total lines added and removed for a pull request
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://user-images.githubusercontent.com/1710840/135920358-b9d0b758-c325-466c-984e-ad9e1a61399a.png" alt="total lines added and removed for PR">
+		</td>
+	</tr>
+</table>
+
 ## Installing
 
 _refined-bitbucket_ is available on the [Google Chrome Web Store][chrome-install] and [Add-ons for Firefox][firefox-install]. When installed, go check the extension's Options to customize it to your needs.

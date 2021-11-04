@@ -37,6 +37,7 @@ new OptionsSync().define({
         mergeCommitMessageEnabled: false,
         mergeCommitMessageUrl: null,
         pullrequestCommitAmount: true,
+        totalLinesChanged: true,
         showCommentsCheckbox: true,
         defaultMergeStrategy: 'none',
         autocollapsePaths: [

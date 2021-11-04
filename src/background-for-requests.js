@@ -24,6 +24,10 @@ type Request = { token: string, repoUrl: string } & (
           name: 'getPullrequestCommits',
           id: number | string,
       }
+    | {
+          name: 'getPullrequestFiles',
+          id: number | string,
+      }
 )
 
 // eslint-disable-next-line no-undef
@@ -44,10 +48,13 @@ chrome.runtime.onMessage.addListener(
                 url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}`
             } else if (request.name === 'getPullrequestActivity') {
                 const { id } = request
-                url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/activity?pagelen=1`
+                url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/activity?pagelen=50`
             } else if (request.name === 'getPullrequestCommits') {
                 const { id } = request
                 url = `https://api.bitbucket.org/2.0/repositories/${repoUrl}/pullrequests/${id}/commits`
+            } else if (request.name === 'getPullrequestFiles') {
+                const { id, hash1, hash2 } = request
+                url = `https://bitbucket.org/!api/2.0/repositories/${repoUrl}/diffstat/${repoUrl}:${hash1}%0D${hash2}?from_pullrequest_id=${id}&pagelen=1000`
             } else {
                 exhaustiveCheck(request.name)
             }

@@ -37,6 +37,7 @@ import setStickyHeader from './sticky-header'
 import setLineLengthLimit from './limit-line-length'
 import setCompactPRFileTree from './compact-pull-request-file-tree'
 import collapsePullRequestSideMenus from './collapse-pull-request-side-menus'
+import totalLinesChanged from './total-lines-changed'
 
 import observeForWordDiffs from './observe-for-word-diffs'
 
@@ -286,6 +287,10 @@ function pullrequestRelatedFeaturesNew(config) {
 
     if (config.compactFileTree) {
         setCompactPRFileTree()
+    }
+
+    if (config.totalLinesChanged) {
+        totalLinesChanged(window.location.href)
     }
 
     if (config.syntaxHighlight) {

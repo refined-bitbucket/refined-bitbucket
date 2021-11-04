@@ -25,13 +25,37 @@ export type PullRequest = {|
 export type PullRequestActivity = {|
     values: Array<
         | {|
-              update: { author: { display_name: string } },
+              update: {
+                  author: { display_name: string },
+                  destination: { commit: { hash: string, type: string } },
+              },
           |}
         | {|
               approval: { user: { display_name: string } },
           |}
         | {| comment: { user: { display_name: string } } |}
     >,
+|}
+
+// https://bitbucket.org/!api/2.0/repositories/%7Busername%7D/%7Brepo_slug%7D/pullrequests/%7DprId%7B/commits
+export type PullRequestCommits = {|
+    pagelen: number,
+    page: number,
+    values: Array<{|
+        hash: string,
+        type: string,
+        message: string,
+        date: string,
+    |}>,
+|}
+
+//
+export type PullRequestDiffStats = {|
+    size: number,
+    values: Array<{|
+        lines_added: number,
+        lines_removed: number,
+    |}>,
 |}
 
 const repoUrl = getRepoURL()
@@ -58,8 +82,15 @@ const api = {
     },
     getPullrequestCommits(
         id: number | string
-    ): Promise<{| size: number |} | void> {
+    ): Promise<PullRequestCommits | void> {
         return sendMessageCb('getPullrequestCommits', { id })
+    },
+    getPullrequestFiles(
+        id: number | string,
+        hash1: string,
+        hash2: string
+    ): Promise<PullRequestDiffStats | void> {
+        return sendMessageCb('getPullrequestFiles', { id, hash1, hash2 })
     },
 }
 
