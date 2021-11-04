@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Refined Bitbucket",
   "description": "Improves Bitbucket's user experience",
-  "version": "3.26.0",
+  "version": "3.26.1",
   "author": "Ronald Rey",
   "homepage_url": "https://github.com/refined-bitbucket/refined-bitbucket",
   "icons": {
