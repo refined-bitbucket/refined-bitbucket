@@ -1,3 +1,27 @@
+# 3.26.0 (2021-11-04)
+
+### Features
+
+-   feat(total-lines-changed): add total lines added and removed for PR (#415)
+    ([11cac62](https://github.com/refined-bitbucket/refined-bitbucket/commit/11cac620a636ea1db6a240fc369628588038d5a2))
+    Thanks [@bertyhell](https://github.com/bertyhell)
+
+-   feat(pr-template): show commits below template description (#419)
+    ([9921788](https://github.com/refined-bitbucket/refined-bitbucket/commit/992178862db0c06e82b364e79db075ccac881819))
+    Thanks [@jfcampos1](https://github.com/jfcampos1)
+
+### Improvements
+
+-   Preserve word diffs when highlighting lines (#410)
+    ([c9b2841](https://github.com/refined-bitbucket/refined-bitbucket/commit/c9b2841d53239c688314b50561407af33f9f5068))
+    Thanks [@pastelsky](https://github.com/pastelsky)
+
+### Language support
+
+-   Add support for HCL/Terraform (#400).
+    ([e9eb710](https://github.com/refined-bitbucket/refined-bitbucket/commit/e9eb71073de84685343e29ae1cabd540e47bd004))
+    Thanks [@maxbrunet](https://github.com/maxbrunet)
+
 # 3.25.0 (2021-02-13)
 
 ### Features
