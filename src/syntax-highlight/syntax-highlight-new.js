@@ -35,6 +35,7 @@ export default function syntaxHighlight(
     theme: string
 ) {
     loadThemeOnce(theme)
+    require('../vendor/prism-preserve-word-diffs')
 
     // Set up an observer to pay attention to all potential code changes in the diff section
     allDiffsObserver.observe(sectionAllDiffs, {
