@@ -33,6 +33,7 @@ new OptionsSync().define({
         augmentPrEntry: true,
         comparePagePullRequest: true,
         prTemplateEnabled: true,
+        prTemplateCommits: true,
         prTemplateUrl: null,
         mergeCommitMessageEnabled: false,
         mergeCommitMessageUrl: null,
