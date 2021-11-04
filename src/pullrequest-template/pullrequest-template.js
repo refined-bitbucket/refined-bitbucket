@@ -50,7 +50,11 @@ export async function insertPullrequestTemplate(
     editorPromises.forEach(p => requestAnimationFrame(() => p.cancel()))
 
     if (editor instanceof HTMLTextAreaElement) {
-        editor.value = template
+        if (prTemplateCommits) {
+            editor.value = template + editor.value
+        } else {
+            editor.value = template
+        }
     } else if (editor instanceof HTMLDivElement) {
         let html = marked(template)
         if (prTemplateCommits) {
