@@ -75,6 +75,7 @@ module.exports = {
     '.sfproj': 'language-markup',
     '.sh': 'language-bash',
     '.slim': 'language-pug',
+    '.sol': 'language-solidity',
     '.snap': 'language-jsx',
     '.styl': 'language-stylus',
     '.svcmap': 'language-markup',
