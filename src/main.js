@@ -144,17 +144,22 @@ function pullrequestListRelatedFeatures(config) {
             let ignoredPrs = localStorage.getItem('ignoredPrs')
             if (ignoredPrs) {
                 ignoredPrs = JSON.parse(ignoredPrs)
-                $("tr[data-qa*='pull-request-row']").each((index, ele) => {
-                    const prId = Number(
-                        ele
-                            .querySelector('a')
-                            .href.match(/pull-requests\/(?<prId>\d+)/)[1]
-                    )
-                    ele.style['text-decoration'] =
-                        ignoredPrs.indexOf(prId) === -1 ? '' : 'line-through'
-                })
+                document
+                    .querySelectorAll("tr[data-qa*='pull-request-row']")
+                    .forEach(ele => {
+                        const prId = Number(
+                            ele
+                                .querySelector('a')
+                                .getAttribute('href')
+                                .match(/pull-requests\/(?<prId>\d+)/)[1]
+                        )
+                        ele.style['text-decoration'] =
+                            ignoredPrs.indexOf(prId) === -1
+                                ? ''
+                                : 'line-through'
+                    })
             }
-        }, 1000)
+        }, 3000)
     }
 
     // eslint-disable-next-line no-new
