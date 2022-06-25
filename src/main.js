@@ -130,7 +130,7 @@ function pullrequestListRelatedFeatures(config) {
     config.ignorePullRequests =
         config.ignorePullRequests === undefined
             ? true
-            : config.ignorePullRequests // todo add proper config
+            : config.ignorePullRequests // Todo add proper config
     if (
         !config.ignoreWhitespace &&
         !config.augmentPrEntry &&
@@ -139,12 +139,12 @@ function pullrequestListRelatedFeatures(config) {
         return
     }
     if (config.ignorePullRequests) {
-        // todo: figure out how to run this code after the PRs are loaded, instead of this setInterval hack...
-        setInterval(function() {
+        // Todo: figure out how to run this code after the PRs are loaded, instead of this setInterval hack...
+        setInterval(() => {
             let ignoredPrs = localStorage.getItem('ignoredPrs')
             if (ignoredPrs) {
                 ignoredPrs = JSON.parse(ignoredPrs)
-                $("tr[data-qa*='pull-request-row']").each(function(index, ele) {
+                $("tr[data-qa*='pull-request-row']").each((index, ele) => {
                     const prId = Number(
                         ele
                             .querySelector('a')
@@ -180,27 +180,33 @@ function codeReviewFeatures(config) {
     config.ignorePullRequests =
         config.ignorePullRequests === undefined
             ? true
-            : config.ignorePullRequests // todo add proper config
+            : config.ignorePullRequests // Todo add proper config
     if (config.ignorePullRequests) {
-        // i can't figure out how to execute this *at the right time*, seems bitbucket first creates the entire page
+        // I can't figure out how to execute this *at the right time*, seems bitbucket first creates the entire page
         // then proceed to remove the entire page, then create the entire page again...
         // so i made this setInterval hack that works, but is a waste of cpu cycles
-        setInterval(function() {
+        setInterval(() => {
             if ($('#pull-requests-button').length > 0) {
                 return
             }
-            let pullRequestButton = document.createElement('span')
+            const pullRequestButton = document.createElement('span')
             pullRequestButton.id = 'pull-requests-button'
             pullRequestButton.innerHTML =
                 '<div class="css-z25nd1"><button aria-pressed="false" aria-label="Ignore this pull request" tabindex="0" type="button" class="css-1v2ovpy"><span class="css-j8fq0c"><span class="css-8xpfx5"><span role="presentation" aria-hidden="true" style="--icon-primary-color: white; --icon-secondary-color: var(--ds-surface, #FFFFFF);" class="css-pxzk9z"><svg width="24" height="24" viewBox="0 0 24 24" role="presentation"><g fill-rule="evenodd"><circle fill="currentColor" cx="12" cy="12" r="10"></circle><path d="M9.707 11.293a1 1 0 10-1.414 1.414l2 2a1 1 0 001.414 0l4-4a1 1 0 10-1.414-1.414L11 12.586l-1.293-1.293z" fill="inherit"></path></g></svg></span></span><span class="css-mu6jxl"><span id="ignore-this-pr-inner-span">Ignore this pull request</span></span></span></button></div>'
-            $(pullRequestButton).on('click', function() {
+            $(pullRequestButton).on('click', () => {
                 const prId = Number(
                     document.location
                         .toString()
                         .match(/pull-requests\/(?<prId>\d+)/)[1]
                 )
                 let ignoredPrs = localStorage.getItem('ignoredPrs')
-                if (!ignoredPrs) {
+                // avoid annoying linter "no negated expression" error...
+                if (
+                    ignoredPrs === null ||
+                    ignoredPrs === undefined ||
+                    ignoredPrs === false ||
+                    ignoredPrs === ''
+                ) {
                     ignoredPrs = []
                 } else {
                     ignoredPrs = JSON.parse(ignoredPrs)
