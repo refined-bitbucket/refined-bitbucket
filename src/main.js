@@ -150,11 +150,8 @@ function pullrequestListRelatedFeatures(config) {
                             .querySelector('a')
                             .href.match(/pull-requests\/(?<prId>\d+)/)[1]
                     )
-                    if (ignoredPrs.indexOf(prId) !== -1) {
-                        ele.style['text-decoration'] = 'line-through'
-                    } else {
-                        ele.style['text-decoration'] = ''
-                    }
+                    ele.style['text-decoration'] =
+                        ignoredPrs.indexOf(prId) === -1 ? '' : 'line-through'
                 })
             }
         }, 1000)
@@ -200,32 +197,28 @@ function codeReviewFeatures(config) {
                         .match(/pull-requests\/(?<prId>\d+)/)[1]
                 )
                 let ignoredPrs = localStorage.getItem('ignoredPrs')
-                // avoid annoying linter "no negated expression" error...
-                if (
-                    ignoredPrs === null ||
-                    ignoredPrs === undefined ||
-                    ignoredPrs === false ||
-                    ignoredPrs === ''
-                ) {
-                    ignoredPrs = []
-                } else {
+                if (ignoredPr) {
                     ignoredPrs = JSON.parse(ignoredPrs)
+                } else {
+                    ignoredPrs = []
                 }
                 const ignoreKey = ignoredPrs.indexOf(prId)
+                // Todo find a better way to send the message.. also eslint-disable something
+                const fixme = window.alert
                 if (ignoreKey === -1) {
                     ignoredPrs.push(prId)
                     localStorage.setItem(
                         'ignoredPrs',
                         JSON.stringify(ignoredPrs)
                     )
-                    alert('added to ignoredPrs')
+                    fixme('added to ignoredPrs')
                 } else {
                     ignoredPrs.splice(ignoreKey, 1)
                     localStorage.setItem(
                         'ignoredPrs',
                         JSON.stringify(ignoredPrs)
                     )
-                    alert('removed from ignoredPrs')
+                    fixme('removed from ignoredPrs')
                 }
             })
             $('.css-vxcmzt:first').prepend(pullRequestButton)
