@@ -197,14 +197,14 @@ function codeReviewFeatures(config) {
                         .match(/pull-requests\/(?<prId>\d+)/)[1]
                 )
                 let ignoredPrs = localStorage.getItem('ignoredPrs')
-                if (ignoredPr) {
+                if (ignoredPrs) {
                     ignoredPrs = JSON.parse(ignoredPrs)
                 } else {
                     ignoredPrs = []
                 }
                 const ignoreKey = ignoredPrs.indexOf(prId)
                 // Todo find a better way to send the message.. also eslint-disable something
-                const fixme = window.alert
+                const fixme = window.alert.bind(window)
                 if (ignoreKey === -1) {
                     ignoredPrs.push(prId)
                     localStorage.setItem(
