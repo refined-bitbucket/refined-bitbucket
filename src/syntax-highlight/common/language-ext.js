@@ -46,6 +46,7 @@ module.exports = {
     '.hcl': 'language-hcl',
     '.hpp': 'language-cpp',
     '.hs': 'language-haskell',
+    '.ipy': 'language-python',
     '.jl': 'language-julia',
     '.js': 'language-jsx',
     '.jsp': 'language-java',
