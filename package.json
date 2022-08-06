@@ -1,195 +1,195 @@
 {
-  "name": "refined-bitbucket",
-  "description": "Chrome extension that improves BitBucket's user interface",
-  "version": "3.26.1",
-  "main": "index.js",
-  "scripts": {
-    "precommit": "lint-staged",
-    "prettier": "prettier --write \"./**/*.{js,jsx,json,css,md,html}\"",
-    "xo": "xo *.js {src,test,scripts}/**/*.js !src/vendor/*.*",
-    "ava": "cross-env NODE_ENV=test BABEL_ENV=testing ava",
-    "ava:w": "npm run ava -- --watch",
-    "flow": "flow check --color=always",
-    "flow:w": "flow check --color=always & chokidar \"src/**/*.js\" -c \"flow check\"",
-    "build": "cross-env NODE_ENV=production webpack",
-    "test": "npm-run-all xo ava flow build",
-    "watch": "cross-env NODE_ENV=development webpack --watch",
-    "sync-version": "node scripts/sync-version",
-    "package": "node scripts/package",
-    "deploy": "npm-run-all test sync-version package && node scripts/deploy",
-    "major": "npm version --no-git-tag-version major && npm run sync-version",
-    "minor": "npm version --no-git-tag-version minor && npm run sync-version",
-    "patch": "npm version --no-git-tag-version patch && npm run sync-version"
-  },
-  "lint-staged": {
-    "**/*.{js,jsx,json,css,md}": [
-      "prettier --write",
-      "git add"
-    ],
-    "**/*.js !src/vendor/prism.js": [
-      "npm run xo",
-      "git add"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/refined-bitbucket/refined-bitbucket.git"
-  },
-  "keywords": [
-    "bitbucket",
-    "highlight",
-    "syntax-highlight",
-    "prism"
-  ],
-  "author": "andremw",
-  "maintainers": [
-    {
-      "name": "Ronald Rey",
-      "email": "reyronald@gmail.com",
-      "url": "http://github.com/reyronald"
-    }
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/refined-bitbucket/refined-bitbucket/issues",
-    "email": "reyronald@gmail.com"
-  },
-  "homepage": "https://github.com/refined-bitbucket/refined-bitbucket#readme",
-  "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.0.0",
-    "@babel/plugin-transform-react-jsx": "^7.0.0",
-    "@babel/preset-flow": "^7.0.0",
-    "@babel/register": "^7.0.0",
-    "archiver": "^3.0.0",
-    "ava": "^1.4.1",
-    "babel-eslint": "^9.0.0",
-    "babel-loader": "^8.0.0",
-    "chokidar-cli": "^1.2.1",
-    "chrome-extension-deploy": "^3.0.0",
-    "copy-webpack-plugin": "^4.3.1",
-    "cross-env": "^5.1.0",
-    "css-loader": "^1.0.0",
-    "del": "^3.0.0",
-    "dotenv": "^6.0.0",
-    "eslint-config-xo-flow": "^0.1.0",
-    "eslint-plugin-flowtype": "^2.50.0",
-    "firefox-extension-deploy": "^1.1.1",
-    "flow-bin": "^0.80.0",
-    "flush-promises": "^1.0.0",
-    "husky": "^0.14.3",
-    "jsdom": "^12.0.0",
-    "lint-staged": "^7.2.2",
-    "mutationobserver-shim": "^0.3.2",
-    "npm-run-all": "^4.1.2",
-    "path": "^0.12.7",
-    "prettier": "^1.11.1",
-    "request": "^2.83.0",
-    "require-hacker": "^3.0.1",
-    "semver": "^5.4.1",
-    "style-loader": "^0.23.0",
-    "uglifyjs-webpack-plugin": "^1.0.0",
-    "webpack": "^4.17.1",
-    "webpack-cli": "^3.1.0",
-    "xo": "^0.23.0",
-    "yoctodelay": "^1.1.0"
-  },
-  "dependencies": {
-    "@testing-library/dom": "^6.11.0",
-    "dom-chef": "^3.1.0",
-    "element-ready": "^3.0.0",
-    "ignore": "^4.0.6",
-    "jquery": "^3.5.0",
-    "jquery-highlight": "^3.4.0",
-    "marked": "^0.7.0",
-    "mousetrap": "^1.6.1",
-    "onetime": "^2.0.1",
-    "selector-observer": "^1.2.0",
-    "time-ago": "^0.2.1",
-    "webext-options-sync": "^0.15.0"
-  },
-  "xo": {
-    "extends": "xo-flow",
-    "prettier": true,
-    "semicolon": false,
-    "esnext": true,
-    "space": 4,
-    "envs": [
-      "browser",
-      "jquery"
-    ],
-    "settings": {
-      "flowtype": {
-        "onlyFilesWithFlowAnnotation": true
-      }
+    "name": "refined-bitbucket",
+    "description": "Chrome extension that improves BitBucket's user interface",
+    "version": "3.26.1",
+    "main": "index.js",
+    "scripts": {
+        "precommit": "lint-staged",
+        "prettier": "prettier --write \"./**/*.{js,jsx,json,css,md,html}\"",
+        "xo": "xo *.js {src,test,scripts}/**/*.js !src/vendor/*.*",
+        "ava": "cross-env NODE_ENV=test BABEL_ENV=testing ava",
+        "ava:w": "npm run ava -- --watch",
+        "flow": "flow check --color=always",
+        "flow:w": "flow check --color=always & chokidar \"src/**/*.js\" -c \"flow check\"",
+        "build": "cross-env NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider webpack",
+        "test": "npm-run-all xo ava flow build",
+        "watch": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider webpack --watch",
+        "sync-version": "node scripts/sync-version",
+        "package": "node scripts/package",
+        "deploy": "npm-run-all test sync-version package && node scripts/deploy",
+        "major": "npm version --no-git-tag-version major && npm run sync-version",
+        "minor": "npm version --no-git-tag-version minor && npm run sync-version",
+        "patch": "npm version --no-git-tag-version patch && npm run sync-version"
     },
-    "rules": {
-      "comma-dangle": 0,
-      "import/no-unassigned-import": 0,
-      "no-unused-vars": [
-        2,
-        {
-          "varsIgnorePattern": "^h$"
-        }
-      ],
-      "babel/object-curly-spacing": 0,
-      "space-before-function-paren": 0,
-      "quotes": [
-        2,
-        "single",
-        {
-          "avoidEscape": true
-        }
-      ],
-      "flowtype/require-return-type": 0,
-      "flowtype/require-parameter-type": 0,
-      "flowtype/newline-after-flow-annotation": 0,
-      "flowtype/array-style-complex-type": [
-        "error",
-        "verbose"
-      ]
-    }
-  },
-  "ava": {
-    "files": [
-      "src/**/*.spec.js"
-    ],
-    "sources": [
-      "src/**/*.js"
-    ],
-    "require": [
-      "@babel/register",
-      "./scripts/ignore-utils"
-    ],
-    "timeout": "10s"
-  },
-  "babel": {
-    "presets": [
-      "@ava/stage-4",
-      "@babel/preset-flow"
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-transform-react-jsx",
-        {
-          "pragma": "h",
-          "useBuiltIns": true
-        }
-      ],
-      [
-        "@babel/plugin-proposal-object-rest-spread",
-        {
-          "useBuiltIns": true
-        }
-      ]
-    ],
-    "env": {
-      "testing": {
-        "plugins": [
-          "@babel/plugin-transform-modules-commonjs"
+    "lint-staged": {
+        "**/*.{js,jsx,json,css,md}": [
+            "prettier --write",
+            "git add"
+        ],
+        "**/*.js !src/vendor/prism.js": [
+            "npm run xo",
+            "git add"
         ]
-      }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/refined-bitbucket/refined-bitbucket.git"
+    },
+    "keywords": [
+        "bitbucket",
+        "highlight",
+        "syntax-highlight",
+        "prism"
+    ],
+    "author": "andremw",
+    "maintainers": [
+        {
+            "name": "Ronald Rey",
+            "email": "reyronald@gmail.com",
+            "url": "http://github.com/reyronald"
+        }
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/refined-bitbucket/refined-bitbucket/issues",
+        "email": "reyronald@gmail.com"
+    },
+    "homepage": "https://github.com/refined-bitbucket/refined-bitbucket#readme",
+    "devDependencies": {
+        "@babel/core": "^7.0.0",
+        "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+        "@babel/plugin-transform-modules-commonjs": "^7.0.0",
+        "@babel/plugin-transform-react-jsx": "^7.0.0",
+        "@babel/preset-flow": "^7.0.0",
+        "@babel/register": "^7.0.0",
+        "archiver": "^3.0.0",
+        "ava": "^1.4.1",
+        "babel-eslint": "^9.0.0",
+        "babel-loader": "^8.0.0",
+        "chokidar-cli": "^1.2.1",
+        "chrome-extension-deploy": "^3.0.0",
+        "copy-webpack-plugin": "^4.3.1",
+        "cross-env": "^5.1.0",
+        "css-loader": "^1.0.0",
+        "del": "^3.0.0",
+        "dotenv": "^6.0.0",
+        "eslint-config-xo-flow": "^0.1.0",
+        "eslint-plugin-flowtype": "^2.50.0",
+        "firefox-extension-deploy": "^1.1.1",
+        "flow-bin": "^0.80.0",
+        "flush-promises": "^1.0.0",
+        "husky": "^0.14.3",
+        "jsdom": "^12.0.0",
+        "lint-staged": "^7.2.2",
+        "mutationobserver-shim": "^0.3.2",
+        "npm-run-all": "^4.1.2",
+        "path": "^0.12.7",
+        "prettier": "^1.11.1",
+        "request": "^2.83.0",
+        "require-hacker": "^3.0.1",
+        "semver": "^5.4.1",
+        "style-loader": "^0.23.0",
+        "uglifyjs-webpack-plugin": "^1.0.0",
+        "webpack": "^4.17.1",
+        "webpack-cli": "^3.1.0",
+        "xo": "^0.23.0",
+        "yoctodelay": "^1.1.0"
+    },
+    "dependencies": {
+        "@testing-library/dom": "^6.11.0",
+        "dom-chef": "^3.1.0",
+        "element-ready": "^3.0.0",
+        "ignore": "^4.0.6",
+        "jquery": "^3.5.0",
+        "jquery-highlight": "^3.4.0",
+        "marked": "^0.7.0",
+        "mousetrap": "^1.6.1",
+        "onetime": "^2.0.1",
+        "selector-observer": "^1.2.0",
+        "time-ago": "^0.2.1",
+        "webext-options-sync": "^0.15.0"
+    },
+    "xo": {
+        "extends": "xo-flow",
+        "prettier": true,
+        "semicolon": false,
+        "esnext": true,
+        "space": 4,
+        "envs": [
+            "browser",
+            "jquery"
+        ],
+        "settings": {
+            "flowtype": {
+                "onlyFilesWithFlowAnnotation": true
+            }
+        },
+        "rules": {
+            "comma-dangle": 0,
+            "import/no-unassigned-import": 0,
+            "no-unused-vars": [
+                2,
+                {
+                    "varsIgnorePattern": "^h$"
+                }
+            ],
+            "babel/object-curly-spacing": 0,
+            "space-before-function-paren": 0,
+            "quotes": [
+                2,
+                "single",
+                {
+                    "avoidEscape": true
+                }
+            ],
+            "flowtype/require-return-type": 0,
+            "flowtype/require-parameter-type": 0,
+            "flowtype/newline-after-flow-annotation": 0,
+            "flowtype/array-style-complex-type": [
+                "error",
+                "verbose"
+            ]
+        }
+    },
+    "ava": {
+        "files": [
+            "src/**/*.spec.js"
+        ],
+        "sources": [
+            "src/**/*.js"
+        ],
+        "require": [
+            "@babel/register",
+            "./scripts/ignore-utils"
+        ],
+        "timeout": "10s"
+    },
+    "babel": {
+        "presets": [
+            "@ava/stage-4",
+            "@babel/preset-flow"
+        ],
+        "plugins": [
+            [
+                "@babel/plugin-transform-react-jsx",
+                {
+                    "pragma": "h",
+                    "useBuiltIns": true
+                }
+            ],
+            [
+                "@babel/plugin-proposal-object-rest-spread",
+                {
+                    "useBuiltIns": true
+                }
+            ]
+        ],
+        "env": {
+            "testing": {
+                "plugins": [
+                    "@babel/plugin-transform-modules-commonjs"
+                ]
+            }
+        }
     }
-  }
 }
