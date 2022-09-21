@@ -20,6 +20,8 @@ module.exports = {
     '.cfc': 'language-actionscript',
     '.cfm': 'language-markup',
     '.clj': 'language-clojure',
+    '.cljc': 'language-clojure',
+    '.cljs': 'language-clojure',
     '.cls': 'language-apex',
     '.cmp': 'language-xml',
     '.coffee': 'language-coffeescript',
