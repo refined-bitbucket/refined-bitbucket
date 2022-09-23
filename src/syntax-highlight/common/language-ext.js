@@ -30,6 +30,7 @@ module.exports = {
     '.cs': 'language-csharp',
     '.cshtml': 'language-markup',
     '.csproj': 'language-markup',
+    '.edn': 'language-clojure',
     '.email': 'language-html',
     '.erb': 'language-ruby',
     '.erl': 'language-erlang',
