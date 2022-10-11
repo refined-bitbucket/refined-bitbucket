@@ -28,6 +28,7 @@ module.exports = {
     '.cs': 'language-csharp',
     '.cshtml': 'language-markup',
     '.csproj': 'language-markup',
+    '.dart': 'language-dart',
     '.email': 'language-html',
     '.erb': 'language-ruby',
     '.erl': 'language-erlang',
