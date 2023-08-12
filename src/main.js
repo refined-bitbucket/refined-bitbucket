@@ -127,8 +127,39 @@ function init(config) {
 
 function pullrequestListRelatedFeatures(config) {
     // Exit early if none of the pr list related features are enabled
-    if (!config.ignoreWhitespace && !config.augmentPrEntry) {
+    config.ignorePullRequests =
+        config.ignorePullRequests === undefined
+            ? true
+            : config.ignorePullRequests // Todo add proper config
+    if (
+        !config.ignoreWhitespace &&
+        !config.augmentPrEntry &&
+        !config.ignorePullRequests
+    ) {
         return
+    }
+    if (config.ignorePullRequests) {
+        // Todo: figure out how to run this code after the PRs are loaded, instead of this setInterval hack...
+        setInterval(() => {
+            let ignoredPrs = localStorage.getItem('ignoredPrs')
+            if (ignoredPrs) {
+                ignoredPrs = JSON.parse(ignoredPrs)
+                document
+                    .querySelectorAll("tr[data-qa*='pull-request-row']")
+                    .forEach(ele => {
+                        const prId = Number(
+                            ele
+                                .querySelector('a')
+                                .getAttribute('href')
+                                .match(/pull-requests\/(?<prId>\d+)/)[1]
+                        )
+                        ele.style['text-decoration'] =
+                            ignoredPrs.indexOf(prId) === -1
+                                ? ''
+                                : 'line-through'
+                    })
+            }
+        }, 3000)
     }
 
     // eslint-disable-next-line no-new
@@ -148,6 +179,57 @@ function pullrequestListRelatedFeatures(config) {
 }
 
 function codeReviewFeatures(config) {
+    config.ignorePullRequests =
+        config.ignorePullRequests === undefined
+            ? true
+            : config.ignorePullRequests // Todo add proper config
+    if (config.ignorePullRequests) {
+        // I can't figure out how to execute this *at the right time*, seems bitbucket first creates the entire page
+        // then proceed to remove the entire page, then create the entire page again...
+        // so i made this setInterval hack that works, but is a waste of cpu cycles
+        setInterval(() => {
+            if ($('#pull-requests-button').length > 0) {
+                return
+            }
+            const pullRequestButton = document.createElement('span')
+            pullRequestButton.id = 'pull-requests-button'
+            pullRequestButton.innerHTML =
+                '<div class="css-z25nd1"><button aria-pressed="false" aria-label="Ignore this pull request" tabindex="0" type="button" class="css-1v2ovpy"><span class="css-j8fq0c"><span class="css-8xpfx5"><span role="presentation" aria-hidden="true" style="--icon-primary-color: white; --icon-secondary-color: var(--ds-surface, #FFFFFF);" class="css-snhnyn"><svg width="24" height="24" viewBox="0 0 24 24" role="presentation"><g fill-rule="evenodd"><circle fill="currentColor" cx="12" cy="12" r="10"></circle><path d="M9.707 11.293a1 1 0 10-1.414 1.414l2 2a1 1 0 001.414 0l4-4a1 1 0 10-1.414-1.414L11 12.586l-1.293-1.293z" fill="inherit"></path></g></svg></span></span><span class="css-mu6jxl"><span id="ignore-this-pr-inner-span">Ignore this pull request</span></span></span></button></div>'
+            $(pullRequestButton).on('click', () => {
+                const prId = Number(
+                    document.location
+                        .toString()
+                        .match(/pull-requests\/(?<prId>\d+)/)[1]
+                )
+                let ignoredPrs = localStorage.getItem('ignoredPrs')
+                if (ignoredPrs) {
+                    ignoredPrs = JSON.parse(ignoredPrs)
+                } else {
+                    ignoredPrs = []
+                }
+                const ignoreKey = ignoredPrs.indexOf(prId)
+                // Todo find a better way to send the message.. also eslint-disable something
+                const fixme = window.alert.bind(window)
+                if (ignoreKey === -1) {
+                    ignoredPrs.push(prId)
+                    localStorage.setItem(
+                        'ignoredPrs',
+                        JSON.stringify(ignoredPrs)
+                    )
+                    fixme('added to ignoredPrs')
+                } else {
+                    ignoredPrs.splice(ignoreKey, 1)
+                    localStorage.setItem(
+                        'ignoredPrs',
+                        JSON.stringify(ignoredPrs)
+                    )
+                    fixme('removed from ignoredPrs')
+                }
+            })
+            $('.css-a49m9p:first').prepend(pullRequestButton)
+        }, 1000)
+    }
+
     autocollapse.init(config.autocollapsePaths, config.autocollapseDeletedFiles)
 
     diffIgnore.init(config.ignorePaths)
